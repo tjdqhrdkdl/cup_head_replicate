@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -44,6 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableUnitySupport>false</EnableUnitySupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -143,9 +144,72 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WindowsProject1.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="Maths.h" />
+    <ClInclude Include="yaAnimation.h" />
+    <ClInclude Include="yaAnimator.h" />
+    <ClInclude Include="yaApplication.h" />
+    <ClInclude Include="yaBgImageObject.h" />
+    <ClInclude Include="yaBossBeppiScene.h" />
+    <ClInclude Include="yaBossVegetableScene.h" />
+    <ClInclude Include="yaCamera.h" />
+    <ClInclude Include="yaCollider.h" />
+    <ClInclude Include="yaCollisionManager.h" />
+    <ClInclude Include="yaComponent.h" />
+    <ClInclude Include="yaEndScene.h" />
+    <ClInclude Include="yaEntity.h" />
+    <ClInclude Include="yaGameObject.h" />
+    <ClInclude Include="yaLogoObject.h" />
+    <ClInclude Include="yaMapScene.h" />
+    <ClInclude Include="yaEnemy.h" />
+    <ClInclude Include="yaObjectManager.h" />
+    <ClInclude Include="yaPeaShooter.h" />
+    <ClInclude Include="yaPicture.h" />
+    <ClInclude Include="yaInput.h" />
+    <ClInclude Include="yaLogoScene.h" />
+    <ClInclude Include="yaMeteor.h" />
+    <ClInclude Include="yaBullet.h" />
+    <ClInclude Include="yaPlayer.h" />
+    <ClInclude Include="yaResource.h" />
+    <ClInclude Include="yaResources.h" />
+    <ClInclude Include="yaScene.h" />
+    <ClInclude Include="yaSceneManager.h" />
+    <ClInclude Include="def.h" />
+    <ClInclude Include="yaTime.h" />
+    <ClInclude Include="yaTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WindowsProject1.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Maths.cpp" />
+    <ClCompile Include="yaAnimation.cpp" />
+    <ClCompile Include="yaAnimator.cpp" />
+    <ClCompile Include="yaApplication.cpp" />
+    <ClCompile Include="yaBgImageObject.cpp" />
+    <ClCompile Include="yaBossBeppiScene.cpp" />
+    <ClCompile Include="yaBossVegetableScene.cpp" />
+    <ClCompile Include="yaCamera.cpp" />
+    <ClCompile Include="yaCollider.cpp" />
+    <ClCompile Include="yaCollisionManager.cpp" />
+    <ClCompile Include="yaComponent.cpp" />
+    <ClCompile Include="yaEndScene.cpp" />
+    <ClCompile Include="yaEntity.cpp" />
+    <ClCompile Include="yaGameObject.cpp" />
+    <ClCompile Include="yaLogoObject.cpp" />
+    <ClCompile Include="yaMapScene.cpp" />
+    <ClCompile Include="yaEnemy.cpp" />
+    <ClCompile Include="yaPeaShooter.cpp" />
+    <ClCompile Include="yaPicture.cpp" />
+    <ClCompile Include="yaInput.cpp" />
+    <ClCompile Include="yaLogoScene.cpp" />
+    <ClCompile Include="yaMeteor.cpp" />
+    <ClCompile Include="yaBullet.cpp" />
+    <ClCompile Include="yaPlayer.cpp" />
+    <ClCompile Include="yaResource.cpp" />
+    <ClCompile Include="yaResources.cpp" />
+    <ClCompile Include="yaScene.cpp" />
+    <ClCompile Include="yaSceneManager.cpp" />
+    <ClCompile Include="yaTime.cpp" />
+    <ClCompile Include="yaTitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WindowsProject1.rc" />
