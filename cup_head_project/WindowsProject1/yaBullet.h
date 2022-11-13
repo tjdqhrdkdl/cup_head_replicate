@@ -5,7 +5,7 @@ namespace ya {
 	class Bullet : public GameObject
 	{
 	public:
-		Bullet();
+		Bullet(Vector2 dir);
 		~Bullet();
 
 		void SetDir(Vector2 vec) { mDir = vec; }

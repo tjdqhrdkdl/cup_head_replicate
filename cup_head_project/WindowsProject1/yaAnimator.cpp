@@ -44,9 +44,12 @@ namespace ya
 			mPlayAnimation->Tick();
 			if (mbLoop && mPlayAnimation->isComplete())
 			{
-				mCompleteEvent();
+				Animator::Events* events
+					= FindEvents(mPlayAnimation->GetName());
+				events->mCompleteEvent();
 				mPlayAnimation->Reset();
 			}
+			
 		}
 	}
 
@@ -84,14 +87,54 @@ namespace ya
 		animation->SetName(name);
 
 		mAnimations.insert(std::make_pair(name, animation));
+		Events* events = new Events();
+		mEvents.insert(std::make_pair(name, events));
 	}	
 
 	void Animator::Play(const std::wstring& name, bool bLoop)
 	{
 		Animation* prevAnimation = mPlayAnimation;
 		mPlayAnimation = FindAnimation(name);
+
+		Animator::Events* events = FindEvents(name);
+		if (events != nullptr)
+			events->mStartEvent();
+
+
 		mPlayAnimation->Reset();
 		mbLoop = bLoop;
+		if (prevAnimation != nullptr)
+		{
+			Animator::Events* prevEvents = FindEvents(prevAnimation->GetName());
+			if (prevAnimation != mPlayAnimation)
+			{
+				if (prevEvents != nullptr)
+					prevEvents->mEndEvent();
+			}
+		}
+	}
+	Animator::Events* Animator::FindEvents(const std::wstring key)
+	{
+		std::map<std::wstring, Events*>::iterator iter = mEvents.find(key);
+		if (iter == mEvents.end())
+			return nullptr;
+		return iter->second;
+	}
+	std::function<void()>& Animator::GetStartEvent(const std::wstring key)
+	{
+		Events* events = FindEvents(key);
+		return events->mStartEvent.mEvent;
+
+	}
+	std::function<void()>& Animator::GetCompleteEvent(const std::wstring key)
+	{
+		Events* events = FindEvents(key);
+		return events->mCompleteEvent.mEvent;
+	}
+	std::function<void()>& Animator::GetEndEvent(const std::wstring key)
+	{
+		Events* events = FindEvents(key);
+		return events->mEndEvent.mEvent;
 	}
 	void Animator::SetMatrixToLighten()
 	{
@@ -127,5 +170,23 @@ namespace ya
 		};
 
 		mPlayAnimation->SetHaveAlpha(false);
+	}
+	void Animator::SetMatrixToTransparent(float transparency)
+	{
+		mColorMatrix = {
+
+		 1.0f,    0.0f,    0.0f,    0.0f,    0.0f,
+
+		 0.0f,    1.0f,    0.0f,    0.0f,    0.0f,
+
+		 0.0f,    0.0f,    1.0f,    0.0f,    0.0f,
+
+		 0.0f,    0.0f,    0.0f,    1.0f-transparency,    0.0f,
+
+		 0.0f,    0.0f,    0.0f,    0.0f,    1.0f
+
+		};
+
+		mPlayAnimation->SetHaveAlpha(true);
 	}
 }

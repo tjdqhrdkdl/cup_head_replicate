@@ -4,16 +4,27 @@
 #include "yaPicture.h"
 namespace ya 
 {
+	class Bullet;
 	class Animator;
 	class Player : public GameObject
 	{
 	public:
 		enum ePlayerState
 		{
-			PlayerState_LookLeft = 0x00000001,
-			PlayerState_OnAir = 0x00000002,
-			PlayerState_OnHit = 0x00000004,
-			PlayerState_CoolShoot = 0x00000008,
+			PlayerState_None = 0x00000000,
+			PlayerState_Input_Left	= 0x00000001,
+			PlayerState_Input_Right = 0x00000002,
+			PlayerState_Input_Up	= 0x00000004,
+			PlayerState_Input_Down  = 0x00000008,
+			PlayerState_Input_X		= 0x00000010,
+			PlayerState_Input_C		= 0x00000020,
+			PlayerState_OnDash		= 0x00000040,
+			PlayerState_OnJump		= 0x00000080,
+			PlayerState_OnHit		= 0x00000100,
+			PlayerState_OnEX		= 0x00000200,
+			PlayerState_OnUlt		= 0x00000400,
+			PlayerState_LookRight	= 0x00000800,
+			PlayerState_OnShoot		= 0x00001000,
 		};
 		Player();
 		~Player();
@@ -25,21 +36,26 @@ namespace ya
 		
 		void PlayerKeyInput();
 		void SetShooterCoolTime(eGunType guntype);
-		std::wstring GetPlayerStrDir();
-		std::wstring GetPlayerXDir();
+		Vector2 SetBulletStartPos(Bullet*);
 
-		short GetState() { return mState; }
+		int GetCurState() { return mCurState; }
+
+		void SetAnimation();
 		void Shoot();
+		void Move();
 	private:
 		float mSpeed;
 		
 		Vector2 mGunDir;
+
+		bool mReloading;
 		float mShooterCoolTime;
 		float mShooterCoolTimeChecker;
+		float mShootAnimationTimeChecker;
 		UINT mShootPoint;
 		eGunType mCurGunType;
 
 		Animator* mAnimator;
-		int mState;
+		int mCurState;
 	};
 }

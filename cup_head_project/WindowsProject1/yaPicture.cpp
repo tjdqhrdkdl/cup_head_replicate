@@ -75,11 +75,16 @@ namespace ya {
 			break;
 		case 90:
 			mImage->RotateFlip(RotateFlipType::Rotate90FlipNone);
+			mRotationDegree = degree;
 			break;
 		case 180:
 			mImage->RotateFlip(Rotate180FlipNone);
+			mRotationDegree = degree;
+			break;
 		case 270:
 			mImage->RotateFlip(Rotate270FlipNone);
+			mRotationDegree = degree;
+			break;
 		}
 		Gdiplus::Status status = mImage->GetHBITMAP(Color(255, 0, 255), &mBitmap);
 		HBITMAP prevBit = (HBITMAP)SelectObject(mHdc, mBitmap);

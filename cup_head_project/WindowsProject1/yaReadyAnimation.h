@@ -2,14 +2,15 @@
 #include "Common.h"
 #include "yaGameObject.h"
 
-namespace ya 
+namespace ya
 {
+	
 	class Animator;
-	class LogoObject : public GameObject
+	class ReadyAnimation : public GameObject
 	{
 	public:
-		LogoObject();
-		~LogoObject();
+		ReadyAnimation();
+		~ReadyAnimation();
 
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;

@@ -51,31 +51,51 @@ namespace ya
 
 	void Input::Tick()
 	{
+		if (GetFocus())
+		{
+			for (UINT i = 0; i < (UINT)eKeyCode::End; i++)
+			{
+				//해당키가 현재 눌려져 있는경우
+				if (GetAsyncKeyState(ASCII[i]) & 0x8000)
+				{
+					// 이전 프레임 눌려져 있엇다
+					if (mKeys[i].bPressed)
+						mKeys[i].state = eKeyState::PRESSED;
+					else
+						mKeys[i].state = eKeyState::DOWN;
+
+					mKeys[i].bPressed = true;
+				}
+				//해당 눌려져 있지 않은 경우
+				else
+				{
+					// 이전 프레임 눌려져 있엇다
+					if (mKeys[i].bPressed)
+						mKeys[i].state = eKeyState::UP;
+					else
+						mKeys[i].state = eKeyState::NONE;
+
+					mKeys[i].bPressed = false;
+				}
+
+			}
+		}
+		else
+		{
 		for (UINT i = 0; i < (UINT)eKeyCode::End; i++)
 		{
-			//해당키가 현재 눌려져 있는경우
-			if (GetAsyncKeyState(ASCII[i]) & 0x8000)
+			if (eKeyState::DOWN == mKeys[i].state
+				|| eKeyState::PRESSED == mKeys[i].state)
 			{
-				// 이전 프레임 눌려져 있엇다
-				if (mKeys[i].bPressed)
-					mKeys[i].state = eKeyState::PRESSED;
-				else
-					mKeys[i].state = eKeyState::DOWN;
-
-				mKeys[i].bPressed = true;
+				mKeys[i].state = eKeyState::UP;
 			}
-			//해당 눌려져 있지 않은 경우
-			else
+			else if (eKeyState::UP == mKeys[i].state)
 			{
-				// 이전 프레임 눌려져 있엇다
-				if (mKeys[i].bPressed)
-					mKeys[i].state = eKeyState::UP;
-				else
-					mKeys[i].state = eKeyState::NONE;
-
-				mKeys[i].bPressed = false;
+				mKeys[i].state = eKeyState::NONE;
 			}
 
+			mKeys[i].bPressed = false;
+		}
 		}
 	}
 

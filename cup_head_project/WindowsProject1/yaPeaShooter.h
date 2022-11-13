@@ -7,7 +7,7 @@ namespace ya
 	
 	{
 	public:
-		PeaShooter();
+		PeaShooter(Vector2 dir);
 		~PeaShooter();
 		
 		static float GetCoolTime() { return CoolTime; }

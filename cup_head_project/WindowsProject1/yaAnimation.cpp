@@ -102,7 +102,8 @@ namespace ya {
 			{
 				pic->FlipX();
 			}
-			pic->RotateImage(imageDegree);
+			if (pic->GetRotationDegree() != imageDegree)
+				pic->RotateImage(imageDegree);
 			mPictures.push_back(pic);
 		}
 		mPictureDuration = duration	;

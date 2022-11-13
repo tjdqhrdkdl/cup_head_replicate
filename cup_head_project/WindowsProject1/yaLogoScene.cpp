@@ -1,6 +1,6 @@
 #include "yaLogoScene.h"
 #include "yaResources.h"
-#include "yaLogoObject.h"
+#include "yaLogoAnimation.h"
 #include "yaInput.h"
 #include "yaScenemanager.h"
 #include "yaEnemy.h"
@@ -8,10 +8,9 @@
 #include "yaCamera.h"
 #include "yaObjectManager.h"
 #include "yaTime.h"
+#include "yaReadyAnimation.h"
 namespace ya {
 	LogoScene::LogoScene()
-		:mSceneTime(6.0f)
-		,mSceneTimeChecker(0.0f)
 	{
 	}
 
@@ -21,20 +20,24 @@ namespace ya {
 
 	void LogoScene::Initialize()
 	{
-		ObjectManager::Instantiate<LogoObject>(this, eColliderLayer::BackGround);
+		ObjectManager::Instantiate<ReadyAnimation>(this, eColliderLayer::BackGround);
+		ObjectManager::Instantiate<LogoAnimation>(this, eColliderLayer::BackGround);
 		Scene::Initialize();
 	}
 
 	void LogoScene::Tick()
 	{
 		Scene::Tick();
-		mSceneTimeChecker += Time::DeltaTime();
-		if ((mSceneTimeChecker > mSceneTime) or KEY_DOWN(eKeyCode::N))
+		bool out = false;
+		for (size_t i = 0; i < 58; i++)
 		{
-			SceneManager::ChangeScene(eSceneType::Title);
-
+			if (KEY_DOWN((eKeyCode)i))
+			{
+				out = true;
+			}
 		}
-
+		if (out)
+			SceneManager::ChangeScene(eSceneType::Title);
 	}
 
 	void LogoScene::Render(HDC hdc)

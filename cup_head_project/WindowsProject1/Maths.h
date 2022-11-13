@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Common.h"
 struct Vector2
 {
 	float x;
@@ -7,14 +7,21 @@ struct Vector2
 
 	Vector2& operator +(Vector2 other) 
 	{ 
-		x += other.x;
-		y += other.y;
-		return *this; 
+		Vector2 ret = { 0,0 };
+		ret.x = this->x + other.x;
+		ret.y = this->y + other.y;
+		return ret;
 	}
 	Vector2 operator -(Vector2 other)
 	{
 		x -= other.x;
 		y -= other.y;
+		return *this;
+	}
+	Vector2 operator *(Vector2 other)
+	{
+		x *= other.x;
+		y *= other.y;
 		return *this;
 	}
 	Vector2& operator /(float f)
@@ -27,6 +34,12 @@ struct Vector2
 	{
 		x *= f;
 		y *= f;
+		return *this;
+	}
+	Vector2 operator +=(Vector2 other)
+	{
+		x += other.x;
+		y += other.y;
 		return *this;
 	}
 	bool operator ==(Vector2 other)
@@ -60,6 +73,7 @@ struct Vector2
 	bool isUp() { return *this == Vector2::Up; }
 	bool isDown() { return *this == Vector2::Down; }
 
+	const std::wstring GetDirInStr();
 	static Vector2 Zero;
 	static Vector2 One;
 	static Vector2 Right;

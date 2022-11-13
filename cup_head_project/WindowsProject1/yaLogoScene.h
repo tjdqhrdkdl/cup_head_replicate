@@ -15,8 +15,6 @@ namespace ya {
 
 			virtual void Enter();
 			virtual void Exit();
-	private:
-		float mSceneTime;
-		float mSceneTimeChecker;
+
 	};
 }

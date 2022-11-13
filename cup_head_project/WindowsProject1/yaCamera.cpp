@@ -46,19 +46,19 @@ namespace ya
 		}
 
 
-		if (KEY_PRESSED(eKeyCode::UP))
+		if (KEY_PRESSED(eKeyCode::NUM_8))
 		{
 			mLookPosition.y -= 600.0f * Time::DeltaTime();
 		}
-		if (KEY_PRESSED(eKeyCode::DOWN))
+		if (KEY_PRESSED(eKeyCode::NUM_2))
 		{
 			mLookPosition.y += 600.0f * Time::DeltaTime();
 		}
-		if (KEY_PRESSED(eKeyCode::LEFT))
+		if (KEY_PRESSED(eKeyCode::NUM_4))
 		{
 			mLookPosition.x -= 600.0f * Time::DeltaTime();
 		}
-		if (KEY_PRESSED(eKeyCode::RIGHT))
+		if (KEY_PRESSED(eKeyCode::NUM_6))
 		{
 			mLookPosition.x += 600.0f * Time::DeltaTime();
 		}

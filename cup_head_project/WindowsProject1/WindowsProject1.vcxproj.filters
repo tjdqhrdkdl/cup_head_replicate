@@ -48,6 +48,9 @@
     <Filter Include="Engine\Scene\BossScenes">
       <UniqueIdentifier>{5955bd89-80e2-47b9-a0cd-955f8b1ab371}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\LogoSceneObj">
+      <UniqueIdentifier>{33db6c20-1ad1-400d-a73b-a043bd1a246c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -158,8 +161,11 @@
     <ClInclude Include="yaPeaShooter.h">
       <Filter>Engine\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="yaLogoObject.h">
-      <Filter>Engine\GameObject</Filter>
+    <ClInclude Include="yaLogoAnimation.h">
+      <Filter>Engine\GameObject\LogoSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="yaReadyAnimation.h">
+      <Filter>Engine\GameObject\LogoSceneObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -253,8 +259,11 @@
     <ClCompile Include="yaPeaShooter.cpp">
       <Filter>Engine\GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="yaLogoObject.cpp">
-      <Filter>Engine\GameObject</Filter>
+    <ClCompile Include="yaLogoAnimation.cpp">
+      <Filter>Engine\GameObject\LogoSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="yaReadyAnimation.cpp">
+      <Filter>Engine\GameObject\LogoSceneObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

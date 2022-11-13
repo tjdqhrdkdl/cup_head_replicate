@@ -7,9 +7,9 @@
 
 namespace ya 
 {
-	Bullet::Bullet()
+	Bullet::Bullet(Vector2 dir)
 	{
-
+		mDir = dir;
 	}
 
 	Bullet::~Bullet()

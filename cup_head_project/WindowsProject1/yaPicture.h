@@ -14,6 +14,7 @@ namespace ya
 		UINT GetHeight() { return mImage->GetHeight(); }
 		void FlipX();
 		void RotateImage(UINT degree);
+		UINT GetRotationDegree() { return mRotationDegree; }
 		Gdiplus::Bitmap* GetImage() { return mImage; }
 		static Picture* Create(const std::wstring& key, UINT width, UINT height);
 		static void _forceinline DrawLightenImage(Graphics* graphic, Picture* mImage, Vector2 pos)
@@ -48,6 +49,6 @@ namespace ya
 		HBITMAP mBitmap;
 		HDC mHdc;
 		Gdiplus::Bitmap* mImage;
-
+		UINT mRotationDegree;
 	};
 }

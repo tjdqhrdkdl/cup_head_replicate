@@ -25,7 +25,7 @@ namespace ya
 
 	private:
 		Animator* mAnimator;
-		std::vector<Picture*> mPictures;
+		std::vector<Picture*> mPictures;	
 		UINT mPictureIndex;
 		float mPictureDuration;
 		float mTime;

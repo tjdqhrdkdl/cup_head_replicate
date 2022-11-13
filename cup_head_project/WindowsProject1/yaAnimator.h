@@ -22,6 +22,12 @@ namespace ya
 
 			std::function<void()> mEvent;
 		};
+		struct Events
+		{
+			Event mStartEvent;
+			Event mCompleteEvent;
+			Event mEndEvent;
+		};
 
 		Animator();
 		~Animator();
@@ -31,6 +37,7 @@ namespace ya
 		Gdiplus::ColorMatrix GetMatrix() { return mColorMatrix; }
 		void SetMatrixToLighten();
 		void SetMatrixToBase();
+		void SetMatrixToTransparent(float);
 		Animation* FindAnimation(const std::wstring& name);
 		void CreateAnimation(const std::wstring& name, const std::wstring& path
 			, UINT imageNum, float duration, bool fromZero,  bool imageReversed
@@ -39,15 +46,19 @@ namespace ya
 
 		void Play(const std::wstring& name, bool bLoop);
 
+		Events* FindEvents(const std::wstring key);
+		std::function<void()>& GetStartEvent(const std::wstring key);
+		std::function<void()>& GetCompleteEvent(const std::wstring key);
+		std::function<void()>& GetEndEvent(const std::wstring key);
+
+		Animation* GetPlayAnimation() { return mPlayAnimation; }
 
 
-	public:
-		Event mStartEvent;
-		Event mCompleteEvent;
-		Event mEndEvent;
+
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
+		std::map<std::wstring, Events*> mEvents;
 		Animation* mPlayAnimation;
 		bool mbLoop;
 
