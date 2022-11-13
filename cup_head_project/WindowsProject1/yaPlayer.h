@@ -37,12 +37,14 @@ namespace ya
 		void PlayerKeyInput();
 		void SetShooterCoolTime(eGunType guntype);
 		Vector2 SetBulletStartPos(Bullet*);
+		void SetGunDir();
 
 		int GetCurState() { return mCurState; }
 
 		void SetAnimation();
 		void Shoot();
 		void Move();
+		void Duck();
 	private:
 		float mSpeed;
 		

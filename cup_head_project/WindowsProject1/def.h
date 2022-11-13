@@ -2,6 +2,7 @@
 #define KEY_PRESSED(KEY) ya::Input::GetKeyState(KEY)==eKeyState::PRESSED
 #define KEY_UP(KEY) ya::Input::GetKeyState(KEY)==eKeyState::UP
 #define KEY_DOWN(KEY) ya::Input::GetKeyState(KEY)==eKeyState::DOWN
+
 enum class eSceneType
 {
 	Logo,

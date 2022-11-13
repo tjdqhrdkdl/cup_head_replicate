@@ -10,10 +10,12 @@
 #include "yaCamera.h"
 #include "yaAnimator.h"
 #include "yaPeaShooter.h"
-
-
+#define STATE_HAVE(STATE) (mCurState & STATE) == STATE
 namespace ya {
 	float ShootAnimTime = 0.1f;
+	Vector2 playerScaleBasic = { 90.0f, 120.0f };
+	Vector2 playerScaleDuck = { 90.0f, 60.0f };
+
 	Player::Player()
 		:mSpeed(200.0f)
 		, mGunDir(Vector2::Right)
@@ -109,6 +111,7 @@ namespace ya {
 		if ((mCurState & PlayerState_Input_X) == PlayerState_Input_X)
 			Shoot();
 		Move();
+		Duck();
 		if ((mReloading))
 		{
 			mShooterCoolTimeChecker += Time::DeltaTime();
@@ -578,7 +581,7 @@ namespace ya {
 			)
 		{
 			Bullet* bullet = nullptr;
-
+			SetGunDir();
 			if (mCurGunType == eGunType::PeaShooter)
 				bullet = new PeaShooter(mGunDir);
 
@@ -612,6 +615,28 @@ namespace ya {
 			pos += playerVec * mSpeed * Time::DeltaTime();
 			SetPos(pos);
 			mCurState &= ~PlayerState_OnShoot;
+		}
+	}
+
+	void Player::Duck()
+	{
+		if (!(STATE_HAVE(PlayerState_OnHit))
+			&& !(STATE_HAVE(PlayerState_OnDash))
+			&& !(STATE_HAVE(PlayerState_OnJump))
+			&& !(STATE_HAVE(PlayerState_OnUlt))
+			&& !(STATE_HAVE(PlayerState_Input_C))
+			&& STATE_HAVE(PlayerState_Input_Down)
+			)
+		{
+			SetScale(playerScaleDuck);
+		}
+		else
+		{
+			if (GetScale() == playerScaleDuck)
+			{
+				SetScale(playerScaleBasic);
+				mCurState &= ~PlayerState_OnShoot;
+			}
 		}
 	}
 
@@ -665,6 +690,34 @@ namespace ya {
 		if (++mShootPoint > 3)
 			mShootPoint = 0;
 		return bulletStartPos;
+	}
+
+	void Player::SetGunDir()
+	{
+		if (STATE_HAVE(PlayerState_LookRight))
+			mGunDir = Vector2::Right;
+		else
+			mGunDir = Vector2::Left;
+		if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Up))
+			mGunDir = Vector2::RightUp;
+		else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Up))
+			mGunDir = Vector2::LeftUp;
+		else if (STATE_HAVE(PlayerState_Input_Right))
+			mGunDir = Vector2::Right;
+		else if (STATE_HAVE(PlayerState_Input_Up))
+			mGunDir = Vector2::Up;
+		else if (STATE_HAVE(PlayerState_Input_Left))
+			mGunDir = Vector2::Left;
+		if (STATE_HAVE(PlayerState_Input_C))
+		{
+			if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Down))
+				mGunDir = Vector2::RightDown;
+			else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Down))
+				mGunDir = Vector2::LeftDown;
+			else if (STATE_HAVE(PlayerState_Input_Down))
+				mGunDir = Vector2::Down;
+
+		}
 	}
 
 
