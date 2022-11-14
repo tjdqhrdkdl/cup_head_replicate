@@ -53,7 +53,7 @@ namespace ya
 				events->mCompleteEvent();
 				mPlayAnimation->Reset();
 			}
-			if ((mbLoop == false) && mPlayAnimation->isComplete())
+			if (mBaseAnimation != nullptr && (mbLoop == false) && mPlayAnimation->isComplete())
 			{
 				mPlayAnimation = mBaseAnimation;
 				mPlayAnimation->Reset();

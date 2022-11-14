@@ -4,7 +4,8 @@
 #include "yaGameObject.h"
 #include "yaCamera.h"
 #include "yaTime.h"
-namespace ya {
+namespace ya 
+{
 	Animation::Animation()
 	{
 	}

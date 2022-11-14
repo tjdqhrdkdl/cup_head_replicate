@@ -10,7 +10,6 @@
 namespace ya 
 {
 	BossBeppiScene::BossBeppiScene()
-		:mScenePlaying(false)
 	{
 	}
 
@@ -41,6 +40,7 @@ namespace ya
 		{
 			SceneManager::ChangeScene(eSceneType::Map);
 		}
+
 	}
 
 	void BossBeppiScene::Render(HDC hdc)

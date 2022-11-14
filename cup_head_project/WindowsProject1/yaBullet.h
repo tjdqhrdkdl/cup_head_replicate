@@ -11,7 +11,7 @@ namespace ya {
 		void SetDir(Vector2 vec) { mDir = vec; }
 		Vector2 GetDir() { return mDir; }
 		void SetDamage(float dmg) { mDamage = dmg; }
-		void GetDamage() { return mDamage; }
+		float GetDamage() { return mDamage; }
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 

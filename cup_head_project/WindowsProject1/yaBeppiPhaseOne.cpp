@@ -77,8 +77,6 @@ namespace ya
 		GameObject* objOther = other->GetOwner();
 		if(objOther->GetLayer() == eColliderLayer::Player_Projecttile)
 		{
-			Bullet* bullet = dynamic_cast<Bullet*>(objOther);
-			
 			onHit = true;
 			mAnimator->SetMatrixToLighten();
 		}

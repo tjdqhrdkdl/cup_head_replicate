@@ -20,6 +20,6 @@ namespace ya
 		virtual void Exit();
 	private:
 		BgImageObject* mBGI;
-		bool mScenePlaying;
+
 	};
 }

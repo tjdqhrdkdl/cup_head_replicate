@@ -22,6 +22,6 @@ namespace ya {
 
 	private:
 		std::vector<GameObject*> mObjects[_COLLIDER_LAYER];
-
+		
 	};
 }
