@@ -11,13 +11,16 @@
 #include "yaAnimator.h"
 #include "yaPeaShooter.h"
 #define STATE_HAVE(STATE) (mCurState & STATE) == STATE
-namespace ya {
+namespace ya 
+{
 	float ShootAnimTime = 0.1f;
+	float DashTime = 0.3f;
+
 	Vector2 playerScaleBasic = { 90.0f, 120.0f };
 	Vector2 playerScaleDuck = { 90.0f, 60.0f };
 
 	Player::Player()
-		:mSpeed(200.0f)
+		:mSpeed(300.0f)
 		, mGunDir(Vector2::Right)
 		, mCurState(PlayerState_LookRight)
 		, mShooterCoolTime(PeaShooter::GetCoolTime())
@@ -28,11 +31,12 @@ namespace ya {
 		, mShootAnimationTimeChecker(0.0f)
 	{
 		SetName(L"Player");
-		SetPos({ 400.0f, 400.0f });
+		SetPos({ 400.0f, 650.0f });
 		SetScale({ 90.0f, 120.0f });
 		AddComponent(new Collider());
 		mAnimator = new Animator();
-		AddComponent(mAnimator); 
+		AddComponent(mAnimator);
+
 		mAnimator->CreateAnimation(L"IdleRight", L"..\\Resources\\Image\\Cuphead\\Idle\\cuphead_idle_00", 5, 0.1f, false, false, { 0, 0 }, true, true );
 		mAnimator->CreateAnimation(L"IdleLeft", L"..\\Resources\\Image\\Cuphead\\Idle\\cuphead_idle_00", 5, 0.1f,false,true, { 0, 0 }, true, true);
 		
@@ -83,8 +87,8 @@ namespace ya {
 		mAnimator->CreateAnimation(L"JumpRight", L"..\\Resources\\Image\\Cuphead\\Jump\\Cuphead\\cuphead_jump_00", 9, 0.05f, false, false, { 0, 0 }, true, true);
 		mAnimator->CreateAnimation(L"JumpLeft", L"..\\Resources\\Image\\Cuphead\\Jump\\Cuphead\\cuphead_jump_00", 9, 0.05f, false, true, { 0, 0 }, true, true);
 		
-		mAnimator->CreateAnimation(L"DashRight", L"..\\Resources\\Image\\Cuphead\\Dash\\Ground\\cuphead_dash_00", 9, 0.05f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"DashLeft", L"..\\Resources\\Image\\Cuphead\\Dash\\Ground\\cuphead_dash_00", 9, 0.05f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"DashRight", L"..\\Resources\\Image\\Cuphead\\Dash\\Ground\\cuphead_dash_00", 9, 0.03f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"DashLeft", L"..\\Resources\\Image\\Cuphead\\Dash\\Ground\\cuphead_dash_00", 9, 0.03f, false, true, { 0, 0 }, true, true);
 
 		mAnimator->CreateAnimation(L"DashAirRight", L"..\\Resources\\Image\\Cuphead\\Dash\\Air\\cuphead_dash_air_00", 9, 0.05f, false, false, { 0, 0 }, true, true);
 		mAnimator->CreateAnimation(L"DashAirLeft", L"..\\Resources\\Image\\Cuphead\\Dash\\Air\\cuphead_dash_air_00", 9, 0.05f, false, true, { 0, 0 }, true, true);
@@ -95,9 +99,10 @@ namespace ya {
 		mAnimator->CreateAnimation(L"HitAirRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Air\\cuphead_hit_air_00", 7, 0.04f, false, false, { 0, 0 }, true, true);
 		mAnimator->CreateAnimation(L"HitAirLeft", L"..\\Resources\\Image\\Cuphead\\Hit\\Air\\cuphead_hit_air_00", 7, 0.04f, false, true, { 0, 0 }, true, true);
 
+		mAnimator->CreateAnimation(L"Intro", L"..\\Resources\\Image\\Cuphead\\Intros\\Regular\\cuphead_intro_a_00", 29, 0.03f, false, false, { 0 ,0 }, true, true);
 
-
-		mAnimator->Play(L"IdleRight", true);
+		mAnimator->SetBaseAnimation(L"IdleRight");
+		mAnimator->Play(L"Intro", false);
 	}
 
 	Player::~Player()
@@ -107,11 +112,15 @@ namespace ya {
 	void Player::Tick()
 	{
 		PlayerKeyInput();
-		SetAnimation();
-		if ((mCurState & PlayerState_Input_X) == PlayerState_Input_X)
-			Shoot();
-		Move();
-		Duck();
+		if (!(mAnimator->GetPlayAnimation()->GetName() == L"Intro"))
+		{
+			SetAnimation();
+			if ((mCurState & PlayerState_Input_X) == PlayerState_Input_X)
+				Shoot();
+			Move();
+			Duck();
+			Dash();
+		}
 		if ((mReloading))
 		{
 			mShooterCoolTimeChecker += Time::DeltaTime();
@@ -124,7 +133,7 @@ namespace ya {
 		if ((mCurState & PlayerState_OnShoot) == PlayerState_OnShoot)
 		{
 			mShootAnimationTimeChecker += Time::DeltaTime();
-			if (mShootAnimationTimeChecker >= ShootAnimTime * 3)
+			if (mShootAnimationTimeChecker >= mShooterCoolTime)
 			{
 				mCurState &= ~PlayerState_OnShoot;
 				mShootAnimationTimeChecker = 0.0f;
@@ -173,12 +182,15 @@ namespace ya {
 		if (KEY_PRESSED(eKeyCode::LEFT))
 		{
 			mCurState |= PlayerState_Input_Left;
-			mCurState &= ~PlayerState_LookRight;
+			if (!(STATE_HAVE(PlayerState_OnDash)))
+				mCurState &= ~PlayerState_LookRight;
 		}
 		if (KEY_PRESSED(eKeyCode::RIGHT))
 		{
 			mCurState |= PlayerState_Input_Right;
-			mCurState |= PlayerState_LookRight;
+
+			if (!(STATE_HAVE(PlayerState_OnDash)))
+				mCurState |= PlayerState_LookRight;
 		}
 		if (KEY_PRESSED(eKeyCode::X))
 		{
@@ -581,10 +593,13 @@ namespace ya {
 			)
 		{
 			Bullet* bullet = nullptr;
+			
 			SetGunDir();
 			if (mCurGunType == eGunType::PeaShooter)
+			{
 				bullet = new PeaShooter(mGunDir);
-
+				bullet->Initialize();
+			}
 			SetBulletStartPos(bullet);
 
 			Scene* curScene = SceneManager::GetCurScene();
@@ -628,6 +643,7 @@ namespace ya {
 			&& STATE_HAVE(PlayerState_Input_Down)
 			)
 		{
+			GetComponent<Collider>()->SetScale({ playerScaleDuck });
 			SetScale(playerScaleDuck);
 		}
 		else
@@ -637,6 +653,34 @@ namespace ya {
 				SetScale(playerScaleBasic);
 				mCurState &= ~PlayerState_OnShoot;
 			}
+		}
+	}
+
+	void Player::Dash()
+	{
+		if (!(STATE_HAVE(PlayerState_OnHit))
+			&& !(STATE_HAVE(PlayerState_OnDash))
+			&& !(STATE_HAVE(PlayerState_OnUlt))
+			&& !(STATE_HAVE(PlayerState_Input_C))
+			&& KEY_DOWN(eKeyCode::LSHIFT)
+			)
+		{
+			mCurState |= PlayerState_OnDash;
+		}
+		if (STATE_HAVE(PlayerState_OnDash))
+		{
+			mDashCoolTimeChecker += Time::DeltaTime();
+			if (mDashCoolTimeChecker >= DashTime)
+			{
+				mCurState &= ~PlayerState_OnDash;
+				mDashCoolTimeChecker = 0;
+			}
+			Vector2 pos = GetPos();
+			if(STATE_HAVE(PlayerState_LookRight))
+				pos.x += 1000 * Time::DeltaTime();
+			else
+				pos.x -= 1000 * Time::DeltaTime();
+			SetPos(pos);
 		}
 	}
 

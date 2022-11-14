@@ -21,6 +21,10 @@ namespace ya {
 
 	void GameObject::Initialize()
 	{
+		for (Component* component : mComponents)
+		{
+			component->Initialize();
+		}
 	}
 
 	void GameObject::Tick()

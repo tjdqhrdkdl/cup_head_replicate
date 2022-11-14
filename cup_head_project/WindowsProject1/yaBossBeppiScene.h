@@ -1,7 +1,9 @@
 #pragma once
 #include "yaScene.h"
+#include "yaBgImageObject.h"
 
-namespace ya {
+namespace ya 
+{
 	class BossBeppiScene : public Scene
 	{
 	public:
@@ -16,5 +18,8 @@ namespace ya {
 
 		virtual void Enter();
 		virtual void Exit();
+	private:
+		BgImageObject* mBGI;
+		bool mScenePlaying;
 	};
 }

@@ -4,10 +4,11 @@
 #include "yaBgImageObject.h"
 #include "yaInput.h"
 #include "yaScenemanager.h"
-#include "yaEnemy.h"
+#include "yaBeppiPhaseOne.h"
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
 #include "yaObjectManager.h"
+#include "yaTime.h"
 namespace ya 
 {
 	TitleScene::TitleScene()
@@ -21,14 +22,10 @@ namespace ya
 	void TitleScene::Initialize()
 	{
 		mBGI = new BgImageObject();
-		mBGI->SetImage(L"TitleBGI", L"Title Screen\\Background\\title_screen_background.png");
+		mBGI->SetImage(L"TitleMainMenuBGI", L"Main Menu Background.png");
+		mBGI->SetPos({ 200,-150 });
 		AddGameObject(mBGI, eColliderLayer::BackGround);
-		ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);
-		ObjectManager::Instantiate<Enemy>(this, Vector2(1000.0f, 580.0f), eColliderLayer::Monster);
-		ObjectManager::Instantiate<Enemy>(this, Vector2(100.0f, 580.0f), eColliderLayer::Monster);
 
-		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster, true);
-		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::Monster, true);
 		Scene::Initialize();
 	}
 

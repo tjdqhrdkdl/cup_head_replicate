@@ -16,10 +16,14 @@ namespace ya {
 	{
 	}
 
+	void Collider::Initialize()
+	{
+		mScale = GetOwner()->GetScale();
+	}
+
 	void Collider::Tick()
 	{ 
 		GameObject* owner = GetOwner();
-		mScale = owner->GetScale();
 		mPos = Vector2(owner->GetPos().x,owner->GetPos().y - mScale.y/2);
 		
 	}

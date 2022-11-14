@@ -64,6 +64,7 @@ namespace ya {
 		Gdiplus::Status status = mImage->GetHBITMAP(Color(255, 0, 255), &mBitmap);
 		HBITMAP prevBit = (HBITMAP)SelectObject(mHdc, mBitmap);
 		DeleteObject(prevBit);
+		mFliped = true;
 	}
 
 	void Picture::RotateImage(UINT degree)

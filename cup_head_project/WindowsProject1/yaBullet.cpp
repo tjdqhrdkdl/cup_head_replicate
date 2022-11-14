@@ -4,7 +4,7 @@
 #include "yaResources.h"
 #include "yaPicture.h"
 #include "yaCamera.h"
-
+#include "yaObjectManager.h"
 namespace ya 
 {
 	Bullet::Bullet(Vector2 dir)
@@ -31,6 +31,8 @@ namespace ya
 
 	void Bullet::OnCollisonEnter(Collider* other)
 	{
+		ObjectManager::Destroy(this);
+		other->OnCollisionExit(this->GetComponent<Collider>());
 	}
 
 	void Bullet::OnCollisonStay(Collider* other)

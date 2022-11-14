@@ -124,7 +124,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    windowData.width = 1600;
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+      0, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
    windowData.hWnd = hWnd;
  
    if (!hWnd)

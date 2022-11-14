@@ -8,6 +8,8 @@ namespace ya
 	public:
 		Collider();
 		~Collider();
+
+		void Initialize() override;
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 

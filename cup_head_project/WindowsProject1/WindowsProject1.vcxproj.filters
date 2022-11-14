@@ -51,6 +51,18 @@
     <Filter Include="Engine\GameObject\LogoSceneObj">
       <UniqueIdentifier>{33db6c20-1ad1-400d-a73b-a043bd1a246c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Bullet">
+      <UniqueIdentifier>{e99469b8-b9bb-405a-b556-ec308f2a4775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Bullet\Base">
+      <UniqueIdentifier>{9a77a3f8-abc1-4e13-b3cd-34c3f63af8df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Bullet\PeaShooter">
+      <UniqueIdentifier>{7abf63ac-448b-41de-8336-73d07dc96e47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossBeppiObj">
+      <UniqueIdentifier>{52c96c1c-8eaa-48f2-af3a-51f7f3cc6982}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -101,12 +113,6 @@
     <ClInclude Include="yaInput.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="yaBullet.h">
-      <Filter>Engine\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="yaMeteor.h">
-      <Filter>Engine\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="yaResource.h">
       <Filter>Engine\Resource\Base</Filter>
     </ClInclude>
@@ -130,9 +136,6 @@
     </ClInclude>
     <ClInclude Include="yaTitleScene.h">
       <Filter>Engine\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="yaEnemy.h">
-      <Filter>Engine\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="yaBgImageObject.h">
       <Filter>Engine\GameObject</Filter>
@@ -158,14 +161,20 @@
     <ClInclude Include="yaAnimation.h">
       <Filter>Engine\Component</Filter>
     </ClInclude>
-    <ClInclude Include="yaPeaShooter.h">
-      <Filter>Engine\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="yaLogoAnimation.h">
       <Filter>Engine\GameObject\LogoSceneObj</Filter>
     </ClInclude>
     <ClInclude Include="yaReadyAnimation.h">
       <Filter>Engine\GameObject\LogoSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBullet.h">
+      <Filter>Engine\GameObject\Bullet\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPeaShooter.h">
+      <Filter>Engine\GameObject\Bullet\PeaShooter</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBeppiPhaseOne.h">
+      <Filter>Engine\GameObject\BossBeppiObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -199,12 +208,6 @@
     <ClCompile Include="yaInput.cpp">
       <Filter>Engine\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="yaBullet.cpp">
-      <Filter>Engine\GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="yaMeteor.cpp">
-      <Filter>Engine\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="yaResource.cpp">
       <Filter>Engine\Resource\Base</Filter>
     </ClCompile>
@@ -232,9 +235,6 @@
     <ClCompile Include="yaTitleScene.cpp">
       <Filter>Engine\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="yaEnemy.cpp">
-      <Filter>Engine\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="yaBgImageObject.cpp">
       <Filter>Engine\GameObject</Filter>
     </ClCompile>
@@ -256,14 +256,20 @@
     <ClCompile Include="yaAnimation.cpp">
       <Filter>Engine\Component</Filter>
     </ClCompile>
-    <ClCompile Include="yaPeaShooter.cpp">
-      <Filter>Engine\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="yaLogoAnimation.cpp">
       <Filter>Engine\GameObject\LogoSceneObj</Filter>
     </ClCompile>
     <ClCompile Include="yaReadyAnimation.cpp">
       <Filter>Engine\GameObject\LogoSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBullet.cpp">
+      <Filter>Engine\GameObject\Bullet\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPeaShooter.cpp">
+      <Filter>Engine\GameObject\Bullet\PeaShooter</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBeppiPhaseOne.cpp">
+      <Filter>Engine\GameObject\BossBeppiObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -98,7 +98,7 @@ namespace ya {
 			
 
 			Picture* pic = Resources::Load<Picture>(key + addInfo, path + addInfo);
-			if (imageReversed)
+			if (imageReversed && !(pic->isFliped()))
 			{
 				pic->FlipX();
 			}

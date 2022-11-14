@@ -3,7 +3,7 @@
 #include "yaLogoAnimation.h"
 #include "yaInput.h"
 #include "yaScenemanager.h"
-#include "yaEnemy.h"
+#include "yaBeppiPhaseOne.h"
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
 #include "yaObjectManager.h"

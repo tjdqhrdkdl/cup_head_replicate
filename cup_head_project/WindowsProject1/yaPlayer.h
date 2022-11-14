@@ -45,6 +45,7 @@ namespace ya
 		void Shoot();
 		void Move();
 		void Duck();
+		void Dash();
 	private:
 		float mSpeed;
 		
@@ -56,6 +57,8 @@ namespace ya
 		float mShootAnimationTimeChecker;
 		UINT mShootPoint;
 		eGunType mCurGunType;
+
+		float mDashCoolTimeChecker;
 
 		Animator* mAnimator;
 		int mCurState;

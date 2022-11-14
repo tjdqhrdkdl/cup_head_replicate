@@ -41,14 +41,10 @@ namespace ya {
 	void MapScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-
-		Graphics graphic(hdc);
-		FontFamily  fontFamily(L"Arial");
-		Font        font(&fontFamily, 12, 0, Gdiplus::UnitPoint);
-		PointF      pointF(10.0f, 30.0f);
-		SolidBrush  solidBrush(Color(255, 0, 0, 0));
-
-		graphic.DrawString(L"MapScene", -1, &font, pointF, &solidBrush);
+		wchar_t szFloat[50] = {};
+		swprintf_s(szFloat, 50, L"MapScene");
+		int strLen = wcsnlen_s(szFloat, 50);
+		TextOut(hdc, 10, 50, szFloat, strLen);
 
 	}
 

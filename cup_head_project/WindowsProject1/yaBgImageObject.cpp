@@ -1,6 +1,6 @@
 #include "yaBgImageObject.h"
 #include "yaResources.h"
-
+#include "yaCamera.h"
 namespace ya {
 
 	BgImageObject::BgImageObject()
@@ -25,14 +25,15 @@ namespace ya {
 		Vector2 scale = GetScale();
 		Vector2 finalPos = pos;
 
+		finalPos = Camera::CalculatePos(finalPos);
 		Vector2 rect;
 		rect.x = mImage->GetWidth() * scale.x;
 		rect.y = mImage->GetHeight() * scale.y;
-
-		//BitBlt(hdc, 0, 0, mImage->GetWidth(), mImage->GetHeight(), mImage->GetDC(), mImage->GetWidth(), mImage->GetHeight(), 0);
-		TransparentBlt(hdc, finalPos.x, finalPos.y, rect.x, rect.y
-			, mImage->GetDC(), 0, 0, mImage->GetWidth(), mImage->GetHeight()
-			, RGB(255, 0, 255));
+		
+		BitBlt(hdc, finalPos.x, finalPos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetDC(), 0, 0, SRCCOPY);
+		//TransparentBlt(hdc, finalPos.x, finalPos.y, rect.x, rect.y
+		//	, mImage->GetDC(), 0, 0, mImage->GetWidth(), mImage->GetHeight()
+		//	, RGB(255, 0, 255));
 		GameObject::Render(hdc);
 	}
 

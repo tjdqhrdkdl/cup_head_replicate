@@ -37,6 +37,10 @@ namespace ya
 		}
 	}
 
+	void Animator::Initialize()
+	{
+	}
+
 	void Animator::Tick()
 	{
 		if (mPlayAnimation != nullptr)
@@ -49,7 +53,12 @@ namespace ya
 				events->mCompleteEvent();
 				mPlayAnimation->Reset();
 			}
-			
+			if ((mbLoop == false) && mPlayAnimation->isComplete())
+			{
+				mPlayAnimation = mBaseAnimation;
+				mPlayAnimation->Reset();
+				mbLoop = true;
+			}
 		}
 	}
 

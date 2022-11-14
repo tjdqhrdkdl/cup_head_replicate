@@ -10,6 +10,7 @@ namespace ya {
 		Component(eComponentType type);
 		Component() = delete;
 		virtual ~Component();
+		virtual void Initialize() = 0;
 		virtual void Tick() = 0;
 		virtual void Render(HDC hdc);
 

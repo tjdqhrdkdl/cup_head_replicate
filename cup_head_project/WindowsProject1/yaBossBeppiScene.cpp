@@ -1,11 +1,16 @@
 #include "yaBossBeppiScene.h"
 #include "yaPlayer.h"
 #include "yaResources.h"
-#include "yaBgImageObject.h"
 #include "yaInput.h"
 #include "yaScenemanager.h"
-namespace ya {
+#include "yaObjectManager.h"
+#include "yaBeppiPhaseOne.h"
+#include "yaCollisionManager.h"
+
+namespace ya 
+{
 	BossBeppiScene::BossBeppiScene()
+		:mScenePlaying(false)
 	{
 	}
 
@@ -15,13 +20,22 @@ namespace ya {
 
 	void BossBeppiScene::Initialize()
 	{
+		mBGI = new BgImageObject();
+		mBGI->SetImage(L"BeppiMainBGI", L"Beppi\\clown_bg_main.png");
+		mBGI->SetPos({ -200,-70 });
+		AddGameObject(mBGI, eColliderLayer::BackGround);
+		ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);
 
-		AddGameObject(new Player(), eColliderLayer::Player);
+		ObjectManager::Instantiate<BeppiPhaseOne>(this, Vector2(1000.0f, 700.0f), eColliderLayer::Monster);
+
+		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster, true);
+		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::Monster, true);
 		Scene::Initialize();
 	}
 
 	void BossBeppiScene::Tick()
 	{
+		
 		Scene::Tick();
 		if (KEY_DOWN(eKeyCode::N))
 		{
@@ -33,13 +47,10 @@ namespace ya {
 	{
 		Scene::Render(hdc);
 
-		Graphics graphic(hdc);
-		FontFamily  fontFamily(L"Arial");
-		Font        font(&fontFamily, 12, 0, Gdiplus::UnitPoint);
-		PointF      pointF(10.0f, 30.0f);
-		SolidBrush  solidBrush(Color(255, 0, 0, 0));
-
-		graphic.DrawString(L"BossBeppiScene", -1, &font, pointF, &solidBrush);
+		wchar_t szFloat[50] = {};
+		swprintf_s(szFloat, 50, L"BossBeppiScene");
+		int strLen = wcsnlen_s(szFloat, 50);
+		TextOut(hdc, 10, 50, szFloat, strLen);
 
 	}
 

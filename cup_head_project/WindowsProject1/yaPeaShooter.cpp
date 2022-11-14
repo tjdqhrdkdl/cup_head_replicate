@@ -8,7 +8,7 @@
 #include "yaObjectManager.h"
 namespace ya
 {
-	float PeaShooter::CoolTime = 1.0f;
+	float PeaShooter::CoolTime = 0.2f;
 	float PeaShooter::AliveTime = 1.0f;
 	PeaShooter::PeaShooter(Vector2 dir)
 		: Bullet(dir)

@@ -32,6 +32,7 @@ namespace ya
 		Animator();
 		~Animator();
 
+		void Initialize() override;
 		virtual void Tick() override;
 		void Render(HDC hdc) override;
 		Gdiplus::ColorMatrix GetMatrix() { return mColorMatrix; }
@@ -52,13 +53,15 @@ namespace ya
 		std::function<void()>& GetEndEvent(const std::wstring key);
 
 		Animation* GetPlayAnimation() { return mPlayAnimation; }
-
+		void SetBaseAnimation(const std::wstring& name) { mBaseAnimation = FindAnimation(name); }
 
 
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
 		std::map<std::wstring, Events*> mEvents;
+
+		Animation* mBaseAnimation;
 		Animation* mPlayAnimation;
 		bool mbLoop;
 
