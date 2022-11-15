@@ -185,6 +185,9 @@
     <ClInclude Include="yaReady.h">
       <Filter>Engine\GameObject\BossSceneObj</Filter>
     </ClInclude>
+    <ClInclude Include="yaLightBulb.h">
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -285,6 +288,9 @@
     </ClCompile>
     <ClCompile Include="yaReady.cpp">
       <Filter>Engine\GameObject\BossSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="yaLightBulb.cpp">
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
