@@ -3,7 +3,7 @@
 #include "yaPicture.h"
 #include "yaCamera.h"
 #include "yaResources.h"
-
+#include "yaSceneManager.h"
 
 namespace ya
 {
@@ -53,11 +53,22 @@ namespace ya
 				events->mCompleteEvent();
 				mPlayAnimation->Reset();
 			}
+			else if (!mbLoop && mPlayAnimation->isComplete())
+			{
+				Animator::Events* events
+					= FindEvents(mPlayAnimation->GetName());
+				events->mCompleteEvent();
+			}
 			if (mBaseAnimation != nullptr && (mbLoop == false) && mPlayAnimation->isComplete())
 			{
-				mPlayAnimation = mBaseAnimation;
-				mPlayAnimation->Reset();
-				mbLoop = true;
+				if (mPlayAnimation->GetName() == L"Intro" && SceneManager::GetCurScene()->isIntro())
+					;
+				else
+				{
+					mPlayAnimation = mBaseAnimation;
+					mPlayAnimation->Reset();
+					mbLoop = true;
+				}
 			}
 		}
 	}
@@ -102,7 +113,9 @@ namespace ya
 
 	void Animator::Play(const std::wstring& name, bool bLoop)
 	{
+		
 		Animation* prevAnimation = mPlayAnimation;
+
 		mPlayAnimation = FindAnimation(name);
 
 		Animator::Events* events = FindEvents(name);

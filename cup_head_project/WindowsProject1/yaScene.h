@@ -16,12 +16,13 @@ namespace ya {
 
 		void AddGameObject(GameObject* gameobject , eColliderLayer type);
 		void DeleteGameObject(GameObject* target);
-
+		bool isIntro() { return misIntro; }
+		void SetIntro(bool b) { misIntro = b; }
 		std::vector<GameObject*> GetGameObjects(eColliderLayer type) { return mObjects[(UINT)type]; }
 		std::vector<GameObject*>* GetGameObjects() { return mObjects; }
 
 	private:
 		std::vector<GameObject*> mObjects[_COLLIDER_LAYER];
-		
+		bool misIntro;
 	};
 }

@@ -99,7 +99,7 @@ namespace ya
 		mAnimator->CreateAnimation(L"HitAirRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Air\\cuphead_hit_air_00", 7, 0.04f, false, false, { 0, 0 }, true, true);
 		mAnimator->CreateAnimation(L"HitAirLeft", L"..\\Resources\\Image\\Cuphead\\Hit\\Air\\cuphead_hit_air_00", 7, 0.04f, false, true, { 0, 0 }, true, true);
 
-		mAnimator->CreateAnimation(L"Intro", L"..\\Resources\\Image\\Cuphead\\Intros\\Regular\\cuphead_intro_a_00", 29, 0.03f, false, false, { 0 ,0 }, true, true);
+		mAnimator->CreateAnimation(L"Intro", L"..\\Resources\\Image\\Cuphead\\Intros\\Regular\\cuphead_intro_a_00", 39, 0.035f, false, false, { 0 ,0 }, true, true);
 
 		mAnimator->SetBaseAnimation(L"IdleRight");
 		mAnimator->Play(L"Intro", false);

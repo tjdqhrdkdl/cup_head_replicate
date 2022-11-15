@@ -17,12 +17,15 @@ namespace ya
 
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
-
+		void Attack();
 		virtual void OnCollisonEnter(Collider* other) override;
 		virtual void OnCollisonStay(Collider* other) override;
 		virtual void OnCollisonExit(Collider* other) override;
 	private:
 		float mSpeed;
+		float mHp;
+		bool mLookingLeft;
+
 		Animator* mAnimator;
 		bool onHit;
 		float onHitChecker;

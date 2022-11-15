@@ -48,11 +48,9 @@ namespace ya {
 
 	void GameObject::SetDeathTime(float time)
 	{
-		if (mDeathTime <= 0.0f)
-		{
-			mDeathTime = time;
-			mDeathTimeOn = true;
-		}
+		mDeathTime = time;
+		mDeathTimeOn = true;
+	
 	}
 
 	void GameObject::OnCollisonEnter(Collider* other)

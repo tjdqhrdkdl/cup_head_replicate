@@ -31,7 +31,7 @@ namespace ya
 
 	void Bullet::OnCollisonEnter(Collider* other)
 	{
-		ObjectManager::Destroy(this);
+		ObjectManager::Destroy(this, 0.0f);
 		other->OnCollisionExit(this->GetComponent<Collider>());
 	}
 

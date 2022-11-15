@@ -60,8 +60,11 @@
     <Filter Include="Engine\GameObject\Bullet\PeaShooter">
       <UniqueIdentifier>{7abf63ac-448b-41de-8336-73d07dc96e47}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\BossBeppiObj">
+    <Filter Include="Engine\GameObject\BossSceneObj">
       <UniqueIdentifier>{52c96c1c-8eaa-48f2-af3a-51f7f3cc6982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossSceneObj\BeppiSceneObj">
+      <UniqueIdentifier>{9e9a060b-d01f-468f-8a64-ff56b10e48e1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -174,7 +177,13 @@
       <Filter>Engine\GameObject\Bullet\PeaShooter</Filter>
     </ClInclude>
     <ClInclude Include="yaBeppiPhaseOne.h">
-      <Filter>Engine\GameObject\BossBeppiObj</Filter>
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="yaDuckPannel.h">
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="yaReady.h">
+      <Filter>Engine\GameObject\BossSceneObj</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -269,7 +278,13 @@
       <Filter>Engine\GameObject\Bullet\PeaShooter</Filter>
     </ClCompile>
     <ClCompile Include="yaBeppiPhaseOne.cpp">
-      <Filter>Engine\GameObject\BossBeppiObj</Filter>
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="yaDuckPannel.cpp">
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="yaReady.cpp">
+      <Filter>Engine\GameObject\BossSceneObj</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

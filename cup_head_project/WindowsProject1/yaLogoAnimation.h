@@ -13,8 +13,11 @@ namespace ya
 
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
+
+		void LogoCompleteEvent();
 	private:
 		Animator* mAnimator;
 		float mTime;
+		bool mComplete;
 	};
 }

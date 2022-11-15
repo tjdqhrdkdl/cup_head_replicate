@@ -6,11 +6,13 @@
 #include "yaObjectManager.h"
 #include "yaBeppiPhaseOne.h"
 #include "yaCollisionManager.h"
-
+#include "yaTime.h"
+#include "yaReady.h"
 namespace ya 
 {
 	BossBeppiScene::BossBeppiScene()
 	{
+		SetIntro(true);
 	}
 
 	BossBeppiScene::~BossBeppiScene()
@@ -27,6 +29,7 @@ namespace ya
 
 		ObjectManager::Instantiate<BeppiPhaseOne>(this, Vector2(1000.0f, 700.0f), eColliderLayer::Monster);
 
+		ObjectManager::Instantiate<Ready>(this, eColliderLayer::UI);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::Monster, true);
 		Scene::Initialize();
@@ -34,7 +37,8 @@ namespace ya
 
 	void BossBeppiScene::Tick()
 	{
-		
+
+
 		Scene::Tick();
 		if (KEY_DOWN(eKeyCode::N))
 		{
