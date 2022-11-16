@@ -5,11 +5,19 @@
 #include "yaPicture.h"
 #include "yaCamera.h"
 #include "yaObjectManager.h"
+#include "yaAnimator.h"
 namespace ya 
 {
 	Bullet::Bullet(Vector2 dir)
 	{
 		mDir = dir;
+		mEffect = new ShootEffect();
+		Scene* curScene = SceneManager::GetCurScene();
+		curScene->AddGameObject(mEffect, eColliderLayer::UI);
+
+		AddComponent(new Collider());
+		mAnimator = new Animator();
+		AddComponent(mAnimator);
 	}
 
 	Bullet::~Bullet()
@@ -18,21 +26,18 @@ namespace ya
 
 	void Bullet::Tick()
 	{
-
 		GameObject::Tick();
 	}
 
 	void Bullet::Render(HDC hdc)
 	{
-
 		GameObject::Render(hdc);
 
 	}
 
 	void Bullet::OnCollisonEnter(Collider* other)
 	{
-		ObjectManager::Destroy(this, 0.0f);
-		other->OnCollisionExit(this->GetComponent<Collider>());
+		mAnimator->Play(L"BulletDeath", false);
 	}
 
 	void Bullet::OnCollisonStay(Collider* other)
@@ -41,5 +46,9 @@ namespace ya
 
 	void Bullet::OnCollisonExit(Collider* other)
 	{
+	}
+	void Bullet::BulletDeathCompleteEvent()
+	{
+		ObjectManager::Destroy(this);
 	}
 }

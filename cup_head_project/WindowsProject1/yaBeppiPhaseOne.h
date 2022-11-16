@@ -18,6 +18,7 @@ namespace ya
 			BeppiPh1State_OnAttackMoving = 0x00000004,
 			BeppiPh1State_OnAttackSmash  = 0x00000008,
 			BeppiPh1State_OnIdleMove	 = 0x00000010,
+			BeppiPh1State_EndFall		 = 0x00000020,
 		};
 		BeppiPhaseOne();
 		~BeppiPhaseOne();
@@ -32,6 +33,7 @@ namespace ya
 		void AttackStartCompleteEvent();
 		void AttackSmashCompleteEvent();
 		void IdleCompleteEvent();
+		void EndCompleteEvent();
 
 		virtual void OnCollisonEnter(Collider* other) override;
 		virtual void OnCollisonStay(Collider* other) override;

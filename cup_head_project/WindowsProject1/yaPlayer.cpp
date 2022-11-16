@@ -31,7 +31,7 @@ namespace ya
 		, mShootAnimationTimeChecker(0.0f)
 	{
 		SetName(L"Player");
-		SetPos({ 400.0f, 650.0f });
+		SetPos({ 400.0f, 700.0f });
 		SetScale({ 90.0f, 120.0f });
 		AddComponent(new Collider());
 		mAnimator = new Animator();
@@ -733,6 +733,7 @@ namespace ya
 		bullet->SetPos(bulletStartPos);
 		if (++mShootPoint > 3)
 			mShootPoint = 0;
+		bullet->GetShootEffect()->SetPos(bulletStartPos + addPos/2);
 		return bulletStartPos;
 	}
 

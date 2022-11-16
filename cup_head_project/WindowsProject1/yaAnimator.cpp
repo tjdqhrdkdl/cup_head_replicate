@@ -63,11 +63,15 @@ namespace ya
 			{
 				if (mPlayAnimation->GetName() == L"Intro" && SceneManager::GetCurScene()->isIntro())
 					;
-				else
+				else if (mPlayAnimation->GetName() == L"Intro")
 				{
 					mPlayAnimation = mBaseAnimation;
 					mPlayAnimation->Reset();
 					mbLoop = true;
+				}
+				else
+				{
+					;
 				}
 			}
 		}

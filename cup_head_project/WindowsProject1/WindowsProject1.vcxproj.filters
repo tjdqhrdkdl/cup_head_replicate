@@ -188,6 +188,9 @@
     <ClInclude Include="yaLightBulb.h">
       <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
     </ClInclude>
+    <ClInclude Include="yaShootEffect.h">
+      <Filter>Engine\GameObject\Bullet\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -291,6 +294,9 @@
     </ClCompile>
     <ClCompile Include="yaLightBulb.cpp">
       <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="yaShootEffect.cpp">
+      <Filter>Engine\GameObject\Bullet\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

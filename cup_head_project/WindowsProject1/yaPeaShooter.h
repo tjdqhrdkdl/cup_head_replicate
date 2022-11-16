@@ -17,7 +17,6 @@ namespace ya
 	private:
 		float mSpeed;
 		float mAliveTimeChecker;
-		Animator* mAnimator;
 
 		static float AliveTime;
 		static float CoolTime;

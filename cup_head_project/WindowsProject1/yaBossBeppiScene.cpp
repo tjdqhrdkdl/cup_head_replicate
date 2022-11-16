@@ -23,8 +23,10 @@ namespace ya
 	{
 		mBGI = new BgImageObject();
 		mBGI->SetImage(L"BeppiMainBGI", L"Beppi\\clown_bg_main.png");
-		mBGI->SetPos({ -200,-70 });
+		mBGI->SetPos({ -200,0 });
 		AddGameObject(mBGI, eColliderLayer::BackGround);
+
+
 		ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);
 
 		ObjectManager::Instantiate<BeppiPhaseOne>(this, eColliderLayer::Monster);

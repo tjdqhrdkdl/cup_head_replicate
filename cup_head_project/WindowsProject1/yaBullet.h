@@ -1,5 +1,6 @@
 #pragma once
 #include "yaGameObject.h"
+#include "yaShootEffect.h"
 namespace ya {
 
 	class Bullet : public GameObject
@@ -12,6 +13,9 @@ namespace ya {
 		Vector2 GetDir() { return mDir; }
 		void SetDamage(float dmg) { mDamage = dmg; }
 		float GetDamage() { return mDamage; }
+		ShootEffect* GetShootEffect() { return mEffect; }
+		Animator* GetAnimator() { return mAnimator; }
+
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 
@@ -19,8 +23,12 @@ namespace ya {
 		virtual void OnCollisonStay(Collider* other) override;
 		virtual void OnCollisonExit(Collider* other) override;
 
+		void BulletDeathCompleteEvent();
 	private:
 		Vector2 mDir;
 		float mDamage;
+		ShootEffect* mEffect;
+
+		Animator* mAnimator;
 	};
 }

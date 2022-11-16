@@ -11,7 +11,7 @@ namespace ya
 	}
 
 	void DuckPannel::Tick()
-	{
+	{	
 	}
 
 	void DuckPannel::Render(HDC hdc)

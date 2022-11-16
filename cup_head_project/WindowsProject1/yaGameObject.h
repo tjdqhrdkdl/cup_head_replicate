@@ -24,6 +24,8 @@ namespace ya {
 		void Death() { mDead = true; }
 		bool IsDeath() { return mDead; }
 		void SetDeathTime(float time);
+		bool IsDeathTimeOn() { return mDeathTimeOn; }
+
 
 		virtual void OnCollisonEnter(Collider* other);
 		virtual void OnCollisonStay(Collider* other);

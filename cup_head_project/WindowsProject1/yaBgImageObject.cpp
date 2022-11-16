@@ -30,19 +30,29 @@ namespace ya {
 		rect.x = mImage->GetWidth() * scale.x;
 		rect.y = mImage->GetHeight() * scale.y;
 		
-		BitBlt(hdc, finalPos.x, finalPos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetDC(), 0, 0, SRCCOPY);
-		//TransparentBlt(hdc, finalPos.x, finalPos.y, rect.x, rect.y
-		//	, mImage->GetDC(), 0, 0, mImage->GetWidth(), mImage->GetHeight()
-		//	, RGB(255, 0, 255));
+		
+
+		if (mIsTransparent)
+		{
+			TransparentBlt(hdc, finalPos.x, finalPos.y, rect.x, rect.y
+				, mImage->GetDC(), 0, 0, mImage->GetWidth(), mImage->GetHeight()
+				, mColor);
+
+		}
+		else
+			BitBlt(hdc, finalPos.x, finalPos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetDC(), 0, 0, SRCCOPY);
+
 		GameObject::Render(hdc);
 	}
 
-	void BgImageObject::SetImage(const std::wstring& key, const std::wstring& fileName)
+	void BgImageObject::SetImage(const std::wstring& key, const std::wstring& fileName,UINT color, bool isTransparent)
 	{
 		std::wstring path = L"..\\Resources\\Image\\";
 		path += fileName;
 
 		mImage = Resources::Load<Picture>(key, path);
+		mIsTransparent = isTransparent;
+		mColor = color;
 
 	}
 }
