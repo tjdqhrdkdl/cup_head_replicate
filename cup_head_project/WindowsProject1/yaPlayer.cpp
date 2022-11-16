@@ -650,6 +650,7 @@ namespace ya
 		{
 			if (GetScale() == playerScaleDuck)
 			{
+				GetComponent<Collider>()->SetScale({ playerScaleBasic });
 				SetScale(playerScaleBasic);
 				mCurState &= ~PlayerState_OnShoot;
 			}
