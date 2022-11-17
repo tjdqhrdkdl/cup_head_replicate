@@ -6,6 +6,9 @@
 #include "yaPicture.h"
 #include "yaCamera.h"
 #include "yaObjectManager.h"
+
+
+
 namespace ya
 {
 	float PeaShooter::CoolTime = 0.2f;
@@ -25,15 +28,15 @@ namespace ya
 		effectAnimator->Play(L"BulletShotSpark", false);
 
 
-		GetAnimator()->CreateAnimation(L"BulletIdleRight", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.01f, false, false, {0,0}, true, true);
-		GetAnimator()->CreateAnimation(L"BulletIdleLeft", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.1f, false, true, { 0,0 }, true, true);
-		GetAnimator()->CreateAnimation(L"BulletIdleUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, true, 90);
-		GetAnimator()->CreateAnimation(L"BulletIdleDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, true, 270);
-		GetAnimator()->CreateAnimation(L"BulletIdleRightUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalUp\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, true);
-		GetAnimator()->CreateAnimation(L"BulletIdleLeftUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalUp\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, true, 90);
-		GetAnimator()->CreateAnimation(L"BulletIdleRightDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalUp\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, true, 270);
-		GetAnimator()->CreateAnimation(L"BulletIdleLeftDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalUp\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, true, 180);
-		GetAnimator()->CreateAnimation(L"BulletDeath", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Death\\weapon_peashot_death_00", 6, 0.01f, false, false, { 0,100 }, true, true);
+		GetAnimator()->CreateAnimation(L"BulletIdleRight", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.01f, false, false, {0,0}, true, false);
+		GetAnimator()->CreateAnimation(L"BulletIdleLeft", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.1f, false, true, { 0,0 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletIdleUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, false, 90);
+		GetAnimator()->CreateAnimation(L"BulletIdleDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, false, 270);
+		GetAnimator()->CreateAnimation(L"BulletIdleRightUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalUp\\weapon_peashot_main_00", 6, 0.1f, false, false, { 22,10 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletIdleLeftUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalUp\\weapon_peashot_main_00", 6, 0.1f, false, true, { -22,10 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletIdleRightDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalDown\\weapon_peashot_main_00", 6, 0.1f, false, false, { -10,15 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletIdleLeftDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalDown\\weapon_peashot_main_00", 6, 0.1f, false, true, { 10,15 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletDeath", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Death\\weapon_peashot_death_00", 6, 0.01f, false, false, { 0,100 }, true, false);
 		
 		GetAnimator()->GetCompleteEvent(L"BulletDeath") = std::bind(&Bullet::BulletDeathCompleteEvent, this);
 		
@@ -51,9 +54,6 @@ namespace ya
 		Vector2 scale = GetScale();
 		pos = pos + GetDir() * mSpeed * Time::DeltaTime();
 		mAliveTimeChecker += Time::DeltaTime();
-		
-		
-		
 		
 
 		if (!(GetAnimator()->GetPlayAnimation()->GetName() == L"BulletDeath"))

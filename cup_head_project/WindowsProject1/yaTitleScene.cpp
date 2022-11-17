@@ -23,7 +23,7 @@ namespace ya
 	{
 		mBGI = new BgImageObject();
 		mBGI->SetImage(L"TitleMainMenuBGI", L"Main Menu Background.png");
-		mBGI->SetPos({ 200,-150 });
+		mBGI->SetPos({ 200,0 });
 		AddGameObject(mBGI, eColliderLayer::BackGround);
 
 		Scene::Initialize();
