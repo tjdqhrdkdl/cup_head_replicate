@@ -22,6 +22,7 @@ namespace ya {
 
 		for (Scene* scene : mScenes )
 		{
+			mCurScene = scene;
 			scene->Initialize();
 		}
 

@@ -11,6 +11,7 @@ namespace ya
 		static __forceinline T* Instantiate(Scene* scene, eColliderLayer type)
 		{
 			T* gameObject = new T();
+			gameObject->Initialize();
 			scene->AddGameObject(dynamic_cast<GameObject*>(gameObject), type);
 
 			return gameObject;

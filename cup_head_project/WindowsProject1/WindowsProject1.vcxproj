@@ -156,7 +156,7 @@
     <ClInclude Include="yaCollider.h" />
     <ClInclude Include="yaCollisionManager.h" />
     <ClInclude Include="yaComponent.h" />
-    <ClInclude Include="yaDuckPannel.h" />
+    <ClInclude Include="yaDuckPanel.h" />
     <ClInclude Include="yaEndScene.h" />
     <ClInclude Include="yaEntity.h" />
     <ClInclude Include="yaGameObject.h" />
@@ -197,7 +197,7 @@
     <ClCompile Include="yaCollider.cpp" />
     <ClCompile Include="yaCollisionManager.cpp" />
     <ClCompile Include="yaComponent.cpp" />
-    <ClCompile Include="yaDuckPannel.cpp" />
+    <ClCompile Include="yaDuckPanel.cpp" />
     <ClCompile Include="yaEndScene.cpp" />
     <ClCompile Include="yaEntity.cpp" />
     <ClCompile Include="yaGameObject.cpp" />

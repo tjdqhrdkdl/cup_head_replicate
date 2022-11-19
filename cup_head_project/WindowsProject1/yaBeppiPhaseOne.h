@@ -29,6 +29,7 @@ namespace ya
 		void Attack();
 		void OnHitCheck();
 		void Move();
+		void SummonDuck();
 
 		void AttackStartCompleteEvent();
 		void AttackSmashCompleteEvent();
@@ -42,6 +43,7 @@ namespace ya
 		float mIdleSpeed;
 		float mAttackSpeed;
 		float mHp;
+		float mDuckTime;
 
 		Animator* mAnimator;
 		bool onHit;
@@ -49,6 +51,9 @@ namespace ya
 
 		float mAttackTimeChecker;
 		float mIdleMoveTimeChecker;
+		float mDuckTimeChecker;
+
+		int mPinkDuckChecker;
 
 		int mCurState;
 

@@ -179,7 +179,7 @@
     <ClInclude Include="yaBeppiPhaseOne.h">
       <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
     </ClInclude>
-    <ClInclude Include="yaDuckPannel.h">
+    <ClInclude Include="yaDuckPanel.h">
       <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
     </ClInclude>
     <ClInclude Include="yaReady.h">
@@ -292,7 +292,7 @@
     <ClCompile Include="yaBeppiPhaseOne.cpp">
       <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
     </ClCompile>
-    <ClCompile Include="yaDuckPannel.cpp">
+    <ClCompile Include="yaDuckPanel.cpp">
       <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
     </ClCompile>
     <ClCompile Include="yaReady.cpp">

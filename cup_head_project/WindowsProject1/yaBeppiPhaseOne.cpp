@@ -11,6 +11,7 @@
 #include "yaCamera.h"
 #include "yaBullet.h"
 #include "yaObjectManager.h"
+#include "yaDuckPanel.h"
 namespace ya 
 {
 	float AttackCoolTime = 5.0f;
@@ -19,13 +20,14 @@ namespace ya
 	BeppiPhaseOne::BeppiPhaseOne()
 		: mIdleSpeed(700.0f)
 		, mAttackSpeed(800.0f)
+		, mDuckTime(2.0f)
 		, onHit(false)
 		, onHitChecker(0.0f)
 		, mHp(50.0f)
 		, mCurState(BeppiPh1State_LookLeft)
 		, mAttackTimeChecker(0.0f)
 	{
-		SetName(L"Enemy");
+		SetName(L"BeppiPhaseOne");
 		SetPos({ 1100,790 });
 		SetScale({ 250.0f,200.0f });
 		AddComponent(new Collider());
@@ -63,6 +65,7 @@ namespace ya
 		
 		mAnimator->SetBaseAnimation(L"IdleLeft");
 		mAnimator->Play(L"Intro", false);
+
 	}
 
 	BeppiPhaseOne::~BeppiPhaseOne()
@@ -78,6 +81,7 @@ namespace ya
 			OnHitCheck();
 			Attack();
 			Move();
+			SummonDuck();
 		}
 
 
@@ -100,7 +104,7 @@ namespace ya
 			playAnimationName = L"IdleLeft";
 			if (IsDeathTimeOn())
 			{
-				playAnimationName = L"EndLeft";
+				playAnimationName = L"EndRight";
 				bLoop = false;
 			}
 			else if ((mCurState & BeppiPh1State_OnAttackStart) == BeppiPh1State_OnAttackStart)
@@ -121,7 +125,7 @@ namespace ya
 			playAnimationName = L"IdleRight";
 			if (IsDeathTimeOn())
 			{
-				playAnimationName = L"EndRight";
+				playAnimationName = L"EndLeft";
 				bLoop = false;
 			}
 			else if ((mCurState & BeppiPh1State_OnAttackStart) == BeppiPh1State_OnAttackStart)
@@ -215,6 +219,29 @@ namespace ya
 			}
 		}
 		SetPos(pos);
+	}
+
+	void BeppiPhaseOne::SummonDuck()
+	{
+		mDuckTimeChecker += Time::DeltaTime();
+		if (mDuckTimeChecker >= mDuckTime)
+		{
+			Scene* curScene = SceneManager::GetCurScene();
+			if (mPinkDuckChecker == 2)
+			{
+				bool pink = true;
+				DuckPanel* pinkDuck = new DuckPanel(pink);
+				pinkDuck->Initialize();
+				curScene->AddGameObject(pinkDuck, eColliderLayer::Monster);
+				mPinkDuckChecker = 0;
+			}
+			else
+			{
+				ObjectManager::Instantiate<DuckPanel>(curScene, eColliderLayer::Monster);
+				mPinkDuckChecker += 1;
+			}
+			mDuckTimeChecker = 0.0f;
+		}
 	}
 
 	void BeppiPhaseOne::AttackStartCompleteEvent()
