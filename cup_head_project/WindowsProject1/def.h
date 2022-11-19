@@ -33,6 +33,7 @@ enum class eComponentType
 {
 	Animator,
 	Collider,
+	Rigidbody,
 	Sound,
 	End,
 };

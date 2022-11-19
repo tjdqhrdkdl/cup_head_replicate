@@ -6,6 +6,7 @@ namespace ya
 {
 	class Bullet;
 	class Animator;
+	class Rigidbody;
 	class Player : public GameObject
 	{
 	public:
@@ -38,29 +39,37 @@ namespace ya
 		void SetShooterCoolTime(eGunType guntype);
 		Vector2 SetBulletStartPos(Bullet*);
 		void SetGunDir();
-
+		Vector2 GetPrevPos() { return mPrevPos; }
 		int GetCurState() { return mCurState; }
 
+		bool isFalling() { return mFalling; }
 		void SetAnimation();
 		void Shoot();
 		void Move();
 		void Duck();
 		void Dash();
+		void Jump();
+
+
 	private:
-		float mSpeed;
-		
-		Vector2 mGunDir;
+		int mCurState;
 
 		bool mReloading;
+		bool mFalling;
+
+		float mSpeed;
 		float mShooterCoolTime;
 		float mShooterCoolTimeChecker;
 		float mShootAnimationTimeChecker;
-		UINT mShootPoint;
-		eGunType mCurGunType;
-
 		float mDashCoolTimeChecker;
+		float mJumpTime;
 
+		UINT mShootPoint;
+		Vector2 mGunDir;
+		Vector2 mPrevPos;
+		eGunType mCurGunType;
 		Animator* mAnimator;
-		int mCurState;
+		Rigidbody* mRigidbody;
+
 	};
 }

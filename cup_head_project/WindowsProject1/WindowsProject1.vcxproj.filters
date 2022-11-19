@@ -191,6 +191,12 @@
     <ClInclude Include="yaShootEffect.h">
       <Filter>Engine\GameObject\Bullet\Base</Filter>
     </ClInclude>
+    <ClInclude Include="yaGround.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="yaRigidbody.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -297,6 +303,12 @@
     </ClCompile>
     <ClCompile Include="yaShootEffect.cpp">
       <Filter>Engine\GameObject\Bullet\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="yaGround.cpp">
+      <Filter>Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="yaRigidbody.cpp">
+      <Filter>Engine\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -160,6 +160,7 @@
     <ClInclude Include="yaEndScene.h" />
     <ClInclude Include="yaEntity.h" />
     <ClInclude Include="yaGameObject.h" />
+    <ClInclude Include="yaGround.h" />
     <ClInclude Include="yaLightBulb.h" />
     <ClInclude Include="yaLogoAnimation.h" />
     <ClInclude Include="yaReady.h" />
@@ -175,6 +176,7 @@
     <ClInclude Include="yaPlayer.h" />
     <ClInclude Include="yaResource.h" />
     <ClInclude Include="yaResources.h" />
+    <ClInclude Include="yaRigidbody.h" />
     <ClInclude Include="yaScene.h" />
     <ClInclude Include="yaSceneManager.h" />
     <ClInclude Include="def.h" />
@@ -199,6 +201,7 @@
     <ClCompile Include="yaEndScene.cpp" />
     <ClCompile Include="yaEntity.cpp" />
     <ClCompile Include="yaGameObject.cpp" />
+    <ClCompile Include="yaGround.cpp" />
     <ClCompile Include="yaLightBulb.cpp" />
     <ClCompile Include="yaLogoAnimation.cpp" />
     <ClCompile Include="yaReady.cpp" />
@@ -213,6 +216,7 @@
     <ClCompile Include="yaPlayer.cpp" />
     <ClCompile Include="yaResource.cpp" />
     <ClCompile Include="yaResources.cpp" />
+    <ClCompile Include="yaRigidbody.cpp" />
     <ClCompile Include="yaScene.cpp" />
     <ClCompile Include="yaSceneManager.cpp" />
     <ClCompile Include="yaShootEffect.cpp" />

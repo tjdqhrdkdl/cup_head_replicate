@@ -10,6 +10,7 @@
 #include "yaCamera.h"
 #include "yaAnimator.h"
 #include "yaPeaShooter.h"
+#include "yaRigidbody.h"
 #define STATE_HAVE(STATE) (mCurState & STATE) == STATE
 namespace ya 
 {
@@ -20,7 +21,7 @@ namespace ya
 	Vector2 playerScaleDuck = { 90.0f, 60.0f };
 
 	Player::Player()
-		:mSpeed(300.0f)
+		:mSpeed(500.0f)
 		, mGunDir(Vector2::Right)
 		, mCurState(PlayerState_LookRight)
 		, mShooterCoolTime(PeaShooter::GetCoolTime())
@@ -29,11 +30,16 @@ namespace ya
 		, mShootPoint(0)
 		, mReloading(false)
 		, mShootAnimationTimeChecker(0.0f)
+		, mFalling(true)
 	{
 		SetName(L"Player");
 		SetPos({ 400.0f, 700.0f });
 		SetScale({ 90.0f, 120.0f });
 		AddComponent(new Collider());
+		mRigidbody = new Rigidbody();
+		AddComponent(mRigidbody);
+	
+
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
 
@@ -65,13 +71,13 @@ namespace ya
 
 		mAnimator->CreateAnimation(L"ShootDiagonalRightUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
 		mAnimator->CreateAnimation(L"ShootDiagonalLeftUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilDiagonalRightUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_boil_00", 3, 0.1f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilDiagonalLeftUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_boil_00", 3, 0.1f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"ShootBoilDiagonalRightUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_boil_00", 3, 0.1f, false, false, { 10, 0 }, true, true);
+		mAnimator->CreateAnimation(L"ShootBoilDiagonalLeftUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_boil_00", 3, 0.1f, false, true, { -10, 0 }, true, true);
 
 		mAnimator->CreateAnimation(L"ShootDiagonalRightDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_down_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
 		mAnimator->CreateAnimation(L"ShootDiagonalLeftDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_down_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilDiagonalRightDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_Down_boil_00", 3, 0.1f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilDiagonalLeftDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_Down_boil_00", 3, 0.1f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"ShootBoilDiagonalRightDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_Down_boil_00", 3, 0.1f, false, false, { 10, 0 }, true, true);
+		mAnimator->CreateAnimation(L"ShootBoilDiagonalLeftDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_Down_boil_00", 3, 0.1f, false, true, { -10, 0 }, true, true);
 		
 		mAnimator->CreateAnimation(L"DuckRight", L"..\\Resources\\Image\\Cuphead\\Duck\\Idle\\cuphead_duck_00", 9, 0.05f, false, false, { 0, 0 }, true, true);
 		mAnimator->CreateAnimation(L"DuckLeft", L"..\\Resources\\Image\\Cuphead\\Duck\\Idle\\cuphead_duck_00", 9, 0.05f, false, true, { 0, 0 }, true, true);
@@ -84,8 +90,8 @@ namespace ya
 		mAnimator->CreateAnimation(L"DuckShootBoilRight", L"..\\Resources\\Image\\Cuphead\\Duck\\Shoot\\cuphead_duck_shoot_boil_00", 4, 0.1f, false, false, { 0, 0 }, true, true);
 		mAnimator->CreateAnimation(L"DuckShootBoilLeft", L"..\\Resources\\Image\\Cuphead\\Duck\\Shoot\\cuphead_duck_shoot_boil_00", 4, 0.1f, false, true, { 0, 0 }, true, true);
 		
-		mAnimator->CreateAnimation(L"JumpRight", L"..\\Resources\\Image\\Cuphead\\Jump\\Cuphead\\cuphead_jump_00", 9, 0.05f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"JumpLeft", L"..\\Resources\\Image\\Cuphead\\Jump\\Cuphead\\cuphead_jump_00", 9, 0.05f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"JumpRight", L"..\\Resources\\Image\\Cuphead\\Jump\\Cuphead\\cuphead_jump_00", 9, 0.02f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"JumpLeft", L"..\\Resources\\Image\\Cuphead\\Jump\\Cuphead\\cuphead_jump_00", 9, 0.02f, false, true, { 0, 0 }, true, true);
 		
 		mAnimator->CreateAnimation(L"DashRight", L"..\\Resources\\Image\\Cuphead\\Dash\\Ground\\cuphead_dash_00", 9, 0.03f, false, false, { 0, 0 }, true, true);
 		mAnimator->CreateAnimation(L"DashLeft", L"..\\Resources\\Image\\Cuphead\\Dash\\Ground\\cuphead_dash_00", 9, 0.03f, false, true, { 0, 0 }, true, true);
@@ -111,6 +117,7 @@ namespace ya
 
 	void Player::Tick()
 	{
+		mPrevPos = GetPos();
 		PlayerKeyInput();
 		if (!(mAnimator->GetPlayAnimation()->GetName() == L"Intro"))
 		{
@@ -120,6 +127,7 @@ namespace ya
 			Move();
 			Duck();
 			Dash();
+			Jump();
 		}
 		if ((mReloading))
 		{
@@ -232,8 +240,9 @@ namespace ya
 			mCurState &= ~PlayerState_Input_C;
 		}
 
-		if (KEY_DOWN(eKeyCode::Z))
+		if (KEY_DOWN(eKeyCode::R))
 		{
+			SetPos({ 400,700 });
 			//Jump()
 		}
 		if (KEY_DOWN(eKeyCode::V))
@@ -663,10 +672,14 @@ namespace ya
 			&& !(STATE_HAVE(PlayerState_OnDash))
 			&& !(STATE_HAVE(PlayerState_OnUlt))
 			&& !(STATE_HAVE(PlayerState_Input_C))
+			&& !(STATE_HAVE(PlayerState_Input_Down))
 			&& KEY_DOWN(eKeyCode::LSHIFT)
 			)
 		{
 			mCurState |= PlayerState_OnDash;
+
+			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
+			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
 		}
 		if (STATE_HAVE(PlayerState_OnDash))
 		{
@@ -674,14 +687,40 @@ namespace ya
 			if (mDashCoolTimeChecker >= DashTime)
 			{
 				mCurState &= ~PlayerState_OnDash;
+
+				dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,5000 });
 				mDashCoolTimeChecker = 0;
 			}
 			Vector2 pos = GetPos();
 			if(STATE_HAVE(PlayerState_LookRight))
-				pos.x += 1000 * Time::DeltaTime();
+				pos.x += 1300 * Time::DeltaTime();
 			else
-				pos.x -= 1000 * Time::DeltaTime();
+				pos.x -= 1300 * Time::DeltaTime();
 			SetPos(pos);
+		}
+	}
+
+	void Player::Jump()
+	{
+		if (!(STATE_HAVE(PlayerState_OnHit))
+			&& !(STATE_HAVE(PlayerState_OnDash))
+			&& !(STATE_HAVE(PlayerState_OnUlt))
+			&& !(STATE_HAVE(PlayerState_Input_C))
+			&& !(STATE_HAVE(PlayerState_OnJump))
+			&& KEY_DOWN(eKeyCode::Z)
+			)
+		{
+			mCurState |= PlayerState_OnJump;
+			Vector2 velocity = mRigidbody->GetVelocity();
+			velocity.y = -1850.0f;
+			mRigidbody->SetVelocity(velocity);
+
+			mRigidbody->SetGround(false);
+		}
+		if (STATE_HAVE(PlayerState_OnJump))
+		{
+			if (mRigidbody->isGround())
+				mCurState &= ~PlayerState_OnJump;
 		}
 	}
 

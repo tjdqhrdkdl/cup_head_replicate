@@ -7,6 +7,7 @@ namespace ya {
 	class Component:public Entity
 	{
 	public:
+		friend class GameObject;
 		Component(eComponentType type);
 		Component() = delete;
 		virtual ~Component();

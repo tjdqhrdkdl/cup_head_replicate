@@ -8,6 +8,7 @@
 #include "yaCollisionManager.h"
 #include "yaTime.h"
 #include "yaReady.h"
+#include "yaGround.h"
 namespace ya 
 {
 	BossBeppiScene::BossBeppiScene()
@@ -26,6 +27,7 @@ namespace ya
 		mBGI->SetPos({ -200,0 });
 		AddGameObject(mBGI, eColliderLayer::BackGround);
 
+		ObjectManager::Instantiate<Ground>(this, eColliderLayer::FrontObject);
 
 		ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);
 
@@ -33,6 +35,8 @@ namespace ya
 
 		ObjectManager::Instantiate<Ready>(this, eColliderLayer::UI);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster, true);
+
+		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontObject, true);
 		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::Monster, true);
 		Scene::Initialize();
 	}
@@ -57,6 +61,8 @@ namespace ya
 		swprintf_s(szFloat, 50, L"BossBeppiScene");
 		int strLen = wcsnlen_s(szFloat, 50);
 		TextOut(hdc, 10, 50, szFloat, strLen);
+
+
 
 	}
 
