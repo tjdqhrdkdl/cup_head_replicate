@@ -16,19 +16,24 @@ namespace ya
 		void SetScale(Vector2 scale) { mScale = scale; }
 		void SetPos(Vector2 pos) { mPos = pos; }
 		void SetOffset(Vector2 pos) { mOffset = pos; }
-
+		void SetOff(bool off) { mOff = off; }
+		void SetHitBox(bool off) { misHitBox = off; }
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetOffset() { return mOffset; }
 		Vector2 GetScale() { return mScale; }
+		bool isOff() { return mOff; }
 
+		bool isHitBox() { return misHitBox; }
 		void OnCollisionEnter(Collider* other);
 		void OnCollisionStay(Collider* other);
 		void OnCollisionExit(Collider* other);
-
 	private:
 		Vector2 mPos;
 		Vector2 mOffset;
 		Vector2 mScale;
 		UINT mCollisionCount;
+
+		bool mOff;
+		bool misHitBox;
 	};
 }

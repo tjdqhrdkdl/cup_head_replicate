@@ -53,16 +53,27 @@ namespace ya {
 	
 	}
 
-	void GameObject::OnCollisonEnter(Collider* other)
+	void GameObject::OnCollisonEnter(Collider* other, Collider* my)
 	{
 	}
 
-	void GameObject::OnCollisonStay(Collider* other)
+	void GameObject::OnCollisonStay(Collider* other, Collider* my)
 	{
 	}
 
-	void GameObject::OnCollisonExit(Collider* other)
+	void GameObject::OnCollisonExit(Collider* other, Collider* my)
 	{
+	}
+
+	Component* GameObject::GetComponent(Component* c)
+	{
+		
+		for (Component* component : mComponents)
+		{
+			if (component == c)
+				return c;
+		}
+		return nullptr;
 	}
 
 	Component* GameObject::GetComponent(eComponentType type)

@@ -2,6 +2,7 @@
 #include "Common.h"
 #include "yaGameObject.h"
 #include "yaPicture.h"
+#include "yaLightBulb.h"
 
 namespace ya
 {
@@ -17,9 +18,9 @@ namespace ya
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 
-		virtual void OnCollisonEnter(Collider* other) override;
-		virtual void OnCollisonStay(Collider* other) override;
-		virtual void OnCollisonExit(Collider* other) override;
+		virtual void OnCollisonEnter(Collider* other, Collider* my) override;
+		virtual void OnCollisonStay(Collider* other, Collider* my) override;
+		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 
 	private:
 		float mSpeed;
@@ -28,6 +29,8 @@ namespace ya
 		Animator* mAnimator;
 		Picture* mPicture;
 
+		LightBulb* mBulb;
+		Collider* mBulbDropCollider;
 		bool mSpin;
 		bool mPink;
 		bool mDown;

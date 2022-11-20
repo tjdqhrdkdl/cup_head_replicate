@@ -27,13 +27,13 @@ namespace ya {
 		bool IsDeathTimeOn() { return mDeathTimeOn; }
 
 
-		virtual void OnCollisonEnter(Collider* other);
-		virtual void OnCollisonStay(Collider* other);
-		virtual void OnCollisonExit(Collider* other);
+		virtual void OnCollisonEnter(Collider* other, Collider* my);
+		virtual void OnCollisonStay(Collider* other, Collider* my);
+		virtual void OnCollisonExit(Collider* other, Collider* my);
 
 		void AddComponent(Component* c) { c->SetOwner(this); mComponents.push_back(c); }
 
-
+		Component* GetComponent(Component*);
 		Component* GetComponent(eComponentType type);
 		template <typename T>
 		T* GetComponent()
@@ -45,6 +45,18 @@ namespace ya {
 					return component;
 			}
 			return nullptr;
+		}		
+		template <typename T>
+		std::vector<T*> GetComponents()
+		{
+			std::vector<T*> components = {};
+			for (auto c : mComponents)
+			{
+				T* component = dynamic_cast<T*>(c);
+				if (component != nullptr)
+					components.push_back(component);
+			}
+			return components;
 		}
 
 		void DeathLoop();

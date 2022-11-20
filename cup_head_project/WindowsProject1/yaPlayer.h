@@ -31,9 +31,9 @@ namespace ya
 		~Player();
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
-		virtual void OnCollisonEnter(Collider* other) override;
-		virtual void OnCollisonStay(Collider* other) override;
-		virtual void OnCollisonExit(Collider* other) override;
+		virtual void OnCollisonEnter(Collider* other, Collider* my) override;
+		virtual void OnCollisonStay(Collider* other, Collider* my) override;
+		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 		
 		void PlayerKeyInput();
 		void SetShooterCoolTime(eGunType guntype);

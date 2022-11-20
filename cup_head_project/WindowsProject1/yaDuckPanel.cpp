@@ -15,6 +15,11 @@ namespace ya
 		SetPos({ 1600,385 });
 		SetScale({ 100.0f,100.0f });
 		AddComponent(new Collider());
+		mBulbDropCollider = new Collider();
+		mBulbDropCollider->SetScale({ 10.0f, 900.0f });
+		mBulbDropCollider->SetHitBox(false);
+		AddComponent(mBulbDropCollider);
+
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
 
@@ -25,6 +30,11 @@ namespace ya
 			mPicture = Resources::Load<Picture>(L"PinkDuckBasicImage", L"..\\Resources\\Image\\Beppi\\Duck\\Pink\\Spin\\p_duck_spin_0010.png");
 		else
 			mPicture = Resources::Load<Picture>(L"DuckBasicImage", L"..\\Resources\\Image\\Beppi\\Duck\\Yellow\\Spin\\duck_spin_0010.png");
+
+		mBulb = new LightBulb();
+		mBulb->Initialize();
+		Scene* curScene = SceneManager::GetCurScene();
+		curScene->AddGameObject(mBulb, eColliderLayer::Monster_Projecttile);
 	}
 
 	DuckPanel::~DuckPanel()
@@ -48,7 +58,20 @@ namespace ya
 			pos.y += mSpeed * Time::DeltaTime();
 		else
 			pos.y -= mSpeed * Time::DeltaTime();
+
 		SetPos(pos);
+		if (mBulb != nullptr)
+		{
+			pos = mBulb->GetPos();
+
+			pos.x -= mSpeed * Time::DeltaTime();
+			if (mDown)
+				pos.y += mSpeed * Time::DeltaTime();
+			else
+				pos.y -= mSpeed * Time::DeltaTime();
+			mBulb->SetPos(pos);
+		}
+
 		GameObject::Tick();
 	}
 
@@ -67,24 +90,45 @@ namespace ya
 		GameObject::Render(hdc);
 	}
 
-	void DuckPanel::OnCollisonEnter(Collider* other)
+	void DuckPanel::OnCollisonEnter(Collider* other, Collider* my)
 	{
-		if (other->GetOwner()->GetLayer() == eColliderLayer::Player_Projecttile)
+		if (other->GetOwner()->GetLayer() == eColliderLayer::Player_Projecttile
+			&& my != mBulbDropCollider)
 		{
 			mSpin = true;
 			if(mPink)
 				mAnimator->Play(L"PinkSpin", true);
 			else
 				mAnimator->Play(L"Spin", true);
-			GetComponent<Collider>()->SetScale({ 0,0 });
+			GetComponent<Collider>()->SetOff(true);
+
+
+			if (mBulb != nullptr)
+			{
+				mBulbDropCollider->SetOff(true);
+				mBulb->GetAnimator()->Play(L"Drop", true);
+				mBulb->SetHang(false);
+				mBulb = nullptr;
+			}
+		}
+		else if (other->GetOwner()->GetLayer() == eColliderLayer::Player
+			&& my == mBulbDropCollider)
+		{
+			if (mBulb != nullptr)
+			{
+				mBulbDropCollider->SetOff(true);
+				mBulb->GetAnimator()->Play(L"Drop", true);
+				mBulb->SetHang(false);
+				mBulb = nullptr;
+			}
 		}
 	}
 
-	void DuckPanel::OnCollisonStay(Collider* other)
+	void DuckPanel::OnCollisonStay(Collider* other, Collider* my)
 	{
 	}
 
-	void DuckPanel::OnCollisonExit(Collider* other)
+	void DuckPanel::OnCollisonExit(Collider* other, Collider* my)
 	{
 	}
 

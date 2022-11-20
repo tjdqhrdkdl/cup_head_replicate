@@ -164,15 +164,15 @@ namespace ya
 		GameObject::Render(hdc);
 	}
 
-	void Player::OnCollisonEnter(Collider* other)
+	void Player::OnCollisonEnter(Collider* other, Collider* my)
 	{
 	}
 
-	void Player::OnCollisonStay(Collider* other)
+	void Player::OnCollisonStay(Collider* other, Collider* my)
 	{
 	}
 
-	void Player::OnCollisonExit(Collider* other)
+	void Player::OnCollisonExit(Collider* other, Collider* my)
 	{
 	}
 

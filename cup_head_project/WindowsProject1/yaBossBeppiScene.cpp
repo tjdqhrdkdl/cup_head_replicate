@@ -34,10 +34,12 @@ namespace ya
 		ObjectManager::Instantiate<BeppiPhaseOne>(this, eColliderLayer::Monster);
 
 		ObjectManager::Instantiate<Ready>(this, eColliderLayer::UI);
-		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster, true);
 
+		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontObject, true);
 		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::Monster, true);
+		CollisionManager::SetLayer(eColliderLayer::Monster_Projecttile, eColliderLayer::FrontObject, true);
+		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::FrontObject, true);
 		Scene::Initialize();
 	}
 

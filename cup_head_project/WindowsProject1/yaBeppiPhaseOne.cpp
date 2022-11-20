@@ -275,7 +275,7 @@ namespace ya
 		mCurState |= BeppiPh1State_EndFall;
 	}
 
-	void BeppiPhaseOne::OnCollisonEnter(Collider* other)
+	void BeppiPhaseOne::OnCollisonEnter(Collider* other, Collider* my)
 	{
 		GameObject* objOther = other->GetOwner();
 		if(objOther->GetLayer() == eColliderLayer::Player_Projecttile)
@@ -288,10 +288,10 @@ namespace ya
 		}
 	}
 
-	void BeppiPhaseOne::OnCollisonStay(Collider* other)
+	void BeppiPhaseOne::OnCollisonStay(Collider* other, Collider* my)
 	{
 	}
-	void BeppiPhaseOne::OnCollisonExit(Collider* other)
+	void BeppiPhaseOne::OnCollisonExit(Collider* other, Collider* my)
 	{
 	}
 }

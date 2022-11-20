@@ -52,22 +52,27 @@ namespace ya {
 
 		for (GameObject* leftObject : lefts)
 		{
-			Collider* leftCollider = leftObject->GetComponent<Collider>();
-			if (leftCollider == nullptr)
-				continue;
-
-			for (GameObject* rightObject : rights)
+			std::vector<Collider*> leftColliders = leftObject->GetComponents<Collider>();
+			for (Collider* leftCollider : leftColliders)
 			{
-				Collider* rightCollider = rightObject->GetComponent<Collider>();
-				if (rightCollider == nullptr)
-					continue;
-				
-				if (leftObject == rightObject)
+				if (leftCollider == nullptr or leftCollider->isOff())
 					continue;
 
-				ColliderCollision(leftCollider, rightCollider);
+				for (GameObject* rightObject : rights)
+				{
+					std::vector<Collider*> rightColliders = rightObject->GetComponents<Collider>();
+					for (Collider* rightCollider : rightColliders)
+					{
+						if (rightCollider == nullptr or rightCollider->isOff())
+							continue;
 
+						if (leftObject == rightObject)
+							continue;
 
+						ColliderCollision(leftCollider, rightCollider);
+					}
+
+				}
 			}
 		}
 

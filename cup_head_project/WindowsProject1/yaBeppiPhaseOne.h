@@ -36,9 +36,9 @@ namespace ya
 		void IdleCompleteEvent();
 		void EndCompleteEvent();
 
-		virtual void OnCollisonEnter(Collider* other) override;
-		virtual void OnCollisonStay(Collider* other) override;
-		virtual void OnCollisonExit(Collider* other) override;
+		virtual void OnCollisonEnter(Collider* other, Collider* my) override;
+		virtual void OnCollisonStay(Collider* other, Collider* my) override;
+		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 	private:
 		float mIdleSpeed;
 		float mAttackSpeed;

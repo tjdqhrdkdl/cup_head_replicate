@@ -35,16 +35,17 @@ namespace ya
 
 	}
 
-	void Bullet::OnCollisonEnter(Collider* other)
+	void Bullet::OnCollisonEnter(Collider* other, Collider* my)
 	{
-		mAnimator->Play(L"BulletDeath", false);
+		if(other->isHitBox())
+			mAnimator->Play(L"BulletDeath", false);
 	}
 
-	void Bullet::OnCollisonStay(Collider* other)
+	void Bullet::OnCollisonStay(Collider* other, Collider* my)
 	{
 	}
 
-	void Bullet::OnCollisonExit(Collider* other)
+	void Bullet::OnCollisonExit(Collider* other, Collider* my)
 	{
 	}
 	void Bullet::BulletDeathCompleteEvent()
