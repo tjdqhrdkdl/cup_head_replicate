@@ -7,17 +7,23 @@ namespace ya
 	
 	{
 	public:
-		PeaShooter(Vector2 dir);
+		PeaShooter(Vector2 dir, bool special = false);
 		~PeaShooter();
 		
 		static float GetCoolTime() { return CoolTime; }
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 
+
+		virtual void OnCollisonEnter(Collider* other, Collider* my) override;
+		virtual void OnCollisonStay(Collider* other, Collider* my) override;
+		virtual void OnCollisonExit(Collider* other, Collider* my) override;
+
 	private:
 		float mSpeed;
 		float mAliveTimeChecker;
 
+		float mEXDamageTime;
 		static float AliveTime;
 		static float CoolTime;
 	};

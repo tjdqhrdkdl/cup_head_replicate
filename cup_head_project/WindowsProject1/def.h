@@ -56,7 +56,6 @@ enum class eColliderLayer
 	Monster,
 	Monster_Projecttile,
 
-
 	UI = _COLLIDER_LAYER - 1,
 	End = _COLLIDER_LAYER,
 };

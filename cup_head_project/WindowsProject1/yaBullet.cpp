@@ -5,15 +5,17 @@
 #include "yaPicture.h"
 #include "yaCamera.h"
 #include "yaObjectManager.h"
+#include "yaMonster.h"
 #include "yaAnimator.h"
 namespace ya 
 {
-	Bullet::Bullet(Vector2 dir)
+	Bullet::Bullet(Vector2 dir, bool special)
 	{
 		mDir = dir;
+		mSpecial = special;
 		mEffect = new ShootEffect();
 		Scene* curScene = SceneManager::GetCurScene();
-		curScene->AddGameObject(mEffect, eColliderLayer::UI);
+		curScene->AddGameObject(mEffect, eColliderLayer::Effect);
 
 		AddComponent(new Collider());
 		mAnimator = new Animator();
@@ -37,8 +39,23 @@ namespace ya
 
 	void Bullet::OnCollisonEnter(Collider* other, Collider* my)
 	{
-		if(other->isHitBox())
-			mAnimator->Play(L"BulletDeath", false);
+		if (other->isHitBox())
+		{
+			if (other->GetOwner()->GetLayer() == eColliderLayer::Monster)
+			{
+				Monster* monster = dynamic_cast<Monster*>(other->GetOwner());
+				if (monster == nullptr)
+					;
+				else
+				{
+					float hp = monster->GetHp();
+					hp -= GetDamage();
+					monster->SetHp(hp);
+				}
+			}
+			if (!mSpecial)
+				mAnimator->Play(L"BulletDeath", false);
+		}
 	}
 
 	void Bullet::OnCollisonStay(Collider* other, Collider* my)

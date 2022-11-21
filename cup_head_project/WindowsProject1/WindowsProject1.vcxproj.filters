@@ -51,20 +51,26 @@
     <Filter Include="Engine\GameObject\LogoSceneObj">
       <UniqueIdentifier>{33db6c20-1ad1-400d-a73b-a043bd1a246c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\Bullet">
-      <UniqueIdentifier>{e99469b8-b9bb-405a-b556-ec308f2a4775}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\GameObject\Bullet\Base">
-      <UniqueIdentifier>{9a77a3f8-abc1-4e13-b3cd-34c3f63af8df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\GameObject\Bullet\PeaShooter">
-      <UniqueIdentifier>{7abf63ac-448b-41de-8336-73d07dc96e47}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GameObject\BossSceneObj">
       <UniqueIdentifier>{52c96c1c-8eaa-48f2-af3a-51f7f3cc6982}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\GameObject\BossSceneObj\BeppiSceneObj">
       <UniqueIdentifier>{9e9a060b-d01f-468f-8a64-ff56b10e48e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Gun">
+      <UniqueIdentifier>{e99469b8-b9bb-405a-b556-ec308f2a4775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Gun\Base">
+      <UniqueIdentifier>{9a77a3f8-abc1-4e13-b3cd-34c3f63af8df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Gun\Base\Bullet">
+      <UniqueIdentifier>{f1ffd64c-14d4-44eb-b269-29c061bc62c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Gun\PeaShooter">
+      <UniqueIdentifier>{7abf63ac-448b-41de-8336-73d07dc96e47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossSceneObj\BossBase">
+      <UniqueIdentifier>{9ad0fd90-bf45-446e-90f8-2956bc4945ac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -170,11 +176,8 @@
     <ClInclude Include="yaReadyAnimation.h">
       <Filter>Engine\GameObject\LogoSceneObj</Filter>
     </ClInclude>
-    <ClInclude Include="yaBullet.h">
-      <Filter>Engine\GameObject\Bullet\Base</Filter>
-    </ClInclude>
     <ClInclude Include="yaPeaShooter.h">
-      <Filter>Engine\GameObject\Bullet\PeaShooter</Filter>
+      <Filter>Engine\GameObject\Gun\PeaShooter</Filter>
     </ClInclude>
     <ClInclude Include="yaBeppiPhaseOne.h">
       <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
@@ -188,14 +191,20 @@
     <ClInclude Include="yaLightBulb.h">
       <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
     </ClInclude>
-    <ClInclude Include="yaShootEffect.h">
-      <Filter>Engine\GameObject\Bullet\Base</Filter>
-    </ClInclude>
     <ClInclude Include="yaGround.h">
       <Filter>Engine\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="yaRigidbody.h">
       <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBullet.h">
+      <Filter>Engine\GameObject\Gun\Base\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="yaShootEffect.h">
+      <Filter>Engine\GameObject\Gun\Base\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMonster.h">
+      <Filter>Engine\GameObject\BossSceneObj\BossBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -283,11 +292,8 @@
     <ClCompile Include="yaReadyAnimation.cpp">
       <Filter>Engine\GameObject\LogoSceneObj</Filter>
     </ClCompile>
-    <ClCompile Include="yaBullet.cpp">
-      <Filter>Engine\GameObject\Bullet\Base</Filter>
-    </ClCompile>
     <ClCompile Include="yaPeaShooter.cpp">
-      <Filter>Engine\GameObject\Bullet\PeaShooter</Filter>
+      <Filter>Engine\GameObject\Gun\PeaShooter</Filter>
     </ClCompile>
     <ClCompile Include="yaBeppiPhaseOne.cpp">
       <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
@@ -301,14 +307,20 @@
     <ClCompile Include="yaLightBulb.cpp">
       <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
     </ClCompile>
-    <ClCompile Include="yaShootEffect.cpp">
-      <Filter>Engine\GameObject\Bullet\Base</Filter>
-    </ClCompile>
     <ClCompile Include="yaGround.cpp">
       <Filter>Engine\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="yaRigidbody.cpp">
       <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBullet.cpp">
+      <Filter>Engine\GameObject\Gun\Base\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="yaShootEffect.cpp">
+      <Filter>Engine\GameObject\Gun\Base\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMonster.cpp">
+      <Filter>Engine\GameObject\BossSceneObj\BossBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

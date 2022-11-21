@@ -1,13 +1,13 @@
 #pragma once
 #include "Common.h"
-#include "yaGameObject.h"
+#include "yaMonster.h"
 #include "yaPicture.h"
 
 namespace ya 
 {
 
 	class Animator;
-	class BeppiPhaseOne : public GameObject
+	class BeppiPhaseOne : public Monster
 	{
 	public:
 		enum eBeppiPh1State
@@ -42,12 +42,9 @@ namespace ya
 	private:
 		float mIdleSpeed;
 		float mAttackSpeed;
-		float mHp;
 		float mDuckTime;
 
 		Animator* mAnimator;
-		bool onHit;
-		float onHitChecker;
 
 		float mAttackTimeChecker;
 		float mIdleMoveTimeChecker;

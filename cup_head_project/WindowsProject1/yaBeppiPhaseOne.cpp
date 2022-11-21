@@ -21,19 +21,18 @@ namespace ya
 		: mIdleSpeed(700.0f)
 		, mAttackSpeed(800.0f)
 		, mDuckTime(2.0f)
-		, onHit(false)
-		, onHitChecker(0.0f)
-		, mHp(50.0f)
 		, mCurState(BeppiPh1State_LookLeft)
 		, mAttackTimeChecker(0.0f)
 		, mBulbDuckChecker(1)
 	{
 		SetName(L"BeppiPhaseOne");
+		mHp = 200;
 		SetPos({ 1100,790 });
 		SetScale({ 250.0f,200.0f });
 		AddComponent(new Collider());
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
+	
 		mAnimator->CreateAnimation(L"IdleLeft", L"..\\Resources\\Image\\Beppi\\Idle\\Phase1_Idle_", 26, 0.04f, true, false);
 		mAnimator->CreateAnimation(L"IdleRight", L"..\\Resources\\Image\\Beppi\\Idle\\Phase1_Idle_", 26, 0.04f, true, true);
 		
@@ -66,7 +65,8 @@ namespace ya
 		
 		mAnimator->SetBaseAnimation(L"IdleLeft");
 		mAnimator->Play(L"Intro", false);
-
+		DuckPanel();
+		LightBulb();
 	}
 
 	BeppiPhaseOne::~BeppiPhaseOne()
@@ -293,8 +293,7 @@ namespace ya
 		GameObject* objOther = other->GetOwner();
 		if(objOther->GetLayer() == eColliderLayer::Player_Projecttile)
 		{
-			Bullet* bullet = dynamic_cast<Bullet*>(other->GetOwner());
-			mHp -= bullet->GetDamage();
+			
 			onHit = true;
 			mAnimator->SetMatrixToLighten();
 			

@@ -31,6 +31,7 @@ namespace ya
 		, mReloading(false)
 		, mShootAnimationTimeChecker(0.0f)
 		, mFalling(true)
+		, mCanDash(true)
 	{
 		SetName(L"Player");
 		SetPos({ 400.0f, 700.0f });
@@ -156,6 +157,8 @@ namespace ya
 
 		mAnimator->SetBaseAnimation(L"IdleRight");
 		mAnimator->Play(L"Intro", false);
+
+		PeaShooter({1,0});
 	}
 
 	Player::~Player()
@@ -721,6 +724,7 @@ namespace ya
 			&& !(STATE_HAVE(PlayerState_OnJump))
 			&& !(STATE_HAVE(PlayerState_OnUlt))
 			&& !(STATE_HAVE(PlayerState_Input_C))
+			&& !(STATE_HAVE(PlayerState_OnEX))
 			&& STATE_HAVE(PlayerState_Input_Down)
 			)
 		{
@@ -743,6 +747,7 @@ namespace ya
 		if (!(STATE_HAVE(PlayerState_OnHit))
 			&& !(STATE_HAVE(PlayerState_OnDash))
 			&& !(STATE_HAVE(PlayerState_OnUlt))
+			&& !(STATE_HAVE(PlayerState_OnEX))
 			&& !(STATE_HAVE(PlayerState_Input_C))
 			&& !(STATE_HAVE(PlayerState_Input_Down))
 			&& mCanDash
@@ -781,6 +786,7 @@ namespace ya
 			&& !(STATE_HAVE(PlayerState_OnDash))
 			&& !(STATE_HAVE(PlayerState_OnUlt))
 			&& !(STATE_HAVE(PlayerState_Input_C))
+			&& !(STATE_HAVE(PlayerState_OnEX))
 			&& !(STATE_HAVE(PlayerState_OnJump))
 			&& KEY_DOWN(eKeyCode::Z)
 			)
@@ -916,8 +922,25 @@ namespace ya
 					mAnimator->GetPlayAnimation() != mAnimator->FindAnimation(playAnimationName))
 					mAnimator->Play(playAnimationName, loop);
 			}
+			//EXbullet
+			{
+				Bullet* bullet = nullptr;
+
+				SetGunDir();
+				if (mCurGunType == eGunType::PeaShooter)
+				{
+					bool isSpecial = true;
+					bullet = new PeaShooter(mGunDir, isSpecial);
+					bullet->Initialize();
+				}
+				SetBulletStartPos(bullet);
+
+				Scene* curScene = SceneManager::GetCurScene();
+				curScene->AddGameObject(bullet, eColliderLayer::Player_Projecttile);
+				mReloading = true;
+			}
 			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
-			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity(Gravity);
+			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
 		}
 			
 	}

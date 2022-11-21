@@ -6,7 +6,7 @@ namespace ya {
 	class Bullet : public GameObject
 	{
 	public:
-		Bullet(Vector2 dir);
+		Bullet(Vector2 dir, bool special = false);
 		~Bullet();
 
 		void SetDir(Vector2 vec) { mDir = vec; }
@@ -24,7 +24,8 @@ namespace ya {
 		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 
 		void BulletDeathCompleteEvent();
-	private:
+	protected:
+		bool mSpecial;
 		Vector2 mDir;
 		float mDamage;
 		ShootEffect* mEffect;
