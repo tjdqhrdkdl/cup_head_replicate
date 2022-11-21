@@ -26,6 +26,7 @@ namespace ya
 		, mHp(50.0f)
 		, mCurState(BeppiPh1State_LookLeft)
 		, mAttackTimeChecker(0.0f)
+		, mBulbDuckChecker(1)
 	{
 		SetName(L"BeppiPhaseOne");
 		SetPos({ 1100,790 });
@@ -237,7 +238,19 @@ namespace ya
 			}
 			else
 			{
-				ObjectManager::Instantiate<DuckPanel>(curScene, eColliderLayer::Monster);
+				if (mBulbDuckChecker == 2)
+				{
+					LightBulb* bulb = new LightBulb();
+					DuckPanel* bulbDuck = new DuckPanel(false,bulb);
+					bulbDuck->Initialize();
+					curScene->AddGameObject(bulbDuck, eColliderLayer::Monster);
+					mBulbDuckChecker = 0;
+				}
+				else
+				{
+					ObjectManager::Instantiate<DuckPanel>(curScene, eColliderLayer::Monster);
+					mBulbDuckChecker += 1;
+				}
 				mPinkDuckChecker += 1;
 			}
 			mDuckTimeChecker = 0.0f;

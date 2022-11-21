@@ -15,6 +15,7 @@ namespace ya
 		virtual void Render(HDC hdc) override;
 
 		void ReadyCompleteEvent();
+
 	private:
 		Animator* mAnimator;
 		float mTime;

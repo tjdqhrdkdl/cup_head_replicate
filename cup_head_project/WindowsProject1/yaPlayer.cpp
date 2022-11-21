@@ -16,7 +16,7 @@ namespace ya
 {
 	float ShootAnimTime = 0.1f;
 	float DashTime = 0.3f;
-
+	Vector2 Gravity = { 0, 5000 };
 	Vector2 playerScaleBasic = { 90.0f, 120.0f };
 	Vector2 playerScaleDuck = { 90.0f, 60.0f };
 
@@ -105,7 +105,54 @@ namespace ya
 		mAnimator->CreateAnimation(L"HitAirRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Air\\cuphead_hit_air_00", 7, 0.04f, false, false, { 0, 0 }, true, true);
 		mAnimator->CreateAnimation(L"HitAirLeft", L"..\\Resources\\Image\\Cuphead\\Hit\\Air\\cuphead_hit_air_00", 7, 0.04f, false, true, { 0, 0 }, true, true);
 
+		mAnimator->CreateAnimation(L"ParryRight", L"..\\Resources\\Image\\Cuphead\\Parry\\Hand\\cuphead_parry_00", 9, 0.03f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"ParryLeft", L"..\\Resources\\Image\\Cuphead\\Parry\\Hand\\cuphead_parry_00", 9, 0.03f, false, true, { 0, 0 }, true, true);
+
+		mAnimator->CreateAnimation(L"EXRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Ground\\cuphead_ex_straight_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Ground\\cuphead_ex_straight_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXAirRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Air\\cuphead_ex_straight_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXAirLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Air\\cuphead_ex_straight_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Ground\\cuphead_ex_up_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Ground\\cuphead_ex_up_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXAirUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Air\\cuphead_ex_up_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXAirUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Air\\cuphead_ex_up_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Ground\\cuphead_ex_down_00", 16, 0.04f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Ground\\cuphead_ex_down_00", 16, 0.04f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXAirDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Air\\cuphead_ex_down_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXAirDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Air\\cuphead_ex_down_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXDiagonalUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Ground\\cuphead_ex_diagonal_up_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXDiagonalUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Ground\\cuphead_ex_diagonal_up_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXAirDiagonalUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Air\\cuphead_ex_diagonal_up_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXAirDiagonalUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Air\\cuphead_ex_diagonal_up_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXDiagonalDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Ground\\cuphead_ex_diagonal_down_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXDiagonalDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Ground\\cuphead_ex_diagonal_down_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXAirDiagonalDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Air\\cuphead_ex_diagonal_down_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
+		mAnimator->CreateAnimation(L"EXAirDiagonalDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Air\\cuphead_ex_diagonal_down_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+
 		mAnimator->CreateAnimation(L"Intro", L"..\\Resources\\Image\\Cuphead\\Intros\\Regular\\cuphead_intro_a_00", 39, 0.035f, false, false, { 0 ,0 }, true, true);
+
+
+		mAnimator->GetCompleteEvent(L"EXRight") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXLeft") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXAirRight") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXAirLeft") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXUpRight") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXUpLeft") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXAirUpRight") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXAirUpLeft") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXDownRight") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXDownLeft") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXAirDownRight") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXAirDownLeft") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXDiagonalUpRight") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXDiagonalUpLeft") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXAirDiagonalUpRight") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXAirDiagonalUpLeft") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXDiagonalDownRight") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXDiagonalDownLeft") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXAirDiagonalDownRight") = std::bind(&Player::EXCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"EXAirDiagonalDownLeft") = std::bind(&Player::EXCompleteEvent, this);
+
 
 		mAnimator->SetBaseAnimation(L"IdleRight");
 		mAnimator->Play(L"Intro", false);
@@ -122,31 +169,15 @@ namespace ya
 		if (!(mAnimator->GetPlayAnimation()->GetName() == L"Intro"))
 		{
 			SetAnimation();
-			if ((mCurState & PlayerState_Input_X) == PlayerState_Input_X)
-				Shoot();
+			Shoot();
 			Move();
 			Duck();
 			Dash();
 			Jump();
+			EX();
+			Parry();
 		}
-		if ((mReloading))
-		{
-			mShooterCoolTimeChecker += Time::DeltaTime();
-			if (mShooterCoolTimeChecker >= mShooterCoolTime)
-			{
-				mReloading = false;
-				mShooterCoolTimeChecker = 0.0f;
-			}
-		}
-		if ((mCurState & PlayerState_OnShoot) == PlayerState_OnShoot)
-		{
-			mShootAnimationTimeChecker += Time::DeltaTime();
-			if (mShootAnimationTimeChecker >= mShooterCoolTime)
-			{
-				mCurState &= ~PlayerState_OnShoot;
-				mShootAnimationTimeChecker = 0.0f;
-			}
-		}
+
 		
 		GameObject::Tick();
 	}
@@ -259,6 +290,7 @@ namespace ya
 	{
 		// 끝나면 자동으로 다음 애니메이션 나오는 것들 -> shoot류, Duckstart류.
 		std::wstring playAnimationName = L"";
+		bool loop = true;
 		if ((mCurState & PlayerState_LookRight) == PlayerState_LookRight)
 		{
 			int StateR = mCurState - PlayerState_LookRight;
@@ -270,14 +302,20 @@ namespace ya
 				else
 					playAnimationName = L"HitRight";
 			}
-			//else if ((StateLookRight & PlayerState_OnEX) == PlayerState_OnEX)
-			//	playAnimationName = L"JumpRight";
+			else if (STATE_HAVE(PlayerState_OnEX))
+			{
+				return;
+			}
 			else if ((StateR & PlayerState_OnDash) == PlayerState_OnDash)
 			{
 				if ((StateR & PlayerState_OnJump) == PlayerState_OnJump)
 					playAnimationName = L"DashAirRight";
 				else
 					playAnimationName = L"DashRight";
+			}
+			else if (STATE_HAVE(PlayerState_OnParry))
+			{
+				playAnimationName = L"ParryRight";
 			}
 			else if ((StateR & PlayerState_OnJump) == PlayerState_OnJump)
 				playAnimationName = L"JumpRight";
@@ -434,14 +472,22 @@ namespace ya
 				else
 					playAnimationName = L"HitLeft";
 			}
-			//else if ((StateLookRight & PlayerState_OnEX) == PlayerState_OnEX)
-			//	playAnimationName = L"JumpRight";
+			else if (STATE_HAVE(PlayerState_OnEX))
+			{
+				return;
+			}
+
 			else if ((StateL & PlayerState_OnDash) == PlayerState_OnDash)
 			{
 				if ((StateL & PlayerState_OnJump) == PlayerState_OnJump)
 					playAnimationName = L"DashAirLeft";
 				else
 					playAnimationName = L"DashLeft";
+			}
+			else if (STATE_HAVE(PlayerState_OnParry))
+			{
+				playAnimationName = L"ParryLeft";
+				loop = false;
 			}
 			else if ((StateL & PlayerState_OnJump) == PlayerState_OnJump)
 				playAnimationName = L"JumpLeft";
@@ -589,7 +635,7 @@ namespace ya
 		}
 		if (playAnimationName != L"" and
 			mAnimator->GetPlayAnimation() != mAnimator->FindAnimation(playAnimationName))
-			mAnimator->Play(playAnimationName, true);
+			mAnimator->Play(playAnimationName, loop);
 	}
 
 	void Player::Shoot()
@@ -599,6 +645,8 @@ namespace ya
 			&&	(mCurState & PlayerState_OnEX) != PlayerState_OnEX
 			&&	(mCurState & PlayerState_OnDash) != PlayerState_OnDash
 			&&	(mCurState & PlayerState_OnUlt) != PlayerState_OnUlt
+			&&	!(STATE_HAVE(PlayerState_OnShoot))
+			&&	STATE_HAVE(PlayerState_Input_X)
 			)
 		{
 			Bullet* bullet = nullptr;
@@ -615,6 +663,30 @@ namespace ya
 			curScene->AddGameObject(bullet, eColliderLayer::Player_Projecttile);
 			mCurState |= PlayerState_OnShoot;
 			mReloading = true;
+		}
+
+		if (KEY_UP(eKeyCode::X))
+		{
+			mCurState &= ~PlayerState_OnShoot;
+		}
+
+		if ((mReloading))
+		{
+			mShooterCoolTimeChecker += Time::DeltaTime();
+			if (mShooterCoolTimeChecker >= mShooterCoolTime)
+			{
+				mReloading = false;
+				mShooterCoolTimeChecker = 0.0f;
+			}
+		}
+		if ((mCurState & PlayerState_OnShoot) == PlayerState_OnShoot)
+		{
+			mShootAnimationTimeChecker += Time::DeltaTime();
+			if (mShootAnimationTimeChecker >= mShooterCoolTime)
+			{
+				mCurState &= ~PlayerState_OnShoot;
+				mShootAnimationTimeChecker = 0.0f;
+			}
 		}
 	}
 
@@ -673,23 +745,26 @@ namespace ya
 			&& !(STATE_HAVE(PlayerState_OnUlt))
 			&& !(STATE_HAVE(PlayerState_Input_C))
 			&& !(STATE_HAVE(PlayerState_Input_Down))
+			&& mCanDash
 			&& KEY_DOWN(eKeyCode::LSHIFT)
 			)
 		{
 			mCurState |= PlayerState_OnDash;
-
+			mCurState &= ~PlayerState_OnParry;
+			if (STATE_HAVE(PlayerState_OnJump))
+				mCanDash = false;
 			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
 			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
 		}
 		if (STATE_HAVE(PlayerState_OnDash))
 		{
-			mDashCoolTimeChecker += Time::DeltaTime();
-			if (mDashCoolTimeChecker >= DashTime)
+			mDashTimeChecker += Time::DeltaTime();
+			if (mDashTimeChecker >= DashTime)
 			{
 				mCurState &= ~PlayerState_OnDash;
 
 				dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,5000 });
-				mDashCoolTimeChecker = 0;
+				mDashTimeChecker = 0;
 			}
 			Vector2 pos = GetPos();
 			if(STATE_HAVE(PlayerState_LookRight))
@@ -719,10 +794,163 @@ namespace ya
 		}
 		if (STATE_HAVE(PlayerState_OnJump))
 		{
-			if (mRigidbody->isGround())
+			mJumpTimeChecker += Time::DeltaTime();
+			if (mRigidbody->isGround()) 
+			{
 				mCurState &= ~PlayerState_OnJump;
+				mJumpTimeChecker = 0;
+				mCanDash = true;
+			}
 		}
 	}
+
+	void Player::EX()
+	{
+		if (!(STATE_HAVE(PlayerState_OnHit))
+			&& !(STATE_HAVE(PlayerState_OnDash))
+			&& !(STATE_HAVE(PlayerState_OnUlt))
+			&& !(STATE_HAVE(PlayerState_OnEX))
+			&& KEY_DOWN(eKeyCode::V)
+			)
+		{
+			mCurState |= PlayerState_OnEX;
+			//애니메이션
+			{
+				bool loop = false;
+				std::wstring playAnimationName = L"";
+				if ((mCurState & PlayerState_LookRight) == PlayerState_LookRight)
+				{
+
+					if (STATE_HAVE(PlayerState_OnJump))
+					{
+						playAnimationName = L"EXAirRight";
+						if ((STATE_HAVE(PlayerState_Input_Right)) && (STATE_HAVE(PlayerState_Input_Down)))
+							playAnimationName = L"EXAirDiagonalDownRight";
+						else if ((STATE_HAVE(PlayerState_Input_Right)) && (STATE_HAVE(PlayerState_Input_Up)))
+							playAnimationName = L"EXAirDiagonalUpRight";
+						else if ((STATE_HAVE(PlayerState_Input_Left)) && (STATE_HAVE(PlayerState_Input_Down)))
+							playAnimationName = L"EXAirDiagonalDownLeft";
+						else if ((STATE_HAVE(PlayerState_Input_Left)) && (STATE_HAVE(PlayerState_Input_Up)))
+							playAnimationName = L"EXAirDiagonalUpLeft";
+						else if (STATE_HAVE(PlayerState_Input_Right))
+							playAnimationName = L"EXAirRight";
+						else if (STATE_HAVE(PlayerState_Input_Left))
+							playAnimationName = L"EXAirLeft";
+						else if (STATE_HAVE(PlayerState_Input_Up))
+							playAnimationName = L"EXAirUpRight";
+						else if (STATE_HAVE(PlayerState_Input_Down))
+							playAnimationName = L"EXAirDownRight";
+
+
+					}
+					else
+					{
+						playAnimationName = L"EXRight";
+						if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Down))
+							playAnimationName = L"EXDiagonalDownRight";
+						else if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Up))
+							playAnimationName = L"EXDiagonalUpRight";
+						else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Down))
+							playAnimationName = L"EXDiagonalDownLeft";
+						else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Up))
+							playAnimationName = L"EXDiagonalUpLeft";
+						else if (STATE_HAVE(PlayerState_Input_Right))
+							playAnimationName = L"EXRight";
+						else if (STATE_HAVE(PlayerState_Input_Left))
+							playAnimationName = L"EXLeft";
+						else if (STATE_HAVE(PlayerState_Input_Up))
+							playAnimationName = L"EXUpRight";
+						else if (STATE_HAVE(PlayerState_Input_Down))
+							playAnimationName = L"EXDownRight";
+
+					}
+				}
+				else
+				{
+					if (STATE_HAVE(PlayerState_OnJump))
+					{
+						playAnimationName = L"EXAirLeft";
+						if ((STATE_HAVE(PlayerState_Input_Right)) && (STATE_HAVE(PlayerState_Input_Down)))
+							playAnimationName = L"EXAirDiagonalDownRight";
+						else if ((STATE_HAVE(PlayerState_Input_Right)) && (STATE_HAVE(PlayerState_Input_Up)))
+							playAnimationName = L"EXAirDiagonalUpRight";
+						else if ((STATE_HAVE(PlayerState_Input_Left)) && (STATE_HAVE(PlayerState_Input_Down)))
+							playAnimationName = L"EXAirDiagonalDownLeft";
+						else if ((STATE_HAVE(PlayerState_Input_Left)) && (STATE_HAVE(PlayerState_Input_Up)))
+							playAnimationName = L"EXAirDiagonalUpLeft";
+						else if (STATE_HAVE(PlayerState_Input_Right))
+							playAnimationName = L"EXAirRight";
+						else if (STATE_HAVE(PlayerState_Input_Left))
+							playAnimationName = L"EXAirLeft";
+						else if (STATE_HAVE(PlayerState_Input_Up))
+							playAnimationName = L"EXAirUpLeft";
+						else if (STATE_HAVE(PlayerState_Input_Down))
+							playAnimationName = L"EXAirDownLeft";
+
+
+					}
+					else
+					{
+						playAnimationName = L"EXLeft";
+						if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Down))
+							playAnimationName = L"EXDiagonalDownRight";
+						else if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Up))
+							playAnimationName = L"EXDiagonalUpRight";
+						else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Down))
+							playAnimationName = L"EXDiagonalDownLeft";
+						else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Up))
+							playAnimationName = L"EXDiagonalUpLeft";
+						else if (STATE_HAVE(PlayerState_Input_Right))
+							playAnimationName = L"EXRight";
+						else if (STATE_HAVE(PlayerState_Input_Left))
+							playAnimationName = L"EXLeft";
+						else if (STATE_HAVE(PlayerState_Input_Up))
+							playAnimationName = L"EXUpLeft";
+						else if (STATE_HAVE(PlayerState_Input_Down))
+							playAnimationName = L"EXDownLeft";
+
+					}
+
+				}
+				if (playAnimationName != L"" and
+					mAnimator->GetPlayAnimation() != mAnimator->FindAnimation(playAnimationName))
+					mAnimator->Play(playAnimationName, loop);
+			}
+			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
+			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity(Gravity);
+		}
+			
+	}
+
+	void Player::Parry()
+	{
+		if (!(STATE_HAVE(PlayerState_OnHit))
+			&& !(STATE_HAVE(PlayerState_OnDash))
+			&& !(STATE_HAVE(PlayerState_OnUlt))
+			&& !(STATE_HAVE(PlayerState_Input_C))
+			&& !(STATE_HAVE(PlayerState_OnParry))
+			&& STATE_HAVE(PlayerState_OnJump)
+			&& mJumpTimeChecker > 0.1
+			&& KEY_DOWN(eKeyCode::Z)
+			)
+		{
+			mCurState |= PlayerState_OnParry;
+		}
+		if (STATE_HAVE(PlayerState_OnParry))
+		{
+			if (mRigidbody->isGround()) 
+			{
+				mCurState &= ~PlayerState_OnParry;
+			}
+		}
+	}
+
+	void Player::EXCompleteEvent()
+	{
+		mCurState &= ~PlayerState_OnEX;
+		dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity(Gravity);
+	}
+
 
 	void Player::SetShooterCoolTime(eGunType guntype)
 	{

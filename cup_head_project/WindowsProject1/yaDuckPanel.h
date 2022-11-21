@@ -12,7 +12,7 @@ namespace ya
 	{
 	public:
 
-		DuckPanel(bool pink = false);
+		DuckPanel(bool pink = false, LightBulb* bulb = nullptr);
 		~DuckPanel();
 
 		virtual void Tick() override;

@@ -26,6 +26,8 @@ namespace ya
 			PlayerState_OnUlt		= 0x00000400,
 			PlayerState_LookRight	= 0x00000800,
 			PlayerState_OnShoot		= 0x00001000,
+			PlayerState_OnParry		= 0x00002000,
+
 		};
 		Player();
 		~Player();
@@ -49,20 +51,25 @@ namespace ya
 		void Duck();
 		void Dash();
 		void Jump();
+		void EX();
+		void Parry();
 
-
+		void ShootCompleteEvent();
+		void EXCompleteEvent();
 	private:
 		int mCurState;
 
 		bool mReloading;
 		bool mFalling;
+		bool mCanDash;
 
 		float mSpeed;
 		float mShooterCoolTime;
 		float mShooterCoolTimeChecker;
 		float mShootAnimationTimeChecker;
-		float mDashCoolTimeChecker;
-		float mJumpTime;
+		float mEXAnimationTimeChecker;
+		float mDashTimeChecker;
+		float mJumpTimeChecker;
 
 		UINT mShootPoint;
 		Vector2 mGunDir;

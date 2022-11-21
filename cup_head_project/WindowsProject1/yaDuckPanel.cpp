@@ -6,19 +6,15 @@
 #include "yaResources.h"
 namespace ya
 {
-	DuckPanel::DuckPanel(bool pink)
+	DuckPanel::DuckPanel(bool pink, LightBulb* bulb)
 		:mSpeed(200)
-		,mAliveTime(10.0f)
-		,mPink(pink)
+		, mAliveTime(10.0f)
+		, mPink(pink)
 	{
 		SetName(L"DuckPannel");
 		SetPos({ 1600,385 });
 		SetScale({ 100.0f,100.0f });
 		AddComponent(new Collider());
-		mBulbDropCollider = new Collider();
-		mBulbDropCollider->SetScale({ 10.0f, 900.0f });
-		mBulbDropCollider->SetHitBox(false);
-		AddComponent(mBulbDropCollider);
 
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
@@ -26,15 +22,24 @@ namespace ya
 		mAnimator->CreateAnimation(L"Spin", L"..\\Resources\\Image\\Beppi\\Duck\\Yellow\\Spin\\duck_spin_00", 11, 0.05f, false, false);
 		mAnimator->CreateAnimation(L"PinkSpin", L"..\\Resources\\Image\\Beppi\\Duck\\Pink\\Spin\\p_duck_spin_00", 11, 0.05f, false, false);
 
-		if(mPink)
+		if (mPink)
 			mPicture = Resources::Load<Picture>(L"PinkDuckBasicImage", L"..\\Resources\\Image\\Beppi\\Duck\\Pink\\Spin\\p_duck_spin_0010.png");
 		else
 			mPicture = Resources::Load<Picture>(L"DuckBasicImage", L"..\\Resources\\Image\\Beppi\\Duck\\Yellow\\Spin\\duck_spin_0010.png");
 
-		mBulb = new LightBulb();
-		mBulb->Initialize();
-		Scene* curScene = SceneManager::GetCurScene();
-		curScene->AddGameObject(mBulb, eColliderLayer::Monster_Projecttile);
+		if (nullptr != bulb)
+		{
+			mBulbDropCollider = new Collider();
+			mBulbDropCollider->SetScale({ 10.0f, 900.0f });
+			mBulbDropCollider->SetAddPos({ 20,0 });
+			mBulbDropCollider->SetHitBox(false);
+			AddComponent(mBulbDropCollider);
+
+			mBulb = bulb;
+			mBulb->Initialize();
+			Scene* curScene = SceneManager::GetCurScene();
+			curScene->AddGameObject(mBulb, eColliderLayer::Monster_Projecttile);
+		}
 	}
 
 	DuckPanel::~DuckPanel()

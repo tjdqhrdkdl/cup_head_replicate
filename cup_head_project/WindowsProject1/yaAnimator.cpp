@@ -35,6 +35,13 @@ namespace ya
 				continue;
 			delete iter->second;
 		}
+
+		for (std::map<std::wstring, Events*>::iterator iter = mEvents.begin();iter != mEvents.end();iter++)
+		{
+			if (iter->second == nullptr)
+				continue;
+			delete iter->second;
+		}
 	}
 
 	void Animator::Initialize()

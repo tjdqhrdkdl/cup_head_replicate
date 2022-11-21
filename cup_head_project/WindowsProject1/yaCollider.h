@@ -18,6 +18,7 @@ namespace ya
 		void SetOffset(Vector2 pos) { mOffset = pos; }
 		void SetOff(bool off) { mOff = off; }
 		void SetHitBox(bool off) { misHitBox = off; }
+		void SetAddPos(Vector2 pos) { mAddPos = pos; }
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetOffset() { return mOffset; }
 		Vector2 GetScale() { return mScale; }
@@ -29,6 +30,7 @@ namespace ya
 		void OnCollisionExit(Collider* other);
 	private:
 		Vector2 mPos;
+		Vector2 mAddPos;
 		Vector2 mOffset;
 		Vector2 mScale;
 		UINT mCollisionCount;

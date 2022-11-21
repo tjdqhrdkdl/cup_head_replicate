@@ -28,7 +28,7 @@ namespace ya {
 		if (!mOff)
 		{
 			GameObject* owner = GetOwner();
-			mPos = Vector2(owner->GetPos().x, owner->GetPos().y - owner->GetScale().y / 2);
+			mPos = Vector2(owner->GetPos().x, owner->GetPos().y - owner->GetScale().y / 2) + mAddPos;
 		}
 	}
 

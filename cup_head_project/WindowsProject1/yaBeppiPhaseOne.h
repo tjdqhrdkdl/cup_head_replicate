@@ -54,7 +54,7 @@ namespace ya
 		float mDuckTimeChecker;
 
 		int mPinkDuckChecker;
-
+		int mBulbDuckChecker;
 		int mCurState;
 
 	};

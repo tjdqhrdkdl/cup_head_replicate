@@ -49,7 +49,9 @@ namespace ya
 				{
 					if ((*iter)->IsDeath() == true)
 					{
+						GameObject* obj = *iter;
 						iter = objects[y].erase(iter);
+						delete obj;
 						continue;
 					}
 					++iter;
