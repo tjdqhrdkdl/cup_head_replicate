@@ -9,7 +9,6 @@ namespace ya
 	{
 		SetName(L"ShootEffect");
 		SetScale({ 100,100 });
-		AddComponent(new Collider());
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
 	}

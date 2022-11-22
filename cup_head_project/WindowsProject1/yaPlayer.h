@@ -37,7 +37,7 @@ namespace ya
 		virtual void OnCollisonStay(Collider* other, Collider* my) override;
 		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 
-		void PlusSpecialPointF(float f) { mSpecialPointFloat += f; }
+		void PlusSpecialPointF(float f) { if (mSpecialPoint < 5) { mSpecialPointFloat += f; } }
 
 		void PlayerKeyInput();
 		void SetShooterCoolTime(eGunType guntype);

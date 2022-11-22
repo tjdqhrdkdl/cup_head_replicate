@@ -11,6 +11,7 @@
 #include "yaAnimator.h"
 #include "yaPeaShooter.h"
 #include "yaRigidbody.h"
+#include "yaParryEffect.h"
 #define STATE_HAVE(STATE) (mCurState & STATE) == STATE
 namespace ya 
 {
@@ -220,6 +221,19 @@ namespace ya
 			{
 				mSpecialPoint += 1;
 			}
+			ParryEffect* parryEffect = new ParryEffect();
+			Vector2 effectPos;
+			if (other->GetPos().x > my->GetPos().x)
+				effectPos.x = my->GetPos().x + (my->GetScale().x / 2);
+			else
+				effectPos.x = my->GetPos().x - (my->GetScale().x / 2);
+			// 기울기 * my->GetPos().x  + k == my->GetPos().y;  k = my->getpos().y - (my->getpos().x * 기울기)
+			effectPos.y = (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x) * effectPos.x +
+				my->GetPos().y - my->GetPos().x * (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x);
+			parryEffect->SetPos(effectPos);
+			Scene* curscene = SceneManager::GetCurScene();
+			curscene->AddGameObject(parryEffect, eColliderLayer::Effect);
+			
 		}
 	}
 

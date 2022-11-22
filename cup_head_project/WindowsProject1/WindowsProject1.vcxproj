@@ -164,6 +164,7 @@
     <ClInclude Include="yaGround.h" />
     <ClInclude Include="yaLightBulb.h" />
     <ClInclude Include="yaLogoAnimation.h" />
+    <ClInclude Include="yaParryEffect.h" />
     <ClInclude Include="yaReady.h" />
     <ClInclude Include="yaReadyAnimation.h" />
     <ClInclude Include="yaMapScene.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="yaGround.cpp" />
     <ClCompile Include="yaLightBulb.cpp" />
     <ClCompile Include="yaLogoAnimation.cpp" />
+    <ClCompile Include="yaParryEffect.cpp" />
     <ClCompile Include="yaReady.cpp" />
     <ClCompile Include="yaReadyAnimation.cpp" />
     <ClCompile Include="yaMapScene.cpp" />

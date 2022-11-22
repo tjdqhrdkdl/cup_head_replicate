@@ -72,6 +72,9 @@
     <Filter Include="Engine\GameObject\BossSceneObj\BossBase">
       <UniqueIdentifier>{9ad0fd90-bf45-446e-90f8-2956bc4945ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Player">
+      <UniqueIdentifier>{ec9cc829-afc7-48d4-9eb6-f43c69c5ef4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -112,9 +115,6 @@
     </ClInclude>
     <ClInclude Include="yaGameObject.h">
       <Filter>Engine\GameObject\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="yaPlayer.h">
-      <Filter>Engine\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="yaTime.h">
       <Filter>Engine\Manager</Filter>
@@ -206,6 +206,12 @@
     <ClInclude Include="yaMonster.h">
       <Filter>Engine\GameObject\BossSceneObj\BossBase</Filter>
     </ClInclude>
+    <ClInclude Include="yaPlayer.h">
+      <Filter>Engine\GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="yaParryEffect.h">
+      <Filter>Engine\GameObject\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -228,9 +234,6 @@
     </ClCompile>
     <ClCompile Include="yaGameObject.cpp">
       <Filter>Engine\GameObject\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="yaPlayer.cpp">
-      <Filter>Engine\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="yaTime.cpp">
       <Filter>Engine\Manager</Filter>
@@ -321,6 +324,12 @@
     </ClCompile>
     <ClCompile Include="yaMonster.cpp">
       <Filter>Engine\GameObject\BossSceneObj\BossBase</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPlayer.cpp">
+      <Filter>Engine\GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="yaParryEffect.cpp">
+      <Filter>Engine\GameObject\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
