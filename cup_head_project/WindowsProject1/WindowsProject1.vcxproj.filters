@@ -75,6 +75,12 @@
     <Filter Include="Engine\GameObject\Player">
       <UniqueIdentifier>{ec9cc829-afc7-48d4-9eb6-f43c69c5ef4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Scene\StructureScenes">
+      <UniqueIdentifier>{7fa76d47-56e7-4c0c-bf50-0f8994263817}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Player\Effects">
+      <UniqueIdentifier>{f6e4a271-ed45-464f-a71f-bb8285973f66}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -107,9 +113,6 @@
     <ClInclude Include="yaScene.h">
       <Filter>Engine\Scene\Base</Filter>
     </ClInclude>
-    <ClInclude Include="yaLogoScene.h">
-      <Filter>Engine\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="def.h">
       <Filter>Engine\Common</Filter>
     </ClInclude>
@@ -140,20 +143,11 @@
     <ClInclude Include="yaCollisionManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="yaMapScene.h">
-      <Filter>Engine\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="yaTitleScene.h">
-      <Filter>Engine\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="yaBgImageObject.h">
       <Filter>Engine\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="yaBossBeppiScene.h">
       <Filter>Engine\Scene\BossScenes</Filter>
-    </ClInclude>
-    <ClInclude Include="yaEndScene.h">
-      <Filter>Engine\Scene</Filter>
     </ClInclude>
     <ClInclude Include="yaBossVegetableScene.h">
       <Filter>Engine\Scene\BossScenes</Filter>
@@ -209,8 +203,26 @@
     <ClInclude Include="yaPlayer.h">
       <Filter>Engine\GameObject\Player</Filter>
     </ClInclude>
+    <ClInclude Include="yaEndScene.h">
+      <Filter>Engine\Scene\StructureScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yaLogoScene.h">
+      <Filter>Engine\Scene\StructureScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMapScene.h">
+      <Filter>Engine\Scene\StructureScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yaTitleScene.h">
+      <Filter>Engine\Scene\StructureScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yaDashEffect.h">
+      <Filter>Engine\GameObject\Player\Effects</Filter>
+    </ClInclude>
     <ClInclude Include="yaParryEffect.h">
-      <Filter>Engine\GameObject\Player</Filter>
+      <Filter>Engine\GameObject\Player\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="yaSpecialAttackEffect.h">
+      <Filter>Engine\GameObject\Player\Effects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +240,6 @@
     </ClCompile>
     <ClCompile Include="yaScene.cpp">
       <Filter>Engine\Scene\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="yaLogoScene.cpp">
-      <Filter>Engine\Scene</Filter>
     </ClCompile>
     <ClCompile Include="yaGameObject.cpp">
       <Filter>Engine\GameObject\Base</Filter>
@@ -262,20 +271,11 @@
     <ClCompile Include="yaCollisionManager.cpp">
       <Filter>Engine\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="yaMapScene.cpp">
-      <Filter>Engine\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="yaTitleScene.cpp">
-      <Filter>Engine\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="yaBgImageObject.cpp">
       <Filter>Engine\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="yaBossBeppiScene.cpp">
       <Filter>Engine\Scene\BossScenes</Filter>
-    </ClCompile>
-    <ClCompile Include="yaEndScene.cpp">
-      <Filter>Engine\Scene</Filter>
     </ClCompile>
     <ClCompile Include="yaBossVegetableScene.cpp">
       <Filter>Engine\Scene\BossScenes</Filter>
@@ -328,8 +328,26 @@
     <ClCompile Include="yaPlayer.cpp">
       <Filter>Engine\GameObject\Player</Filter>
     </ClCompile>
+    <ClCompile Include="yaEndScene.cpp">
+      <Filter>Engine\Scene\StructureScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yaLogoScene.cpp">
+      <Filter>Engine\Scene\StructureScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMapScene.cpp">
+      <Filter>Engine\Scene\StructureScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yaTitleScene.cpp">
+      <Filter>Engine\Scene\StructureScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yaDashEffect.cpp">
+      <Filter>Engine\GameObject\Player\Effects</Filter>
+    </ClCompile>
     <ClCompile Include="yaParryEffect.cpp">
-      <Filter>Engine\GameObject\Player</Filter>
+      <Filter>Engine\GameObject\Player\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSpecialAttackEffect.cpp">
+      <Filter>Engine\GameObject\Player\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

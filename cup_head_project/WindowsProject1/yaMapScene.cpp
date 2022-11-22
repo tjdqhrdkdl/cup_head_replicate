@@ -45,7 +45,6 @@ namespace ya {
 		swprintf_s(szFloat, 50, L"MapScene");
 		int strLen = wcsnlen_s(szFloat, 50);
 		TextOut(hdc, 10, 50, szFloat, strLen);
-
 	}
 
 	void MapScene::Enter()

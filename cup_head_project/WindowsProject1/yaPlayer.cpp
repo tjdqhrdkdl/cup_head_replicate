@@ -12,6 +12,9 @@
 #include "yaPeaShooter.h"
 #include "yaRigidbody.h"
 #include "yaParryEffect.h"
+#include "yaSpecialAttackEffect.h"
+#include "yaDashEffect.h"
+
 #define STATE_HAVE(STATE) (mCurState & STATE) == STATE
 namespace ya 
 {
@@ -41,7 +44,7 @@ namespace ya
 		AddComponent(new Collider());
 		mRigidbody = new Rigidbody();
 		AddComponent(mRigidbody);
-	
+
 
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
@@ -111,24 +114,24 @@ namespace ya
 			mAnimator->CreateAnimation(L"ParryRight", L"..\\Resources\\Image\\Cuphead\\Parry\\Hand\\cuphead_parry_00", 9, 0.03f, false, false, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"ParryLeft", L"..\\Resources\\Image\\Cuphead\\Parry\\Hand\\cuphead_parry_00", 9, 0.03f, false, true, { 0, 0 }, true, true);
 
-			mAnimator->CreateAnimation(L"EXRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Ground\\cuphead_ex_straight_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"EXLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Ground\\cuphead_ex_straight_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Ground\\cuphead_ex_straight_00", 14, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Ground\\cuphead_ex_straight_00", 14, 0.03f, false, true, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"EXAirRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Air\\cuphead_ex_straight_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"EXAirLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Air\\cuphead_ex_straight_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"EXUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Ground\\cuphead_ex_up_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"EXUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Ground\\cuphead_ex_up_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Ground\\cuphead_ex_up_00", 14, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Ground\\cuphead_ex_up_00", 14, 0.03f, false, true, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"EXAirUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Air\\cuphead_ex_up_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"EXAirUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Air\\cuphead_ex_up_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"EXDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Ground\\cuphead_ex_down_00", 16, 0.04f, false, false, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"EXDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Ground\\cuphead_ex_down_00", 16, 0.04f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Ground\\cuphead_ex_down_00", 14, 0.04f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Ground\\cuphead_ex_down_00", 14, 0.04f, false, true, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"EXAirDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Air\\cuphead_ex_down_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"EXAirDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Air\\cuphead_ex_down_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"EXDiagonalUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Ground\\cuphead_ex_diagonal_up_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"EXDiagonalUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Ground\\cuphead_ex_diagonal_up_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDiagonalUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Ground\\cuphead_ex_diagonal_up_00", 14, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDiagonalUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Ground\\cuphead_ex_diagonal_up_00", 14, 0.03f, false, true, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"EXAirDiagonalUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Air\\cuphead_ex_diagonal_up_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"EXAirDiagonalUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Air\\cuphead_ex_diagonal_up_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"EXDiagonalDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Ground\\cuphead_ex_diagonal_down_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"EXDiagonalDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Ground\\cuphead_ex_diagonal_down_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDiagonalDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Ground\\cuphead_ex_diagonal_down_00", 14, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDiagonalDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Ground\\cuphead_ex_diagonal_down_00", 14, 0.03f, false, true, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"EXAirDiagonalDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Air\\cuphead_ex_diagonal_down_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"EXAirDiagonalDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Air\\cuphead_ex_diagonal_down_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
 
@@ -160,8 +163,12 @@ namespace ya
 		mAnimator->SetBaseAnimation(L"IdleRight");
 		mAnimator->Play(L"Intro", false);
 
-		PeaShooter({1,0});
+		//Initialize시 이미지 로드
+		{PeaShooter({ 1,0 });
 		ParryEffect();
+		DashEffect();
+		SpecialAttackEffect({ 1,0 });
+		}
 	}
 
 	Player::~Player()
@@ -234,6 +241,7 @@ namespace ya
 			parryEffect->SetPos(effectPos);
 			Scene* curscene = SceneManager::GetCurScene();
 			curscene->AddGameObject(parryEffect, eColliderLayer::Effect);
+
 		}
 	}
 
@@ -312,6 +320,7 @@ namespace ya
 		if (KEY_DOWN(eKeyCode::R))
 		{
 			SetPos({ 400,700 });
+			mSpecialPoint = 5;
 			//Jump()
 		}
 		if (KEY_DOWN(eKeyCode::V))
@@ -795,6 +804,19 @@ namespace ya
 				mCanDash = false;
 			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
 			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
+			
+			
+			DashEffect* dashEffect;
+			bool isLeft = true;
+			if(STATE_HAVE(PlayerState_LookRight))
+				dashEffect = new DashEffect();
+			else
+				dashEffect = new DashEffect(isLeft);
+
+			dashEffect->SetPos(GetPos());
+			Scene* curscene = SceneManager::GetCurScene();
+			curscene->AddGameObject(dashEffect, eColliderLayer::Effect);
+
 		}
 		if (STATE_HAVE(PlayerState_OnDash))
 		{
@@ -986,6 +1008,11 @@ namespace ya
 
 			if (STATE_HAVE(PlayerState_OnJump))
 				mCanEX = false;
+
+			SpecialAttackEffect* exEffect = new SpecialAttackEffect(mGunDir);
+			exEffect->SetPos(GetPos());
+			Scene* curscene = SceneManager::GetCurScene();
+			curscene->AddGameObject(exEffect, eColliderLayer::Effect);
 		}
 			
 	}
@@ -1076,15 +1103,12 @@ namespace ya
 	{
 		Vector2 bulletStartPos = {};
 		Vector2 addPos = {};
-		bulletStartPos = { GetPos().x ,
-					GetPos().y - GetScale().y / 2 };
+		bulletStartPos = { GetPos().x , GetPos().y - GetScale().y / 2 };
 
-		addPos = { GetScale().x / 2, GetScale().y / 2 };
+		addPos = { GetScale().x / 2, 0};
 		addPos = addPos * mGunDir;
 		bulletStartPos += addPos;
 		bullet->SetPos(bulletStartPos);
-		if (++mShootPoint > 3)
-			mShootPoint = 0;
 		bullet->GetShootEffect()->SetPos(bulletStartPos + addPos / 2);
 		return bulletStartPos;
 	}

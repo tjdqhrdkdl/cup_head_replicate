@@ -150,6 +150,7 @@
     <ClInclude Include="yaAnimator.h" />
     <ClInclude Include="yaApplication.h" />
     <ClInclude Include="yaBgImageObject.h" />
+    <ClInclude Include="yaDashEffect.h" />
     <ClInclude Include="yaMonster.h" />
     <ClInclude Include="yaBossBeppiScene.h" />
     <ClInclude Include="yaBossVegetableScene.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="yaSceneManager.h" />
     <ClInclude Include="def.h" />
     <ClInclude Include="yaShootEffect.h" />
+    <ClInclude Include="yaSpecialAttackEffect.h" />
     <ClInclude Include="yaTime.h" />
     <ClInclude Include="yaTitleScene.h" />
   </ItemGroup>
@@ -193,6 +195,7 @@
     <ClCompile Include="yaAnimator.cpp" />
     <ClCompile Include="yaApplication.cpp" />
     <ClCompile Include="yaBgImageObject.cpp" />
+    <ClCompile Include="yaDashEffect.cpp" />
     <ClCompile Include="yaMonster.cpp" />
     <ClCompile Include="yaBossBeppiScene.cpp" />
     <ClCompile Include="yaBossVegetableScene.cpp" />
@@ -224,6 +227,7 @@
     <ClCompile Include="yaScene.cpp" />
     <ClCompile Include="yaSceneManager.cpp" />
     <ClCompile Include="yaShootEffect.cpp" />
+    <ClCompile Include="yaSpecialAttackEffect.cpp" />
     <ClCompile Include="yaTime.cpp" />
     <ClCompile Include="yaTitleScene.cpp" />
   </ItemGroup>

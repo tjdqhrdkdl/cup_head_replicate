@@ -28,11 +28,8 @@ namespace ya
 		AddGameObject(mBGI, eColliderLayer::BackGround);
 
 		ObjectManager::Instantiate<Ground>(this, eColliderLayer::FrontObject);
-
 		ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);
-
 		ObjectManager::Instantiate<BeppiPhaseOne>(this, eColliderLayer::Monster);
-
 		ObjectManager::Instantiate<Ready>(this, eColliderLayer::UI);
 
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster, true);

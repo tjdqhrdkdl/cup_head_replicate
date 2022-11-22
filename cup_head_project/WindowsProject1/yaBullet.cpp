@@ -71,6 +71,7 @@ namespace ya
 	void Bullet::OnCollisonExit(Collider* other, Collider* my)
 	{
 	}
+	
 	void Bullet::BulletDeathCompleteEvent()
 	{
 		ObjectManager::Destroy(this);
