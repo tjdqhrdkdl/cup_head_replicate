@@ -28,7 +28,7 @@ namespace ya {
 		{
 			SceneManager::ChangeScene(eSceneType::Title);
 		}
-		if (KEY_DOWN(eKeyCode::B))
+		if (KEY_DOWN(eKeyCode::N))
 		{
 			SceneManager::ChangeScene(eSceneType::BossBeppi);
 		}
