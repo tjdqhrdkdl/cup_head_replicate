@@ -36,15 +36,18 @@ namespace ya
 		virtual void OnCollisonEnter(Collider* other, Collider* my) override;
 		virtual void OnCollisonStay(Collider* other, Collider* my) override;
 		virtual void OnCollisonExit(Collider* other, Collider* my) override;
-		
+
+		void PlusSpecialPointF(float f) { mSpecialPointFloat += f; }
+
 		void PlayerKeyInput();
 		void SetShooterCoolTime(eGunType guntype);
 		void SetGunDir();
-		void SetGunEXDir();
+		void SetGunEXDir(); 
 		Vector2 SetBulletStartPos(Bullet*);
 		Vector2 SetEXBulletStartPos(Bullet*);
 		Vector2 GetPrevPos() { return mPrevPos; }
 		int GetCurState() { return mCurState; }
+		
 
 		bool isFalling() { return mFalling; }
 		void SetAnimation();
@@ -59,6 +62,9 @@ namespace ya
 		void EXCompleteEvent();
 	private:
 		int mCurState;
+		UINT mSpecialPoint;
+		float mSpecialPointFloat;
+
 
 		bool mReloading;
 		bool mFalling;

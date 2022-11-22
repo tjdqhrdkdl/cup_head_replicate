@@ -182,18 +182,45 @@ namespace ya
 			Parry();
 		}
 
-		
+		if (mSpecialPointFloat > 1)
+		{
+			if(mSpecialPoint < 5)
+				mSpecialPoint += 1;
+			mSpecialPointFloat = 0;
+		}
 		GameObject::Tick();
 	}
 
 	void Player::Render(HDC hdc)
 	{
+		Graphics graphic(hdc);
+		FontFamily  fontFamily(L"Arial");
+		Font        font(&fontFamily, 12, 0, Gdiplus::UnitPoint);
+		PointF      pointF(10.0f, 30.0f);
+		SolidBrush  solidBrush(Color(255, 255, 0, 255));
+		
 
+		graphic.DrawString(std::to_wstring(mSpecialPoint).c_str(), -1, &font, pointF, &solidBrush);
 		GameObject::Render(hdc);
 	}
 
 	void Player::OnCollisonEnter(Collider* other, Collider* my)
 	{
+		//패링 성공
+		if (other->GetOwner()->isParryable()
+			&& STATE_HAVE(PlayerState_OnParry))
+		{
+			Vector2 velocity = mRigidbody->GetVelocity();
+			velocity.y = -1500.0f;
+			mRigidbody->SetVelocity(velocity);
+
+			mCurState &= ~PlayerState_OnParry;
+			other->GetOwner()->SetParried(true);
+			if (mSpecialPoint < 5)
+			{
+				mSpecialPoint += 1;
+			}
+		}
 	}
 
 	void Player::OnCollisonStay(Collider* other, Collider* my)
@@ -650,11 +677,11 @@ namespace ya
 			
 			SetGunDir();
 			if (mCurGunType == eGunType::PeaShooter)
-			{
 				bullet = new PeaShooter(mGunDir);
-				bullet->Initialize();
-			}
 			SetBulletStartPos(bullet);
+			bullet->Initialize();
+			bullet->SetOwner(this);
+
 
 			Scene* curScene = SceneManager::GetCurScene();
 			curScene->AddGameObject(bullet, eColliderLayer::Player_Projecttile);
@@ -813,8 +840,10 @@ namespace ya
 			&& !(STATE_HAVE(PlayerState_OnEX))
 			&& mCanEX
 			&& KEY_DOWN(eKeyCode::V)
+			&& mSpecialPoint > 0
 			)
 		{
+			mSpecialPoint -= 1;
 			mCurState |= PlayerState_OnEX;
 			//애니메이션
 			{
@@ -927,9 +956,12 @@ namespace ya
 				{
 					bool isSpecial = true;
 					bullet = new PeaShooter(mGunDir, isSpecial);
-					bullet->Initialize();
 				}
 				SetEXBulletStartPos(bullet);
+				bullet->Initialize();
+				bullet->SetOwner(this);
+
+
 
 				Scene* curScene = SceneManager::GetCurScene();
 				curScene->AddGameObject(bullet, eColliderLayer::Player_Projecttile);
@@ -972,7 +1004,6 @@ namespace ya
 		mCurState &= ~PlayerState_OnEX;
 		dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity(Gravity);
 	}
-
 
 	void Player::SetShooterCoolTime(eGunType guntype)
 	{
@@ -1038,6 +1069,8 @@ namespace ya
 		addPos = addPos * mGunDir;
 		bulletStartPos += addPos;
 		bullet->SetPos(bulletStartPos);
+		if (++mShootPoint > 3)
+			mShootPoint = 0;
 		bullet->GetShootEffect()->SetPos(bulletStartPos + addPos / 2);
 		return bulletStartPos;
 	}

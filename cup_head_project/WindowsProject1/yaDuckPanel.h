@@ -32,7 +32,6 @@ namespace ya
 		LightBulb* mBulb;
 		Collider* mBulbDropCollider;
 		bool mSpin;
-		bool mPink;
 		bool mDown;
 	};
 }

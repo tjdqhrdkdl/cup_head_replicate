@@ -9,13 +9,14 @@ namespace ya
 	DuckPanel::DuckPanel(bool pink, LightBulb* bulb)
 		:mSpeed(200)
 		, mAliveTime(10.0f)
-		, mPink(pink)
 	{
 		SetName(L"DuckPannel");
 		SetPos({ 1600,385 });
 		SetScale({ 100.0f,100.0f });
+		mPink = pink;
+		
 		AddComponent(new Collider());
-
+		
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
 
@@ -76,7 +77,12 @@ namespace ya
 				pos.y -= mSpeed * Time::DeltaTime();
 			mBulb->SetPos(pos);
 		}
-
+		if (mParried && !mSpin)
+		{
+			mAnimator->Play(L"PinkSpin", true);
+			mSpin = true;
+			GetComponent<Collider>()->SetOff(true);
+		}
 		GameObject::Tick();
 	}
 
@@ -127,6 +133,8 @@ namespace ya
 				mBulb = nullptr;
 			}
 		}
+
+
 	}
 
 	void DuckPanel::OnCollisonStay(Collider* other, Collider* my)

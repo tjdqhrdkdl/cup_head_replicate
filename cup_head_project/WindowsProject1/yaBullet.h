@@ -1,8 +1,9 @@
 #pragma once
 #include "yaGameObject.h"
 #include "yaShootEffect.h"
-namespace ya {
-
+namespace ya 
+{
+	class Player;
 	class Bullet : public GameObject
 	{
 	public:
@@ -12,6 +13,7 @@ namespace ya {
 		void SetDir(Vector2 vec) { mDir = vec; }
 		Vector2 GetDir() { return mDir; }
 		void SetDamage(float dmg) { mDamage = dmg; }
+		void SetOwner(Player* pl) { mOwner = pl; }
 		float GetDamage() { return mDamage; }
 		ShootEffect* GetShootEffect() { return mEffect; }
 		Animator* GetAnimator() { return mAnimator; }
@@ -31,5 +33,6 @@ namespace ya {
 		ShootEffect* mEffect;
 
 		Animator* mAnimator;
+		Player* mOwner;
 	};
 }

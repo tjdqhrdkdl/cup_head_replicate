@@ -60,6 +60,11 @@ namespace ya {
 		}
 
 		void DeathLoop();
+
+
+		bool isParryable() { return mPink; }
+		void SetParried(bool parry) { mParried = parry; }
+
 	private:
 		std::vector<Component*> mComponents;
 		Vector2 mPos;
@@ -68,5 +73,9 @@ namespace ya {
 		eColliderLayer mLayer;
 		float mDeathTime;
 		bool mDeathTimeOn;
+
+	protected:
+		bool mPink;
+		bool mParried;
 	};
 }

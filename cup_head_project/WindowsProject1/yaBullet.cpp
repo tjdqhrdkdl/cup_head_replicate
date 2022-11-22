@@ -6,6 +6,7 @@
 #include "yaCamera.h"
 #include "yaObjectManager.h"
 #include "yaMonster.h"
+#include "yaPlayer.h"
 #include "yaAnimator.h"
 namespace ya 
 {
@@ -51,10 +52,15 @@ namespace ya
 					float hp = monster->GetHp();
 					hp -= GetDamage();
 					monster->SetHp(hp);
+					if(!mSpecial)
+						mOwner->PlusSpecialPointF(GetDamage() / 100);
 				}
+
 			}
 			if (!mSpecial)
+			{
 				mAnimator->Play(L"BulletDeath", false);
+			}
 		}
 	}
 
