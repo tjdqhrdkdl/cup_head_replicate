@@ -65,8 +65,9 @@ namespace ya
 		
 		mAnimator->SetBaseAnimation(L"IdleLeft");
 		mAnimator->Play(L"Intro", false);
-		DuckPanel();
-		LightBulb();
+		
+		DuckPanel InitDuck = DuckPanel();
+		LightBulb InitBulb = LightBulb();
 	}
 
 	BeppiPhaseOne::~BeppiPhaseOne()
@@ -164,7 +165,7 @@ namespace ya
 		if (onHit)
 		{
 			onHitChecker += Time::DeltaTime();
-			if (onHitChecker > 0.2f)
+			if (onHitChecker > 0.05f)
 			{
 				onHitChecker = 0;
 				onHit = false;

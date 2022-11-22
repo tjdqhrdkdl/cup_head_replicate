@@ -50,12 +50,12 @@ enum class eColliderLayer
 	BackGround,
 	BehindObject,
 	FrontObject,
+	Monster,
+	Monster_Projecttile,
 	Effect,
 	Player,
 	Player_Projecttile,
-	Monster,
-	Monster_Projecttile,
-
+	
 	UI = _COLLIDER_LAYER - 1,
 	End = _COLLIDER_LAYER,
 };

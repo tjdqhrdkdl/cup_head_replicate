@@ -22,8 +22,11 @@ namespace ya
 	private:
 		float mSpeed;
 		float mAliveTimeChecker;
+		float mEXDamageTimeChecker;
+		float mEXDeathTimeChecker;
 
-		float mEXDamageTime;
+		int mHitCount;
+
 		static float AliveTime;
 		static float CoolTime;
 	};

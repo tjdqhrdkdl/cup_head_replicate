@@ -39,8 +39,10 @@ namespace ya
 		
 		void PlayerKeyInput();
 		void SetShooterCoolTime(eGunType guntype);
-		Vector2 SetBulletStartPos(Bullet*);
 		void SetGunDir();
+		void SetGunEXDir();
+		Vector2 SetBulletStartPos(Bullet*);
+		Vector2 SetEXBulletStartPos(Bullet*);
 		Vector2 GetPrevPos() { return mPrevPos; }
 		int GetCurState() { return mCurState; }
 
@@ -54,7 +56,6 @@ namespace ya
 		void EX();
 		void Parry();
 
-		void ShootCompleteEvent();
 		void EXCompleteEvent();
 	private:
 		int mCurState;
@@ -62,6 +63,7 @@ namespace ya
 		bool mReloading;
 		bool mFalling;
 		bool mCanDash;
+		bool mCanEX;
 
 		float mSpeed;
 		float mShooterCoolTime;

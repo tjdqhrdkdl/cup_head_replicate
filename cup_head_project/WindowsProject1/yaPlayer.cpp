@@ -32,6 +32,7 @@ namespace ya
 		, mShootAnimationTimeChecker(0.0f)
 		, mFalling(true)
 		, mCanDash(true)
+		, mCanEX(true)
 	{
 		SetName(L"Player");
 		SetPos({ 400.0f, 700.0f });
@@ -43,118 +44,118 @@ namespace ya
 
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
+		{
+			mAnimator->CreateAnimation(L"IdleRight", L"..\\Resources\\Image\\Cuphead\\Idle\\cuphead_idle_00", 5, 0.1f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"IdleLeft", L"..\\Resources\\Image\\Cuphead\\Idle\\cuphead_idle_00", 5, 0.1f, false, true, { 0, 0 }, true, true);
 
-		mAnimator->CreateAnimation(L"IdleRight", L"..\\Resources\\Image\\Cuphead\\Idle\\cuphead_idle_00", 5, 0.1f, false, false, { 0, 0 }, true, true );
-		mAnimator->CreateAnimation(L"IdleLeft", L"..\\Resources\\Image\\Cuphead\\Idle\\cuphead_idle_00", 5, 0.1f,false,true, { 0, 0 }, true, true);
-		
-		mAnimator->CreateAnimation(L"RunRight", L"..\\Resources\\Image\\Cuphead\\Run\\Normal\\cuphead_run_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"RunLeft", L"..\\Resources\\Image\\Cuphead\\Run\\Normal\\cuphead_run_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"RunShootingRight", L"..\\Resources\\Image\\Cuphead\\Run\\Shooting\\Straight\\cuphead_run_shoot_00", 17, 0.03f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"RunShootingLeft", L"..\\Resources\\Image\\Cuphead\\Run\\Shooting\\Straight\\cuphead_run_shoot_00", 17, 0.03f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"RunShootingUpRight", L"..\\Resources\\Image\\Cuphead\\Run\\Shooting\\Diagonal Up\\cuphead_run_shoot_diagonal_up_00", 17, 0.03f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"RunShootingUpLeft", L"..\\Resources\\Image\\Cuphead\\Run\\Shooting\\Diagonal Up\\cuphead_run_shoot_diagonal_up_00", 17, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"RunRight", L"..\\Resources\\Image\\Cuphead\\Run\\Normal\\cuphead_run_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"RunLeft", L"..\\Resources\\Image\\Cuphead\\Run\\Normal\\cuphead_run_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"RunShootingRight", L"..\\Resources\\Image\\Cuphead\\Run\\Shooting\\Straight\\cuphead_run_shoot_00", 17, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"RunShootingLeft", L"..\\Resources\\Image\\Cuphead\\Run\\Shooting\\Straight\\cuphead_run_shoot_00", 17, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"RunShootingUpRight", L"..\\Resources\\Image\\Cuphead\\Run\\Shooting\\Diagonal Up\\cuphead_run_shoot_diagonal_up_00", 17, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"RunShootingUpLeft", L"..\\Resources\\Image\\Cuphead\\Run\\Shooting\\Diagonal Up\\cuphead_run_shoot_diagonal_up_00", 17, 0.03f, false, true, { 0, 0 }, true, true);
 
-		mAnimator->CreateAnimation(L"ShootRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Straight\\cuphead_shoot_straight_00", 4, ShootAnimTime, false, false, { 15, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Straight\\cuphead_shoot_straight_00", 4, ShootAnimTime, false, true, { -15, 0 }, true, true);
-		
-		mAnimator->CreateAnimation(L"ShootBoilRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Straight\\cuphead_shoot_straight_boil_00", 3, 0.1f, false, false, { 18, -7 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Straight\\cuphead_shoot_straight_boil_00", 3, 0.1f, false, true, { -18, -7 }, true, true);
-	
-		mAnimator->CreateAnimation(L"ShootUpRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Up\\cuphead_shoot_up_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootUpLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Up\\cuphead_shoot_up_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilUpRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Up\\cuphead_shoot_up_boil_00", 3, 0.1f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilUpLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Up\\cuphead_shoot_up_boil_00", 3, 0.1f, false, true, { 0, 0 }, true, true);
-	
-		mAnimator->CreateAnimation(L"ShootDownRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Down\\cuphead_shoot_down_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootDownLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Down\\cuphead_shoot_down_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilDownRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Down\\cuphead_shoot_down_boil_00", 3, 0.1f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilDownLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Down\\cuphead_shoot_down_boil_00", 3, 0.1f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Straight\\cuphead_shoot_straight_00", 4, ShootAnimTime, false, false, { 15, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Straight\\cuphead_shoot_straight_00", 4, ShootAnimTime, false, true, { -15, 0 }, true, true);
 
-		mAnimator->CreateAnimation(L"ShootDiagonalRightUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootDiagonalLeftUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilDiagonalRightUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_boil_00", 3, 0.1f, false, false, { 10, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilDiagonalLeftUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_boil_00", 3, 0.1f, false, true, { -10, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootBoilRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Straight\\cuphead_shoot_straight_boil_00", 3, 0.1f, false, false, { 18, -7 }, true, true);
+			mAnimator->CreateAnimation(L"ShootBoilLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Straight\\cuphead_shoot_straight_boil_00", 3, 0.1f, false, true, { -18, -7 }, true, true);
 
-		mAnimator->CreateAnimation(L"ShootDiagonalRightDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_down_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootDiagonalLeftDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_down_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilDiagonalRightDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_Down_boil_00", 3, 0.1f, false, false, { 10, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ShootBoilDiagonalLeftDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_Down_boil_00", 3, 0.1f, false, true, { -10, 0 }, true, true);
-		
-		mAnimator->CreateAnimation(L"DuckRight", L"..\\Resources\\Image\\Cuphead\\Duck\\Idle\\cuphead_duck_00", 9, 0.05f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"DuckLeft", L"..\\Resources\\Image\\Cuphead\\Duck\\Idle\\cuphead_duck_00", 9, 0.05f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootUpRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Up\\cuphead_shoot_up_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootUpLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Up\\cuphead_shoot_up_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootBoilUpRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Up\\cuphead_shoot_up_boil_00", 3, 0.1f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootBoilUpLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Up\\cuphead_shoot_up_boil_00", 3, 0.1f, false, true, { 0, 0 }, true, true);
 
-		mAnimator->CreateAnimation(L"DuckIdleRight", L"..\\Resources\\Image\\Cuphead\\Duck\\Idle\\cuphead_duck_idle_00", 6, 0.1f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"DuckIdleLeft", L"..\\Resources\\Image\\Cuphead\\Duck\\Idle\\cuphead_duck_idle_00", 6, 0.1f, false, true, { 0, 0 }, true, true);
-		
-		mAnimator->CreateAnimation(L"DuckShootRight", L"..\\Resources\\Image\\Cuphead\\Duck\\Shoot\\cuphead_duck_shoot_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"DuckShootLeft", L"..\\Resources\\Image\\Cuphead\\Duck\\Shoot\\cuphead_duck_shoot_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"DuckShootBoilRight", L"..\\Resources\\Image\\Cuphead\\Duck\\Shoot\\cuphead_duck_shoot_boil_00", 4, 0.1f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"DuckShootBoilLeft", L"..\\Resources\\Image\\Cuphead\\Duck\\Shoot\\cuphead_duck_shoot_boil_00", 4, 0.1f, false, true, { 0, 0 }, true, true);
-		
-		mAnimator->CreateAnimation(L"JumpRight", L"..\\Resources\\Image\\Cuphead\\Jump\\Cuphead\\cuphead_jump_00", 9, 0.02f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"JumpLeft", L"..\\Resources\\Image\\Cuphead\\Jump\\Cuphead\\cuphead_jump_00", 9, 0.02f, false, true, { 0, 0 }, true, true);
-		
-		mAnimator->CreateAnimation(L"DashRight", L"..\\Resources\\Image\\Cuphead\\Dash\\Ground\\cuphead_dash_00", 9, 0.03f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"DashLeft", L"..\\Resources\\Image\\Cuphead\\Dash\\Ground\\cuphead_dash_00", 9, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootDownRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Down\\cuphead_shoot_down_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootDownLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Down\\cuphead_shoot_down_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootBoilDownRight", L"..\\Resources\\Image\\Cuphead\\Shoot\\Down\\cuphead_shoot_down_boil_00", 3, 0.1f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootBoilDownLeft", L"..\\Resources\\Image\\Cuphead\\Shoot\\Down\\cuphead_shoot_down_boil_00", 3, 0.1f, false, true, { 0, 0 }, true, true);
 
-		mAnimator->CreateAnimation(L"DashAirRight", L"..\\Resources\\Image\\Cuphead\\Dash\\Air\\cuphead_dash_air_00", 9, 0.05f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"DashAirLeft", L"..\\Resources\\Image\\Cuphead\\Dash\\Air\\cuphead_dash_air_00", 9, 0.05f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootDiagonalRightUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootDiagonalLeftUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootBoilDiagonalRightUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_boil_00", 3, 0.1f, false, false, { 10, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootBoilDiagonalLeftUp", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Up\\cuphead_shoot_diagonal_up_boil_00", 3, 0.1f, false, true, { -10, 0 }, true, true);
 
-		mAnimator->CreateAnimation(L"HitRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Ground\\cuphead_hit_00", 7, 0.05f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"HItLeft", L"..\\Resources\\Image\\Cuphead\\HIt\\Ground\\cuphead_hit_00", 7, 0.05f, false, true, { 0, 0 }, true, true);
-	
-		mAnimator->CreateAnimation(L"HitAirRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Air\\cuphead_hit_air_00", 7, 0.04f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"HitAirLeft", L"..\\Resources\\Image\\Cuphead\\Hit\\Air\\cuphead_hit_air_00", 7, 0.04f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootDiagonalRightDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_down_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootDiagonalLeftDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_down_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootBoilDiagonalRightDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_Down_boil_00", 3, 0.1f, false, false, { 10, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ShootBoilDiagonalLeftDown", L"..\\Resources\\Image\\Cuphead\\Shoot\\Diagonal Down\\cuphead_shoot_diagonal_Down_boil_00", 3, 0.1f, false, true, { -10, 0 }, true, true);
 
-		mAnimator->CreateAnimation(L"ParryRight", L"..\\Resources\\Image\\Cuphead\\Parry\\Hand\\cuphead_parry_00", 9, 0.03f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"ParryLeft", L"..\\Resources\\Image\\Cuphead\\Parry\\Hand\\cuphead_parry_00", 9, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"DuckRight", L"..\\Resources\\Image\\Cuphead\\Duck\\Idle\\cuphead_duck_00", 9, 0.05f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"DuckLeft", L"..\\Resources\\Image\\Cuphead\\Duck\\Idle\\cuphead_duck_00", 9, 0.05f, false, true, { 0, 0 }, true, true);
 
-		mAnimator->CreateAnimation(L"EXRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Ground\\cuphead_ex_straight_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Ground\\cuphead_ex_straight_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXAirRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Air\\cuphead_ex_straight_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXAirLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Air\\cuphead_ex_straight_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Ground\\cuphead_ex_up_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Ground\\cuphead_ex_up_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXAirUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Air\\cuphead_ex_up_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXAirUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Air\\cuphead_ex_up_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Ground\\cuphead_ex_down_00", 16, 0.04f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Ground\\cuphead_ex_down_00", 16, 0.04f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXAirDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Air\\cuphead_ex_down_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXAirDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Air\\cuphead_ex_down_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXDiagonalUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Ground\\cuphead_ex_diagonal_up_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXDiagonalUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Ground\\cuphead_ex_diagonal_up_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXAirDiagonalUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Air\\cuphead_ex_diagonal_up_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXAirDiagonalUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Air\\cuphead_ex_diagonal_up_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXDiagonalDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Ground\\cuphead_ex_diagonal_down_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXDiagonalDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Ground\\cuphead_ex_diagonal_down_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXAirDiagonalDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Air\\cuphead_ex_diagonal_down_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
-		mAnimator->CreateAnimation(L"EXAirDiagonalDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Air\\cuphead_ex_diagonal_down_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"DuckIdleRight", L"..\\Resources\\Image\\Cuphead\\Duck\\Idle\\cuphead_duck_idle_00", 6, 0.1f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"DuckIdleLeft", L"..\\Resources\\Image\\Cuphead\\Duck\\Idle\\cuphead_duck_idle_00", 6, 0.1f, false, true, { 0, 0 }, true, true);
 
-		mAnimator->CreateAnimation(L"Intro", L"..\\Resources\\Image\\Cuphead\\Intros\\Regular\\cuphead_intro_a_00", 39, 0.035f, false, false, { 0 ,0 }, true, true);
+			mAnimator->CreateAnimation(L"DuckShootRight", L"..\\Resources\\Image\\Cuphead\\Duck\\Shoot\\cuphead_duck_shoot_00", 4, ShootAnimTime, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"DuckShootLeft", L"..\\Resources\\Image\\Cuphead\\Duck\\Shoot\\cuphead_duck_shoot_00", 4, ShootAnimTime, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"DuckShootBoilRight", L"..\\Resources\\Image\\Cuphead\\Duck\\Shoot\\cuphead_duck_shoot_boil_00", 4, 0.1f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"DuckShootBoilLeft", L"..\\Resources\\Image\\Cuphead\\Duck\\Shoot\\cuphead_duck_shoot_boil_00", 4, 0.1f, false, true, { 0, 0 }, true, true);
 
+			mAnimator->CreateAnimation(L"JumpRight", L"..\\Resources\\Image\\Cuphead\\Jump\\Cuphead\\cuphead_jump_00", 9, 0.02f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"JumpLeft", L"..\\Resources\\Image\\Cuphead\\Jump\\Cuphead\\cuphead_jump_00", 9, 0.02f, false, true, { 0, 0 }, true, true);
 
-		mAnimator->GetCompleteEvent(L"EXRight") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXLeft") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXAirRight") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXAirLeft") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXUpRight") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXUpLeft") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXAirUpRight") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXAirUpLeft") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXDownRight") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXDownLeft") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXAirDownRight") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXAirDownLeft") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXDiagonalUpRight") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXDiagonalUpLeft") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXAirDiagonalUpRight") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXAirDiagonalUpLeft") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXDiagonalDownRight") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXDiagonalDownLeft") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXAirDiagonalDownRight") = std::bind(&Player::EXCompleteEvent, this);
-		mAnimator->GetCompleteEvent(L"EXAirDiagonalDownLeft") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->CreateAnimation(L"DashRight", L"..\\Resources\\Image\\Cuphead\\Dash\\Ground\\cuphead_dash_00", 9, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"DashLeft", L"..\\Resources\\Image\\Cuphead\\Dash\\Ground\\cuphead_dash_00", 9, 0.03f, false, true, { 0, 0 }, true, true);
+
+			mAnimator->CreateAnimation(L"DashAirRight", L"..\\Resources\\Image\\Cuphead\\Dash\\Air\\cuphead_dash_air_00", 9, 0.05f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"DashAirLeft", L"..\\Resources\\Image\\Cuphead\\Dash\\Air\\cuphead_dash_air_00", 9, 0.05f, false, true, { 0, 0 }, true, true);
+
+			mAnimator->CreateAnimation(L"HitRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Ground\\cuphead_hit_00", 7, 0.05f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"HItLeft", L"..\\Resources\\Image\\Cuphead\\HIt\\Ground\\cuphead_hit_00", 7, 0.05f, false, true, { 0, 0 }, true, true);
+
+			mAnimator->CreateAnimation(L"HitAirRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Air\\cuphead_hit_air_00", 7, 0.04f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"HitAirLeft", L"..\\Resources\\Image\\Cuphead\\Hit\\Air\\cuphead_hit_air_00", 7, 0.04f, false, true, { 0, 0 }, true, true);
+
+			mAnimator->CreateAnimation(L"ParryRight", L"..\\Resources\\Image\\Cuphead\\Parry\\Hand\\cuphead_parry_00", 9, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"ParryLeft", L"..\\Resources\\Image\\Cuphead\\Parry\\Hand\\cuphead_parry_00", 9, 0.03f, false, true, { 0, 0 }, true, true);
+
+			mAnimator->CreateAnimation(L"EXRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Ground\\cuphead_ex_straight_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Ground\\cuphead_ex_straight_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXAirRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Air\\cuphead_ex_straight_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXAirLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Straight\\Air\\cuphead_ex_straight_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Ground\\cuphead_ex_up_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Ground\\cuphead_ex_up_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXAirUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Air\\cuphead_ex_up_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXAirUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Up\\Air\\cuphead_ex_up_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Ground\\cuphead_ex_down_00", 16, 0.04f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Ground\\cuphead_ex_down_00", 16, 0.04f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXAirDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Air\\cuphead_ex_down_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXAirDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Down\\Air\\cuphead_ex_down_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDiagonalUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Ground\\cuphead_ex_diagonal_up_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDiagonalUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Ground\\cuphead_ex_diagonal_up_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXAirDiagonalUpRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Air\\cuphead_ex_diagonal_up_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXAirDiagonalUpLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Up\\Air\\cuphead_ex_diagonal_up_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDiagonalDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Ground\\cuphead_ex_diagonal_down_00", 16, 0.03f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXDiagonalDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Ground\\cuphead_ex_diagonal_down_00", 16, 0.03f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXAirDiagonalDownRight", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Air\\cuphead_ex_diagonal_down_air_00", 7, 0.06f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"EXAirDiagonalDownLeft", L"..\\Resources\\Image\\Cuphead\\Special Attck\\Diagonal Down\\Air\\cuphead_ex_diagonal_down_air_00", 7, 0.06f, false, true, { 0, 0 }, true, true);
+
+			mAnimator->CreateAnimation(L"Intro", L"..\\Resources\\Image\\Cuphead\\Intros\\Regular\\cuphead_intro_a_00", 39, 0.035f, false, false, { 0 ,0 }, true, true);
 
 
+			mAnimator->GetCompleteEvent(L"EXRight") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXLeft") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXAirRight") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXAirLeft") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXUpRight") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXUpLeft") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXAirUpRight") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXAirUpLeft") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXDownRight") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXDownLeft") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXAirDownRight") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXAirDownLeft") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXDiagonalUpRight") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXDiagonalUpLeft") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXAirDiagonalUpRight") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXAirDiagonalUpLeft") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXDiagonalDownRight") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXDiagonalDownLeft") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXAirDiagonalDownRight") = std::bind(&Player::EXCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"EXAirDiagonalDownLeft") = std::bind(&Player::EXCompleteEvent, this);
+
+		}
 		mAnimator->SetBaseAnimation(L"IdleRight");
 		mAnimator->Play(L"Intro", false);
 
@@ -187,14 +188,7 @@ namespace ya
 
 	void Player::Render(HDC hdc)
 	{
-		Graphics graphic(hdc);
-		FontFamily  fontFamily(L"Arial");
-		Font        font(&fontFamily, 12, 0, Gdiplus::UnitPoint);
-		PointF      pointF(10.0f, 30.0f);
-		SolidBrush  solidBrush(Color(255, 255, 0, 255));
-		
 
-		graphic.DrawString(std::to_wstring(mCurState).c_str(), -1, &font, pointF, &solidBrush);
 		GameObject::Render(hdc);
 	}
 
@@ -806,6 +800,7 @@ namespace ya
 				mCurState &= ~PlayerState_OnJump;
 				mJumpTimeChecker = 0;
 				mCanDash = true;
+				mCanEX = true;
 			}
 		}
 	}
@@ -816,6 +811,7 @@ namespace ya
 			&& !(STATE_HAVE(PlayerState_OnDash))
 			&& !(STATE_HAVE(PlayerState_OnUlt))
 			&& !(STATE_HAVE(PlayerState_OnEX))
+			&& mCanEX
 			&& KEY_DOWN(eKeyCode::V)
 			)
 		{
@@ -926,14 +922,14 @@ namespace ya
 			{
 				Bullet* bullet = nullptr;
 
-				SetGunDir();
+				SetGunEXDir();
 				if (mCurGunType == eGunType::PeaShooter)
 				{
 					bool isSpecial = true;
 					bullet = new PeaShooter(mGunDir, isSpecial);
 					bullet->Initialize();
 				}
-				SetBulletStartPos(bullet);
+				SetEXBulletStartPos(bullet);
 
 				Scene* curScene = SceneManager::GetCurScene();
 				curScene->AddGameObject(bullet, eColliderLayer::Player_Projecttile);
@@ -941,6 +937,9 @@ namespace ya
 			}
 			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
 			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
+
+			if (STATE_HAVE(PlayerState_OnJump))
+				mCanEX = false;
 		}
 			
 	}
@@ -1028,6 +1027,21 @@ namespace ya
 		return bulletStartPos;
 	}
 
+	Vector2 Player::SetEXBulletStartPos(Bullet* bullet)
+	{
+		Vector2 bulletStartPos = {};
+		Vector2 addPos = {};
+		bulletStartPos = { GetPos().x ,
+					GetPos().y - GetScale().y / 2 };
+
+		addPos = { GetScale().x / 2, GetScale().y / 2 };
+		addPos = addPos * mGunDir;
+		bulletStartPos += addPos;
+		bullet->SetPos(bulletStartPos);
+		bullet->GetShootEffect()->SetPos(bulletStartPos + addPos / 2);
+		return bulletStartPos;
+	}
+
 	void Player::SetGunDir()
 	{
 		if (STATE_HAVE(PlayerState_LookRight))
@@ -1054,6 +1068,32 @@ namespace ya
 				mGunDir = Vector2::Down;
 
 		}
+	}
+
+	void Player::SetGunEXDir()
+	{
+		if (STATE_HAVE(PlayerState_LookRight))
+			mGunDir = Vector2::Right;
+		else
+			mGunDir = Vector2::Left;
+		if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Up))
+			mGunDir = Vector2::RightUp;
+		else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Up))
+			mGunDir = Vector2::LeftUp;
+		else if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Down))
+			mGunDir = Vector2::RightDown;
+		else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Down))
+			mGunDir = Vector2::LeftDown;
+		else if (STATE_HAVE(PlayerState_Input_Down))
+			mGunDir = Vector2::Down;
+		else if (STATE_HAVE(PlayerState_Input_Right))
+			mGunDir = Vector2::Right;
+		else if (STATE_HAVE(PlayerState_Input_Up))
+			mGunDir = Vector2::Up;
+		else if (STATE_HAVE(PlayerState_Input_Left))
+			mGunDir = Vector2::Left;
+
+
 	}
 
 

@@ -31,7 +31,7 @@ namespace ya
 		{
 			mBulbDropCollider = new Collider();
 			mBulbDropCollider->SetScale({ 10.0f, 900.0f });
-			mBulbDropCollider->SetAddPos({ 20,0 });
+			mBulbDropCollider->SetAddPos({ 40,0 });
 			mBulbDropCollider->SetHitBox(false);
 			AddComponent(mBulbDropCollider);
 

@@ -53,8 +53,9 @@ namespace ya
 		std::function<void()>& GetEndEvent(const std::wstring key);
 
 		Animation* GetPlayAnimation() { return mPlayAnimation; }
+		
 		void SetBaseAnimation(const std::wstring& name) { mBaseAnimation = FindAnimation(name); }
-
+		void SetStop(bool stop) { mbStop = stop; }
 
 
 	private:
@@ -64,7 +65,7 @@ namespace ya
 		Animation* mBaseAnimation;
 		Animation* mPlayAnimation;
 		bool mbLoop;
-
+		bool mbStop;
 		Gdiplus::ColorMatrix mColorMatrix;
 
 	};

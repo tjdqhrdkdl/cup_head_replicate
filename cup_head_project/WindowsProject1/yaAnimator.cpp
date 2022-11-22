@@ -50,7 +50,7 @@ namespace ya
 
 	void Animator::Tick()
 	{
-		if (mPlayAnimation != nullptr)
+		if (mPlayAnimation != nullptr && mbStop ==false)
 		{
 			mPlayAnimation->Tick();
 			if (mbLoop && mPlayAnimation->isComplete())

@@ -6,7 +6,7 @@
 #include "yaPicture.h"
 #include "yaCamera.h"
 #include "yaObjectManager.h"
-
+#include "yaMonster.h"
 
 
 namespace ya
@@ -33,20 +33,22 @@ namespace ya
 		GetAnimator()->CreateAnimation(L"BulletIdleLeftUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalUp\\weapon_peashot_main_00", 6, 0.1f, false, true, { -22,10 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletIdleRightDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalDown\\weapon_peashot_main_00", 6, 0.1f, false, false, { -10,15 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletIdleLeftDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalDown\\weapon_peashot_main_00", 6, 0.1f, false, true, { 10,15 }, true, false);
-		GetAnimator()->CreateAnimation(L"BulletDeath", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Death\\weapon_peashot_death_00", 6, 0.01f, false, false, { 0,100 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletDeath", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Death\\weapon_peashot_death_00", 6, 0.02f, false, false, { 0,100 }, true, false);
 
-		GetAnimator()->CreateAnimation(L"BulletSpecialIdleRight", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { 0,30 }, true, false);
-		GetAnimator()->CreateAnimation(L"BulletSpecialIdleLeft", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, true, { 0,30 }, true, false);
-		GetAnimator()->CreateAnimation(L"BulletSpecialIdleUp", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { 0,30 }, true, false, 270);
-		GetAnimator()->CreateAnimation(L"BulletSpecialIdleDown", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { 0,30 }, true, false, 90);
-		GetAnimator()->CreateAnimation(L"BulletSpecialIdleRightUp", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalUp\\weapon_peashot_EX_loop_00", 9, 0.1f, false, false, { 22,10 }, true, false);
-		GetAnimator()->CreateAnimation(L"BulletSpecialIdleLeftUp", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalUp\\weapon_peashot_EX_loop_00", 9, 0.1f, false, true, { -22,10 }, true, false);
-		GetAnimator()->CreateAnimation(L"BulletSpecialIdleRightDown", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalDown\\weapon_peashot_EX_loop_00", 9, 0.1f, false, false, { -10,15 }, true, false);
-		GetAnimator()->CreateAnimation(L"BulletSpecialIdleLeftDown", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalDown\\weapon_peashot_EX_loop_00", 9, 0.1f, false, true, { 10,15 }, true, false);
-		GetAnimator()->CreateAnimation(L"BulletSpecialDeath", L"..\\Resources\\Image\\PeaShooter\\EX\\Death\\weapon_peashot_ex_death_00", 11, 0.01f, false, false, { 0,100 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletSpecialIdleRight", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { -50,0 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletSpecialIdleLeft", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, true, { 50,0 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletSpecialIdleUp", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { 0,100 }, true, false, 270);
+		GetAnimator()->CreateAnimation(L"BulletSpecialIdleDown", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { 0,0 }, true, false, 90);
+		GetAnimator()->CreateAnimation(L"BulletSpecialIdleRightUp", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalUp\\weapon_peashot_EX_loop_00", 9, 0.1f, false, false, { -40,100 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletSpecialIdleLeftUp", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalUp\\weapon_peashot_EX_loop_00", 9, 0.1f, false, true, { 40,100 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletSpecialIdleRightDown", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalDown\\weapon_peashot_EX_loop_00", 9, 0.1f, false, false, { -30,30 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletSpecialIdleLeftDown", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalDown\\weapon_peashot_EX_loop_00", 9, 0.1f, false, true, { 30,30 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletSpecialDeath", L"..\\Resources\\Image\\PeaShooter\\EX\\Death\\weapon_peashot_ex_death_00", 11, 0.025f, false, false, { 0,100 }, true, false);
 
 		GetAnimator()->GetCompleteEvent(L"BulletSpecialDeath") = std::bind(&Bullet::BulletDeathCompleteEvent, this);
 		GetAnimator()->GetCompleteEvent(L"BulletDeath") = std::bind(&Bullet::BulletDeathCompleteEvent, this);
+		GetAnimator()->GetCompleteEvent(L"BulletSpecialDeath");
+
 		if (!mSpecial)
 		{
 			SetScale({ 20.0f,20.0f });
@@ -63,7 +65,7 @@ namespace ya
 		}
 		else
 		{
-			SetScale({ 100.0f,50.0f });
+			SetScale({ 100.0f,100.0f });
 
 			SetDamage(5);
 
@@ -89,20 +91,39 @@ namespace ya
 		
 		if (mSpecial)
 		{
-			mEXDamageTime += Time::DeltaTime();
-			if (mEXDamageTime > 0.2)
-				mEXDamageTime = 0;
+			mEXDamageTimeChecker += Time::DeltaTime();
 		}
 
-		if (!(GetAnimator()->GetPlayAnimation()->GetName() == L"BulletDeath"))
+
+		if (mHitCount == 3)
 		{
-			SetPos(pos);
+			GetComponent<Collider>()->SetOff(true);
+			mEXDeathTimeChecker += Time::DeltaTime();
+		}
+
+
+		if (!(GetAnimator()->GetPlayAnimation()->GetName() == L"BulletDeath")
+			&& !(GetAnimator()->GetPlayAnimation()->GetName() == L"BulletSpecialDeath")
+			)
+		{
+			
 			if (mAliveTimeChecker > AliveTime)
 			{
-				if (mSpecial)
+				if (!mSpecial)
+				{
+					ObjectManager::Destroy(this);
+				}
+
+				else if(mAliveTimeChecker > AliveTime * 2)
+				{
 					mAnimator->Play(L"BulletSpecialDeath", false);
-				ObjectManager::Destroy(this);
+				}
 			}
+			if (mEXDeathTimeChecker > 0.03f)
+			{
+				mAnimator->Play(L"BulletSpecialDeath", false);
+			}
+			SetPos(pos);
 		}
 		Bullet::Tick();
 	}
@@ -114,15 +135,28 @@ namespace ya
 
 	void PeaShooter::OnCollisonEnter(Collider* other, Collider* my)
 	{
-		Bullet::OnCollisonEnter(other,my);
+		Bullet::OnCollisonEnter(other, my);
+		if (mSpecial
+			&& other->isHitBox()
+			&& other->GetOwner()->GetLayer() ==eColliderLayer::Monster)
+		{
+			mHitCount++;
+		}
 	}
 
 	void PeaShooter::OnCollisonStay(Collider* other, Collider* my)
 	{
 		Bullet::OnCollisonStay(other, my);
-		if (mSpecial && mEXDamageTime > 0.1)
+		if (mSpecial && mEXDamageTimeChecker > 0.1)
 		{
-			Bullet::OnCollisonEnter(other, my);
+			PeaShooter::OnCollisonEnter(other, my);
+			if (other->isHitBox()
+				&& other->GetOwner()->GetLayer() == eColliderLayer::Monster)
+			{
+				Monster* monster = dynamic_cast<Monster*>(other->GetOwner());
+				monster->OnCollisonEnter(my, other);
+			}
+			mEXDamageTimeChecker = 0;
 		}
 	}
 
