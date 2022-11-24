@@ -40,7 +40,7 @@ void ya::Time::Render(HDC hdc)
 float ya::Time::DeltaTime()
 {
 	if (mSlowDown)
-		return mDeltaTime * 0.2f;
+		return mDeltaTime * 0.001f;
 	else
 		return mDeltaTime;
 }

@@ -178,7 +178,8 @@ namespace ya
 	void Player::Tick()
 	{
 		mPrevPos = GetPos();
-		PlayerKeyInput();
+		if(!mParrySlow)
+			PlayerKeyInput();
 		if (!(mAnimator->GetPlayAnimation()->GetName() == L"Intro"))
 		{
 			SetAnimation();
@@ -1042,7 +1043,7 @@ namespace ya
 		if (mParrySlow)
 		{
 			mParrySlowTimeChecker += Time::DeltaTime();
-			if (mParrySlowTimeChecker > 0.02f)
+			if (mParrySlowTimeChecker > 0.0002f)
 			{
 				Time::SlowDown(false);
 				mParrySlowTimeChecker = 0;
