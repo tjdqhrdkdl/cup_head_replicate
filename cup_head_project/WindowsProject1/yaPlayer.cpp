@@ -241,7 +241,8 @@ namespace ya
 			parryEffect->SetPos(effectPos);
 			Scene* curscene = SceneManager::GetCurScene();
 			curscene->AddGameObject(parryEffect, eColliderLayer::Effect);
-
+			Time::SlowDown(true);
+			mParrySlow = true;
 		}
 	}
 
@@ -1036,6 +1037,16 @@ namespace ya
 			if (mRigidbody->isGround()) 
 			{
 				mCurState &= ~PlayerState_OnParry;
+			}
+		}
+		if (mParrySlow)
+		{
+			mParrySlowTimeChecker += Time::DeltaTime();
+			if (mParrySlowTimeChecker > 0.02f)
+			{
+				Time::SlowDown(false);
+				mParrySlowTimeChecker = 0;
+				mParrySlow = false;
 			}
 		}
 	}

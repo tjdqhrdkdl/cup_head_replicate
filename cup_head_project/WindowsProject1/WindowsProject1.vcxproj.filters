@@ -81,6 +81,9 @@
     <Filter Include="Engine\GameObject\Player\Effects">
       <UniqueIdentifier>{f6e4a271-ed45-464f-a71f-bb8285973f66}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\UIBase">
+      <UniqueIdentifier>{c20992c6-eb8d-4ed5-9293-50130926898b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -224,6 +227,12 @@
     <ClInclude Include="yaSpecialAttackEffect.h">
       <Filter>Engine\GameObject\Player\Effects</Filter>
     </ClInclude>
+    <ClInclude Include="yaUIManager.h">
+      <Filter>Engine\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="yaUIBase.h">
+      <Filter>Engine\UIBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -348,6 +357,12 @@
     </ClCompile>
     <ClCompile Include="yaSpecialAttackEffect.cpp">
       <Filter>Engine\GameObject\Player\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="yaUIManager.cpp">
+      <Filter>Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="yaUIBase.cpp">
+      <Filter>Engine\UIBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

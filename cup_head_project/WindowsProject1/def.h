@@ -59,6 +59,17 @@ enum class eColliderLayer
 	UI = _COLLIDER_LAYER - 1,
 	End = _COLLIDER_LAYER,
 };
+enum class eUIType
+{
+	HP,
+	MP,
+	SHOP,
+	INVENTORY,
+	OPTION,
+
+
+	END,
+};
 enum class eGunType
 {
 	PeaShooter,

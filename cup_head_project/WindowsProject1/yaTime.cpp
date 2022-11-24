@@ -4,6 +4,7 @@ LARGE_INTEGER ya::Time::mCpuFrequency;
 LARGE_INTEGER ya::Time::mPrevFrequency;
 LARGE_INTEGER ya::Time::mCurFrequency;
 float ya::Time::mDeltaTime = 0.0f;
+bool ya::Time::mSlowDown = false;
 
 void ya::Time::Initialize()
 {
@@ -34,4 +35,12 @@ void ya::Time::Render(HDC hdc)
 	swprintf_s(szFloat, 50, L"fps : %d", fps);
 	int strLen = wcsnlen_s(szFloat, 50);
 	TextOut(hdc, 10, 10, szFloat, strLen);
+}
+
+float ya::Time::DeltaTime()
+{
+	if (mSlowDown)
+		return mDeltaTime * 0.2f;
+	else
+		return mDeltaTime;
 }

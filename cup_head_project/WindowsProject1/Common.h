@@ -6,7 +6,9 @@
 #include <list>
 #include <map>
 #include <functional>
-
+#include <queue>
+#include <stack>
+#include <unordered_map>
 #include "def.h"
 #include "Maths.h"
 

@@ -62,6 +62,8 @@ namespace ya
 		void EXCompleteEvent();
 	private:
 		int mCurState;
+
+		UINT mHP;
 		UINT mSpecialPoint;
 		float mSpecialPointFloat;
 
@@ -70,6 +72,7 @@ namespace ya
 		bool mFalling;
 		bool mCanDash;
 		bool mCanEX;
+		bool mParrySlow;
 
 		float mSpeed;
 		float mShooterCoolTime;
@@ -78,6 +81,7 @@ namespace ya
 		float mEXAnimationTimeChecker;
 		float mDashTimeChecker;
 		float mJumpTimeChecker;
+		float mParrySlowTimeChecker;
 
 		UINT mShootPoint;
 		Vector2 mGunDir;
