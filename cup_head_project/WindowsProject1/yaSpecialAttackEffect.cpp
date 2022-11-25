@@ -15,8 +15,8 @@ namespace ya
 		mAnimator->CreateAnimation(L"BoomDown", L"..\\Resources\\Image\\Cuphead\\Special Attck\\SFX\\Sprite\\A\\weapon_ex_dust_a_00", 21, 0.03f, false, false, { 0,200 }, true, false, 90);
 		mAnimator->CreateAnimation(L"BoomRightUp", L"..\\Resources\\Image\\Cuphead\\Special Attck\\SFX\\Sprite\\A\\weapon_ex_dust_a_00", 21, 0.03f, false, false, { 0,200 });
 		mAnimator->CreateAnimation(L"BoomLeftUp", L"..\\Resources\\Image\\Cuphead\\Special Attck\\SFX\\Sprite\\A\\weapon_ex_dust_a_00", 21, 0.03f, false, true, { 0,200 });
-		mAnimator->CreateAnimation(L"BoomRightDown", L"..\\Resources\\Image\\Cuphead\\Special Attck\\SFX\\Sprite\\A\\weapon_ex_dust_a_00", 21, 0.03f, false, false, { 0,200 }, true, false, 270);
-		mAnimator->CreateAnimation(L"BoomLeftDown", L"..\\Resources\\Image\\Cuphead\\Special Attck\\SFX\\Sprite\\A\\weapon_ex_dust_a_00", 21, 0.03f, false, false, { 0,200 }, true, false, 90);
+		mAnimator->CreateAnimation(L"BoomRightDown", L"..\\Resources\\Image\\Cuphead\\Special Attck\\SFX\\Sprite\\A\\weapon_ex_dust_a_00", 21, 0.03f, false, false, { 0,200 });
+		mAnimator->CreateAnimation(L"BoomLeftDown", L"..\\Resources\\Image\\Cuphead\\Special Attck\\SFX\\Sprite\\A\\weapon_ex_dust_a_00", 21, 0.03f, false, true, { 0,200 });
 		std::wstring dirStr = mDir.GetDirInStr();
 		mAnimator->Play(L"Boom"+dirStr, false);
 		mAnimator->GetCompleteEvent(L"BoomRight") = std::bind(&SpecialAttackEffect::EffectCompleteEvent, this);

@@ -238,14 +238,33 @@ namespace ya
 					mSpecialPoint += 1;
 				}
 				ParryEffect* parryEffect = new ParryEffect();
+
 				Vector2 effectPos;
 				if (other->GetPos().x > my->GetPos().x)
 					effectPos.x = my->GetPos().x + (my->GetScale().x / 2);
 				else
 					effectPos.x = my->GetPos().x - (my->GetScale().x / 2);
+
 				//상수 k = my->getpos().y - (my->getpos().x * 기울기)
-				effectPos.y = (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x) * effectPos.x +
-					my->GetPos().y - my->GetPos().x * (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x);
+				float gradient = (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x);
+				float k = my->GetPos().y - (my->GetPos().x * gradient);
+				effectPos.y = gradient * effectPos.x + k;
+				if( other->GetPos().y > my->GetPos().y)
+				{
+					if (effectPos.y < my->GetPos().y - my->GetScale().y / 2)
+					{
+						effectPos.y = my->GetPos().y + my->GetScale().y / 2;
+						effectPos.x = (effectPos.y - k) / gradient;
+					}
+				}
+				else
+				{
+					if (effectPos.y > my->GetPos().y + my->GetScale().y / 2)
+					{
+						effectPos.y = my->GetPos().y + my->GetScale().y / 2;
+						effectPos.x = (effectPos.y - k) / gradient;
+					}
+				}
 				parryEffect->SetPos(effectPos);
 				Scene* curscene = SceneManager::GetCurScene();
 				curscene->AddGameObject(parryEffect, eColliderLayer::Effect);
@@ -594,6 +613,8 @@ namespace ya
 				else if (StateR == PlayerState_Input_Left + PlayerState_Input_Up)
 					playAnimationName = L"RunLeft";
 
+				else
+					playAnimationName = L"RunRight";
 			}
 		}
 		else
@@ -764,6 +785,9 @@ namespace ya
 				else if (StateL == PlayerState_Input_Right + PlayerState_Input_Up)
 					playAnimationName = L"RunRight";
 				else if (StateL == PlayerState_Input_Left + PlayerState_Input_Up)
+					playAnimationName = L"RunLeft";
+
+				else
 					playAnimationName = L"RunLeft";
 			}
 		}
