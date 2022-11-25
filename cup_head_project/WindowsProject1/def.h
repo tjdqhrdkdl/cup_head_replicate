@@ -56,7 +56,8 @@ enum class eColliderLayer
 	Player,
 	Player_Projecttile,
 	
-	UI = _COLLIDER_LAYER - 1,
+	UI = _COLLIDER_LAYER - 2,
+	Camera = _COLLIDER_LAYER - 1,
 	End = _COLLIDER_LAYER,
 };
 enum class eUIType

@@ -185,6 +185,8 @@
     <ClInclude Include="yaResources.h" />
     <ClInclude Include="yaRigidbody.h" />
     <ClInclude Include="yaScene.h" />
+    <ClInclude Include="yaSceneEnter.h" />
+    <ClInclude Include="yaSceneExit.h" />
     <ClInclude Include="yaSceneManager.h" />
     <ClInclude Include="def.h" />
     <ClInclude Include="yaShootEffect.h" />
@@ -235,6 +237,8 @@
     <ClCompile Include="yaResources.cpp" />
     <ClCompile Include="yaRigidbody.cpp" />
     <ClCompile Include="yaScene.cpp" />
+    <ClCompile Include="yaSceneEnter.cpp" />
+    <ClCompile Include="yaSceneExit.cpp" />
     <ClCompile Include="yaSceneManager.cpp" />
     <ClCompile Include="yaShootEffect.cpp" />
     <ClCompile Include="yaSpecialAttackEffect.cpp" />

@@ -12,10 +12,12 @@ namespace ya
 	   
 		static void Release();
 		static Scene* GetCurScene() { return mCurScene; }
-
+		static void SetCurScene(eSceneType type) { mCurScene = mScenes[(UINT)type]; }
 
 		static void DetroyGameObject();
 		static void ChangeScene(eSceneType type);
+
+
 	private:
 		static Scene* mScenes[(UINT)eSceneType::Max];
 		static Scene* mCurScene;

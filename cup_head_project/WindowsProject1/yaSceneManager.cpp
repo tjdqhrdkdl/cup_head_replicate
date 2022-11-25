@@ -6,7 +6,11 @@
 #include "yaBossVegetableScene.h"
 #include "yaEndScene.h"
 #include "yaObjectManager.h"
-namespace ya {
+#include "yaSceneEnter.h"
+#include "yaSceneExit.h"
+
+namespace ya 
+{
    
 	Scene* SceneManager::mScenes[(UINT)eSceneType::Max] = {};
 	Scene* SceneManager::mCurScene = nullptr;
@@ -53,7 +57,7 @@ namespace ya {
 
 	void SceneManager::DetroyGameObject()
 	{
-		ya::ObjectManager::Release();
+		ObjectManager::Release();
 	}
 
 	void SceneManager::ChangeScene(eSceneType type)
@@ -64,10 +68,9 @@ namespace ya {
 		}
 		else
 		{
-			mCurScene->Exit();
-			mCurScene = mScenes[(UINT)type];
+			SceneExit* sceneExit = new SceneExit(type);
+			sceneExit->Initialize();
+			mCurScene->AddGameObject(dynamic_cast<GameObject*>(sceneExit), eColliderLayer::Camera);
 		}
-
-		mCurScene->Enter();
 	}
 }

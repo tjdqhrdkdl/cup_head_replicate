@@ -48,15 +48,6 @@
     <Filter Include="Engine\Scene\BossScenes">
       <UniqueIdentifier>{5955bd89-80e2-47b9-a0cd-955f8b1ab371}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\LogoSceneObj">
-      <UniqueIdentifier>{33db6c20-1ad1-400d-a73b-a043bd1a246c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\GameObject\BossSceneObj">
-      <UniqueIdentifier>{52c96c1c-8eaa-48f2-af3a-51f7f3cc6982}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\GameObject\BossSceneObj\BeppiSceneObj">
-      <UniqueIdentifier>{9e9a060b-d01f-468f-8a64-ff56b10e48e1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GameObject\Gun">
       <UniqueIdentifier>{e99469b8-b9bb-405a-b556-ec308f2a4775}</UniqueIdentifier>
     </Filter>
@@ -68,9 +59,6 @@
     </Filter>
     <Filter Include="Engine\GameObject\Gun\PeaShooter">
       <UniqueIdentifier>{7abf63ac-448b-41de-8336-73d07dc96e47}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\GameObject\BossSceneObj\BossBase">
-      <UniqueIdentifier>{9ad0fd90-bf45-446e-90f8-2956bc4945ac}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\GameObject\Player">
       <UniqueIdentifier>{ec9cc829-afc7-48d4-9eb6-f43c69c5ef4f}</UniqueIdentifier>
@@ -87,11 +75,29 @@
     <Filter Include="Engine\UI\Base">
       <UniqueIdentifier>{d5bdbbb3-008c-4de8-b2cb-61952475fbd4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1">
+    <Filter Include="Engine\GameObject\BossBase">
+      <UniqueIdentifier>{9ad0fd90-bf45-446e-90f8-2956bc4945ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\SceneObject">
+      <UniqueIdentifier>{d3268932-96a8-43d0-a4e5-93b1cf6f77ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Beppi">
+      <UniqueIdentifier>{9e9a060b-d01f-468f-8a64-ff56b10e48e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Beppi\Phase 1">
       <UniqueIdentifier>{6e3497ae-6bd9-4810-ba94-e599ce645f4d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 2">
+    <Filter Include="Engine\GameObject\Beppi\Phase 2">
       <UniqueIdentifier>{807119de-f34b-44cd-9443-a390f8f2d39d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\SceneObject\LogoSceneObj">
+      <UniqueIdentifier>{568c148a-2898-4018-9b55-51816da682a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\SceneObject\BossSceneObj">
+      <UniqueIdentifier>{a5e6c4bb-6453-4830-9348-d34839174e44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\SceneObject\SceneChange">
+      <UniqueIdentifier>{266c261a-a92f-4b76-9a82-8a75556c2292}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -176,17 +182,8 @@
     <ClInclude Include="yaAnimation.h">
       <Filter>Engine\Component</Filter>
     </ClInclude>
-    <ClInclude Include="yaLogoAnimation.h">
-      <Filter>Engine\GameObject\LogoSceneObj</Filter>
-    </ClInclude>
-    <ClInclude Include="yaReadyAnimation.h">
-      <Filter>Engine\GameObject\LogoSceneObj</Filter>
-    </ClInclude>
     <ClInclude Include="yaPeaShooter.h">
       <Filter>Engine\GameObject\Gun\PeaShooter</Filter>
-    </ClInclude>
-    <ClInclude Include="yaReady.h">
-      <Filter>Engine\GameObject\BossSceneObj</Filter>
     </ClInclude>
     <ClInclude Include="yaGround.h">
       <Filter>Engine\GameObject</Filter>
@@ -201,7 +198,7 @@
       <Filter>Engine\GameObject\Gun\Base\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="yaMonster.h">
-      <Filter>Engine\GameObject\BossSceneObj\BossBase</Filter>
+      <Filter>Engine\GameObject\BossBase</Filter>
     </ClInclude>
     <ClInclude Include="yaPlayer.h">
       <Filter>Engine\GameObject\Player</Filter>
@@ -240,19 +237,34 @@
       <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="yaBeppiPhaseOne.h">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+      <Filter>Engine\GameObject\Beppi\Phase 1</Filter>
     </ClInclude>
     <ClInclude Include="yaDuckPanel.h">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+      <Filter>Engine\GameObject\Beppi\Phase 1</Filter>
     </ClInclude>
     <ClInclude Include="yaLightBulb.h">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+      <Filter>Engine\GameObject\Beppi\Phase 1</Filter>
     </ClInclude>
     <ClInclude Include="yaEXPointUI.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
     <ClInclude Include="yaOnHitEffect.h">
       <Filter>Engine\GameObject\Player\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="yaLogoAnimation.h">
+      <Filter>Engine\GameObject\SceneObject\LogoSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="yaReadyAnimation.h">
+      <Filter>Engine\GameObject\SceneObject\LogoSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="yaReady.h">
+      <Filter>Engine\GameObject\SceneObject\BossSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="yaSceneExit.h">
+      <Filter>Engine\GameObject\SceneObject\SceneChange</Filter>
+    </ClInclude>
+    <ClInclude Include="yaSceneEnter.h">
+      <Filter>Engine\GameObject\SceneObject\SceneChange</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -319,17 +331,8 @@
     <ClCompile Include="yaAnimation.cpp">
       <Filter>Engine\Component</Filter>
     </ClCompile>
-    <ClCompile Include="yaLogoAnimation.cpp">
-      <Filter>Engine\GameObject\LogoSceneObj</Filter>
-    </ClCompile>
-    <ClCompile Include="yaReadyAnimation.cpp">
-      <Filter>Engine\GameObject\LogoSceneObj</Filter>
-    </ClCompile>
     <ClCompile Include="yaPeaShooter.cpp">
       <Filter>Engine\GameObject\Gun\PeaShooter</Filter>
-    </ClCompile>
-    <ClCompile Include="yaReady.cpp">
-      <Filter>Engine\GameObject\BossSceneObj</Filter>
     </ClCompile>
     <ClCompile Include="yaGround.cpp">
       <Filter>Engine\GameObject</Filter>
@@ -344,7 +347,7 @@
       <Filter>Engine\GameObject\Gun\Base\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="yaMonster.cpp">
-      <Filter>Engine\GameObject\BossSceneObj\BossBase</Filter>
+      <Filter>Engine\GameObject\BossBase</Filter>
     </ClCompile>
     <ClCompile Include="yaPlayer.cpp">
       <Filter>Engine\GameObject\Player</Filter>
@@ -383,19 +386,34 @@
       <Filter>Engine\UI</Filter>
     </ClCompile>
     <ClCompile Include="yaBeppiPhaseOne.cpp">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+      <Filter>Engine\GameObject\Beppi\Phase 1</Filter>
     </ClCompile>
     <ClCompile Include="yaDuckPanel.cpp">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+      <Filter>Engine\GameObject\Beppi\Phase 1</Filter>
     </ClCompile>
     <ClCompile Include="yaLightBulb.cpp">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+      <Filter>Engine\GameObject\Beppi\Phase 1</Filter>
     </ClCompile>
     <ClCompile Include="yaEXPointUI.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
     <ClCompile Include="yaOnHitEffect.cpp">
       <Filter>Engine\GameObject\Player\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="yaLogoAnimation.cpp">
+      <Filter>Engine\GameObject\SceneObject\LogoSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="yaReadyAnimation.cpp">
+      <Filter>Engine\GameObject\SceneObject\LogoSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="yaReady.cpp">
+      <Filter>Engine\GameObject\SceneObject\BossSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSceneExit.cpp">
+      <Filter>Engine\GameObject\SceneObject\SceneChange</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSceneEnter.cpp">
+      <Filter>Engine\GameObject\SceneObject\SceneChange</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
