@@ -1,4 +1,5 @@
 #include "yaOnHitEffect.h"
+#include "yaAnimator.h"
 
 namespace ya
 {

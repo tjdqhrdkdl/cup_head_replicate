@@ -102,9 +102,8 @@ namespace ya {
 		}
 		pic = new Picture();
 		Gdiplus::Bitmap* bmp1 = new Gdiplus::Bitmap(width, height, PixelFormat32bppARGB);
-		Gdiplus::Bitmap* bmp2 = new Gdiplus::Bitmap(width, height, PixelFormat32bppARGB);
 		pic->mImage = bmp1;
-		Gdiplus::Status status = bmp2->GetHBITMAP(Color(0, 0, 0), &(pic->mBitmap));
+		Gdiplus::Status status = bmp1->GetHBITMAP(Color(0, 0, 0), &(pic->mBitmap));
 		if (status != 0)
 		{
 			MessageBox(nullptr, L"bitmap Load Failed!!!", L"Error", MB_OK);

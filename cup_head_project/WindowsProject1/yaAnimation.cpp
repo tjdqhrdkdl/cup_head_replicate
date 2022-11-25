@@ -69,10 +69,20 @@ namespace ya
 		}
 		else
 		{
-			TransparentBlt(hdc, finalPos.x, finalPos.y, 
-				mPictures[mPictureIndex]->GetWidth(), mPictures[mPictureIndex]->GetHeight(),
-				mPictures[mPictureIndex]->GetDC(), 0, 0, mPictures[mPictureIndex]->GetWidth(),
-				mPictures[mPictureIndex]->GetHeight(), RGB(255, 0, 255));
+			if (mAnimator->isLighten())
+			{
+				TransparentBlt(hdc, finalPos.x, finalPos.y,
+					mLightenAnimation->mPictures[mPictureIndex]->GetWidth(), mLightenAnimation->mPictures[mPictureIndex]->GetHeight(),
+					mLightenAnimation->mPictures[mPictureIndex]->GetDC(), 0, 0, mLightenAnimation->mPictures[mPictureIndex]->GetWidth(),
+					mLightenAnimation->mPictures[mPictureIndex]->GetHeight(), RGB(255, 0, 255));
+			}
+			else
+			{
+				TransparentBlt(hdc, finalPos.x, finalPos.y,
+					mPictures[mPictureIndex]->GetWidth(), mPictures[mPictureIndex]->GetHeight(),
+					mPictures[mPictureIndex]->GetDC(), 0, 0, mPictures[mPictureIndex]->GetWidth(),
+					mPictures[mPictureIndex]->GetHeight(), RGB(255, 0, 255));
+			}
 		}
 	}
 

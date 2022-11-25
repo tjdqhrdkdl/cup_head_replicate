@@ -20,7 +20,7 @@ namespace ya
 	BeppiPhaseOne::BeppiPhaseOne()
 		: mIdleSpeed(700.0f)
 		, mAttackSpeed(800.0f)
-		, mDuckTime(2.0f)
+		, mDuckTime(3.0f)
 		, mCurState(BeppiPh1State_LookLeft)
 		, mAttackTimeChecker(0.0f)
 		, mBulbDuckChecker(1)
@@ -33,17 +33,36 @@ namespace ya
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
 	
-		mAnimator->CreateAnimation(L"IdleLeft", L"..\\Resources\\Image\\Beppi\\Idle\\Phase1_Idle_", 26, 0.04f, true, false);
-		mAnimator->CreateAnimation(L"IdleRight", L"..\\Resources\\Image\\Beppi\\Idle\\Phase1_Idle_", 26, 0.04f, true, true);
+		mAnimator->SetLightenAnimation(mAnimator->CreateAnimation(L"IdleLeft", L"..\\Resources\\Image\\Beppi\\Idle\\Phase1_Idle_", 26, 0.04f, true, false)
+			, mAnimator->CreateAnimation(L"LightenIdleLeft", L"..\\Resources\\Image\\Beppi\\Idle\\Lighten\\Phase1_Idle_", 26, 0.04f, true, false));
 		
-		mAnimator->CreateAnimation(L"AttackStartLeft", L"..\\Resources\\Image\\Beppi\\Attack\\Start\\Phase1_Attack_", 12, 0.05f, true, false, {0,30});
-		mAnimator->CreateAnimation(L"AttackStartRight", L"..\\Resources\\Image\\Beppi\\Attack\\Start\\Phase1_Attack_", 12, 0.05f, true, true, { 0,30 });
+		mAnimator->SetLightenAnimation(mAnimator->CreateAnimation(L"IdleRight", L"..\\Resources\\Image\\Beppi\\Idle\\Phase1_Idle_", 26, 0.04f, true, true)
+			, mAnimator->CreateAnimation(L"LightenIdleRight", L"..\\Resources\\Image\\Beppi\\Idle\\Lighten\\Phase1_Idle_", 26, 0.04f, true, true));
+		
+		mAnimator->SetLightenAnimation(
+			mAnimator->CreateAnimation(L"AttackStartLeft", L"..\\Resources\\Image\\Beppi\\Attack\\Start\\Phase1_Attack_", 12, 0.05f, true, false, { 0,30 })
+			, mAnimator->CreateAnimation(L"LightenAttackStartLeft", L"..\\Resources\\Image\\Beppi\\Attack\\Lighten\\Start\\Phase1_Attack_", 12, 0.05f, true, false, { 0,30 }));
 
-		mAnimator->CreateAnimation(L"AttackMovingLeft", L"..\\Resources\\Image\\Beppi\\Attack\\Moving\\Phase1_Attack_", 6, 0.01f, true, false, { 0,30 });
-		mAnimator->CreateAnimation(L"AttackMovingRight", L"..\\Resources\\Image\\Beppi\\Attack\\Moving\\Phase1_Attack_", 6, 0.01f, true, true, { 0,30 });
+		mAnimator->SetLightenAnimation(
+			mAnimator->CreateAnimation(L"AttackStartRight", L"..\\Resources\\Image\\Beppi\\Attack\\Start\\Phase1_Attack_", 12, 0.05f, true, true, { 0,30 })
+			, mAnimator->CreateAnimation(L"LightenAttackStartRight", L"..\\Resources\\Image\\Beppi\\Attack\\Lighten\\Start\\Phase1_Attack_", 12, 0.05f, true, true, { 0,30 }));
+	
+		mAnimator->SetLightenAnimation(
+			mAnimator->CreateAnimation(L"AttackMovingLeft", L"..\\Resources\\Image\\Beppi\\Attack\\Moving\\Phase1_Attack_", 6, 0.01f, true, false, { 0,30 })
+			, mAnimator->CreateAnimation(L"LightenAttackMovingLeft", L"..\\Resources\\Image\\Beppi\\Attack\\Lighten\\Moving\\Phase1_Attack_", 6, 0.01f, true, false, { 0,30 }));
 
-		mAnimator->CreateAnimation(L"AttackSmashLeft", L"..\\Resources\\Image\\Beppi\\Attack\\Smash\\Phase1_Attack_", 17, 0.04f, true, false);
-		mAnimator->CreateAnimation(L"AttackSmashRight", L"..\\Resources\\Image\\Beppi\\Attack\\Smash\\Phase1_Attack_", 17, 0.04f, true, true);
+		mAnimator->SetLightenAnimation(
+			mAnimator->CreateAnimation(L"AttackMovingRight", L"..\\Resources\\Image\\Beppi\\Attack\\Moving\\Phase1_Attack_", 6, 0.01f, true, true, { 0,30 })
+			, mAnimator->CreateAnimation(L"LightenAttackMovingRight", L"..\\Resources\\Image\\Beppi\\Attack\\Lighten\\Moving\\Phase1_Attack_", 6, 0.01f, true, true, { 0,30 }));
+
+		mAnimator->SetLightenAnimation(
+			mAnimator->CreateAnimation(L"AttackSmashLeft", L"..\\Resources\\Image\\Beppi\\Attack\\Smash\\Phase1_Attack_", 17, 0.04f, true, false)
+			, mAnimator->CreateAnimation(L"LightenAttackSmashLeft", L"..\\Resources\\Image\\Beppi\\Attack\\Lighten\\Smash\\Phase1_Attack_", 17, 0.04f, true, false));
+
+		mAnimator->SetLightenAnimation(
+			mAnimator->CreateAnimation(L"AttackSmashRight", L"..\\Resources\\Image\\Beppi\\Attack\\Smash\\Phase1_Attack_", 17, 0.04f, true, true)
+			, mAnimator->CreateAnimation(L"LightenAttackSmashRight", L"..\\Resources\\Image\\Beppi\\Attack\\Lighten\\Smash\\Phase1_Attack_", 17, 0.04f, true, true));
+
 
 		mAnimator->CreateAnimation(L"Intro", L"..\\Resources\\Image\\Beppi\\Intro\\Phase1_Intro_", 30, 0.03f, true, false, { 180,-10 });
 
@@ -169,7 +188,7 @@ namespace ya
 			{
 				onHitChecker = 0;
 				onHit = false;
-				mAnimator->SetMatrixToBase();
+				mAnimator->SetLighten(false);
 			}
 		}
 	}
@@ -296,7 +315,7 @@ namespace ya
 		{
 			
 			onHit = true;
-			mAnimator->SetMatrixToLighten();
+			mAnimator->SetLighten(true);
 			
 		}
 	}

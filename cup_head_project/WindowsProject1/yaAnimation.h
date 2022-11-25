@@ -23,6 +23,8 @@ namespace ya
 
 		void SetHaveAlpha(bool data) { mbHaveAlpha = data; }
 
+		void SetLightenAnimation(Animation* lightenAnim) { mLightenAnimation = lightenAnim; }
+
 	private:
 		Animator* mAnimator;
 		std::vector<Picture*> mPictures;	
@@ -37,5 +39,7 @@ namespace ya
 
 		bool mbHaveAlpha;
 		Vector2 mFixPos;
+
+		Animation* mLightenAnimation;
 	};
 }

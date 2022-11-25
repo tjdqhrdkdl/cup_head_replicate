@@ -40,7 +40,8 @@ namespace ya
 		void SetMatrixToBase();
 		void SetMatrixToTransparent(float);
 		Animation* FindAnimation(const std::wstring& name);
-		void CreateAnimation(const std::wstring& name, const std::wstring& path
+
+		Animation* CreateAnimation(const std::wstring& name, const std::wstring& path
 			, UINT imageNum, float duration, bool fromZero,  bool imageReversed
 			, Vector2 fixPos = Vector2::Zero, bool bAffectedCamera = true
 			, bool haveAlpha = false, UINT imageDegree = 0);
@@ -57,6 +58,10 @@ namespace ya
 		void SetBaseAnimation(const std::wstring& name) { mBaseAnimation = FindAnimation(name); }
 		void SetStop(bool stop) { mbStop = stop; }
 
+		void SetLightenAnimation(Animation* base, Animation* lighten) { base->SetLightenAnimation(lighten); }
+		bool isLighten() { return mbIsLighten; }
+		void SetLighten(bool b) { mbIsLighten = b;}
+
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
@@ -67,6 +72,8 @@ namespace ya
 		bool mbLoop;
 		bool mbStop;
 		Gdiplus::ColorMatrix mColorMatrix;
+
+		bool mbIsLighten;
 
 	};
 }

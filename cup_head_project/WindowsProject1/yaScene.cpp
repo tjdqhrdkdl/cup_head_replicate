@@ -1,4 +1,7 @@
 #include "yaScene.h"
+#include "yaCamera.h"
+
+#include "yaApplication.h"
 
 namespace ya {
 	Scene::Scene()
@@ -38,6 +41,19 @@ namespace ya {
 		{
 			for (size_t y = 0; y < mObjects[x].size(); y++)
 			{
+				if (mObjects[x][y] == nullptr)
+					continue;
+				if (mObjects[x][y]->IsDeath())
+					continue;
+				Vector2 pos = mObjects[x][y]->GetPos();
+				pos = Camera::CalculatePos(pos);
+				if (pos.x < -100
+					|| pos.y < -100)
+					continue;
+				if (pos.x > Application::GetInstance().GetWindowData().width + 100
+					|| pos.y > Application::GetInstance().GetWindowData().height + 100)
+					continue;
+
 				mObjects[x][y]->Render(hdc);
 			}
 		}

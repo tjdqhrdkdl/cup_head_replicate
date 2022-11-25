@@ -102,24 +102,25 @@ namespace ya
 		return nullptr;
 	}
 
-	void Animator::CreateAnimation(const std::wstring& name, const std::wstring& path
+	Animation* Animator::CreateAnimation(const std::wstring& name, const std::wstring& path
 		, UINT imageNum, float duration, bool fromZero, bool imageReversed, Vector2 fixPos, bool bAffectedCamera ,bool haveAlpha, UINT imageDegree )
 	{
 		if (FindAnimation(name) != nullptr)
 		{
 			MessageBox(nullptr, L"중복 키 애니메이션 생성", L"애니메이션 생성 실패!", MB_OK);
-			return;
+			return nullptr;
 		}
 		std::wstring objName = GetOwner()->GetName();
 		Animation* animation = new Animation();
 		animation->Create(objName+L"_"+name, path
 			, imageNum, duration, imageReversed, fromZero,fixPos, bAffectedCamera, haveAlpha, imageDegree);
 		animation->SetAnimator(this);
-		animation->SetName(name);
+		animation->SetName(name);			
 
 		mAnimations.insert(std::make_pair(name, animation));
 		Events* events = new Events();
 		mEvents.insert(std::make_pair(name, events));
+		return animation;
 	}	
 
 	void Animator::Play(const std::wstring& name, bool bLoop)
