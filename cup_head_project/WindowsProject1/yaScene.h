@@ -18,11 +18,13 @@ namespace ya {
 		void DeleteGameObject(GameObject* target);
 		bool isIntro() { return misIntro; }
 		void SetIntro(bool b) { misIntro = b; }
+		bool isStarted() { return mStarted; }
 		std::vector<GameObject*> GetGameObjects(eColliderLayer type) { return mObjects[(UINT)type]; }
 		std::vector<GameObject*>* GetGameObjects() { return mObjects; }
 
-	private:
+	protected:
 		std::vector<GameObject*> mObjects[_COLLIDER_LAYER];
 		bool misIntro;
+		bool mStarted;
 	};
 }

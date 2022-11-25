@@ -151,6 +151,9 @@
     <ClInclude Include="yaApplication.h" />
     <ClInclude Include="yaBgImageObject.h" />
     <ClInclude Include="yaDashEffect.h" />
+    <ClInclude Include="yaEXPointUI.h" />
+    <ClInclude Include="yaHealthUI.h" />
+    <ClInclude Include="yaHUD.h" />
     <ClInclude Include="yaMonster.h" />
     <ClInclude Include="yaBossBeppiScene.h" />
     <ClInclude Include="yaBossVegetableScene.h" />
@@ -198,6 +201,9 @@
     <ClCompile Include="yaApplication.cpp" />
     <ClCompile Include="yaBgImageObject.cpp" />
     <ClCompile Include="yaDashEffect.cpp" />
+    <ClCompile Include="yaEXPointUI.cpp" />
+    <ClCompile Include="yaHealthUI.cpp" />
+    <ClCompile Include="yaHUD.cpp" />
     <ClCompile Include="yaMonster.cpp" />
     <ClCompile Include="yaBossBeppiScene.cpp" />
     <ClCompile Include="yaBossVegetableScene.cpp" />

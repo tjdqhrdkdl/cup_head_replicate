@@ -81,8 +81,17 @@
     <Filter Include="Engine\GameObject\Player\Effects">
       <UniqueIdentifier>{f6e4a271-ed45-464f-a71f-bb8285973f66}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\UIBase">
+    <Filter Include="Engine\UI">
       <UniqueIdentifier>{c20992c6-eb8d-4ed5-9293-50130926898b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI\Base">
+      <UniqueIdentifier>{d5bdbbb3-008c-4de8-b2cb-61952475fbd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1">
+      <UniqueIdentifier>{6e3497ae-6bd9-4810-ba94-e599ce645f4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 2">
+      <UniqueIdentifier>{807119de-f34b-44cd-9443-a390f8f2d39d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -176,17 +185,8 @@
     <ClInclude Include="yaPeaShooter.h">
       <Filter>Engine\GameObject\Gun\PeaShooter</Filter>
     </ClInclude>
-    <ClInclude Include="yaBeppiPhaseOne.h">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
-    </ClInclude>
-    <ClInclude Include="yaDuckPanel.h">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
-    </ClInclude>
     <ClInclude Include="yaReady.h">
       <Filter>Engine\GameObject\BossSceneObj</Filter>
-    </ClInclude>
-    <ClInclude Include="yaLightBulb.h">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
     </ClInclude>
     <ClInclude Include="yaGround.h">
       <Filter>Engine\GameObject</Filter>
@@ -231,7 +231,25 @@
       <Filter>Engine\Manager</Filter>
     </ClInclude>
     <ClInclude Include="yaUIBase.h">
-      <Filter>Engine\UIBase</Filter>
+      <Filter>Engine\UI\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="yaHealthUI.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="yaHUD.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBeppiPhaseOne.h">
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+    </ClInclude>
+    <ClInclude Include="yaDuckPanel.h">
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+    </ClInclude>
+    <ClInclude Include="yaLightBulb.h">
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+    </ClInclude>
+    <ClInclude Include="yaEXPointUI.h">
+      <Filter>Engine\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -307,17 +325,8 @@
     <ClCompile Include="yaPeaShooter.cpp">
       <Filter>Engine\GameObject\Gun\PeaShooter</Filter>
     </ClCompile>
-    <ClCompile Include="yaBeppiPhaseOne.cpp">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
-    </ClCompile>
-    <ClCompile Include="yaDuckPanel.cpp">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
-    </ClCompile>
     <ClCompile Include="yaReady.cpp">
       <Filter>Engine\GameObject\BossSceneObj</Filter>
-    </ClCompile>
-    <ClCompile Include="yaLightBulb.cpp">
-      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj</Filter>
     </ClCompile>
     <ClCompile Include="yaGround.cpp">
       <Filter>Engine\GameObject</Filter>
@@ -362,7 +371,25 @@
       <Filter>Engine\Manager</Filter>
     </ClCompile>
     <ClCompile Include="yaUIBase.cpp">
-      <Filter>Engine\UIBase</Filter>
+      <Filter>Engine\UI\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="yaHealthUI.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="yaHUD.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBeppiPhaseOne.cpp">
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+    </ClCompile>
+    <ClCompile Include="yaDuckPanel.cpp">
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+    </ClCompile>
+    <ClCompile Include="yaLightBulb.cpp">
+      <Filter>Engine\GameObject\BossSceneObj\BeppiSceneObj\Phase 1</Filter>
+    </ClCompile>
+    <ClCompile Include="yaEXPointUI.cpp">
+      <Filter>Engine\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

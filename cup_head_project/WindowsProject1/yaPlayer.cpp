@@ -37,6 +37,7 @@ namespace ya
 		, mFalling(true)
 		, mCanDash(true)
 		, mCanEX(true)
+		, mHP(3)
 	{
 		SetName(L"Player");
 		SetPos({ 400.0f, 700.0f });
@@ -105,11 +106,11 @@ namespace ya
 			mAnimator->CreateAnimation(L"DashAirRight", L"..\\Resources\\Image\\Cuphead\\Dash\\Air\\cuphead_dash_air_00", 9, 0.05f, false, false, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"DashAirLeft", L"..\\Resources\\Image\\Cuphead\\Dash\\Air\\cuphead_dash_air_00", 9, 0.05f, false, true, { 0, 0 }, true, true);
 
-			mAnimator->CreateAnimation(L"HitRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Ground\\cuphead_hit_00", 7, 0.05f, false, false, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"HItLeft", L"..\\Resources\\Image\\Cuphead\\HIt\\Ground\\cuphead_hit_00", 7, 0.05f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"HitRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Ground\\cuphead_hit_00", 7, 0.05f, false, false, { -30, 30 }, true, true);
+			mAnimator->CreateAnimation(L"HitLeft", L"..\\Resources\\Image\\Cuphead\\HIt\\Ground\\cuphead_hit_00", 7, 0.05f, false, true, { 0, 0 }, true, true);
 
-			mAnimator->CreateAnimation(L"HitAirRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Air\\cuphead_hit_air_00", 7, 0.04f, false, false, { 0, 0 }, true, true);
-			mAnimator->CreateAnimation(L"HitAirLeft", L"..\\Resources\\Image\\Cuphead\\Hit\\Air\\cuphead_hit_air_00", 7, 0.04f, false, true, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"HitAirRight", L"..\\Resources\\Image\\Cuphead\\HIt\\Air\\cuphead_hit_air_00", 7, 0.05f, false, false, { 0, 0 }, true, true);
+			mAnimator->CreateAnimation(L"HitAirLeft", L"..\\Resources\\Image\\Cuphead\\Hit\\Air\\cuphead_hit_air_00", 7, 0.05f, false, true, { 0, 0 }, true, true);
 
 			mAnimator->CreateAnimation(L"ParryRight", L"..\\Resources\\Image\\Cuphead\\Parry\\Hand\\cuphead_parry_00", 9, 0.03f, false, false, { 0, 0 }, true, true);
 			mAnimator->CreateAnimation(L"ParryLeft", L"..\\Resources\\Image\\Cuphead\\Parry\\Hand\\cuphead_parry_00", 9, 0.03f, false, true, { 0, 0 }, true, true);
@@ -159,6 +160,12 @@ namespace ya
 			mAnimator->GetCompleteEvent(L"EXAirDiagonalDownRight") = std::bind(&Player::EXCompleteEvent, this);
 			mAnimator->GetCompleteEvent(L"EXAirDiagonalDownLeft") = std::bind(&Player::EXCompleteEvent, this);
 
+			mAnimator->GetCompleteEvent(L"HitRight") = std::bind(&Player::OnHitCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"HitLeft") = std::bind(&Player::OnHitCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"HitAirRight") = std::bind(&Player::OnHitCompleteEvent, this);
+			mAnimator->GetCompleteEvent(L"HitAirLeft") = std::bind(&Player::OnHitCompleteEvent, this);
+
+
 		}
 		mAnimator->SetBaseAnimation(L"IdleRight");
 		mAnimator->Play(L"Intro", false);
@@ -178,8 +185,7 @@ namespace ya
 	void Player::Tick()
 	{
 		mPrevPos = GetPos();
-		if(!mParrySlow)
-			PlayerKeyInput();
+		PlayerKeyInput();
 		if (!(mAnimator->GetPlayAnimation()->GetName() == L"Intro"))
 		{
 			SetAnimation();
@@ -190,14 +196,18 @@ namespace ya
 			Jump();
 			EX();
 			Parry();
+			OnHit();
 		}
-
+		if (mSpecialPoint == 5)
+			mSpecialPointFloat = 0;
 		if (mSpecialPointFloat > 1)
 		{
 			if(mSpecialPoint < 5)
 				mSpecialPoint += 1;
 			mSpecialPointFloat = 0;
 		}
+
+
 		GameObject::Tick();
 	}
 
@@ -210,45 +220,120 @@ namespace ya
 		SolidBrush  solidBrush(Color(255, 255, 0, 255));
 		
 
-		graphic.DrawString(std::to_wstring(mSpecialPoint).c_str(), -1, &font, pointF, &solidBrush);
+		graphic.DrawString(std::to_wstring(mCurState).c_str(), -1, &font, pointF, &solidBrush);
 		GameObject::Render(hdc);
 	}
 
 	void Player::OnCollisonEnter(Collider* other, Collider* my)
 	{
-		//패링 성공
-		if (other->GetOwner()->isParryable()
-			&& STATE_HAVE(PlayerState_OnParry))
-		{
-			Vector2 velocity = mRigidbody->GetVelocity();
-			velocity.y = -1500.0f;
-			mRigidbody->SetVelocity(velocity);
-
-			mCurState &= ~PlayerState_OnParry;
-			other->GetOwner()->SetParried(true);
-			if (mSpecialPoint < 5)
+		Scene* curscene = SceneManager::GetCurScene();
+		if (curscene->isStarted())
+		{		
+			//패링 성공
+			if (other->GetOwner()->isParryable()
+				&& STATE_HAVE(PlayerState_OnParry))
 			{
-				mSpecialPoint += 1;
+				Vector2 velocity = mRigidbody->GetVelocity();
+				velocity.y = -1500.0f;
+				mRigidbody->SetVelocity(velocity);
+
+				mCurState &= ~PlayerState_OnParry;
+				other->GetOwner()->SetParried(true);
+				if (mSpecialPoint < 5)
+				{
+					mSpecialPoint += 1;
+				}
+				ParryEffect* parryEffect = new ParryEffect();
+				Vector2 effectPos;
+				if (other->GetPos().x > my->GetPos().x)
+					effectPos.x = my->GetPos().x + (my->GetScale().x / 2);
+				else
+					effectPos.x = my->GetPos().x - (my->GetScale().x / 2);
+				//상수 k = my->getpos().y - (my->getpos().x * 기울기)
+				effectPos.y = (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x) * effectPos.x +
+					my->GetPos().y - my->GetPos().x * (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x);
+				parryEffect->SetPos(effectPos);
+				Scene* curscene = SceneManager::GetCurScene();
+				curscene->AddGameObject(parryEffect, eColliderLayer::Effect);
+				Time::SlowDown(true);
+				mParrySlow = true;
 			}
-			ParryEffect* parryEffect = new ParryEffect();
-			Vector2 effectPos;
-			if (other->GetPos().x > my->GetPos().x)
-				effectPos.x = my->GetPos().x + (my->GetScale().x / 2);
-			else
-				effectPos.x = my->GetPos().x - (my->GetScale().x / 2);
-			//상수 k = my->getpos().y - (my->getpos().x * 기울기)
-			effectPos.y = (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x) * effectPos.x +
-				my->GetPos().y - my->GetPos().x * (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x);
-			parryEffect->SetPos(effectPos);
-			Scene* curscene = SceneManager::GetCurScene();
-			curscene->AddGameObject(parryEffect, eColliderLayer::Effect);
-			Time::SlowDown(true);
-			mParrySlow = true;
+
+			//몬스터와 부딪힘
+			else if (mInvincibile == false
+				&& other->isHitBox() 
+				&& !(STATE_HAVE(PlayerState_OnHit))
+				&& ((other->GetOwner()->GetLayer() == eColliderLayer::Monster
+					|| other->GetOwner()->GetLayer() == eColliderLayer::Monster_Projecttile))
+				)
+			{
+				if(mHP > 0)
+				{
+					mHP -= 1;
+					mCurState |= PlayerState_OnHit;
+
+					mInvincibile = true;
+					dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
+					dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
+				}
+			}
 		}
 	}
 
 	void Player::OnCollisonStay(Collider* other, Collider* my)
 	{
+		Scene* curscene = SceneManager::GetCurScene();
+		if (curscene->isStarted())
+		{
+			//패링 성공
+			if (other->GetOwner()->isParryable()
+				&& STATE_HAVE(PlayerState_OnParry))
+			{
+				Vector2 velocity = mRigidbody->GetVelocity();
+				velocity.y = -1500.0f;
+				mRigidbody->SetVelocity(velocity);
+
+				mCurState &= ~PlayerState_OnParry;
+				other->GetOwner()->SetParried(true);
+				if (mSpecialPoint < 5)
+				{
+					mSpecialPoint += 1;
+				}
+				ParryEffect* parryEffect = new ParryEffect();
+				Vector2 effectPos;
+				if (other->GetPos().x > my->GetPos().x)
+					effectPos.x = my->GetPos().x + (my->GetScale().x / 2);
+				else
+					effectPos.x = my->GetPos().x - (my->GetScale().x / 2);
+				//상수 k = my->getpos().y - (my->getpos().x * 기울기)
+				effectPos.y = (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x) * effectPos.x +
+					my->GetPos().y - my->GetPos().x * (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x);
+				parryEffect->SetPos(effectPos);
+				Scene* curscene = SceneManager::GetCurScene();
+				curscene->AddGameObject(parryEffect, eColliderLayer::Effect);
+				Time::SlowDown(true);
+				mParrySlow = true;
+			}
+
+			//몬스터와 부딪힘
+			else if (mInvincibile == false
+				&& other->isHitBox()
+				&& !(STATE_HAVE(PlayerState_OnHit))
+				&& ((other->GetOwner()->GetLayer() == eColliderLayer::Monster
+					|| other->GetOwner()->GetLayer() == eColliderLayer::Monster_Projecttile))
+				)
+			{
+				if (mHP > 0)
+				{
+					mHP -= 1;
+					mCurState |= PlayerState_OnHit;
+
+					mInvincibile = true;
+					dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
+					dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
+				}
+			}
+		}
 	}
 
 	void Player::OnCollisonExit(Collider* other, Collider* my)
@@ -323,6 +408,7 @@ namespace ya
 		{
 			SetPos({ 400,700 });
 			mSpecialPoint = 5;
+			mHP = 5;
 			//Jump()
 		}
 		if (KEY_DOWN(eKeyCode::V))
@@ -748,7 +834,7 @@ namespace ya
 			&& (mCurState & PlayerState_OnDash) != PlayerState_OnDash
 			&& (mCurState & PlayerState_OnUlt) != PlayerState_OnUlt
 			&& (mCurState & PlayerState_Input_C) != PlayerState_Input_C
-			&& (mCurState & PlayerState_Input_Down) != PlayerState_Input_Down
+			&& !(GetScale() == playerScaleDuck)
 			)
 		{
 			Vector2 playerVec = {};
@@ -1052,9 +1138,29 @@ namespace ya
 		}
 	}
 
+	void Player::OnHit()
+	{
+		if (mInvincibile)
+		{
+			mInvincibileTimeChecker += Time::DeltaTime();
+			if (mInvincibileTimeChecker > 2.0f)
+			{
+				mInvincibile = false;
+				mInvincibileTimeChecker = 0;
+			}
+		}
+	}
+
 	void Player::EXCompleteEvent()
 	{
 		mCurState &= ~PlayerState_OnEX;
+		dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity(Gravity);
+	}
+
+	void Player::OnHitCompleteEvent()
+	{
+		mCurState &= ~PlayerState_OnHit;
+
 		dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity(Gravity);
 	}
 
@@ -1131,26 +1237,50 @@ namespace ya
 			mGunDir = Vector2::Right;
 		else
 			mGunDir = Vector2::Left;
-		if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Up))
-			mGunDir = Vector2::RightUp;
-		else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Up))
-			mGunDir = Vector2::LeftUp;
-		else if (STATE_HAVE(PlayerState_Input_Right))
-			mGunDir = Vector2::Right;
-		else if (STATE_HAVE(PlayerState_Input_Up))
-			mGunDir = Vector2::Up;
-		else if (STATE_HAVE(PlayerState_Input_Left))
-			mGunDir = Vector2::Left;
-		if (STATE_HAVE(PlayerState_Input_C))
+
+		if (!(STATE_HAVE(PlayerState_OnJump)))
 		{
-			if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Down))
+			if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Up))
+				mGunDir = Vector2::RightUp;
+			else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Up))
+				mGunDir = Vector2::LeftUp;
+			else if (STATE_HAVE(PlayerState_Input_Right))
+				mGunDir = Vector2::Right;
+			else if (STATE_HAVE(PlayerState_Input_Up))
+				mGunDir = Vector2::Up;
+			else if (STATE_HAVE(PlayerState_Input_Left))
+				mGunDir = Vector2::Left;
+			if (STATE_HAVE(PlayerState_Input_C))
+			{
+				if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Down))
+					mGunDir = Vector2::RightDown;
+				else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Down))
+					mGunDir = Vector2::LeftDown;
+				else if (STATE_HAVE(PlayerState_Input_Down))
+					mGunDir = Vector2::Down;
+
+			}
+		}
+		else
+		{
+			if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Up))
+				mGunDir = Vector2::RightUp;
+			else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Up))
+				mGunDir = Vector2::LeftUp;
+			else if (STATE_HAVE(PlayerState_Input_Right) && STATE_HAVE(PlayerState_Input_Down))
 				mGunDir = Vector2::RightDown;
 			else if (STATE_HAVE(PlayerState_Input_Left) && STATE_HAVE(PlayerState_Input_Down))
 				mGunDir = Vector2::LeftDown;
 			else if (STATE_HAVE(PlayerState_Input_Down))
 				mGunDir = Vector2::Down;
-
+			else if (STATE_HAVE(PlayerState_Input_Right))
+				mGunDir = Vector2::Right;
+			else if (STATE_HAVE(PlayerState_Input_Up))
+				mGunDir = Vector2::Up;
+			else if (STATE_HAVE(PlayerState_Input_Left))
+				mGunDir = Vector2::Left;
 		}
+
 	}
 
 	void Player::SetGunEXDir()

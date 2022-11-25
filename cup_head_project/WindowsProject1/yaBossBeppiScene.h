@@ -4,6 +4,7 @@
 
 namespace ya 
 {
+	class Player;
 	class BossBeppiScene : public Scene
 	{
 	public:
@@ -16,11 +17,13 @@ namespace ya
 		virtual void Render(HDC hdc) override;
 
 
-		virtual void Enter();
-		virtual void Exit();
+		virtual void Enter() override;
+		virtual void Exit() override;
+
+
 	private:
 		BgImageObject* mBGI;
-		bool mStarted;
+		Player* mPlayer;
 		float mTime;
 	};
 }

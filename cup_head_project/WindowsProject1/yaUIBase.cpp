@@ -37,7 +37,7 @@ namespace ya
 		for (UiBase* child : mChilds)
 		{
 			child->mbEnable = true;
-			child->OnActive();
+			child->Active();
 		}
 	}
 
@@ -45,7 +45,7 @@ namespace ya
 	{
 		for (UiBase* child : mChilds)
 		{
-			child->OnInActive();
+			child->InActive();
 			child->mbEnable = false;
 		}
 		OnInActive();
@@ -80,7 +80,7 @@ namespace ya
 		for (UiBase* child : mChilds)
 		{
 			if (child->mbEnable)
-				child->OnRender(hdc);
+				child->Render(hdc);
 		}
 	}
 
@@ -89,7 +89,7 @@ namespace ya
 		for (UiBase* child : mChilds)
 		{
 			if (child->mbEnable)
-				child->OnClear();
+				child->UIClear();
 		}
 		OnClear();
 	}

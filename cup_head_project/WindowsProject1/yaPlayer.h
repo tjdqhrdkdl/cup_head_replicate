@@ -46,8 +46,10 @@ namespace ya
 		Vector2 SetBulletStartPos(Bullet*);
 		Vector2 SetEXBulletStartPos(Bullet*);
 		Vector2 GetPrevPos() { return mPrevPos; }
-		int GetCurState() { return mCurState; }
-		
+
+		UINT GetHP() { return mHP; }
+		UINT GetSpecialPoint() { return mSpecialPoint; }
+		float GetSpecialPointFloat() { return mSpecialPointFloat; }
 
 		bool isFalling() { return mFalling; }
 		void SetAnimation();
@@ -58,8 +60,10 @@ namespace ya
 		void Jump();
 		void EX();
 		void Parry();
+		void OnHit();
 
 		void EXCompleteEvent();
+		void OnHitCompleteEvent();
 	private:
 		int mCurState;
 
@@ -73,6 +77,7 @@ namespace ya
 		bool mCanDash;
 		bool mCanEX;
 		bool mParrySlow;
+		bool mInvincibile;
 
 		float mSpeed;
 		float mShooterCoolTime;
@@ -82,6 +87,7 @@ namespace ya
 		float mDashTimeChecker;
 		float mJumpTimeChecker;
 		float mParrySlowTimeChecker;
+		float mInvincibileTimeChecker;
 
 		UINT mShootPoint;
 		Vector2 mGunDir;

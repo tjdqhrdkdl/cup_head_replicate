@@ -5,6 +5,7 @@
 #include "yaResources.h"
 #include "yaCollisionManager.h"
 #include "yaCamera.h"
+#include "yaUIManager.h"
 namespace ya {
 	Application::Application()
 	{
@@ -47,8 +48,10 @@ namespace ya {
 
 		Time::Initialize();
 		Input::Initialize();
+		UIManager::Initialize();
 		SceneManager::Initialize();
 		Camera::Initialize();
+
 		
 	}
 
@@ -60,6 +63,7 @@ namespace ya {
 		Camera::Tick();
 		SceneManager::Tick();
 		CollisionManager::Tick();
+		UIManager::Tick();
 
 		HBRUSH black = Application::GetBrush(eBrushColor::Blakc);
 		HBRUSH oldbrush = (HBRUSH)SelectObject(mWindowData.backBuffer, black);
@@ -68,10 +72,10 @@ namespace ya {
 
 		
 		SceneManager::Render(mWindowData.backBuffer);
+		UIManager::Render(mWindowData.backBuffer);
 		Camera::Render(mWindowData.backBuffer);
 		Input::Render(mWindowData.backBuffer);
 		Time::Render(mWindowData.backBuffer);
-		
 		BitBlt(mWindowData.hdc, 0, 0, mWindowData.width, mWindowData.height, mWindowData.backBuffer, 0, 0, SRCCOPY);
 
 
@@ -83,6 +87,7 @@ namespace ya {
 	{
 		SceneManager::Release();
 		Resources::Release();
+		UIManager::Release();
 
 		ReleaseDC(mWindowData.hWnd, mWindowData.hdc);
 		ReleaseDC(mWindowData.hWnd, mWindowData.backBuffer);

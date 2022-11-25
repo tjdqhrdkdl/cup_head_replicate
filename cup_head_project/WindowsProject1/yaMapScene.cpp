@@ -4,7 +4,7 @@
 #include "yaBgImageObject.h"
 #include "yaInput.h"
 #include "yaScenemanager.h"
-
+#include "yaUIManager.h"
 namespace ya {
 	MapScene::MapScene()
 	{

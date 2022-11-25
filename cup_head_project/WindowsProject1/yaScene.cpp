@@ -2,6 +2,7 @@
 
 namespace ya {
 	Scene::Scene()
+		:mStarted(false)
 	{
 	}
 
