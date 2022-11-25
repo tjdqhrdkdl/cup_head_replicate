@@ -14,6 +14,7 @@
 #include "yaParryEffect.h"
 #include "yaSpecialAttackEffect.h"
 #include "yaDashEffect.h"
+#include "yaOnHitEffect.h"
 
 #define STATE_HAVE(STATE) (mCurState & STATE) == STATE
 namespace ya 
@@ -169,12 +170,13 @@ namespace ya
 		}
 		mAnimator->SetBaseAnimation(L"IdleRight");
 		mAnimator->Play(L"Intro", false);
-
 		//Initialize시 이미지 로드
-		{PeaShooter({ 1,0 });
-		ParryEffect();
-		DashEffect();
-		SpecialAttackEffect({ 1,0 });
+		{
+			PeaShooter({ 1,0 });
+			ParryEffect();
+			DashEffect();
+			SpecialAttackEffect({ 1,0 });
+			OnHitEffect();
 		}
 	}
 
@@ -197,14 +199,6 @@ namespace ya
 			EX();
 			Parry();
 			OnHit();
-		}
-		if (mSpecialPoint == 5)
-			mSpecialPointFloat = 0;
-		if (mSpecialPointFloat > 1)
-		{
-			if(mSpecialPoint < 5)
-				mSpecialPoint += 1;
-			mSpecialPointFloat = 0;
 		}
 
 
@@ -275,6 +269,12 @@ namespace ya
 					mInvincibile = true;
 					dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
 					dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
+					mCurState &= ~PlayerState_OnDash;
+					mDashTimeChecker = 0;
+					OnHitEffect* onhitEffect = new OnHitEffect();
+					onhitEffect->SetPos(GetPos());
+					Scene* curscene = SceneManager::GetCurScene();
+					curscene->AddGameObject(onhitEffect, eColliderLayer::Effect);
 				}
 			}
 		}
@@ -342,38 +342,40 @@ namespace ya
 
 	void Player::PlayerKeyInput()
 	{
-		// 키 눌러진 상태
-		if (KEY_PRESSED(eKeyCode::UP))
+		if (!(STATE_HAVE(PlayerState_OnHit)))
 		{
-			mCurState |= PlayerState_Input_Up;
-		}
-		if (KEY_PRESSED(eKeyCode::DOWN))
-		{
-			mCurState |= PlayerState_Input_Down;
-		}
-		if (KEY_PRESSED(eKeyCode::LEFT))
-		{
-			mCurState |= PlayerState_Input_Left;
-			if (!(STATE_HAVE(PlayerState_OnDash)))
-				mCurState &= ~PlayerState_LookRight;
-		}
-		if (KEY_PRESSED(eKeyCode::RIGHT))
-		{
-			mCurState |= PlayerState_Input_Right;
+			// 키 눌러진 상태
+			if (KEY_PRESSED(eKeyCode::UP))
+			{
+				mCurState |= PlayerState_Input_Up;
+			}
+			if (KEY_PRESSED(eKeyCode::DOWN))
+			{
+				mCurState |= PlayerState_Input_Down;
+			}
+			if (KEY_PRESSED(eKeyCode::LEFT))
+			{
+				mCurState |= PlayerState_Input_Left;
+				if (!(STATE_HAVE(PlayerState_OnDash)))
+					mCurState &= ~PlayerState_LookRight;
+			}
+			if (KEY_PRESSED(eKeyCode::RIGHT))
+			{
+				mCurState |= PlayerState_Input_Right;
 
-			if (!(STATE_HAVE(PlayerState_OnDash)))
-				mCurState |= PlayerState_LookRight;
-		}
-		if (KEY_PRESSED(eKeyCode::X))
-		{
-			mCurState |= PlayerState_Input_X;
+				if (!(STATE_HAVE(PlayerState_OnDash)))
+					mCurState |= PlayerState_LookRight;
+			}
+			if (KEY_PRESSED(eKeyCode::X))
+			{
+				mCurState |= PlayerState_Input_X;
 
+			}
+			if (KEY_PRESSED(eKeyCode::C))
+			{
+				mCurState |= PlayerState_Input_C;
+			}
 		}
-		if (KEY_PRESSED(eKeyCode::C))
-		{
-			mCurState |= PlayerState_Input_C;
-		}
-
 
 		// 키 누르는 순간
 		// 중복키
@@ -411,14 +413,6 @@ namespace ya
 			mHP = 5;
 			//Jump()
 		}
-		if (KEY_DOWN(eKeyCode::V))
-		{
-			//EX()
-		}
-		if (KEY_DOWN(eKeyCode::LSHIFT))
-		{
-			//Dash()
-		}
 	}
 
 	void Player::SetAnimation()
@@ -454,8 +448,8 @@ namespace ya
 			}
 			else if ((StateR & PlayerState_OnJump) == PlayerState_OnJump)
 				playAnimationName = L"JumpRight";
-			
-			
+
+
 
 			else if ((StateR & PlayerState_Input_C) == PlayerState_Input_C)
 			{
@@ -481,7 +475,7 @@ namespace ya
 				else if ((StateRAim & PlayerState_Input_X) == PlayerState_Input_X)
 				{
 					int StateRAimShoot = StateRAim - PlayerState_Input_X;
-					
+
 					if ((StateRAimShoot & PlayerState_OnShoot) != PlayerState_OnShoot && !mReloading)
 					{
 						if (StateRAimShoot == PlayerState_None)
@@ -626,8 +620,8 @@ namespace ya
 			}
 			else if ((StateL & PlayerState_OnJump) == PlayerState_OnJump)
 				playAnimationName = L"JumpLeft";
-			
-			
+
+
 
 			else if ((StateL & PlayerState_Input_C) == PlayerState_Input_C)
 			{
@@ -768,9 +762,14 @@ namespace ya
 					playAnimationName = L"RunLeft";
 			}
 		}
-		if (playAnimationName != L"" and
-			mAnimator->GetPlayAnimation() != mAnimator->FindAnimation(playAnimationName))
+
+
+		if (playAnimationName != L""
+			&& mAnimator->GetPlayAnimation() != mAnimator->FindAnimation(playAnimationName)
+			)
+		{
 			mAnimator->Play(playAnimationName, loop);
+		}
 	}
 
 	void Player::Shoot()
@@ -1102,7 +1101,15 @@ namespace ya
 			Scene* curscene = SceneManager::GetCurScene();
 			curscene->AddGameObject(exEffect, eColliderLayer::Effect);
 		}
-			
+
+		if (mSpecialPoint == 5)
+			mSpecialPointFloat = 0;
+		if (mSpecialPointFloat > 1)
+		{
+			if (mSpecialPoint < 5)
+				mSpecialPoint += 1;
+			mSpecialPointFloat = 0;
+		}
 	}
 
 	void Player::Parry()
@@ -1147,7 +1154,29 @@ namespace ya
 			{
 				mInvincibile = false;
 				mInvincibileTimeChecker = 0;
+				mAnimator->SetMatrixToBase();
+				mAnimator->GetPlayAnimation()->SetHaveAlpha(true);
 			}
+			Blink();
+		}
+	}
+
+	void Player::Blink()
+	{
+		if (mInvincibile
+			&&!(STATE_HAVE(PlayerState_OnHit)))
+		{
+			if (!mBlinkChecker)
+				mBlinkTimeChecker += Time::DeltaTime() * 8;
+			else
+				mBlinkTimeChecker -= Time::DeltaTime() * 8;
+			
+			if (mBlinkTimeChecker > 1)
+				mBlinkChecker = true;
+			else if (mBlinkTimeChecker < 0)
+				mBlinkChecker = false;
+
+			mAnimator->SetMatrixToTransparent(mBlinkTimeChecker);
 		}
 	}
 

@@ -11,6 +11,7 @@
 #include "yaGround.h"
 #include "yaUIManager.h"
 #include "yaHealthUI.h"
+
 namespace ya 
 {
 	BossBeppiScene::BossBeppiScene()

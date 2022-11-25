@@ -251,6 +251,9 @@
     <ClInclude Include="yaEXPointUI.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
+    <ClInclude Include="yaOnHitEffect.h">
+      <Filter>Engine\GameObject\Player\Effects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -390,6 +393,9 @@
     </ClCompile>
     <ClCompile Include="yaEXPointUI.cpp">
       <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="yaOnHitEffect.cpp">
+      <Filter>Engine\GameObject\Player\Effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

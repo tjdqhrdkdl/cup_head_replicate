@@ -61,6 +61,7 @@ namespace ya
 		void EX();
 		void Parry();
 		void OnHit();
+		void Blink();
 
 		void EXCompleteEvent();
 		void OnHitCompleteEvent();
@@ -78,6 +79,7 @@ namespace ya
 		bool mCanEX;
 		bool mParrySlow;
 		bool mInvincibile;
+		bool mBlinkChecker;
 
 		float mSpeed;
 		float mShooterCoolTime;
@@ -88,6 +90,7 @@ namespace ya
 		float mJumpTimeChecker;
 		float mParrySlowTimeChecker;
 		float mInvincibileTimeChecker;
+		float mBlinkTimeChecker;
 
 		UINT mShootPoint;
 		Vector2 mGunDir;
