@@ -96,7 +96,7 @@
     <Filter Include="Engine\GameObject\SceneObject\BossSceneObj">
       <UniqueIdentifier>{a5e6c4bb-6453-4830-9348-d34839174e44}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\SceneObject\SceneChange">
+    <Filter Include="Engine\GameObject\SceneObject\SceneChanger">
       <UniqueIdentifier>{266c261a-a92f-4b76-9a82-8a75556c2292}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -261,10 +261,10 @@
       <Filter>Engine\GameObject\SceneObject\BossSceneObj</Filter>
     </ClInclude>
     <ClInclude Include="yaSceneExit.h">
-      <Filter>Engine\GameObject\SceneObject\SceneChange</Filter>
+      <Filter>Engine\GameObject\SceneObject\SceneChanger</Filter>
     </ClInclude>
     <ClInclude Include="yaSceneEnter.h">
-      <Filter>Engine\GameObject\SceneObject\SceneChange</Filter>
+      <Filter>Engine\GameObject\SceneObject\SceneChanger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -410,10 +410,10 @@
       <Filter>Engine\GameObject\SceneObject\BossSceneObj</Filter>
     </ClCompile>
     <ClCompile Include="yaSceneExit.cpp">
-      <Filter>Engine\GameObject\SceneObject\SceneChange</Filter>
+      <Filter>Engine\GameObject\SceneObject\SceneChanger</Filter>
     </ClCompile>
     <ClCompile Include="yaSceneEnter.cpp">
-      <Filter>Engine\GameObject\SceneObject\SceneChange</Filter>
+      <Filter>Engine\GameObject\SceneObject\SceneChanger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,5 @@ namespace ya
 	private:
 		Animator* mAnimator;
 		float mTime;
-		bool mComplete;
 	};
 }

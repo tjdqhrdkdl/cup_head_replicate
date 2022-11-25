@@ -24,6 +24,8 @@ namespace ya
 	private:
 		BgImageObject* mBGI;
 		Player* mPlayer;
+		
+		bool mbInitialized;
 		float mTime;
 	};
 }

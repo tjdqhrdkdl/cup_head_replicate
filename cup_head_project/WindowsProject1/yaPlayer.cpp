@@ -221,7 +221,7 @@ namespace ya
 	void Player::OnCollisonEnter(Collider* other, Collider* my)
 	{
 		Scene* curscene = SceneManager::GetCurScene();
-		if (curscene->isStarted())
+		if (!(curscene->isIntro()))
 		{		
 			//패링 성공
 			if (other->GetOwner()->isParryable()
@@ -309,7 +309,7 @@ namespace ya
 	void Player::OnCollisonStay(Collider* other, Collider* my)
 	{
 		Scene* curscene = SceneManager::GetCurScene();
-		if (curscene->isStarted())
+		if (!(curscene->isIntro()))
 		{
 			//패링 성공
 			if (other->GetOwner()->isParryable()
@@ -326,14 +326,33 @@ namespace ya
 					mSpecialPoint += 1;
 				}
 				ParryEffect* parryEffect = new ParryEffect();
+
 				Vector2 effectPos;
 				if (other->GetPos().x > my->GetPos().x)
 					effectPos.x = my->GetPos().x + (my->GetScale().x / 2);
 				else
 					effectPos.x = my->GetPos().x - (my->GetScale().x / 2);
+
 				//상수 k = my->getpos().y - (my->getpos().x * 기울기)
-				effectPos.y = (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x) * effectPos.x +
-					my->GetPos().y - my->GetPos().x * (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x);
+				float gradient = (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x);
+				float k = my->GetPos().y - (my->GetPos().x * gradient);
+				effectPos.y = gradient * effectPos.x + k;
+				if (other->GetPos().y > my->GetPos().y)
+				{
+					if (effectPos.y < my->GetPos().y - my->GetScale().y / 2)
+					{
+						effectPos.y = my->GetPos().y + my->GetScale().y / 2;
+						effectPos.x = (effectPos.y - k) / gradient;
+					}
+				}
+				else
+				{
+					if (effectPos.y > my->GetPos().y + my->GetScale().y / 2)
+					{
+						effectPos.y = my->GetPos().y + my->GetScale().y / 2;
+						effectPos.x = (effectPos.y - k) / gradient;
+					}
+				}
 				parryEffect->SetPos(effectPos);
 				Scene* curscene = SceneManager::GetCurScene();
 				curscene->AddGameObject(parryEffect, eColliderLayer::Effect);
@@ -353,8 +372,23 @@ namespace ya
 				{
 					mHP -= 1;
 					mCurState |= PlayerState_OnHit;
+					mRigidbody->SetGravity(Gravity);
+					mRigidbody->SetGround(false);
+					Vector2 velocity = mRigidbody->GetVelocity();
+					velocity.y = -1000.0f;
+					if (STATE_HAVE(PlayerState_LookRight))
+						velocity.x = -100.0f;
+					else
+						velocity.x = 100.0f;
+					mRigidbody->SetVelocity(velocity);
 
 					mInvincibile = true;
+					mCurState &= ~PlayerState_OnDash;
+					mDashTimeChecker = 0;
+					OnHitEffect* onhitEffect = new OnHitEffect();
+					onhitEffect->SetPos(GetPos());
+					Scene* curscene = SceneManager::GetCurScene();
+					curscene->AddGameObject(onhitEffect, eColliderLayer::Effect);
 				}
 			}
 		}

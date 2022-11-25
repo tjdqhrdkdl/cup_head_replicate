@@ -2,21 +2,12 @@
 
 namespace ya {
 	Scene::Scene()
-		:mStarted(false)
 	{
 	}
 
 	Scene::~Scene()
 	{
-		for (size_t x = 0; x < _COLLIDER_LAYER; x++)
-		{
-			for (size_t y = 0; y < mObjects[x].size(); y++)
-			{
-				delete mObjects[x][y];
-				mObjects[x][y] = nullptr;
-			}
-		}
-
+		Release();
 	}
 
 	void Scene::Initialize()
@@ -58,6 +49,18 @@ namespace ya {
 
 	void Scene::Exit()
 	{
+	}
+
+	void Scene::Release()
+	{
+		for (size_t x = 0; x < _COLLIDER_LAYER-1; x++)
+		{
+			for (size_t y = 0; y < mObjects[x].size(); y++)
+			{
+				delete mObjects[x][y];
+			}
+			mObjects[x].clear();
+		}
 	}
 
 	void Scene::AddGameObject(GameObject* gameobject, eColliderLayer type)

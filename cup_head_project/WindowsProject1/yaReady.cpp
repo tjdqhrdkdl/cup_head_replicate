@@ -6,7 +6,6 @@
 namespace ya
 {
 	Ready::Ready()
-		:mComplete(false)
 	{
 		SetName(L"BossReady");
 		SetPos({ 800,900 });
@@ -27,10 +26,6 @@ namespace ya
 	void Ready::Tick()
 	{
 		GameObject::Tick();
-		if (mComplete == true)
-		{
-			ObjectManager::Destroy(this);
-		}
 	}
 
 	void Ready::Render(HDC hdc)
@@ -40,7 +35,7 @@ namespace ya
 
 	void Ready::ReadyCompleteEvent()
 	{
-		mComplete = true;
+		ObjectManager::Destroy(this);
 		SceneManager::GetCurScene()->SetIntro(false);
 	}
 

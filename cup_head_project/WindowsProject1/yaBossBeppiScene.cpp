@@ -15,8 +15,8 @@
 namespace ya 
 {
 	BossBeppiScene::BossBeppiScene()
+		:mbInitialized(true)
 	{
-		SetIntro(true);
 	}
 
 	BossBeppiScene::~BossBeppiScene()
@@ -25,6 +25,7 @@ namespace ya
 
 	void BossBeppiScene::Initialize()
 	{
+		SetIntro(true);
 		mBGI = new BgImageObject();
 		mBGI->SetImage(L"BeppiMainBGI", L"Beppi\\clown_bg_main.png");
 		mBGI->SetPos({ -200,0 });
@@ -50,7 +51,6 @@ namespace ya
 	{
 		Scene::Tick();
 
-		mStarted = true;
 		if (KEY_DOWN(eKeyCode::N))
 		{
 			SceneManager::ChangeScene(eSceneType::Map);
@@ -73,6 +73,8 @@ namespace ya
 
 	void BossBeppiScene::Enter()
 	{
+		if(!mbInitialized)
+			Initialize();
 		Scene::Enter();
 		HUD* healthUI = UIManager::GetUiInstant<HUD>(eUIType::HP);
 		healthUI->SetTarget(mPlayer);
@@ -84,7 +86,9 @@ namespace ya
 
 	void BossBeppiScene::Exit()
 	{
+		Scene::Release();
+		mbInitialized = false;
 		UIManager::Pop(eUIType::HP);
-		UIManager::Push(eUIType::MP);
+		UIManager::Pop(eUIType::MP);
 	}
 }
