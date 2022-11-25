@@ -265,10 +265,17 @@ namespace ya
 				{
 					mHP -= 1;
 					mCurState |= PlayerState_OnHit;
+					mRigidbody->SetGravity(Gravity);
+					mRigidbody->SetGround(false);
+					Vector2 velocity = mRigidbody->GetVelocity();
+					velocity.y = -1000.0f;
+					if (STATE_HAVE(PlayerState_LookRight))
+						velocity.x = -100.0f;
+					else
+						velocity.x = 100.0f;
+					mRigidbody->SetVelocity(velocity);
 
 					mInvincibile = true;
-					dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
-					dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
 					mCurState &= ~PlayerState_OnDash;
 					mDashTimeChecker = 0;
 					OnHitEffect* onhitEffect = new OnHitEffect();
@@ -329,8 +336,6 @@ namespace ya
 					mCurState |= PlayerState_OnHit;
 
 					mInvincibile = true;
-					dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
-					dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
 				}
 			}
 		}
@@ -1147,6 +1152,7 @@ namespace ya
 
 	void Player::OnHit()
 	{
+		
 		if (mInvincibile)
 		{
 			mInvincibileTimeChecker += Time::DeltaTime();
@@ -1189,8 +1195,6 @@ namespace ya
 	void Player::OnHitCompleteEvent()
 	{
 		mCurState &= ~PlayerState_OnHit;
-
-		dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity(Gravity);
 	}
 
 	void Player::SetShooterCoolTime(eGunType guntype)
