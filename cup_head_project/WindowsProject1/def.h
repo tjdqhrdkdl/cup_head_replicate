@@ -48,9 +48,9 @@ enum class eColliderLayer
 {
 	Default,
 	BackGround,
-	BehindObject,
+	BehindMonster,
 	FrontObject,
-	Monster,
+	FrontMonster,
 	Monster_Projecttile,
 	Effect,
 	Player,

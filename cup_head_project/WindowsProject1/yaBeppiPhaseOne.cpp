@@ -177,6 +177,18 @@ namespace ya
 			mCurState &= ~BeppiPh1State_OnIdleMove;
 			mAttackTimeChecker = 0;
 		}
+
+		if (mAttackStarted)
+		{
+			mAttackStartedTimeChecker += Time::DeltaTime();
+			if (mAttackStartedTimeChecker > 0.5f)
+			{
+				mCurState &= ~BeppiPh1State_OnAttackStart;
+				mCurState |= BeppiPh1State_OnAttackMoving;
+				mAttackStarted = false;
+				mAttackStartedTimeChecker = 0;
+			}
+		}
 	}
 
 	void BeppiPhaseOne::OnHitCheck()
@@ -204,8 +216,7 @@ namespace ya
 		
 		if ((mCurState & BeppiPh1State_EndFall) == BeppiPh1State_EndFall)
 		{
-
-			pos.y += 1000 * Time::DeltaTime();
+			pos.y += 500 * Time::DeltaTime();
 		}
 		else if ((mCurState & BeppiPh1State_OnAttackMoving) == BeppiPh1State_OnAttackMoving)
 		{
@@ -253,7 +264,7 @@ namespace ya
 				bool pink = true;
 				DuckPanel* pinkDuck = new DuckPanel(pink);
 				pinkDuck->Initialize();
-				curScene->AddGameObject(pinkDuck, eColliderLayer::Monster);
+				curScene->AddGameObject(pinkDuck, eColliderLayer::FrontMonster);
 				mPinkDuckChecker = 0;
 			}
 			else
@@ -263,12 +274,12 @@ namespace ya
 					LightBulb* bulb = new LightBulb();
 					DuckPanel* bulbDuck = new DuckPanel(false,bulb);
 					bulbDuck->Initialize();
-					curScene->AddGameObject(bulbDuck, eColliderLayer::Monster);
+					curScene->AddGameObject(bulbDuck, eColliderLayer::FrontMonster);
 					mBulbDuckChecker = 0;
 				}
 				else
 				{
-					ObjectManager::Instantiate<DuckPanel>(curScene, eColliderLayer::Monster);
+					ObjectManager::Instantiate<DuckPanel>(curScene, eColliderLayer::FrontMonster);
 					mBulbDuckChecker += 1;
 				}
 				mPinkDuckChecker += 1;
@@ -279,11 +290,7 @@ namespace ya
 
 	void BeppiPhaseOne::AttackStartCompleteEvent()
 	{
-		if (mAttackTimeChecker > 1.3f)
-		{
-			mCurState &= ~BeppiPh1State_OnAttackStart;
-			mCurState |= BeppiPh1State_OnAttackMoving;
-		}
+		mAttackStarted = true;
 	}
 
 	void BeppiPhaseOne::AttackSmashCompleteEvent()
@@ -292,7 +299,7 @@ namespace ya
 		mCurState ^= BeppiPh1State_LookLeft;
 		if (mHp <= 0)
 		{
-			ObjectManager::Destroy(this, 3.0f);
+			ObjectManager::Destroy(this, 5.0f);
 			GetComponent<Collider>()->SetScale({0,0});
 			SetScale({ 0,0 });
 		}
@@ -305,6 +312,7 @@ namespace ya
 
 	void BeppiPhaseOne::EndCompleteEvent()
 	{
+		SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::BehindMonster);
 		mCurState |= BeppiPh1State_EndFall;
 	}
 

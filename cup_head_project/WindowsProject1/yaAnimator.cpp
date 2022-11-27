@@ -62,9 +62,13 @@ namespace ya
 			}
 			else if (!mbLoop && mPlayAnimation->isComplete())
 			{
-				Animator::Events* events
-					= FindEvents(mPlayAnimation->GetName());
-				events->mCompleteEvent();
+				if (!(mPlayAnimation->haveCompleted()))
+				{
+					Animator::Events* events
+						= FindEvents(mPlayAnimation->GetName());
+					events->mCompleteEvent();
+					mPlayAnimation->SetHaveCompleted(true);
+				}
 			}
 			if (mBaseAnimation != nullptr && (mbLoop == false) && mPlayAnimation->isComplete())
 			{

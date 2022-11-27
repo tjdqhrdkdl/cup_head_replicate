@@ -35,10 +35,15 @@ namespace ya
 	void SceneExit::AnimCompleteEvent()
 	{
 		ObjectManager::Destroy(this);
-		SceneManager::GetCurScene()->Exit();
+		Scene* prevScene = SceneManager::GetCurScene();
+		prevScene->Exit();
+
 		SceneManager::SetCurScene(mType);
 		SceneManager::GetCurScene()->Enter();
-		ObjectManager::Instantiate<SceneEnter>(SceneManager::GetCurScene(), eColliderLayer::Camera);
+
+		SceneEnter* sceneEnter = new SceneEnter(prevScene);
+		sceneEnter->Initialize();
+		SceneManager::GetCurScene()->AddGameObject(dynamic_cast<GameObject*>(sceneEnter), eColliderLayer::Camera);
 	}
 
 }

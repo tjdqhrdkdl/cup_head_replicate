@@ -20,6 +20,7 @@ namespace ya
 		if (mComplete)
 			return;
 
+
 		mTime += Time::DeltaTime();
 		if (mTime > mPictureDuration)
 		{
@@ -91,6 +92,7 @@ namespace ya
 		mTime = 0;
 		mComplete = false;
 		mPictureIndex = 0;
+		mbHaveCompleted = false;
 	}
 
 	void Animation::Create(const std::wstring& key, const std::wstring& path

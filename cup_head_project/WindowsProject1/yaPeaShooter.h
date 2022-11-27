@@ -29,5 +29,7 @@ namespace ya
 
 		static float AliveTime;
 		static float CoolTime;
+		static float BulletDamage;
+		static float EXDamage;
 	};
 }

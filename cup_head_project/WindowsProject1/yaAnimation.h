@@ -22,9 +22,10 @@ namespace ya
 		void SetAnimator(Animator* animator) { mAnimator = animator; }
 
 		void SetHaveAlpha(bool data) { mbHaveAlpha = data; }
-
 		void SetLightenAnimation(Animation* lightenAnim) { mLightenAnimation = lightenAnim; }
 
+		bool haveCompleted() { return mbHaveCompleted; }
+		void SetHaveCompleted(bool c) { mbHaveCompleted = c; }
 	private:
 		Animator* mAnimator;
 		std::vector<Picture*> mPictures;	
@@ -38,6 +39,7 @@ namespace ya
 		bool mAffectedCamera;
 
 		bool mbHaveAlpha;
+		bool mbHaveCompleted;
 		Vector2 mFixPos;
 
 		Animation* mLightenAnimation;

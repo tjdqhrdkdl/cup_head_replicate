@@ -64,7 +64,8 @@ namespace ya {
 
 		bool isParryable() { return mPink; }
 		void SetParried(bool parry) { mParried = parry; }
-
+		bool isLayerChanged() { return mLayerChanged; }
+		void SetLayerChange(bool b) { mLayerChanged = b; }
 	private:
 		std::vector<Component*> mComponents;
 		Vector2 mPos;
@@ -77,5 +78,6 @@ namespace ya {
 	protected:
 		bool mPink;
 		bool mParried;
+		bool mLayerChanged;
 	};
 }

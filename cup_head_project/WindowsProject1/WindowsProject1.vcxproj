@@ -149,6 +149,7 @@
     <ClInclude Include="yaAnimation.h" />
     <ClInclude Include="yaAnimator.h" />
     <ClInclude Include="yaApplication.h" />
+    <ClInclude Include="yaBeppiPhaseTwo.h" />
     <ClInclude Include="yaBgImageObject.h" />
     <ClInclude Include="yaDashEffect.h" />
     <ClInclude Include="yaEXPointUI.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="yaAnimation.cpp" />
     <ClCompile Include="yaAnimator.cpp" />
     <ClCompile Include="yaApplication.cpp" />
+    <ClCompile Include="yaBeppiPhaseTwo.cpp" />
     <ClCompile Include="yaBgImageObject.cpp" />
     <ClCompile Include="yaDashEffect.cpp" />
     <ClCompile Include="yaEXPointUI.cpp" />

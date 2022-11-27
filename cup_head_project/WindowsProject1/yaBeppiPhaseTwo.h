@@ -3,25 +3,25 @@
 #include "yaMonster.h"
 #include "yaPicture.h"
 
-namespace ya 
+namespace ya
 {
 
 	class Animator;
-	class BeppiPhaseOne : public Monster
+	class BeppiPhaseTwo : public Monster
 	{
 	public:
 		enum eBeppiPh1State
 		{
-			BeppiPh1State_None			 = 0x00000000,
-			BeppiPh1State_LookLeft		 = 0x00000001,
-			BeppiPh1State_OnAttackStart	 = 0x00000002,
+			BeppiPh1State_None = 0x00000000,
+			BeppiPh1State_LookLeft = 0x00000001,
+			BeppiPh1State_OnAttackStart = 0x00000002,
 			BeppiPh1State_OnAttackMoving = 0x00000004,
-			BeppiPh1State_OnAttackSmash  = 0x00000008,
-			BeppiPh1State_OnIdleMove	 = 0x00000010,
-			BeppiPh1State_EndFall		 = 0x00000020,
+			BeppiPh1State_OnAttackSmash = 0x00000008,
+			BeppiPh1State_OnIdleMove = 0x00000010,
+			BeppiPh1State_EndFall = 0x00000020,
 		};
-		BeppiPhaseOne();
-		~BeppiPhaseOne();
+		BeppiPhaseTwo();
+		~BeppiPhaseTwo();
 
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
@@ -53,9 +53,6 @@ namespace ya
 		int mPinkDuckChecker;
 		int mBulbDuckChecker;
 		int mCurState;
-
-		bool mAttackStarted;
-		float mAttackStartedTimeChecker;
 
 	};
 }

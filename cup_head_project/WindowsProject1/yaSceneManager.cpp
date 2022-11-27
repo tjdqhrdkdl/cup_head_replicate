@@ -29,7 +29,6 @@ namespace ya
 			mCurScene = scene;
 			scene->Initialize();
 		}
-
 		ChangeScene(eSceneType::Logo);
 		
 	}

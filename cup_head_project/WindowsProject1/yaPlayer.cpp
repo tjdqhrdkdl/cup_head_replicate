@@ -45,6 +45,7 @@ namespace ya
 		SetScale({ 90.0f, 120.0f });
 		AddComponent(new Collider());
 		mRigidbody = new Rigidbody();
+		mRigidbody->SetGround(true);
 		AddComponent(mRigidbody);
 
 
@@ -249,7 +250,7 @@ namespace ya
 				float gradient = (other->GetPos().y - my->GetPos().y) / (other->GetPos().x - my->GetPos().x);
 				float k = my->GetPos().y - (my->GetPos().x * gradient);
 				effectPos.y = gradient * effectPos.x + k;
-				if( other->GetPos().y > my->GetPos().y)
+				if( other->GetPos().y < my->GetPos().y)
 				{
 					if (effectPos.y < my->GetPos().y - my->GetScale().y / 2)
 					{
@@ -276,7 +277,7 @@ namespace ya
 			else if (mInvincibile == false
 				&& other->isHitBox() 
 				&& !(STATE_HAVE(PlayerState_OnHit))
-				&& ((other->GetOwner()->GetLayer() == eColliderLayer::Monster
+				&& ((other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
 					|| other->GetOwner()->GetLayer() == eColliderLayer::Monster_Projecttile))
 				)
 			{
@@ -301,6 +302,8 @@ namespace ya
 					onhitEffect->SetPos(GetPos());
 					Scene* curscene = SceneManager::GetCurScene();
 					curscene->AddGameObject(onhitEffect, eColliderLayer::Effect);
+
+					EXCompleteEvent();
 				}
 			}
 		}
@@ -364,7 +367,7 @@ namespace ya
 			else if (mInvincibile == false
 				&& other->isHitBox()
 				&& !(STATE_HAVE(PlayerState_OnHit))
-				&& ((other->GetOwner()->GetLayer() == eColliderLayer::Monster
+				&& ((other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
 					|| other->GetOwner()->GetLayer() == eColliderLayer::Monster_Projecttile))
 				)
 			{
@@ -389,6 +392,8 @@ namespace ya
 					onhitEffect->SetPos(GetPos());
 					Scene* curscene = SceneManager::GetCurScene();
 					curscene->AddGameObject(onhitEffect, eColliderLayer::Effect);
+
+					EXCompleteEvent();
 				}
 			}
 		}
@@ -923,6 +928,7 @@ namespace ya
 			)
 		{
 			GetComponent<Collider>()->SetScale({ playerScaleDuck });
+			
 			SetScale(playerScaleDuck);
 		}
 		else
@@ -933,6 +939,17 @@ namespace ya
 				SetScale(playerScaleBasic);
 				mCurState &= ~PlayerState_OnShoot;
 			}
+		}
+		if (!(STATE_HAVE(PlayerState_OnHit))
+			&& !(STATE_HAVE(PlayerState_OnDash))
+			&& !(STATE_HAVE(PlayerState_OnJump))
+			&& !(STATE_HAVE(PlayerState_OnUlt))
+			&& !(STATE_HAVE(PlayerState_Input_C))
+			&& !(STATE_HAVE(PlayerState_OnEX))
+			&& KEY_DOWN(eKeyCode::DOWN)
+			)
+		{
+			mCurState &= ~PlayerState_OnShoot;
 		}
 	}
 

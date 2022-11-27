@@ -16,7 +16,6 @@ namespace ya {
 	void EndScene::Initialize()
 	{
 
-		AddGameObject(new Player(), eColliderLayer::Player);
 		Scene::Initialize();
 	}
 

@@ -1,11 +1,14 @@
 #include "yaSceneEnter.h"
+#include "yaScene.h"
 #include "yaAnimator.h"
 #include "yaObjectManager.h"
 
 namespace ya
 {
-	SceneEnter::SceneEnter()
+	SceneEnter::SceneEnter(Scene* prev)
+		:mPrevScene(prev)
 	{
+		
 		SetName(L"SceneChangeEnter");
 		SetPos({ 800,900 });
 		SetScale({ 1600,900 });
@@ -34,6 +37,7 @@ namespace ya
 	void SceneEnter::AnimCompleteEvent()
 	{
 		ObjectManager::Destroy(this);
+		mPrevScene->ReleaseCameraObj();
 	}
 
 }

@@ -42,7 +42,7 @@ namespace ya
 	{
 		if (other->isHitBox())
 		{
-			if (other->GetOwner()->GetLayer() == eColliderLayer::Monster)
+			if (other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster)
 			{
 				Monster* monster = dynamic_cast<Monster*>(other->GetOwner());
 				if (monster == nullptr)

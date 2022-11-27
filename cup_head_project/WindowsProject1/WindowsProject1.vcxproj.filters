@@ -266,6 +266,9 @@
     <ClInclude Include="yaSceneEnter.h">
       <Filter>Engine\GameObject\SceneObject\SceneChanger</Filter>
     </ClInclude>
+    <ClInclude Include="yaBeppiPhaseTwo.h">
+      <Filter>Engine\GameObject\Beppi\Phase 2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -414,6 +417,9 @@
     </ClCompile>
     <ClCompile Include="yaSceneEnter.cpp">
       <Filter>Engine\GameObject\SceneObject\SceneChanger</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBeppiPhaseTwo.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

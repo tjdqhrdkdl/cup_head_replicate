@@ -30,16 +30,19 @@ namespace ya
 		mBGI->SetImage(L"BeppiMainBGI", L"Beppi\\clown_bg_main.png");
 		mBGI->SetPos({ 0,0 });
 		AddGameObject(mBGI, eColliderLayer::BackGround);
-
+		BgImageObject* track = new BgImageObject();
+		track->SetImage(L"BeppiTrack", L"Beppi\\clown_bg_track.png", RGB(255,0,255), true);
+		track->SetPos({ -10,600 });
+		AddGameObject(track, eColliderLayer::FrontObject);
 		ObjectManager::Instantiate<Ground>(this, eColliderLayer::FrontObject);
 		mPlayer = ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);
-		ObjectManager::Instantiate<BeppiPhaseOne>(this, eColliderLayer::Monster);
+		ObjectManager::Instantiate<BeppiPhaseOne>(this, eColliderLayer::FrontMonster);
 		ObjectManager::Instantiate<Ready>(this, eColliderLayer::UI);
 
-		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster, true);
+		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontObject, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster_Projecttile, true);
-		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::Monster, true);
+		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::FrontMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Monster_Projecttile, eColliderLayer::FrontObject, true);
 		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::FrontObject, true);
 

@@ -15,11 +15,14 @@ namespace ya {
 		virtual void Exit();
 
 		void Release();
+		void ReleaseCameraObj();
 
 		void AddGameObject(GameObject* gameobject , eColliderLayer type);
 		void DeleteGameObject(GameObject* target);
 		bool isIntro() { return misIntro; }
 		void SetIntro(bool b) { misIntro = b; }
+		void ChangeLayer(GameObject* gameobject, eColliderLayer newtype);
+
 		std::vector<GameObject*> GetGameObjects(eColliderLayer type) { return mObjects[(UINT)type]; }
 		std::vector<GameObject*>* GetGameObjects() { return mObjects; }
 

@@ -6,10 +6,11 @@ namespace ya
 {
 
 	class Animator;
+	class Scene;
 	class SceneEnter : public GameObject
 	{
 	public:
-		SceneEnter();
+		SceneEnter(Scene* prev);
 		~SceneEnter();
 
 		virtual void Tick() override;
@@ -19,5 +20,7 @@ namespace ya
 
 	private:
 		Animator* mAnimator;
+
+		Scene* mPrevScene;
 	};
 }

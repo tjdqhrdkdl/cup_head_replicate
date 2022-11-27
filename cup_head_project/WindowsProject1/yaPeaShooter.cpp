@@ -13,6 +13,9 @@ namespace ya
 {
 	float PeaShooter::CoolTime = 0.2f;
 	float PeaShooter::AliveTime = 1.0f;
+	float PeaShooter::BulletDamage = 3.3f;
+	float PeaShooter::EXDamage = 10.0f;
+
 	PeaShooter::PeaShooter(Vector2 dir, bool special)
 		: Bullet(dir, special)
 		, mSpeed(1200.0f)
@@ -53,7 +56,7 @@ namespace ya
 		{
 			SetScale({ 20.0f,20.0f });
 
-			SetDamage(3.3f);
+			SetDamage(BulletDamage);
 
 			
 			effectAnimator->Play(L"BulletShotSpark", false);
@@ -67,7 +70,7 @@ namespace ya
 		{
 			SetScale({ 150.0f,150.0f });
 
-			SetDamage(5);
+			SetDamage(EXDamage);
 
 			effectAnimator->Play(L"BulletShotSpark", false);
 
@@ -138,7 +141,7 @@ namespace ya
 		Bullet::OnCollisonEnter(other, my);
 		if (mSpecial
 			&& other->isHitBox()
-			&& other->GetOwner()->GetLayer() ==eColliderLayer::Monster)
+			&& other->GetOwner()->GetLayer() ==eColliderLayer::FrontMonster)
 		{
 			mHitCount++;
 		}
@@ -151,7 +154,7 @@ namespace ya
 		{
 			PeaShooter::OnCollisonEnter(other, my);
 			if (other->isHitBox()
-				&& other->GetOwner()->GetLayer() == eColliderLayer::Monster)
+				&& other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster)
 			{
 				Monster* monster = dynamic_cast<Monster*>(other->GetOwner());
 				monster->OnCollisonEnter(my, other);
