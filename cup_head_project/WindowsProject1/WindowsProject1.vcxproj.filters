@@ -99,6 +99,9 @@
     <Filter Include="Engine\GameObject\SceneObject\SceneChanger">
       <UniqueIdentifier>{266c261a-a92f-4b76-9a82-8a75556c2292}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Beppi\Phase 2\BeppiPhaseTwo">
+      <UniqueIdentifier>{bdf523f3-eb51-4618-89a7-751a4774ecb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -267,7 +270,10 @@
       <Filter>Engine\GameObject\SceneObject\SceneChanger</Filter>
     </ClInclude>
     <ClInclude Include="yaBeppiPhaseTwo.h">
-      <Filter>Engine\GameObject\Beppi\Phase 2</Filter>
+      <Filter>Engine\GameObject\Beppi\Phase 2\BeppiPhaseTwo</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBeppiPh2Body.h">
+      <Filter>Engine\GameObject\Beppi\Phase 2\BeppiPhaseTwo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -419,7 +425,10 @@
       <Filter>Engine\GameObject\SceneObject\SceneChanger</Filter>
     </ClCompile>
     <ClCompile Include="yaBeppiPhaseTwo.cpp">
-      <Filter>Engine\GameObject\Beppi\Phase 2</Filter>
+      <Filter>Engine\GameObject\Beppi\Phase 2\BeppiPhaseTwo</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBeppiPh2Body.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 2\BeppiPhaseTwo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

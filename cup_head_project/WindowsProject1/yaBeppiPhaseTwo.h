@@ -2,7 +2,7 @@
 #include "Common.h"
 #include "yaMonster.h"
 #include "yaPicture.h"
-
+#include "yaBeppiPh2Body.h"
 namespace ya
 {
 

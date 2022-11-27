@@ -11,7 +11,7 @@
 #include "yaGround.h"
 #include "yaUIManager.h"
 #include "yaHealthUI.h"
-
+#include "yaBeppiPhaseTwo.h"
 namespace ya 
 {
 	BossBeppiScene::BossBeppiScene()
@@ -36,7 +36,7 @@ namespace ya
 		AddGameObject(track, eColliderLayer::FrontObject);
 		ObjectManager::Instantiate<Ground>(this, eColliderLayer::FrontObject);
 		mPlayer = ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);
-		ObjectManager::Instantiate<BeppiPhaseOne>(this, eColliderLayer::FrontMonster);
+		ObjectManager::Instantiate<BeppiPh2Body>(this, eColliderLayer::BehindMonster);
 		ObjectManager::Instantiate<Ready>(this, eColliderLayer::UI);
 
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontMonster, true);
@@ -48,6 +48,7 @@ namespace ya
 
 
 		Scene::Initialize();
+		BeppiPh2Body();
 	}
 
 	void BossBeppiScene::Tick()
