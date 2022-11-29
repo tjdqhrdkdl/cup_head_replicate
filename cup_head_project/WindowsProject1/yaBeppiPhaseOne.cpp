@@ -12,6 +12,7 @@
 #include "yaBullet.h"
 #include "yaObjectManager.h"
 #include "yaDuckPanel.h"
+#include "yaBossBeppiScene.h"
 namespace ya 
 {
 	float AttackCoolTime = 5.0f;
@@ -91,6 +92,7 @@ namespace ya
 
 	BeppiPhaseOne::~BeppiPhaseOne()
 	{
+		
 	}
 
 	void BeppiPhaseOne::Tick()
@@ -99,21 +101,20 @@ namespace ya
 		if (mAnimator->GetPlayAnimation()->GetName() != L"Intro")
 		{
 			SetAnimation();
-			OnHitCheck();
 			Attack();
 			Move();
 			SummonDuck();
 		}
 
 
-		GameObject::Tick();
+		Monster::Tick();
 		
 	}
 
 	void BeppiPhaseOne::Render(HDC hdc)
 	{
 
-		GameObject::Render(hdc);
+		Monster::Render(hdc);
 	}
 
 	void BeppiPhaseOne::SetAnimation()
@@ -191,19 +192,6 @@ namespace ya
 		}
 	}
 
-	void BeppiPhaseOne::OnHitCheck()
-	{
-		if (onHit)
-		{
-			onHitChecker += Time::DeltaTime();
-			if (onHitChecker > 0.05f)
-			{
-				onHitChecker = 0;
-				onHit = false;
-				mAnimator->SetLighten(false);
-			}
-		}
-	}
 
 	void BeppiPhaseOne::Move()
 	{
@@ -300,6 +288,7 @@ namespace ya
 		if (mHp <= 0)
 		{
 			ObjectManager::Destroy(this, 5.0f);
+			dynamic_cast<BossBeppiScene*>(SceneManager::GetCurScene())->SetPhase(2);
 			GetComponent<Collider>()->SetScale({0,0});
 			SetScale({ 0,0 });
 		}
@@ -318,19 +307,13 @@ namespace ya
 
 	void BeppiPhaseOne::OnCollisonEnter(Collider* other, Collider* my)
 	{
-		GameObject* objOther = other->GetOwner();
-		if(objOther->GetLayer() == eColliderLayer::Player_Projecttile)
-		{
-			
-			onHit = true;
-			mAnimator->SetLighten(true);
-			
-		}
+		Monster::OnCollisonEnter(other, my);
 	}
 
 	void BeppiPhaseOne::OnCollisonStay(Collider* other, Collider* my)
 	{
 	}
+
 	void BeppiPhaseOne::OnCollisonExit(Collider* other, Collider* my)
 	{
 	}

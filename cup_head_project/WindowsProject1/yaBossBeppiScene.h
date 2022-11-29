@@ -20,6 +20,9 @@ namespace ya
 		virtual void Enter() override;
 		virtual void Exit() override;
 
+		UINT GetPhase() { return mPhase; }
+		void SetPhase(UINT phase) { mPhase = phase, mbPhaseChanged = true; }
+		Player* GetScenePlayer() { return mPlayer; }
 
 	private:
 		BgImageObject* mBGI;
@@ -27,5 +30,9 @@ namespace ya
 		
 		bool mbInitialized;
 		float mTime;
+
+		UINT mPhase;
+		bool mbPhaseChanged;
+		float mPhaseTimeChecker;
 	};
 }

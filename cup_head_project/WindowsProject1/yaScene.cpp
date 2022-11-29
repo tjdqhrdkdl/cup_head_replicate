@@ -32,19 +32,14 @@ namespace ya {
 			for (size_t y = 0; y < mObjects[x].size(); y++)
 			{
 				if (mObjects[x][y]->isLayerChanged())
+				{
+					mObjects[x][y]->SetLayerChange(false);
 					continue;
+				}
 				mObjects[x][y]->Tick();
 			}
 		}
 
-		for (size_t x = 0; x < _COLLIDER_LAYER; x++)
-		{
-			for (size_t y = 0; y < mObjects[x].size(); y++)
-			{
-				if (mObjects[x][y]->isLayerChanged())
-					mObjects[x][y]->SetLayerChange(false);
-			}
-		}
 
 	}
 
@@ -117,6 +112,7 @@ namespace ya {
 			mObjects[(UINT)curtype].erase(remove(mObjects[(UINT)curtype].begin()
 				, mObjects[(UINT)curtype].end(), gameobject), mObjects[(UINT)curtype].end());
 			mObjects[(UINT)newtype].push_back(gameobject);
+			gameobject->SetLayer(newtype);
 			gameobject->SetLayerChange(true);
 		}
 	}

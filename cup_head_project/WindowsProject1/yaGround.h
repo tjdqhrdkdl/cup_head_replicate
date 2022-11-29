@@ -4,7 +4,6 @@
 
 namespace ya
 {
-	class Player;
 	class Ground : public GameObject
 	{
 	public:
@@ -18,7 +17,6 @@ namespace ya
 		virtual void OnCollisonStay(Collider* other, Collider* my) override;
 		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 
-	private:
-		Player* mPlayer;
+
 	};
 }

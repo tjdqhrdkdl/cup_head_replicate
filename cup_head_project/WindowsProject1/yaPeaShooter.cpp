@@ -157,7 +157,8 @@ namespace ya
 				&& other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster)
 			{
 				Monster* monster = dynamic_cast<Monster*>(other->GetOwner());
-				monster->OnCollisonEnter(my, other);
+				if(monster!=nullptr)
+					monster->OnCollisonEnter(my, other);
 			}
 			mEXDamageTimeChecker = 0;
 		}

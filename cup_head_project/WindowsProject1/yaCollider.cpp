@@ -10,6 +10,7 @@ namespace ya {
 		, mScale(Vector2::One)
 		, mCollisionCount(0)
 		, misHitBox(true)
+		, misDanger(true)
 	{
 	}
 
@@ -25,11 +26,9 @@ namespace ya {
 
 	void Collider::Tick()
 	{ 
-		if (!mOff)
-		{
-			GameObject* owner = GetOwner();
-			mPos = Vector2(owner->GetPos().x, owner->GetPos().y - owner->GetScale().y / 2) + mAddPos;
-		}
+		GameObject* owner = GetOwner();
+		mPos = Vector2(owner->GetPos().x, owner->GetPos().y - owner->GetScale().y / 2) + mAddPos;
+	
 	}
 
 	void Collider::Render(HDC hdc)

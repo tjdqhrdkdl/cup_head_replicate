@@ -13,7 +13,12 @@ namespace ya
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 
+		void IntroCue1();
+		void IntroCue2();
+
+		void PipeIntroCompleteEvent();
 	private:
+		bool mIntroMove;
 		Animator* mBodyAnimator;
 		Animator* mLeftPipeAnimator;
 		Animator* mRightPipeAnimator;

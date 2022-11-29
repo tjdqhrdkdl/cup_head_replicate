@@ -66,8 +66,9 @@ namespace ya
 				{
 					Animator::Events* events
 						= FindEvents(mPlayAnimation->GetName());
-					events->mCompleteEvent();
+
 					mPlayAnimation->SetHaveCompleted(true);
+					events->mCompleteEvent();
 				}
 			}
 			if (mBaseAnimation != nullptr && (mbLoop == false) && mPlayAnimation->isComplete())

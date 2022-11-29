@@ -27,7 +27,6 @@ namespace ya
 		virtual void Render(HDC hdc) override;
 		void SetAnimation();
 		void Attack();
-		void OnHitCheck();
 		void Move();
 		void SummonDuck();
 
@@ -44,7 +43,7 @@ namespace ya
 		float mAttackSpeed;
 		float mDuckTime;
 
-		Animator* mAnimator;
+
 
 		float mAttackTimeChecker;
 		float mIdleMoveTimeChecker;

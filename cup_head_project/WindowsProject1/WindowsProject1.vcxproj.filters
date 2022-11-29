@@ -102,6 +102,15 @@
     <Filter Include="Engine\GameObject\Beppi\Phase 2\BeppiPhaseTwo">
       <UniqueIdentifier>{bdf523f3-eb51-4618-89a7-751a4774ecb6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Beppi\Phase 2\BalloonDog">
+      <UniqueIdentifier>{702d5776-d188-45c6-bd33-13cceb6581a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Ground">
+      <UniqueIdentifier>{5dc766e4-bb4b-4d7b-9592-5c82a92948e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Beppi\Phase 2\RollerCoaster">
+      <UniqueIdentifier>{98b214d1-3809-458d-b4a4-54683849ff41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -188,9 +197,6 @@
     <ClInclude Include="yaPeaShooter.h">
       <Filter>Engine\GameObject\Gun\PeaShooter</Filter>
     </ClInclude>
-    <ClInclude Include="yaGround.h">
-      <Filter>Engine\GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="yaRigidbody.h">
       <Filter>Engine\Component</Filter>
     </ClInclude>
@@ -275,6 +281,30 @@
     <ClInclude Include="yaBeppiPh2Body.h">
       <Filter>Engine\GameObject\Beppi\Phase 2\BeppiPhaseTwo</Filter>
     </ClInclude>
+    <ClInclude Include="yaBalloonDog.h">
+      <Filter>Engine\GameObject\Beppi\Phase 2\BalloonDog</Filter>
+    </ClInclude>
+    <ClInclude Include="yaGround.h">
+      <Filter>Engine\GameObject\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="yaRollerCoaster.h">
+      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+    </ClInclude>
+    <ClInclude Include="yaRollerCoasterTrail.h">
+      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+    </ClInclude>
+    <ClInclude Include="yaLeftWall.h">
+      <Filter>Engine\GameObject\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="yaRightWall.h">
+      <Filter>Engine\GameObject\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="yaRollerCoasterHead.h">
+      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+    </ClInclude>
+    <ClInclude Include="yaRollerCoasterTail.h">
+      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -342,9 +372,6 @@
     </ClCompile>
     <ClCompile Include="yaPeaShooter.cpp">
       <Filter>Engine\GameObject\Gun\PeaShooter</Filter>
-    </ClCompile>
-    <ClCompile Include="yaGround.cpp">
-      <Filter>Engine\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="yaRigidbody.cpp">
       <Filter>Engine\Component</Filter>
@@ -429,6 +456,30 @@
     </ClCompile>
     <ClCompile Include="yaBeppiPh2Body.cpp">
       <Filter>Engine\GameObject\Beppi\Phase 2\BeppiPhaseTwo</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBalloonDog.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 2\BalloonDog</Filter>
+    </ClCompile>
+    <ClCompile Include="yaGround.cpp">
+      <Filter>Engine\GameObject\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="yaRollerCoaster.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+    </ClCompile>
+    <ClCompile Include="yaRollerCoasterTrail.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+    </ClCompile>
+    <ClCompile Include="yaLeftWall.cpp">
+      <Filter>Engine\GameObject\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="yaRightWall.cpp">
+      <Filter>Engine\GameObject\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="yaRollerCoasterHead.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+    </ClCompile>
+    <ClCompile Include="yaRollerCoasterTail.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

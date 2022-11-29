@@ -276,6 +276,7 @@ namespace ya
 			//¸ó½ºÅÍ¿Í ºÎµúÈû
 			else if (mInvincibile == false
 				&& other->isHitBox() 
+				&& other->isDanger()
 				&& !(STATE_HAVE(PlayerState_OnHit))
 				&& ((other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
 					|| other->GetOwner()->GetLayer() == eColliderLayer::Monster_Projecttile))
@@ -366,6 +367,7 @@ namespace ya
 			//¸ó½ºÅÍ¿Í ºÎµúÈû
 			else if (mInvincibile == false
 				&& other->isHitBox()
+				&& other->isDanger()
 				&& !(STATE_HAVE(PlayerState_OnHit))
 				&& ((other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
 					|| other->GetOwner()->GetLayer() == eColliderLayer::Monster_Projecttile))

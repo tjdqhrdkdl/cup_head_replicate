@@ -70,7 +70,7 @@ namespace ya
 		}
 		else
 		{
-			if (mAnimator->isLighten())
+			if (mAnimator->isLighten() && mLightenAnimation != nullptr)
 			{
 				TransparentBlt(hdc, finalPos.x, finalPos.y,
 					mLightenAnimation->mPictures[mPictureIndex]->GetWidth(), mLightenAnimation->mPictures[mPictureIndex]->GetHeight(),

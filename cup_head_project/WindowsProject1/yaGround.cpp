@@ -7,7 +7,6 @@
 namespace ya
 {
 	Ground::Ground()
-		:mPlayer(nullptr)
 	{
 		AddComponent(new Collider());
 		SetPos({ 800, 700 });
@@ -43,7 +42,6 @@ namespace ya
 				dynamic_cast<Rigidbody*>(player->GetComponent(eComponentType::Rigidbody))->SetGround(true);
 				plPos.y = 700;
 				player->SetPos(plPos);
-				mPlayer = player;
 			}
 		}
 	}

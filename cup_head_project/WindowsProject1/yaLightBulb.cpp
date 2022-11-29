@@ -4,6 +4,7 @@
 #include "yaObjectManager.h"
 #include "yaTime.h"
 #include "yaResources.h"
+#include "yaGround.h"
 namespace ya
 {
 	LightBulb::LightBulb()
@@ -56,7 +57,10 @@ namespace ya
 
 	void LightBulb::OnCollisonEnter(Collider* other, Collider* my)
 	{
-		if (other->GetOwner()->GetLayer() == eColliderLayer::FrontObject)
+		if (
+			other->GetOwner()->GetLayer() == eColliderLayer::FrontObject
+			&& dynamic_cast<Ground*>(other->GetOwner()) != nullptr
+			)
 		{
 			mAnimator->Play(L"Explode", false);
 			mExploded = true;

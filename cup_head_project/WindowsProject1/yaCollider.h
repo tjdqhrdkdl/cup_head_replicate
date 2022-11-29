@@ -19,12 +19,14 @@ namespace ya
 		void SetOff(bool off) { mOff = off; }
 		void SetHitBox(bool off) { misHitBox = off; }
 		void SetAddPos(Vector2 pos) { mAddPos = pos; }
+		void SetDanger(bool off) { misDanger = off; }
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetOffset() { return mOffset; }
 		Vector2 GetScale() { return mScale; }
 		bool isOff() { return mOff; }
 
 		bool isHitBox() { return misHitBox; }
+		bool isDanger() { return misDanger; }
 		void OnCollisionEnter(Collider* other);
 		void OnCollisionStay(Collider* other);
 		void OnCollisionExit(Collider* other);
@@ -37,5 +39,6 @@ namespace ya
 
 		bool mOff;
 		bool misHitBox;
+		bool misDanger;
 	};
 }
