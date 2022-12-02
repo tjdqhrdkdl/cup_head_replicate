@@ -124,5 +124,23 @@ namespace ya
 		mbHaveAlpha = haveAlpha;
 		mFixPos = fixPos;
 	}
+
+	void Animation::DeleteGDIPlusImage()
+	{
+		if(GetName() != L"Logo")
+			for (size_t i = 0; i < mPictures.size(); i++)
+			{
+				if(mPictures[i]->mbDeletedGDIPlusImage ==false)
+					mPictures[i]->DeleteGDIPlusImage();
+			}
+	}
+
+	void Animation::DeleteBitmap()
+	{
+		for (size_t i = 0; i < mPictures.size(); i++)
+		{
+			mPictures[i]->DeleteBitmap();
+		}
+	}
 	
 }

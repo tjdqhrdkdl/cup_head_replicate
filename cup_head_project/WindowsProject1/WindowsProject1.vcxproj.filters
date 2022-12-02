@@ -305,6 +305,12 @@
     <ClInclude Include="yaRollerCoasterTail.h">
       <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
     </ClInclude>
+    <ClInclude Include="yaRollerCoasterHeadPinkNose.h">
+      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBossExplosion.h">
+      <Filter>Engine\GameObject\BossBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -480,6 +486,12 @@
     </ClCompile>
     <ClCompile Include="yaRollerCoasterTail.cpp">
       <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+    </ClCompile>
+    <ClCompile Include="yaRollerCoasterHeadPinkNose.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBossExplosion.cpp">
+      <Filter>Engine\GameObject\BossBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -27,6 +27,8 @@ namespace ya
 
 
 	private:
+		float mAliveTime;
+		float mAliveTimeChecker;
 		float mSpeed;
 
 		Collider* mCollider;

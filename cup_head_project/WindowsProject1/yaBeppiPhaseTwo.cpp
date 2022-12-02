@@ -14,6 +14,7 @@
 #include "yaRollerCoaster.h"
 #include "yaBossBeppiScene.h"
 #include "yaPlayer.h"
+#include "yaBossExplosion.h"
 namespace ya
 {
 	BeppiPhaseTwo::BeppiPhaseTwo()
@@ -43,17 +44,24 @@ namespace ya
 		mAnimator->SetLightenAnimation(mAnimator->CreateAnimation(L"IntroBalloon", L"..\\Resources\\Image\\Beppi\\Phase 2\\Intro\\Beppi\\IntroBalloon\\Phase2_Intro_", 4, 0.1f, true, false, { 0,-100 })
 			, mAnimator->CreateAnimation(L"LightenIntroBalloon", L"..\\Resources\\Image\\Beppi\\Phase 2\\Intro\\Beppi\\IntroBalloon\\Lighten\\Phase2_Intro_", 4, 0.1f, true, false, { 0,-100 }));
 
-		
+		mAnimator->CreateAnimation(L"End", L"..\\Resources\\Image\\Beppi\\Phase 2\\End\\Phase2_End_", 7, 0.1f, true, false, { 0,300 });
+
+
 		mAnimator->GetCompleteEvent(L"IntroBulkup") = std::bind(&BeppiPhaseTwo::IntroBulkupCompleteEvent, this);
 		mAnimator->GetCompleteEvent(L"IntroBalloon") = std::bind(&BeppiPhaseTwo::IntroBalloonCompleteEvent, this);
 
-		mAnimator->Play(L"IntroApear", true);
 
+		mAnimator->Play(L"IntroApear", true);
+		
 		mCollider->SetOff(true);
 		
 
 		BalloonDog({1,0});
 		RollerCoaster(10);
+
+		BeppiPh2Body();
+
+		mAnimator->DeleteGDIPlusImage();
 	}
 
 	BeppiPhaseTwo::~BeppiPhaseTwo()
@@ -70,6 +78,41 @@ namespace ya
 			SummonBalloonDogs();
 			SummonCoaster();
 		}
+		if (IsDeathTimeOn())
+		{
+			mDeathEffectTimeChecker += Time::DeltaTime();
+			if (mDeathEffectTimeChecker > 0.5f)
+			{
+				mDeathEffectTimeChecker = 0;
+				Vector2 pos = GetPos();
+				switch (rand() % 6)
+				{
+				case 0:
+					pos += {30, 10};
+					break;
+				case 1:
+					pos += {-100, 50};
+					break;
+				case 2:
+					pos += {100, -50};
+					break;
+				case 3:
+					pos += {-140, 100};
+					break;
+				case 4:
+					pos += {-70, -40};
+					break;
+				case 5:
+					pos += {100, 50};
+					break;
+				}
+
+				BossExplosion* effect = ObjectManager::Instantiate<BossExplosion>(SceneManager::GetCurScene(), eColliderLayer::Effect);
+
+				effect->SetPos(pos);
+			}
+		}
+
 	}
 
 	void BeppiPhaseTwo::Render(HDC hdc)
@@ -122,6 +165,12 @@ namespace ya
 				pos.y = 300;
 				mAnimator->Play(L"HeadIdle", true);
 			}
+		}
+
+		else if (IsDeathTimeOn() && GetDeathTime() < 3)
+		{
+			ObjectManager::Destroy(mPh2Body, 3);
+			pos.y -= 400 * Time::DeltaTime();
 		}
 		SetPos(pos);
 	}
@@ -203,6 +252,7 @@ namespace ya
 		{
 			mCoasterTimeChecker = 0;
 			RollerCoaster* coaster = new RollerCoaster(10);
+			coaster->Initialize();
 			SceneManager::GetCurScene()->AddGameObject(coaster, eColliderLayer::FrontObject);
 		}
 	}
@@ -210,6 +260,12 @@ namespace ya
 	void BeppiPhaseTwo::OnCollisonEnter(Collider* other, Collider* my)
 	{
 		Monster::OnCollisonEnter(other, my);
+		if (mDead && !IsDeathTimeOn())
+		{
+			mAnimator->Play(L"End", false);
+
+			ObjectManager::Destroy(this, 5.0f);
+		}
 	}
 
 	void BeppiPhaseTwo::OnCollisonStay(Collider* other, Collider* my)

@@ -43,5 +43,6 @@ namespace ya
 		float mCoasterTimeChecker;
 
 		bool misIntroApear;
+		float mDeathEffectTimeChecker;
 	};
 }

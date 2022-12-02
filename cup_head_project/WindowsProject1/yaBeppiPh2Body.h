@@ -19,6 +19,7 @@ namespace ya
 		void PipeIntroCompleteEvent();
 	private:
 		bool mIntroMove;
+		Vector2 mVelocity;
 		Animator* mBodyAnimator;
 		Animator* mLeftPipeAnimator;
 		Animator* mRightPipeAnimator;

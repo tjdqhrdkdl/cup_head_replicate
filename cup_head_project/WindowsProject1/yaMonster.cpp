@@ -44,7 +44,8 @@ void ya::Monster::OnCollisonEnter(Collider* other, Collider* my)
 	GameObject* objOther = other->GetOwner();
 	if (objOther->GetLayer() == eColliderLayer::Player_Projecttile)
 	{
-
+		if (mHp < 0)
+			mDead = true;
 		onHit = true;
 		mAnimator->SetLighten(true);
 	}

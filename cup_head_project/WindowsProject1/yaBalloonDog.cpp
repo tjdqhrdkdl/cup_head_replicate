@@ -4,11 +4,12 @@
 #include "yaObjectManager.h"
 #include "yaTime.h"
 #include "yaResources.h"
-
+#include "yaGround.h"
 namespace ya
 {
 	BalloonDog::BalloonDog(Vector2 dir , bool pink)
 		:mDir(dir)
+		,mAliveTime(10.0f)
 	{
 		mPink = pink;
 		SetName(L"BalloonDog");
@@ -96,6 +97,7 @@ namespace ya
 			mAnimator->Play(L"Apear" + dirStr, false);
 
 
+		mAnimator->DeleteGDIPlusImage();
 		mCollider->SetOff(true);
 
 	}
@@ -106,6 +108,13 @@ namespace ya
 
 	void BalloonDog::Tick()
 	{
+		mAliveTimeChecker += Time::DeltaTime();
+		if (mAliveTimeChecker > mAliveTime)
+		{
+			ObjectManager::Destroy(this);
+			mAliveTimeChecker = 0;
+
+		}
 		if (mAnimator->GetPlayAnimation()->GetName() == L"Idle" + mDir.GetDirInStr()
 			|| mAnimator->GetPlayAnimation()->GetName() == L"PinkIdle" + mDir.GetDirInStr()
 			)
@@ -144,7 +153,8 @@ namespace ya
 	void BalloonDog::OnCollisonEnter(Collider* other, Collider* my)
 	{
 		Monster::OnCollisonEnter(other,my);
-		if(other->GetOwner()->GetLayer() == eColliderLayer::FrontObject)
+		if(other->GetOwner()->GetLayer() == eColliderLayer::FrontObject
+			&& dynamic_cast<Ground*>(other->GetOwner()) != nullptr)
 		{
 			if (mPink)
 				mAnimator->Play(L"PinkPop", false);

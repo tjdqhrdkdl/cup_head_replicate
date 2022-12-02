@@ -28,20 +28,20 @@ namespace ya
 		effectAnimator->GetCompleteEvent(L"BulletShotSpark") = std::bind(&ShootEffect::ShootEffectCompleteEvent, GetShootEffect());
 
 
+		GetAnimator()->CreateAnimation(L"BulletIdleUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Up\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletIdleDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Down\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletIdleRight", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.01f, false, false, { 0,0 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletIdleLeft", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.1f, false, true, { 0,0 }, true, false);
-		GetAnimator()->CreateAnimation(L"BulletIdleUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, false, 90);
-		GetAnimator()->CreateAnimation(L"BulletIdleDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\Straight\\weapon_peashot_main_00", 6, 0.1f, false, false, { 0,0 }, true, false, 270);
 		GetAnimator()->CreateAnimation(L"BulletIdleRightUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalUp\\weapon_peashot_main_00", 6, 0.1f, false, false, { 22,10 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletIdleLeftUp", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalUp\\weapon_peashot_main_00", 6, 0.1f, false, true, { -22,10 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletIdleRightDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalDown\\weapon_peashot_main_00", 6, 0.1f, false, false, { -10,15 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletIdleLeftDown", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Idle\\DiagonalDown\\weapon_peashot_main_00", 6, 0.1f, false, true, { 10,15 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletDeath", L"..\\Resources\\Image\\PeaShooter\\Bullet\\Death\\weapon_peashot_death_00", 6, 0.02f, false, false, { 0,100 }, true, false);
 
+		GetAnimator()->CreateAnimation(L"BulletSpecialIdleUp", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Up\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { 0,100 }, true, false);
+		GetAnimator()->CreateAnimation(L"BulletSpecialIdleDown", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Down\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { 0,0 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletSpecialIdleRight", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { -50,50 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletSpecialIdleLeft", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, true, { 50,50 }, true, false);
-		GetAnimator()->CreateAnimation(L"BulletSpecialIdleUp", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { 0,100 }, true, false, 270);
-		GetAnimator()->CreateAnimation(L"BulletSpecialIdleDown", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\Straight\\weapon_peashot_EX_loop_00", 9, 0.05f, false, false, { 0,0 }, true, false, 90);
 		GetAnimator()->CreateAnimation(L"BulletSpecialIdleRightUp", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalUp\\weapon_peashot_EX_loop_00", 9, 0.1f, false, false, { -40,180 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletSpecialIdleLeftUp", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalUp\\weapon_peashot_EX_loop_00", 9, 0.1f, false, true, { 40,180 }, true, false);
 		GetAnimator()->CreateAnimation(L"BulletSpecialIdleRightDown", L"..\\Resources\\Image\\PeaShooter\\EX\\Idle\\DiagonalDown\\weapon_peashot_EX_loop_00", 9, 0.1f, false, false, { -30,80 }, true, false);

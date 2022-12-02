@@ -41,6 +41,8 @@ namespace ya
 			Scene* curScene = SceneManager::GetCurScene();
 			curScene->AddGameObject(mBulb, eColliderLayer::Monster_Projecttile);
 		}
+
+		mAnimator->DeleteGDIPlusImage();
 	}
 
 	DuckPanel::~DuckPanel()

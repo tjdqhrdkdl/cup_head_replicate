@@ -9,6 +9,7 @@
 #include "yaObjectManager.h"
 #include "yaTime.h"
 #include "yaReadyAnimation.h"
+#include "yaAnimator.h"
 namespace ya {
 	LogoScene::LogoScene()
 	{
@@ -20,8 +21,8 @@ namespace ya {
 
 	void LogoScene::Initialize()
 	{
-		ObjectManager::Instantiate<ReadyAnimation>(this, eColliderLayer::BackGround);
-		ObjectManager::Instantiate<LogoAnimation>(this, eColliderLayer::BackGround);
+		mReady = ObjectManager::Instantiate<ReadyAnimation>(this, eColliderLayer::BackGround);
+		mLogo = ObjectManager::Instantiate<LogoAnimation>(this, eColliderLayer::BackGround);
 		Scene::Initialize();
 	}
 
@@ -60,5 +61,9 @@ namespace ya {
 
 	void LogoScene::Exit()
 	{
+		mReady->GetComponent<Animator>()->DeleteBitmap();
+		mLogo->GetComponent<Animator>()->DeleteBitmap();
+		ObjectManager::Destroy(mReady);
+		ObjectManager::Destroy(mLogo);
 	}
 }

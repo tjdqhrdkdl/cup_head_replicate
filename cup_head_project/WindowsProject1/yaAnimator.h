@@ -62,6 +62,8 @@ namespace ya
 		bool isLighten() { return mbIsLighten; }
 		void SetLighten(bool b) { mbIsLighten = b;}
 
+		void DeleteGDIPlusImage();
+		void DeleteBitmap();
 
 	private:
 		std::map<std::wstring, Animation*> mAnimations;

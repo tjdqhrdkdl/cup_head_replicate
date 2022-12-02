@@ -34,16 +34,17 @@ namespace ya
 		if (mWithPassenger)
 		{
 			mChairAnimator->CreateAnimation(L"TrailChair", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_Seat_", 3, 0.1f, true, false);
-			mPersonXAnimator1->CreateAnimation(L"TrailPersonX", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_Passenger_", 8, 0.02f, true, false,{-90,-36});
-			mPersonYAnimator1->CreateAnimation(L"TrailPersonY", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_PassengerY_", 8, 0.02f, true, false, { -65,-5 });
-			mPersonXAnimator2->CreateAnimation(L"TrailPersonX", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_Passenger_", 8, 0.02f, true, false, { 55,-5 });
-			mPersonYAnimator2->CreateAnimation(L"TrailPersonY", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_PassengerY_", 8, 0.02f, true, false, { 30, -30 });
+			mPersonXAnimator1->CreateAnimation(L"TrailPersonX", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_Passenger_", 8, 0.04f, true, false,{-90,-36});
+			mPersonYAnimator1->CreateAnimation(L"TrailPersonY", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_PassengerY_", 8, 0.04f, true, false, { -65,-5 });
+			mPersonXAnimator2->CreateAnimation(L"TrailPersonX", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_Passenger_", 8, 0.04f, true, false, { 55,-5 });
+			mPersonYAnimator2->CreateAnimation(L"TrailPersonY", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_PassengerY_", 8, 0.04f, true, false, { 30, -30 });
 
 			mChairAnimator->Play(L"TrailChair", true);
 			mPersonXAnimator1->Play(L"TrailPersonX", true);
 			mPersonYAnimator1->Play(L"TrailPersonY", true);
 			mPersonXAnimator2->Play(L"TrailPersonX", true);
 			mPersonYAnimator2->Play(L"TrailPersonY", true);
+
 		}
 		mBackAnimator->Play(L"TrailBack", true);
 		if (misBlue)

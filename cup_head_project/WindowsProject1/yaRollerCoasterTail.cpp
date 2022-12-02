@@ -7,9 +7,14 @@ namespace ya
 	RollerCoasterTail::RollerCoasterTail()
 	{
 		SetName(L"CoasterTail");
-		SetScale({ 270,170 });
+		SetScale({ 270,70 });
 		mCollider = new Collider();
+		Collider* collider2 = new Collider();
+		collider2->SetScale({ 50, 170 });
+		collider2->SetAddPos({ -100,-50 });
 		AddComponent(mCollider);
+		AddComponent(collider2);
+
 		mBackAnimator = new Animator();
 		mFrontAnimator = new Animator();
 		AddComponent(mBackAnimator);
@@ -20,6 +25,8 @@ namespace ya
 		
 		mBackAnimator->Play(L"BackIdle", true);
 		mFrontAnimator->Play(L"FrontIdle", true);
+		mBackAnimator->DeleteGDIPlusImage();
+		mFrontAnimator->DeleteGDIPlusImage();
 	}
 
 	RollerCoasterTail::~RollerCoasterTail()

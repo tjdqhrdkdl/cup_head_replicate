@@ -67,8 +67,8 @@ namespace ya
 
 		mAnimator->CreateAnimation(L"Intro", L"..\\Resources\\Image\\Beppi\\Intro\\Phase1_Intro_", 30, 0.03f, true, false, { 180,-10 });
 
-		mAnimator->CreateAnimation(L"EndLeft", L"..\\Resources\\Image\\Beppi\\End\\Phase1_End_", 16, 0.05f, true, false, { 0,0 });
-		mAnimator->CreateAnimation(L"EndRight", L"..\\Resources\\Image\\Beppi\\End\\Phase1_End_", 16, 0.05f, true, true, { 0,0 });
+		mAnimator->CreateAnimation(L"EndLeft", L"..\\Resources\\Image\\Beppi\\End\\Phase1_End_", 16, 0.04f, true, false, { 0,-100 });
+		mAnimator->CreateAnimation(L"EndRight", L"..\\Resources\\Image\\Beppi\\End\\Phase1_End_", 16, 0.04f, true, true, { 0,-100 });
 
 		
 		mAnimator->GetCompleteEvent(L"IdleLeft") = std::bind(&BeppiPhaseOne::IdleCompleteEvent, this);
@@ -82,10 +82,10 @@ namespace ya
 
 		
 		
-		
 		mAnimator->SetBaseAnimation(L"IdleLeft");
 		mAnimator->Play(L"Intro", false);
-		
+
+		mAnimator->DeleteGDIPlusImage();
 		DuckPanel InitDuck = DuckPanel();
 		LightBulb InitBulb = LightBulb();
 	}
@@ -202,9 +202,19 @@ namespace ya
 		else
 			dir = Vector2::Right;
 		
-		if ((mCurState & BeppiPh1State_EndFall) == BeppiPh1State_EndFall)
+		if (IsDeathTimeOn())
 		{
-			pos.y += 500 * Time::DeltaTime();
+			if ((mCurState & BeppiPh1State_EndFall) == BeppiPh1State_EndFall)
+			{
+				pos.y += 500 * Time::DeltaTime();
+			}
+			else
+			{
+				if ((mCurState & BeppiPh1State_LookLeft) == BeppiPh1State_LookLeft)
+					pos.x -= 100 * Time::DeltaTime();
+				else
+					pos.x += 100 * Time::DeltaTime();
+			}
 		}
 		else if ((mCurState & BeppiPh1State_OnAttackMoving) == BeppiPh1State_OnAttackMoving)
 		{
@@ -212,6 +222,16 @@ namespace ya
 			{
 				if (pos.x <= 200)
 				{
+					if (mHp <= 0)
+					{
+						mCurState ^= BeppiPh1State_LookLeft;
+						ObjectManager::Destroy(this, 5.0f);
+
+						SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::BehindMonster);
+						dynamic_cast<BossBeppiScene*>(SceneManager::GetCurScene())->SetPhase(2);
+						GetComponent<Collider>()->SetScale({ 0,0 });
+						SetScale({ 0,0 });
+					}
 					mCurState &= ~BeppiPh1State_OnAttackMoving;
 					mCurState |= BeppiPh1State_OnAttackSmash;
 				}
@@ -220,6 +240,15 @@ namespace ya
 			{
 				if (pos.x >= 1400)
 				{
+					if (mHp <= 0)
+					{
+						mCurState ^= BeppiPh1State_LookLeft;
+						ObjectManager::Destroy(this, 5.0f);
+						SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::BehindMonster);
+						dynamic_cast<BossBeppiScene*>(SceneManager::GetCurScene())->SetPhase(2);
+						GetComponent<Collider>()->SetScale({ 0,0 });
+						SetScale({ 0,0 });
+					}
 					mCurState &= ~BeppiPh1State_OnAttackMoving;
 					mCurState |= BeppiPh1State_OnAttackSmash;
 				}
@@ -285,13 +314,7 @@ namespace ya
 	{
 		mCurState &= ~BeppiPh1State_OnAttackSmash;
 		mCurState ^= BeppiPh1State_LookLeft;
-		if (mHp <= 0)
-		{
-			ObjectManager::Destroy(this, 5.0f);
-			dynamic_cast<BossBeppiScene*>(SceneManager::GetCurScene())->SetPhase(2);
-			GetComponent<Collider>()->SetScale({0,0});
-			SetScale({ 0,0 });
-		}
+
 	}
 
 	void BeppiPhaseOne::IdleCompleteEvent()
@@ -301,7 +324,7 @@ namespace ya
 
 	void BeppiPhaseOne::EndCompleteEvent()
 	{
-		SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::BehindMonster);
+		
 		mCurState |= BeppiPh1State_EndFall;
 	}
 

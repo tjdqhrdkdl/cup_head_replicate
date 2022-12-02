@@ -14,6 +14,8 @@ namespace ya
 		AddComponent(mAnimator);
 		mAnimator->CreateAnimation(L"Ready", L"..\\Resources\\Image\\Title Screen\\Cuphead and Mugman\\cuphead_title_screen_00", 35, 0.03f, false, false, { 0,0 }, false, false);
 		mAnimator->Play(L"Ready", true);
+
+		mAnimator->DeleteGDIPlusImage();
 	}
 
 	ReadyAnimation::~ReadyAnimation()

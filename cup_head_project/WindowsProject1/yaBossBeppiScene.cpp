@@ -59,7 +59,6 @@ namespace ya
 
 		//Initialize
 		BeppiPhaseTwo();
-		BeppiPh2Body();
 	}
 
 	void BossBeppiScene::Tick()
@@ -70,8 +69,9 @@ namespace ya
 			mPhaseTimeChecker += Time::DeltaTime();
 			if (mPhaseTimeChecker > 5.0f)
 			{
+				BeppiPh2Body* ph2Body = ObjectManager::Instantiate<BeppiPh2Body>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
 				BeppiPhaseTwo* beppiPh2  = ObjectManager::Instantiate<BeppiPhaseTwo>(this, eColliderLayer::BehindMonster);
-				beppiPh2->SetBody(ObjectManager::Instantiate<BeppiPh2Body>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster));
+				beppiPh2->SetBody(ph2Body);
 				mbPhaseChanged = false;
 				mPhaseTimeChecker = 0;
 			}

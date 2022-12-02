@@ -2,6 +2,7 @@
 #include "yaScene.h"
 
 namespace ya {
+	class Animation;
 	class LogoScene : public Scene
 	{
 		public:
@@ -16,5 +17,8 @@ namespace ya {
 			virtual void Enter();
 			virtual void Exit();
 
+	private:
+		GameObject* mReady;
+		GameObject* mLogo;
 	};
 }

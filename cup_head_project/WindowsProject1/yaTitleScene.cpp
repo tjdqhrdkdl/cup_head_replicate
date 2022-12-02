@@ -47,6 +47,7 @@ namespace ya
 
 	void TitleScene::Enter()
 	{
+
 	}
 
 	void TitleScene::Exit()

@@ -1,4 +1,6 @@
 #include "yaRollerCoasterHead.h"
+#include "yaObjectManager.h"
+#include "yaSceneManager.h"
 #include "yaAnimator.h"
 #include "yaCollider.h"
 
@@ -16,9 +18,12 @@ namespace ya
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
 
-		mAnimator->CreateAnimation(L"Idle", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_Front_", 8, 0.04f, true, false, { 0,0 });
-		
-		mAnimator->Play(L"Idle", true);
+		mAnimator->SetLightenAnimation(mAnimator->CreateAnimation(L"PinkIdle", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\PinkHead\\Rollercoaster_Front_", 8, 0.04f, true, false, { 0,0 }),
+			mAnimator->CreateAnimation(L"Idle", L"..\\Resources\\Image\\Beppi\\Phase 2\\Rollercoaster\\Rollercoaster_Front_", 8, 0.04f, true, false, { 0,0 }));
+		mAnimator->Play(L"PinkIdle", true);
+
+		mPinkNose = new RollerCoasterHeadPinkNose();
+		SceneManager::GetCurScene()->AddGameObject(mPinkNose, eColliderLayer::FrontMonster);
 	}
 
 	RollerCoasterHead::~RollerCoasterHead()
@@ -27,6 +32,15 @@ namespace ya
 
 	void RollerCoasterHead::Tick()
 	{
+		if (mPinkNose != nullptr) 
+		{
+			mPinkNose->SetPos(GetPos());
+			if (mPinkNose->isParried())
+			{
+				ObjectManager::Destroy(mPinkNose);
+				mAnimator->SetLighten(true);
+			}
+		}
 		GameObject::Tick();
 	}
 

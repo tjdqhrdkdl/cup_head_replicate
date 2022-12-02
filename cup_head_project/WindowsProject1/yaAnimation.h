@@ -26,6 +26,10 @@ namespace ya
 
 		bool haveCompleted() { return mbHaveCompleted; }
 		void SetHaveCompleted(bool c) { mbHaveCompleted = c; }
+
+		void DeleteGDIPlusImage();
+		void DeleteBitmap();
+
 	private:
 		Animator* mAnimator;
 		std::vector<Picture*> mPictures;	

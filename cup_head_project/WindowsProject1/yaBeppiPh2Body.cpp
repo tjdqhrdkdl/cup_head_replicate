@@ -5,6 +5,7 @@ namespace ya
 {
 	BeppiPh2Body::BeppiPh2Body()
 		:mIntroMove(true)
+		,mVelocity({0,0})
 	{
 		
 		SetPos({ 800,1300 });
@@ -40,7 +41,14 @@ namespace ya
 		mLeftBottleAnimator->SetStop(true);
 		mRightBottleAnimator->SetStop(true);
 
+		mLeftPipeAnimator->DeleteGDIPlusImage();
+		mRightPipeAnimator->DeleteGDIPlusImage();
+		mLeftBottleAnimator->DeleteGDIPlusImage();
+		mRightBottleAnimator->DeleteGDIPlusImage();
+		mTankAnimator->DeleteGDIPlusImage();
+		mBodyAnimator->DeleteGDIPlusImage();
 
+		
 	}
 	BeppiPh2Body::~BeppiPh2Body()
 	{
@@ -56,7 +64,15 @@ namespace ya
 			{
 				pos.y = 600;
 				mIntroMove = false;
-			}SetPos(pos);
+			}
+			SetPos(pos);
+		}
+		if (IsDeathTimeOn())
+		{
+			Vector2 pos = GetPos();
+			pos.y += mVelocity.y * Time::DeltaTime();
+			mVelocity.y += 800 * Time::DeltaTime();
+			SetPos(pos);
 		}
 		GameObject::Tick();
 	}

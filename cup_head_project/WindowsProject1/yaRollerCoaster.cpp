@@ -54,6 +54,7 @@ namespace ya
 		mGroundCollider->SetScale({ 2900, 50 });
 		mGroundCollider->SetAddPos({ 3000, 705 });
 		AddComponent(mGroundCollider);
+		mGroundCollider->Tick();
 
 
 	}
@@ -76,6 +77,15 @@ namespace ya
 		if (mAliveTimeChecker > mAliveTime)
 		{
 			ObjectManager::Destroy(this);
+			for (size_t i = 0; i < mTrails.size(); i++)
+			{
+				ObjectManager::Destroy(mTrails[i]);
+			}
+			ObjectManager::Destroy(mHead);
+			ObjectManager::Destroy(mTail);
+			if(mHead->GetNose()!= nullptr)
+				ObjectManager::Destroy(mHead->GetNose());
+
 		}
 
 		//본체 및 땅 이동

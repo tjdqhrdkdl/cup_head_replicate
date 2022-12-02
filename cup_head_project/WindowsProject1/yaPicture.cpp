@@ -3,11 +3,12 @@
 #include "yaResources.h"
 
 
-namespace ya {
+namespace ya
+{
 
 	Picture::Picture()
 		:mHdc(NULL)
-		,mImage(nullptr)
+		, mImage(nullptr)
 	{}
 	Picture::~Picture()
 	{
@@ -39,7 +40,7 @@ namespace ya {
 		return S_OK;*/
 		mImage = new Gdiplus::Bitmap(path.c_str());
 		mBitmap = nullptr;
-		Gdiplus::Status status =  mImage->GetHBITMAP(Color(255, 0, 255), &mBitmap);
+		Gdiplus::Status status = mImage->GetHBITMAP(Color(255, 0, 255), &mBitmap);
 		if (status != 0)
 		{
 			MessageBox(nullptr, L"bitmap Load Failed!!!", L"Error", MB_OK);
@@ -49,6 +50,8 @@ namespace ya {
 		{
 			return E_FAIL;
 		}
+		mWidth = mImage->GetWidth();
+		mHeight = mImage->GetHeight();
 		HDC mainDC = Application::GetInstance().GetWindowData().hdc;
 		mHdc = CreateCompatibleDC(mainDC);
 
@@ -120,4 +123,12 @@ namespace ya {
 		return pic;
 	}
 
+	void Picture::DeleteBitmap()
+	{
+		if (mBitmap != nullptr) {
+			DeleteObject(mBitmap);
+			DeleteDC(mHdc);
+		}
+
+	}
 }

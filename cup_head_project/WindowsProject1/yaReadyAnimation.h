@@ -14,6 +14,7 @@ namespace ya
 
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
+
 	private:
 		Animator* mAnimator;
 	};

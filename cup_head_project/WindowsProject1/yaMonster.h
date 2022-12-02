@@ -27,5 +27,6 @@ namespace ya
 		float mHp;
 		bool onHit;
 		float onHitChecker;
+		bool mDead;
 	};
 }

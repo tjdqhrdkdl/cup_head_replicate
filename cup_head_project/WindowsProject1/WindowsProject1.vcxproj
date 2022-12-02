@@ -153,6 +153,7 @@
     <ClInclude Include="yaBeppiPh2Body.h" />
     <ClInclude Include="yaBeppiPhaseTwo.h" />
     <ClInclude Include="yaBgImageObject.h" />
+    <ClInclude Include="yaBossExplosion.h" />
     <ClInclude Include="yaDashEffect.h" />
     <ClInclude Include="yaEXPointUI.h" />
     <ClInclude Include="yaHealthUI.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="yaRigidbody.h" />
     <ClInclude Include="yaRollerCoaster.h" />
     <ClInclude Include="yaRollerCoasterHead.h" />
+    <ClInclude Include="yaRollerCoasterHeadPinkNose.h" />
     <ClInclude Include="yaRollerCoasterTail.h" />
     <ClInclude Include="yaRollerCoasterTrail.h" />
     <ClInclude Include="yaScene.h" />
@@ -215,6 +217,7 @@
     <ClCompile Include="yaBeppiPh2Body.cpp" />
     <ClCompile Include="yaBeppiPhaseTwo.cpp" />
     <ClCompile Include="yaBgImageObject.cpp" />
+    <ClCompile Include="yaBossExplosion.cpp" />
     <ClCompile Include="yaDashEffect.cpp" />
     <ClCompile Include="yaEXPointUI.cpp" />
     <ClCompile Include="yaHealthUI.cpp" />
@@ -252,6 +255,7 @@
     <ClCompile Include="yaRigidbody.cpp" />
     <ClCompile Include="yaRollerCoaster.cpp" />
     <ClCompile Include="yaRollerCoasterHead.cpp" />
+    <ClCompile Include="yaRollerCoasterHeadPinkNose.cpp" />
     <ClCompile Include="yaRollerCoasterTail.cpp" />
     <ClCompile Include="yaRollerCoasterTrail.cpp" />
     <ClCompile Include="yaScene.cpp" />

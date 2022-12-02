@@ -1,7 +1,7 @@
 #pragma once
 #include "Common.h"
 #include "yaGameObject.h"
-
+#include "yaRollerCoasterHeadPinkNose.h"
 namespace ya
 {
 
@@ -20,10 +20,12 @@ namespace ya
 		virtual void OnCollisonStay(Collider* other, Collider* my) override;
 		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 
+		RollerCoasterHeadPinkNose* GetNose() { return mPinkNose; }
 
 	private:
 		Collider* mCollider;
-
 		Animator* mAnimator;
+
+		RollerCoasterHeadPinkNose* mPinkNose;
 	};
 }

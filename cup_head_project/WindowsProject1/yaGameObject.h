@@ -25,6 +25,7 @@ namespace ya {
 		bool IsDeath() { return mDead; }
 		void SetDeathTime(float time);
 		bool IsDeathTimeOn() { return mDeathTimeOn; }
+		float GetDeathTime() { return mDeathTime; }
 
 
 		virtual void OnCollisonEnter(Collider* other, Collider* my);
@@ -64,6 +65,7 @@ namespace ya {
 
 		bool isParryable() { return mPink; }
 		void SetParried(bool parry) { mParried = parry; }
+		bool isParried() { return mParried; }
 		bool isLayerChanged() { return mLayerChanged; }
 		void SetLayerChange(bool b) { mLayerChanged = b; }
 	private:

@@ -18,6 +18,8 @@ namespace ya
 
 		mAnimator->GetCompleteEvent(L"Logo") = std::bind( & LogoAnimation::LogoCompleteEvent, this);
 		mAnimator->Play(L"Logo", false);
+
+		mAnimator->DeleteGDIPlusImage();
 	}
 
 	LogoAnimation::~LogoAnimation()
@@ -31,14 +33,13 @@ namespace ya
 		{
 			mTime += Time::DeltaTime();
 			mAnimator->SetMatrixToTransparent((mTime));
-			if (mTime >= 1.0f)
-				ObjectManager::Destroy(this);
 		}
 	}
 
 	void LogoAnimation::Render(HDC hdc)
 	{
-		GameObject::Render(hdc);
+		if(mTime < 1.0f)
+			GameObject::Render(hdc);
 	}
 
 	void LogoAnimation::LogoCompleteEvent()

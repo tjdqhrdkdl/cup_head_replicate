@@ -22,7 +22,7 @@ namespace ya
 
 		mAnimator->GetCompleteEvent(L"Explode") = std::bind(&LightBulb::ExplodeEndEvent, this);
 		mPicture = Resources::Load<Picture>(L"BulbBasicImage", L"..\\Resources\\Image\\Beppi\\lightbulb\\Drop\\lightbulb_drop_0001.png");
-	}
+}
 
 	LightBulb::~LightBulb()
 	{
