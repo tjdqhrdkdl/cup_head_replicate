@@ -14,6 +14,7 @@
 #include "yaUIManager.h"
 #include "yaHealthUI.h"
 #include "yaBeppiPhaseTwo.h"
+#include "yaBeppiPhaseThree.h"
 namespace ya 
 {
 	BossBeppiScene::BossBeppiScene()
@@ -42,7 +43,7 @@ namespace ya
 		ObjectManager::Instantiate<LeftWall>(this, eColliderLayer::FrontObject);
 		ObjectManager::Instantiate<RightWall>(this, eColliderLayer::FrontObject);
 		mPlayer = ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);
-		ObjectManager::Instantiate<BeppiPhaseOne>(this, eColliderLayer::FrontMonster);
+		ObjectManager::Instantiate<BeppiPhaseOne>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
 		ObjectManager::Instantiate<Ready>(this, eColliderLayer::UI);
 
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontMonster, true);
@@ -56,9 +57,10 @@ namespace ya
 
 
 		Scene::Initialize();
-
+		mPhase = 1;
 		//Initialize
 		BeppiPhaseTwo();
+		BeppiPhaseThree(true);
 	}
 
 	void BossBeppiScene::Tick()
@@ -72,6 +74,17 @@ namespace ya
 				BeppiPh2Body* ph2Body = ObjectManager::Instantiate<BeppiPh2Body>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
 				BeppiPhaseTwo* beppiPh2  = ObjectManager::Instantiate<BeppiPhaseTwo>(this, eColliderLayer::BehindMonster);
 				beppiPh2->SetBody(ph2Body);
+				mbPhaseChanged = false;
+				mPhaseTimeChecker = 0;
+			}
+		}
+
+		if (mPhase == 3 && mbPhaseChanged)
+		{
+			mPhaseTimeChecker += Time::DeltaTime();
+			if (mPhaseTimeChecker > 12.0f)
+			{
+				ObjectManager::Instantiate<BeppiPhaseThree>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
 				mbPhaseChanged = false;
 				mPhaseTimeChecker = 0;
 			}

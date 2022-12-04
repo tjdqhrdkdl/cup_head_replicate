@@ -92,6 +92,7 @@ namespace ya {
 	void Scene::AddGameObject(GameObject* gameobject, eColliderLayer type)
 	{
 		gameobject->SetLayer(type);
+		gameobject->Initialize();
 		mObjects[(UINT)type].push_back(gameobject);
 	}
 

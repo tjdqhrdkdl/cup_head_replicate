@@ -8,7 +8,7 @@ namespace ya
 		SetName(L"BossExplosion");
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
-		mAnimator->CreateAnimation(L"Boom", L"..\\Resources\\Image\\BossExplosion\\boss_explosion_00", 12, 0.04f, false, false, { 0,0 });
+		mAnimator->CreateAnimation(L"Boom", L"..\\Resources\\Image\\BossExplosion\\boss_explosion_00", 12, 0.06f, false, false, { 0,0 });
 
 		mAnimator->Play(L"Boom", true);
 

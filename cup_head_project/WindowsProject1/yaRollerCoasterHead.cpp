@@ -3,10 +3,14 @@
 #include "yaSceneManager.h"
 #include "yaAnimator.h"
 #include "yaCollider.h"
+#include "yaTime.h"
 
 namespace ya
 {
 	RollerCoasterHead::RollerCoasterHead()
+		:
+		 mAliveTime(13.0f)
+		, mAliveTimeChecker(0)
 	{
 		SetName(L"CoasterTail");
 		SetScale({ 270,200 });
@@ -36,11 +40,12 @@ namespace ya
 		{
 			mPinkNose->SetPos(GetPos());
 			if (mPinkNose->isParried())
-			{
-				ObjectManager::Destroy(mPinkNose);
 				mAnimator->SetLighten(true);
-			}
 		}
+
+		mAliveTimeChecker += Time::DeltaTime();
+		if (mAliveTimeChecker > mAliveTime)
+			ObjectManager::Destroy(this);
 		GameObject::Tick();
 	}
 

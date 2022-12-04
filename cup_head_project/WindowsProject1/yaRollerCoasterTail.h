@@ -23,6 +23,8 @@ namespace ya
 
 	private:
 		Collider* mCollider;
+		float mAliveTime;
+		float mAliveTimeChecker;
 
 		Animator* mBackAnimator;
 		Animator* mFrontAnimator;

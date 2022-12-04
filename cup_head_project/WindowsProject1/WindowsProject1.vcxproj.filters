@@ -111,6 +111,15 @@
     <Filter Include="Engine\GameObject\Beppi\Phase 2\RollerCoaster">
       <UniqueIdentifier>{98b214d1-3809-458d-b4a4-54683849ff41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Beppi\Phase 3">
+      <UniqueIdentifier>{42439227-fbdb-4fe7-9bde-07e27b75dd0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Beppi\Phase 3\BeppiPhaseThree">
+      <UniqueIdentifier>{ab6490a0-8621-46a8-8af3-bc751123ee3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Beppi\Phase 3\BeppiHorse">
+      <UniqueIdentifier>{6efbd219-1c89-463b-b16d-7429a2f7cd82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -311,6 +320,18 @@
     <ClInclude Include="yaBossExplosion.h">
       <Filter>Engine\GameObject\BossBase</Filter>
     </ClInclude>
+    <ClInclude Include="yaBeppiPhaseThree.h">
+      <Filter>Engine\GameObject\Beppi\Phase 3\BeppiPhaseThree</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBeppiPhaseThreeBack.h">
+      <Filter>Engine\GameObject\Beppi\Phase 3\BeppiPhaseThree</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBeppiHorse.h">
+      <Filter>Engine\GameObject\Beppi\Phase 3\BeppiHorse</Filter>
+    </ClInclude>
+    <ClInclude Include="yaHorseShoe.h">
+      <Filter>Engine\GameObject\Beppi\Phase 3\BeppiHorse</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -492,6 +513,18 @@
     </ClCompile>
     <ClCompile Include="yaBossExplosion.cpp">
       <Filter>Engine\GameObject\BossBase</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBeppiPhaseThree.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 3\BeppiPhaseThree</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBeppiPhaseThreeBack.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 3\BeppiPhaseThree</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBeppiHorse.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 3\BeppiHorse</Filter>
+    </ClCompile>
+    <ClCompile Include="yaHorseShoe.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 3\BeppiHorse</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

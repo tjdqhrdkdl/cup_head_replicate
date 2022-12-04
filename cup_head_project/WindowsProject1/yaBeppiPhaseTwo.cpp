@@ -60,6 +60,7 @@ namespace ya
 		RollerCoaster(10);
 
 		BeppiPh2Body();
+		BossExplosion();
 
 		mAnimator->DeleteGDIPlusImage();
 	}
@@ -81,29 +82,29 @@ namespace ya
 		if (IsDeathTimeOn())
 		{
 			mDeathEffectTimeChecker += Time::DeltaTime();
-			if (mDeathEffectTimeChecker > 0.5f)
+			if (mDeathEffectTimeChecker > 0.4f + (rand() % 5) * 0.1)
 			{
 				mDeathEffectTimeChecker = 0;
 				Vector2 pos = GetPos();
 				switch (rand() % 6)
 				{
 				case 0:
-					pos += {30, 10};
+					pos += {60, 120};
 					break;
 				case 1:
-					pos += {-100, 50};
+					pos += {-150, 30};
 					break;
 				case 2:
-					pos += {100, -50};
+					pos += {100, 50};
 					break;
 				case 3:
-					pos += {-140, 100};
+					pos += {-10, 250};
 					break;
 				case 4:
-					pos += {-70, -40};
+					pos += {-70, 40};
 					break;
 				case 5:
-					pos += {100, 50};
+					pos += {100, 200};
 					break;
 				}
 
@@ -166,11 +167,13 @@ namespace ya
 				mAnimator->Play(L"HeadIdle", true);
 			}
 		}
-
+		else if (IsDeathTimeOn() && GetDeathTime() > 3)
+		{
+			pos.y += 40 * Time::DeltaTime();
+		}
 		else if (IsDeathTimeOn() && GetDeathTime() < 3)
 		{
-			ObjectManager::Destroy(mPh2Body, 3);
-			pos.y -= 400 * Time::DeltaTime();
+			pos.y -= 500 * Time::DeltaTime();
 		}
 		SetPos(pos);
 	}
@@ -262,9 +265,11 @@ namespace ya
 		Monster::OnCollisonEnter(other, my);
 		if (mDead && !IsDeathTimeOn())
 		{
-			mAnimator->Play(L"End", false);
+			mAnimator->Play(L"End", true);
 
 			ObjectManager::Destroy(this, 5.0f);
+			ObjectManager::Destroy(mPh2Body, 3);
+			dynamic_cast<BossBeppiScene*>(SceneManager::GetCurScene())->SetPhase(3);
 		}
 	}
 

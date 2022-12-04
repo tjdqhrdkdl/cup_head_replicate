@@ -12,7 +12,7 @@ namespace ya
 		Collider* collider = new Collider();
 		collider->SetHitBox(false);
 		AddComponent(collider);
-		SetPos({ 1695, 900 });
+		SetPos({ 1710, 900 });
 		SetScale({ 200, 950 });
 	}
 

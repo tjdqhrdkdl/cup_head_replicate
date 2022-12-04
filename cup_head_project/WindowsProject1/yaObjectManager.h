@@ -52,6 +52,7 @@ namespace ya
 						GameObject* obj = *iter;
 						iter = objects[y].erase(iter);
 						delete obj;
+						obj = nullptr;
 						continue;
 					}
 					++iter;

@@ -5,8 +5,9 @@
 namespace ya
 {
 	RollerCoasterHeadPinkNose::RollerCoasterHeadPinkNose()
-		:mAliveTime(10.0f)
-		,mAliveTimeChecker(0)
+		:
+		mAliveTime(13.0f)
+		, mAliveTimeChecker(0)
 	{
 		mCollider = new Collider();
 		mCollider->SetScale({ 100,30 });
@@ -24,10 +25,9 @@ namespace ya
 	{
 		mAliveTimeChecker += Time::DeltaTime();
 		if (mAliveTimeChecker > mAliveTime)
-		{
 			ObjectManager::Destroy(this);
-			mAliveTimeChecker = 0;
-		}
+		if (mParried)
+			mCollider->SetOff(true);
 		GameObject::Tick();
 	}
 

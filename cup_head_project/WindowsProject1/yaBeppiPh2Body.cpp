@@ -71,7 +71,7 @@ namespace ya
 		{
 			Vector2 pos = GetPos();
 			pos.y += mVelocity.y * Time::DeltaTime();
-			mVelocity.y += 800 * Time::DeltaTime();
+			mVelocity.y += 1000 * Time::DeltaTime();
 			SetPos(pos);
 		}
 		GameObject::Tick();

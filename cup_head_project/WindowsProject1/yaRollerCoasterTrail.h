@@ -25,6 +25,8 @@ namespace ya
 		bool misBlue;
 		bool mWithPassenger;
 		Collider* mCollider;
+		float mAliveTime;
+		float mAliveTimeChecker;
 
 		Animator* mBackAnimator;
 		Animator* mChairAnimator;

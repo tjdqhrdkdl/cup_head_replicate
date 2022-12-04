@@ -1,10 +1,14 @@
 #include "yaRollerCoasterTail.h"
 #include "yaAnimator.h"
 #include "yaCollider.h"
-
+#include "yaTime.h"
+#include "yaObjectManager.h"
 namespace ya
 {
 	RollerCoasterTail::RollerCoasterTail()
+		:
+		 mAliveTime(13.0f)
+		, mAliveTimeChecker(0)
 	{
 		SetName(L"CoasterTail");
 		SetScale({ 270,70 });
@@ -35,6 +39,9 @@ namespace ya
 
 	void RollerCoasterTail::Tick()
 	{
+		mAliveTimeChecker += Time::DeltaTime();
+		if (mAliveTimeChecker > mAliveTime)
+			ObjectManager::Destroy(this);
 		GameObject::Tick();
 	}
 

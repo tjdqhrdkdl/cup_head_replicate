@@ -8,14 +8,14 @@
 namespace ya
 {
 	RollerCoaster::RollerCoaster(UINT coasterLength)
-		:mSpeed(400)
+		:mSpeed(450)
 		,mAliveTime(13.0f)
 		,mAliveTimeChecker(0)
 		,mTrailLength(coasterLength)
 	{
 		//꼬리 생성
 		mTail = ObjectManager::Instantiate<RollerCoasterTail>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
-		mTail->SetPos({ 4570,700 });
+		mTail->SetPos({ 4870,700 });
 
 		//각 cart 생성
 		UINT withPassengersCount = 0;
@@ -40,19 +40,19 @@ namespace ya
 			}
 			RollerCoasterTrail* trail = new RollerCoasterTrail(isBlue, withPassengers);
 			mTrails.push_back(trail);
-			trail->SetPos({ 1900+float(270 * i), 700 });
+			trail->SetPos({ 2200+float(270 * i), 700 });
 			trail->Initialize();
 			SceneManager::GetCurScene()->AddGameObject(trail, eColliderLayer::FrontMonster);
 		}
 		//머리 생성
 		mHead = ObjectManager::Instantiate<RollerCoasterHead>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
-		mHead->SetPos({ 1570,750 });
+		mHead->SetPos({ 1870,750 });
 
 
 		//움직이는 땅
 		mGroundCollider = new Collider();
 		mGroundCollider->SetScale({ 2900, 50 });
-		mGroundCollider->SetAddPos({ 3000, 705 });
+		mGroundCollider->SetAddPos({ 3300, 705 });
 		AddComponent(mGroundCollider);
 		mGroundCollider->Tick();
 
@@ -61,12 +61,6 @@ namespace ya
 
 	RollerCoaster::~RollerCoaster()
 	{
-		for (size_t i = 0; i < mTrailLength; i++)
-		{
-			ObjectManager::Destroy(mTrails[i]);
-		}
-		ObjectManager::Destroy(mHead);
-		ObjectManager::Destroy(mTail);
 
 	}
 
@@ -75,18 +69,7 @@ namespace ya
 		//죽음 메커니즘
 		mAliveTimeChecker += Time::DeltaTime();
 		if (mAliveTimeChecker > mAliveTime)
-		{
 			ObjectManager::Destroy(this);
-			for (size_t i = 0; i < mTrails.size(); i++)
-			{
-				ObjectManager::Destroy(mTrails[i]);
-			}
-			ObjectManager::Destroy(mHead);
-			ObjectManager::Destroy(mTail);
-			if(mHead->GetNose()!= nullptr)
-				ObjectManager::Destroy(mHead->GetNose());
-
-		}
 
 		//본체 및 땅 이동
 		Vector2 pos = GetPos();

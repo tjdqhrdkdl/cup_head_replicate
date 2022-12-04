@@ -280,6 +280,7 @@ namespace ya
 				&& !(STATE_HAVE(PlayerState_OnHit))
 				&& ((other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
 					|| other->GetOwner()->GetLayer() == eColliderLayer::Monster_Projecttile))
+				&& !mParrySlow
 				)
 			{
 				if(mHP > 0)
@@ -371,6 +372,7 @@ namespace ya
 				&& !(STATE_HAVE(PlayerState_OnHit))
 				&& ((other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
 					|| other->GetOwner()->GetLayer() == eColliderLayer::Monster_Projecttile))
+				&&!mParrySlow
 				)
 			{
 				if (mHP > 0)

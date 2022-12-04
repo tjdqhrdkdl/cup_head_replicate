@@ -25,6 +25,8 @@ namespace ya
 	private:
 		Collider* mCollider;
 		Animator* mAnimator;
+		float mAliveTime;
+		float mAliveTimeChecker;
 
 		RollerCoasterHeadPinkNose* mPinkNose;
 	};
