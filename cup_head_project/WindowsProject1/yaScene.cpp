@@ -31,15 +31,18 @@ namespace ya {
 		{
 			for (size_t y = 0; y < mObjects[x].size(); y++)
 			{
-				if (mObjects[x][y]->isLayerChanged())
+				if (y < mObjects[x].size())
 				{
-					mObjects[x][y]->SetLayerChange(false);
-					continue;
+					if (mObjects[x][y]->isLayerChanged())
+					{
+						mObjects[x][y]->SetLayerChange(false);
+						continue;
+					}
+					if (mObjects[x][y] != nullptr)
+						mObjects[x][y]->Tick();
 				}
-				mObjects[x][y]->Tick();
 			}
 		}
-
 
 	}
 
@@ -84,7 +87,7 @@ namespace ya {
 	{
 		for (size_t y = 0; y < mObjects[_COLLIDER_LAYER-1].size(); y++)
 		{
-			delete mObjects[_COLLIDER_LAYER - 1][y];
+			mObjects[_COLLIDER_LAYER - 1].erase(mObjects[_COLLIDER_LAYER - 1].begin() + y);
 		}
 		mObjects[_COLLIDER_LAYER - 1].clear();
 	}

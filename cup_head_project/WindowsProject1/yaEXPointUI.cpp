@@ -36,25 +36,31 @@ namespace ya
 
 	void EXPointUI::OnTick()
 	{
-		Player* player = dynamic_cast<Player*>(mTarget);
-		mPoint = player->GetSpecialPoint();
-		mFloatPoint = player->GetSpecialPointFloat();
+		if (mTarget != nullptr)
+		{
+			Player* player = dynamic_cast<Player*>(mTarget);
+			mPoint = player->GetSpecialPoint();
+			mFloatPoint = player->GetSpecialPointFloat();
+		}
 	}
 
 	void EXPointUI::OnRender(HDC hdc)
 	{
-		for (size_t i = 0; i < mPoint; i++)
+		if (mTarget != nullptr)
 		{
-			TransparentBlt(hdc, GetPos().x + i*26, GetPos().y,
-				mBasePicture->GetWidth(), mBasePicture->GetHeight(),
-				mBasePicture->GetDC(), 0, 0, mBasePicture->GetWidth(),
-				mBasePicture->GetHeight(), RGB(255, 0, 255));
-		}
+			for (size_t i = 0; i < mPoint; i++)
+			{
+				TransparentBlt(hdc, GetPos().x + i * 26, GetPos().y,
+					mBasePicture->GetWidth(), mBasePicture->GetHeight(),
+					mBasePicture->GetDC(), 0, 0, mBasePicture->GetWidth(),
+					mBasePicture->GetHeight(), RGB(255, 0, 255));
+			}
 
-		TransparentBlt(hdc, GetPos().x + mPoint * 26, GetPos().y,
-			mBasePicture->GetWidth(), mBasePicture->GetHeight()*mFloatPoint,
-			mBasePicture->GetDC(), 0, 0, mBasePicture->GetWidth(),
-			mBasePicture->GetHeight()*mFloatPoint, RGB(255, 0, 255));
+			TransparentBlt(hdc, GetPos().x + mPoint * 26, GetPos().y,
+				mBasePicture->GetWidth(), mBasePicture->GetHeight() * mFloatPoint,
+				mBasePicture->GetDC(), 0, 0, mBasePicture->GetWidth(),
+				mBasePicture->GetHeight() * mFloatPoint, RGB(255, 0, 255));
+		}
 	}
 
 	void EXPointUI::OnClear()

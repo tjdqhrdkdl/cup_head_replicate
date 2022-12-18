@@ -164,4 +164,9 @@ namespace ya
 	{
 	}
 
+	void HorseShoe::Release()
+	{
+		mAnimator->Release();
+	}
+
 }

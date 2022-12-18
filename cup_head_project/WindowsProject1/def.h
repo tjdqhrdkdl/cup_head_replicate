@@ -10,6 +10,7 @@ enum class eSceneType
 	Map,
 	BossVegetable,
 	BossBeppi,
+	BossWernerWerman,
 	End,
 	Max,
 };
@@ -49,13 +50,15 @@ enum class eColliderLayer
 	Default,
 	BackGround,
 	BehindMonster,
+	BehindMonsterHat,
 	FrontObject,
 	FrontMonster,
 	Monster_Projecttile,
 	Effect,
 	Player,
 	Player_Projecttile,
-	
+	Top_Effect,
+
 	UI = _COLLIDER_LAYER - 2,
 	Camera = _COLLIDER_LAYER - 1,
 	End = _COLLIDER_LAYER,

@@ -67,6 +67,7 @@ namespace ya {
 		void SetParried(bool parry) { mParried = parry; }
 		bool isParried() { return mParried; }
 		bool isLayerChanged() { return mLayerChanged; }
+		bool isEmptyPink() { return mEmptyPink; }
 		void SetLayerChange(bool b) { mLayerChanged = b; }
 	private:
 		std::vector<Component*> mComponents;
@@ -79,6 +80,7 @@ namespace ya {
 
 	protected:
 		bool mPink;
+		bool mEmptyPink;
 		bool mParried;
 		bool mLayerChanged;
 	};

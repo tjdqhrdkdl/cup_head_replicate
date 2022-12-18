@@ -111,9 +111,9 @@ namespace ya {
 
 			if (iter->second == false)
 			{
+				iter->second = true;
 				left->OnCollisionEnter(right);
 				right->OnCollisionEnter(left);
-				iter->second = true;
 			}
 			else
 			{
@@ -125,9 +125,9 @@ namespace ya {
 		{
 			if (iter->second)
 			{
+				iter->second = false;
 				left->OnCollisionExit(right);
 				right->OnCollisionExit(left);
-				iter->second = false;
 			}
 		}
 	}

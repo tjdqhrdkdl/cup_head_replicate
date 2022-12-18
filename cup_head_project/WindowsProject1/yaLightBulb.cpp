@@ -83,4 +83,9 @@ namespace ya
 		ObjectManager::Destroy(this);
 	}
 
+	void LightBulb::Release()
+	{
+		mAnimator->Release();
+	}
+
 }

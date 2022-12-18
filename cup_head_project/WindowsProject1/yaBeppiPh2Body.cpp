@@ -102,4 +102,14 @@ namespace ya
 		mRightPipeAnimator->Play(L"RightPipeIdle", true);
 	}
 
+	void BeppiPh2Body::Release()
+	{
+		mBodyAnimator->Release();
+		mLeftPipeAnimator->Release();
+		mRightPipeAnimator->Release();
+		mLeftBottleAnimator->Release();
+		mRightBottleAnimator->Release();
+		mTankAnimator->Release();
+	}
+
 }

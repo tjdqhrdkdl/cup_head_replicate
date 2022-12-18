@@ -16,7 +16,7 @@ namespace ya {
 		virtual void Render(HDC hdc);
 
 		GameObject* GetOwner() { return mOwner; }
-		void SetOwner(GameObject* owner) { mOwner = owner; }
+		virtual void SetOwner(GameObject* owner) { mOwner = owner; }
 		eComponentType GetType() { return mType; }
 
 	private:

@@ -4,6 +4,7 @@
 #include "yaMapScene.h"
 #include "yaBossBeppiScene.h"
 #include "yaBossVegetableScene.h"
+#include "yaBossCanRatScene.h"
 #include "yaEndScene.h"
 #include "yaObjectManager.h"
 #include "yaSceneEnter.h"
@@ -22,14 +23,17 @@ namespace ya
 		mScenes[(UINT)eSceneType::Map] = new MapScene();
 		mScenes[(UINT)eSceneType::BossVegetable] = new BossVegetableScene();
 		mScenes[(UINT)eSceneType::BossBeppi] = new BossBeppiScene();
+		mScenes[(UINT)eSceneType::BossWernerWerman] = new BossCanRatScene();
 		mScenes[(UINT)eSceneType::End] = new EndScene();
 
-		for (Scene* scene : mScenes )
+		for (size_t i = 0; i < 3; i++)
 		{
+			Scene* scene = mScenes[i];
 			mCurScene = scene;
 			scene->Initialize();
 		}
-		ChangeScene(eSceneType::Logo);
+
+		mCurScene = mScenes[0];
 		
 	}
 

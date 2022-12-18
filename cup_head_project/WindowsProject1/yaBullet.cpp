@@ -40,9 +40,10 @@ namespace ya
 
 	void Bullet::OnCollisonEnter(Collider* other, Collider* my)
 	{
-		if (other->isHitBox())
+		if (other->isHitBox() && !(other->isBulletPassing()))
 		{
-			if (other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster)
+			if (other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
+				|| other->GetOwner()->GetLayer() == eColliderLayer::BehindMonster)
 			{
 				Monster* monster = dynamic_cast<Monster*>(other->GetOwner());
 				if (monster == nullptr)

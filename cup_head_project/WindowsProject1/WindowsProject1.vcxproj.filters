@@ -108,9 +108,6 @@
     <Filter Include="Engine\GameObject\Ground">
       <UniqueIdentifier>{5dc766e4-bb4b-4d7b-9592-5c82a92948e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\Beppi\Phase 2\RollerCoaster">
-      <UniqueIdentifier>{98b214d1-3809-458d-b4a4-54683849ff41}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GameObject\Beppi\Phase 3">
       <UniqueIdentifier>{42439227-fbdb-4fe7-9bde-07e27b75dd0e}</UniqueIdentifier>
     </Filter>
@@ -119,6 +116,33 @@
     </Filter>
     <Filter Include="Engine\GameObject\Beppi\Phase 3\BeppiHorse">
       <UniqueIdentifier>{6efbd219-1c89-463b-b16d-7429a2f7cd82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Beppi\Phase 4">
+      <UniqueIdentifier>{110fe4b5-5f78-45bd-9019-bcc700b32239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Beppi\Phase 4\Penguin">
+      <UniqueIdentifier>{752f0b82-97e5-447a-a448-75689d5f1809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Beppi\RollerCoaster">
+      <UniqueIdentifier>{98b214d1-3809-458d-b4a4-54683849ff41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossWernerWerman">
+      <UniqueIdentifier>{a1a68be8-ee58-47b0-a406-f7a7667dd07f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossWernerWerman\Phase 1">
+      <UniqueIdentifier>{f176e1d3-7bdb-4152-9127-3c8f03e56f02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossWernerWerman\Phase 1\Bullets">
+      <UniqueIdentifier>{7102d73d-41db-496a-af50-3801ca4dc02a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossWernerWerman\Phase 2">
+      <UniqueIdentifier>{fffec82c-6364-4e91-b396-16ae436cde93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossWernerWerman\PeekingCat">
+      <UniqueIdentifier>{2cbdcb89-fd8b-4d0a-81e0-ddf93379b398}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\BossWernerWerman\Phase 3">
+      <UniqueIdentifier>{647c87ae-4c7e-421f-b549-d182a40ae8ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -297,10 +321,10 @@
       <Filter>Engine\GameObject\Ground</Filter>
     </ClInclude>
     <ClInclude Include="yaRollerCoaster.h">
-      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+      <Filter>Engine\GameObject\Beppi\RollerCoaster</Filter>
     </ClInclude>
     <ClInclude Include="yaRollerCoasterTrail.h">
-      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+      <Filter>Engine\GameObject\Beppi\RollerCoaster</Filter>
     </ClInclude>
     <ClInclude Include="yaLeftWall.h">
       <Filter>Engine\GameObject\Ground</Filter>
@@ -309,13 +333,13 @@
       <Filter>Engine\GameObject\Ground</Filter>
     </ClInclude>
     <ClInclude Include="yaRollerCoasterHead.h">
-      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+      <Filter>Engine\GameObject\Beppi\RollerCoaster</Filter>
     </ClInclude>
     <ClInclude Include="yaRollerCoasterTail.h">
-      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+      <Filter>Engine\GameObject\Beppi\RollerCoaster</Filter>
     </ClInclude>
     <ClInclude Include="yaRollerCoasterHeadPinkNose.h">
-      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+      <Filter>Engine\GameObject\Beppi\RollerCoaster</Filter>
     </ClInclude>
     <ClInclude Include="yaBossExplosion.h">
       <Filter>Engine\GameObject\BossBase</Filter>
@@ -331,6 +355,84 @@
     </ClInclude>
     <ClInclude Include="yaHorseShoe.h">
       <Filter>Engine\GameObject\Beppi\Phase 3\BeppiHorse</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBeppiPhaseFour.h">
+      <Filter>Engine\GameObject\Beppi\Phase 4</Filter>
+    </ClInclude>
+    <ClInclude Include="yaSwingPlatform.h">
+      <Filter>Engine\GameObject\Beppi\Phase 4</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPenguin.h">
+      <Filter>Engine\GameObject\Beppi\Phase 4\Penguin</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPenguinBaseBall.h">
+      <Filter>Engine\GameObject\Beppi\Phase 4\Penguin</Filter>
+    </ClInclude>
+    <ClInclude Include="yaFrontUmbrella.h">
+      <Filter>Engine\GameObject\Beppi\Phase 4</Filter>
+    </ClInclude>
+    <ClInclude Include="yaKnockOut.h">
+      <Filter>Engine\GameObject\SceneObject\BossSceneObj</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBossCanRatScene.h">
+      <Filter>Engine\Scene\BossScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yaWernerWermanPh1.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 1</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPinkSpring.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 1\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="yaTomatoBomb.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 1\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="yaTomatoFire.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 1\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="yaJunk.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 1\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="yaWernerWermanPh2.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 2</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBottomWoodCart.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 2</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPh2WallGround.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 2</Filter>
+    </ClInclude>
+    <ClInclude Include="yaDisc.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 2</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPhase2BGChanger.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 2</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPeakingCat.h">
+      <Filter>Engine\GameObject\BossWernerWerman\PeekingCat</Filter>
+    </ClInclude>
+    <ClInclude Include="yaWernerWermanPh3.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPhase3BGChanger.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPhase3BGExplodeEffect.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClInclude>
+    <ClInclude Include="yaCatBody.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClInclude>
+    <ClInclude Include="yaGhostMouse.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClInclude>
+    <ClInclude Include="yaGhostMouseBall.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClInclude>
+    <ClInclude Include="yaCatPaw.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClInclude>
+    <ClInclude Include="yaWoodPiece.h">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -491,10 +593,10 @@
       <Filter>Engine\GameObject\Ground</Filter>
     </ClCompile>
     <ClCompile Include="yaRollerCoaster.cpp">
-      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+      <Filter>Engine\GameObject\Beppi\RollerCoaster</Filter>
     </ClCompile>
     <ClCompile Include="yaRollerCoasterTrail.cpp">
-      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+      <Filter>Engine\GameObject\Beppi\RollerCoaster</Filter>
     </ClCompile>
     <ClCompile Include="yaLeftWall.cpp">
       <Filter>Engine\GameObject\Ground</Filter>
@@ -503,13 +605,13 @@
       <Filter>Engine\GameObject\Ground</Filter>
     </ClCompile>
     <ClCompile Include="yaRollerCoasterHead.cpp">
-      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+      <Filter>Engine\GameObject\Beppi\RollerCoaster</Filter>
     </ClCompile>
     <ClCompile Include="yaRollerCoasterTail.cpp">
-      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+      <Filter>Engine\GameObject\Beppi\RollerCoaster</Filter>
     </ClCompile>
     <ClCompile Include="yaRollerCoasterHeadPinkNose.cpp">
-      <Filter>Engine\GameObject\Beppi\Phase 2\RollerCoaster</Filter>
+      <Filter>Engine\GameObject\Beppi\RollerCoaster</Filter>
     </ClCompile>
     <ClCompile Include="yaBossExplosion.cpp">
       <Filter>Engine\GameObject\BossBase</Filter>
@@ -525,6 +627,84 @@
     </ClCompile>
     <ClCompile Include="yaHorseShoe.cpp">
       <Filter>Engine\GameObject\Beppi\Phase 3\BeppiHorse</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBeppiPhaseFour.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 4</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSwingPlatform.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 4</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPenguin.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 4\Penguin</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPenguinBaseBall.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 4\Penguin</Filter>
+    </ClCompile>
+    <ClCompile Include="yaFrontUmbrella.cpp">
+      <Filter>Engine\GameObject\Beppi\Phase 4</Filter>
+    </ClCompile>
+    <ClCompile Include="yaKnockOut.cpp">
+      <Filter>Engine\GameObject\SceneObject\BossSceneObj</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBossCanRatScene.cpp">
+      <Filter>Engine\Scene\BossScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yaWernerWermanPh1.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 1</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPinkSpring.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 1\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="yaTomatoBomb.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 1\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="yaTomatoFire.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 1\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="yaJunk.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 1\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="yaWernerWermanPh2.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 2</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBottomWoodCart.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 2</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPh2WallGround.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 2</Filter>
+    </ClCompile>
+    <ClCompile Include="yaDisc.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 2</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPhase2BGChanger.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 2</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPeakingCat.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\PeekingCat</Filter>
+    </ClCompile>
+    <ClCompile Include="yaWernerWermanPh3.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPhase3BGChanger.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPhase3BGExplodeEffect.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCatBody.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClCompile>
+    <ClCompile Include="yaGhostMouse.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClCompile>
+    <ClCompile Include="yaGhostMouseBall.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCatPaw.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClCompile>
+    <ClCompile Include="yaWoodPiece.cpp">
+      <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -29,6 +29,7 @@ namespace ya
 		virtual void OnCollisonStay(Collider* other, Collider* my) override;
 		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 
+		void Release();
 	private:
 		Collider* mCollider;
 		BeppiHorse* mHorse;

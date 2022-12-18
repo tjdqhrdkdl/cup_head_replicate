@@ -66,4 +66,9 @@ namespace ya
 	{
 	}
 
+	void RollerCoasterHead::Release()
+	{
+		mAnimator->Release();
+	}
+
 }

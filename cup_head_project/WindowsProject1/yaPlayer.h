@@ -7,6 +7,7 @@ namespace ya
 	class Bullet;
 	class Animator;
 	class Rigidbody;
+	class Collider;
 	class Player : public GameObject
 	{
 	public:
@@ -50,8 +51,11 @@ namespace ya
 		UINT GetHP() { return mHP; }
 		UINT GetSpecialPoint() { return mSpecialPoint; }
 		float GetSpecialPointFloat() { return mSpecialPointFloat; }
+		Collider* GetJumpCollider() { return mJumpCollider; }
+		bool IsParrying();
 
 		bool isFalling() { return mFalling; }
+		bool isInvincible() { return mInvincibile; }
 		void SetAnimation();
 		void Shoot();
 		void Move();
@@ -98,6 +102,6 @@ namespace ya
 		eGunType mCurGunType;
 		Animator* mAnimator;
 		Rigidbody* mRigidbody;
-
+		Collider* mJumpCollider;
 	};
 }

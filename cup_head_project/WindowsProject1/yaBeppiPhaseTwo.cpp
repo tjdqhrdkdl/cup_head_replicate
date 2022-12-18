@@ -298,4 +298,11 @@ namespace ya
 		mCollider->SetAddPos({ 0,0 });
 	}
 
+	void BeppiPhaseTwo::Release()
+	{
+		mAnimator->Release();
+		BeppiPh2Body().Release();
+		BalloonDog({1,0}).Release();
+	}
+
 }

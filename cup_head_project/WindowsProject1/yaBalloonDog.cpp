@@ -96,8 +96,6 @@ namespace ya
 		else
 			mAnimator->Play(L"Apear" + dirStr, false);
 
-
-		mAnimator->DeleteGDIPlusImage();
 		mCollider->SetOff(true);
 
 	}
@@ -186,6 +184,11 @@ namespace ya
 	void BalloonDog::PopCompleteEvent()
 	{
 		ObjectManager::Destroy(this);
+	}
+
+	void BalloonDog::Release()
+	{
+		mAnimator->Release();
 	}
 
 

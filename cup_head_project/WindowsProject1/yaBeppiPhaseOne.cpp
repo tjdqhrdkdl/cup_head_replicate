@@ -340,4 +340,10 @@ namespace ya
 	void BeppiPhaseOne::OnCollisonExit(Collider* other, Collider* my)
 	{
 	}
+	void BeppiPhaseOne::Release()
+	{
+		mAnimator->Release();
+		DuckPanel().Release();
+		LightBulb().Release();
+	}
 }

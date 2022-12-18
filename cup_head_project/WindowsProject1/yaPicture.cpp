@@ -13,6 +13,7 @@ namespace ya
 	Picture::~Picture()
 	{
 		DeleteDC(mHdc);
+		DeleteBitmap();
 	}
 	HRESULT Picture::Load(const std::wstring& path)
 	{

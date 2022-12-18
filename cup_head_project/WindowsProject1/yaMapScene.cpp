@@ -28,13 +28,13 @@ namespace ya {
 		{
 			SceneManager::ChangeScene(eSceneType::Title);
 		}
-		if (KEY_DOWN(eKeyCode::N))
+		if (KEY_DOWN(eKeyCode::B))
 		{
 			SceneManager::ChangeScene(eSceneType::BossBeppi);
 		}
-		if (KEY_DOWN(eKeyCode::V))
+		if (KEY_DOWN(eKeyCode::N))
 		{
-			SceneManager::ChangeScene(eSceneType::BossVegetable);
+			SceneManager::ChangeScene(eSceneType::BossWernerWerman);
 		}
 	}
 

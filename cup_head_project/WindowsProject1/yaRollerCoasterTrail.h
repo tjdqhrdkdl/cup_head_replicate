@@ -10,7 +10,7 @@ namespace ya
 	{
 	public:
 
-		RollerCoasterTrail(bool blue, bool person);
+		RollerCoasterTrail(bool blue, bool person, bool init= false);
 		~RollerCoasterTrail();
 
 		virtual void Tick() override;
@@ -21,6 +21,7 @@ namespace ya
 		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 
 
+		void Release();
 	private:
 		bool misBlue;
 		bool mWithPassenger;

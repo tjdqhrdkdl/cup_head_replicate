@@ -13,8 +13,10 @@ namespace ya
 	{
 	public:
 
-		RollerCoaster(UINT coasterLength);
+		RollerCoaster(UINT coasterLength , bool init = false);
 		~RollerCoaster();
+
+		void SetSpeed(float speed) { mSpeed = speed; }
 
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
@@ -23,7 +25,7 @@ namespace ya
 		virtual void OnCollisonStay(Collider* other, Collider* my) override;
 		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 
-
+		void Release();
 	private:
 		float mSpeed;
 		float mAliveTime;

@@ -22,6 +22,7 @@ namespace ya
 
 		RollerCoasterHeadPinkNose* GetNose() { return mPinkNose; }
 
+		void Release();
 	private:
 		Collider* mCollider;
 		Animator* mAnimator;

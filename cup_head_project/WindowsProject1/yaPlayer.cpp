@@ -15,6 +15,7 @@
 #include "yaSpecialAttackEffect.h"
 #include "yaDashEffect.h"
 #include "yaOnHitEffect.h"
+#include "yaPinkSpring.h"
 
 #define STATE_HAVE(STATE) (mCurState & STATE) == STATE
 namespace ya 
@@ -44,6 +45,11 @@ namespace ya
 		SetPos({ 400.0f, 700.0f });
 		SetScale({ 90.0f, 120.0f });
 		AddComponent(new Collider());
+
+		mJumpCollider = new Collider();
+		mJumpCollider->SetScale({ 90,10 });
+		mJumpCollider->SetAddPos({ 0,60 });
+		AddComponent(mJumpCollider);
 		mRigidbody = new Rigidbody();
 		mRigidbody->SetGround(true);
 		AddComponent(mRigidbody);
@@ -229,12 +235,15 @@ namespace ya
 				&& STATE_HAVE(PlayerState_OnParry))
 			{
 				Vector2 velocity = mRigidbody->GetVelocity();
-				velocity.y = -1500.0f;
+				if (dynamic_cast<PinkSpring*>(other->GetOwner()) != nullptr)
+					velocity.y = -2000.0f;
+				else
+					velocity.y = -1500.0f;
 				mRigidbody->SetVelocity(velocity);
 
 				mCurState &= ~PlayerState_OnParry;
 				other->GetOwner()->SetParried(true);
-				if (mSpecialPoint < 5)
+				if (mSpecialPoint < 5 && !other->GetOwner()->isEmptyPink())
 				{
 					mSpecialPoint += 1;
 				}
@@ -281,6 +290,7 @@ namespace ya
 				&& ((other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
 					|| other->GetOwner()->GetLayer() == eColliderLayer::Monster_Projecttile))
 				&& !mParrySlow
+				&& my != mJumpCollider
 				)
 			{
 				if(mHP > 0)
@@ -321,12 +331,15 @@ namespace ya
 				&& STATE_HAVE(PlayerState_OnParry))
 			{
 				Vector2 velocity = mRigidbody->GetVelocity();
-				velocity.y = -1500.0f;
+				if (dynamic_cast<PinkSpring*>(other->GetOwner()) != nullptr)
+					velocity.y = -2200.0f;
+				else
+					velocity.y = -1500.0f;
 				mRigidbody->SetVelocity(velocity);
 
 				mCurState &= ~PlayerState_OnParry;
 				other->GetOwner()->SetParried(true);
-				if (mSpecialPoint < 5)
+				if (mSpecialPoint < 5 && !other->GetOwner()->isEmptyPink())
 				{
 					mSpecialPoint += 1;
 				}
@@ -373,6 +386,7 @@ namespace ya
 				&& ((other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
 					|| other->GetOwner()->GetLayer() == eColliderLayer::Monster_Projecttile))
 				&&!mParrySlow
+				&& my != mJumpCollider
 				)
 			{
 				if (mHP > 0)
@@ -480,6 +494,11 @@ namespace ya
 			mHP = 5;
 			//Jump()
 		}
+	}
+
+	bool Player::IsParrying()
+	{
+		return STATE_HAVE(PlayerState_OnParry);
 	}
 
 	void Player::SetAnimation()
@@ -934,6 +953,8 @@ namespace ya
 			GetComponent<Collider>()->SetScale({ playerScaleDuck });
 			
 			SetScale(playerScaleDuck);
+
+			mJumpCollider->SetAddPos({ 0,30 });
 		}
 		else
 		{
@@ -941,6 +962,7 @@ namespace ya
 			{
 				GetComponent<Collider>()->SetScale({ playerScaleBasic });
 				SetScale(playerScaleBasic);
+				mJumpCollider->SetAddPos({ 0,60 });
 				mCurState &= ~PlayerState_OnShoot;
 			}
 		}
@@ -1010,18 +1032,23 @@ namespace ya
 
 	void Player::Jump()
 	{
+		if (mRigidbody->isGround() == false)
+		{
+			mCurState |= PlayerState_OnJump;
+		}
 		if (!(STATE_HAVE(PlayerState_OnHit))
 			&& !(STATE_HAVE(PlayerState_OnDash))
 			&& !(STATE_HAVE(PlayerState_OnUlt))
 			&& !(STATE_HAVE(PlayerState_Input_C))
 			&& !(STATE_HAVE(PlayerState_OnEX))
 			&& !(STATE_HAVE(PlayerState_OnJump))
+			&& !(STATE_HAVE(PlayerState_Input_Down))
 			&& KEY_DOWN(eKeyCode::Z)
 			)
 		{
 			mCurState |= PlayerState_OnJump;
 			Vector2 velocity = mRigidbody->GetVelocity();
-			velocity.y = -1850.0f;
+			velocity.y = -1900.0f;
 			mRigidbody->SetVelocity(velocity);
 
 			mRigidbody->SetGround(false);

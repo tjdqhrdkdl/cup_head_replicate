@@ -25,7 +25,7 @@ namespace ya
 		void ApearCompleteEvent();
 		void PopCompleteEvent();
 
-
+		void Release();
 	private:
 		float mAliveTime;
 		float mAliveTimeChecker;

@@ -53,4 +53,9 @@ namespace ya
 	{
 	}
 
+	void BeppiPhaseThreeBack::Release()
+	{
+		mAnimator->Release();
+	}
+
 }

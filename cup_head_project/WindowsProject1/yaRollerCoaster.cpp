@@ -7,55 +7,57 @@
 #include "yaRigidbody.h"
 namespace ya
 {
-	RollerCoaster::RollerCoaster(UINT coasterLength)
+	RollerCoaster::RollerCoaster(UINT coasterLength, bool init)
 		:mSpeed(450)
 		,mAliveTime(13.0f)
 		,mAliveTimeChecker(0)
 		,mTrailLength(coasterLength)
 	{
-		//部府 积己
-		mTail = ObjectManager::Instantiate<RollerCoasterTail>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
-		mTail->SetPos({ 4870,700 });
-
-		//阿 cart 积己
-		UINT withPassengersCount = 0;
-		bool isBlue = false;
-		bool withPassengers = false;
-		for (size_t i = 0; i < mTrailLength; i++)
+		if (!init)
 		{
-			if (isBlue)
-				isBlue = false;
-			else
-				isBlue = true;
-			
-			if (withPassengersCount == 3)
+			//部府 积己
+			mTail = ObjectManager::Instantiate<RollerCoasterTail>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
+			mTail->SetPos({ 4870,700 });
+
+			//阿 cart 积己
+			UINT withPassengersCount = 0;
+			bool isBlue = false;
+			bool withPassengers = false;
+			for (size_t i = 0; i < mTrailLength; i++)
 			{
-				withPassengers = true;
-				withPassengersCount = 0;
+				if (isBlue)
+					isBlue = false;
+				else
+					isBlue = true;
+
+				if (withPassengersCount == 3)
+				{
+					withPassengers = true;
+					withPassengersCount = 0;
+				}
+				else
+				{
+					withPassengers = false;
+					++withPassengersCount;
+				}
+				RollerCoasterTrail* trail = new RollerCoasterTrail(isBlue, withPassengers);
+				mTrails.push_back(trail);
+				trail->SetPos({ 2200 + float(270 * i), 700 });
+				trail->Initialize();
+				SceneManager::GetCurScene()->AddGameObject(trail, eColliderLayer::FrontMonster);
 			}
-			else
-			{
-				withPassengers = false;
-				++withPassengersCount;
-			}
-			RollerCoasterTrail* trail = new RollerCoasterTrail(isBlue, withPassengers);
-			mTrails.push_back(trail);
-			trail->SetPos({ 2200+float(270 * i), 700 });
-			trail->Initialize();
-			SceneManager::GetCurScene()->AddGameObject(trail, eColliderLayer::FrontMonster);
+			//赣府 积己
+			mHead = ObjectManager::Instantiate<RollerCoasterHead>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
+			mHead->SetPos({ 1870,750 });
+
+
+			//框流捞绰 顶
+			mGroundCollider = new Collider();
+			mGroundCollider->SetScale({ 2900, 50 });
+			mGroundCollider->SetAddPos({ 3300, 705 });
+			AddComponent(mGroundCollider);
+			mGroundCollider->Tick();
 		}
-		//赣府 积己
-		mHead = ObjectManager::Instantiate<RollerCoasterHead>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
-		mHead->SetPos({ 1870,750 });
-
-
-		//框流捞绰 顶
-		mGroundCollider = new Collider();
-		mGroundCollider->SetScale({ 2900, 50 });
-		mGroundCollider->SetAddPos({ 3300, 705 });
-		AddComponent(mGroundCollider);
-		mGroundCollider->Tick();
-
 
 	}
 
@@ -120,14 +122,29 @@ namespace ya
 		if (other->GetOwner()->GetLayer() == eColliderLayer::Player)
 		{
 			Player* player = dynamic_cast<Player*>(other->GetOwner());
-			Vector2 plPos = player->GetPos();
-			plPos.x -= mSpeed * Time::DeltaTime();
-			player->SetPos(plPos);
+			if (!player->isInvincible())
+			{
+				Vector2 plPos = player->GetPos();
+				plPos.x -= mSpeed * Time::DeltaTime() * 0.5;
+				player->SetPos(plPos);
+			}
 		}
 	}
 
 	void RollerCoaster::OnCollisonExit(Collider* other, Collider* my)
 	{
+		if (other->GetOwner()->GetLayer() == eColliderLayer::Player)
+		{
+			Player* player = dynamic_cast<Player*>(other->GetOwner());
+			dynamic_cast<Rigidbody*>(player->GetComponent(eComponentType::Rigidbody))->SetGround(false);
+		}
+	}
+
+	void RollerCoaster::Release()
+	{
+		RollerCoasterHead().Release();
+		RollerCoasterTail().Release();
+		RollerCoasterTrail(0,0).Release();
 	}
 
 

@@ -15,6 +15,8 @@
 #include "yaHealthUI.h"
 #include "yaBeppiPhaseTwo.h"
 #include "yaBeppiPhaseThree.h"
+#include "yaBeppiPhaseFour.h"
+#include "yaKnockOut.h"
 namespace ya 
 {
 	BossBeppiScene::BossBeppiScene()
@@ -44,16 +46,20 @@ namespace ya
 		ObjectManager::Instantiate<RightWall>(this, eColliderLayer::FrontObject);
 		mPlayer = ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);
 		ObjectManager::Instantiate<BeppiPhaseOne>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
-		ObjectManager::Instantiate<Ready>(this, eColliderLayer::UI);
+		ObjectManager::Instantiate<Ready>(this, eColliderLayer::Top_Effect);
 
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontObject, true);
+		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::BehindMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster_Projecttile, true);
 		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::FrontMonster, true);
+		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::FrontObject, true);
+		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::BehindMonster, true);
 
 		CollisionManager::SetLayer(eColliderLayer::FrontMonster, eColliderLayer::FrontObject, true);
+		CollisionManager::SetLayer(eColliderLayer::FrontMonster, eColliderLayer::FrontMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Monster_Projecttile, eColliderLayer::FrontObject, true);
-		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::FrontObject, true);
+
 
 
 		Scene::Initialize();
@@ -61,6 +67,16 @@ namespace ya
 		//Initialize
 		BeppiPhaseTwo();
 		BeppiPhaseThree(true);
+		BeppiPhaseFour(true);
+		KnockOut();
+
+		HUD* healthUI = UIManager::GetUiInstant<HUD>(eUIType::HP);
+		healthUI->SetTarget(mPlayer);
+		HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
+		exPointUI->SetTarget(mPlayer);
+		mPhaseTimeChecker = 0;
+		mPhase = 0;
+		mbPhaseChanged = false;
 	}
 
 	void BossBeppiScene::Tick()
@@ -82,14 +98,31 @@ namespace ya
 		if (mPhase == 3 && mbPhaseChanged)
 		{
 			mPhaseTimeChecker += Time::DeltaTime();
-			if (mPhaseTimeChecker > 12.0f)
+			if (mPhaseTimeChecker > 8.0f)
 			{
 				ObjectManager::Instantiate<BeppiPhaseThree>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
 				mbPhaseChanged = false;
 				mPhaseTimeChecker = 0;
 			}
 		}
-	
+
+		if (mPhase == 4 && mbPhaseChanged)
+		{
+			mPhaseTimeChecker += Time::DeltaTime();
+			if (mPhaseTimeChecker > 18.0f)
+			{
+				ObjectManager::Instantiate<BeppiPhaseFour>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
+				mbPhaseChanged = false;
+				mPhaseTimeChecker = 0;
+			}
+		}
+
+		if (mPhase == 5 && mbPhaseChanged)
+		{
+			mbPhaseChanged = false;
+			SceneManager::ChangeScene(eSceneType::Map);
+		}
+
 		if (KEY_DOWN(eKeyCode::N))
 		{
 			SceneManager::ChangeScene(eSceneType::Map);
@@ -112,13 +145,8 @@ namespace ya
 
 	void BossBeppiScene::Enter()
 	{
-		if(!mbInitialized)
-			Initialize();
+		Initialize();
 		Scene::Enter();
-		HUD* healthUI = UIManager::GetUiInstant<HUD>(eUIType::HP);
-		healthUI->SetTarget(mPlayer);
-		HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
-		exPointUI->SetTarget(mPlayer);
 		UIManager::Push(eUIType::HP);
 		UIManager::Push(eUIType::MP);
 	}
@@ -129,5 +157,17 @@ namespace ya
 		mbInitialized = false;
 		UIManager::Pop(eUIType::HP);
 		UIManager::Pop(eUIType::MP);
+		HUD* healthUI = UIManager::GetUiInstant<HUD>(eUIType::HP);
+		healthUI->SetTarget(nullptr);
+		HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
+		exPointUI->SetTarget(nullptr);
+		Release();
+	}
+	void BossBeppiScene::Release()
+	{
+		BeppiPhaseOne().Release();
+		BeppiPhaseTwo().Release();
+		BeppiPhaseThree(true).Release();
+		BeppiPhaseFour(true).Release();
 	}
 }

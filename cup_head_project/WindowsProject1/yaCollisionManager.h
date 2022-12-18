@@ -14,6 +14,8 @@ namespace ya {
 		static bool Intersect(Collider* left, Collider* right);
 
 		static void ColliderCollision(Collider* left, Collider* right);
+		static std::map<UINT64, bool>* GetCollisionInfo() { return &mCollisionInfo; }
+
 	private:
 		static WORD mMatrix[_COLLIDER_LAYER];
 		static std::map<UINT64, bool> mCollisionInfo;

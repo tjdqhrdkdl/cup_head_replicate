@@ -33,6 +33,7 @@ namespace ya
 		//panel->SetPos(Vector2(100.0f, 100.0f));
 		//panel->AddChild(button);
 		//panel->AddChild(hud);
+
 		HealthUI* healthUI = new HealthUI(eUIType::HP);
 		mUIs.insert(std::make_pair(eUIType::HP, healthUI));
 

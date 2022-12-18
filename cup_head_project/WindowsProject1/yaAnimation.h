@@ -26,10 +26,13 @@ namespace ya
 
 		bool haveCompleted() { return mbHaveCompleted; }
 		void SetHaveCompleted(bool c) { mbHaveCompleted = c; }
+		Picture* GetPlayPicture() { return mPictures[mPictureIndex]; }
+		UINT GetIndex() { return mPictureIndex; }
 
 		void DeleteGDIPlusImage();
 		void DeleteBitmap();
 
+		void Release();
 	private:
 		Animator* mAnimator;
 		std::vector<Picture*> mPictures;	

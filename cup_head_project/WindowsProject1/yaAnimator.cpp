@@ -179,6 +179,7 @@ namespace ya
 		Events* events = FindEvents(key);
 		return events->mEndEvent.mEvent;
 	}
+
 	void Animator::DeleteGDIPlusImage()
 	{
 		std::map<std::wstring, Animation*>::iterator iter;
@@ -196,6 +197,16 @@ namespace ya
 		{
 			if (iter->second != nullptr)
 				iter->second->DeleteBitmap();
+		}
+	}
+
+	void Animator::Release()
+	{
+		std::map<std::wstring, Animation*>::iterator iter;
+		for (iter = mAnimations.begin(); iter != mAnimations.end(); iter++)
+		{
+			if (iter->second != nullptr)
+				iter->second->Release();
 		}
 	}
 

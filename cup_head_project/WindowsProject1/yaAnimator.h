@@ -53,6 +53,9 @@ namespace ya
 		std::function<void()>& GetCompleteEvent(const std::wstring key);
 		std::function<void()>& GetEndEvent(const std::wstring key);
 
+		Vector2 GetAddPos() { return mAddPos; }
+		void SetAddPos(Vector2 pos) { mAddPos = pos; }
+
 		Animation* GetPlayAnimation() { return mPlayAnimation; }
 		void SetPlayAnimation(Animation* anim) { mPlayAnimation = anim; }
 
@@ -66,6 +69,8 @@ namespace ya
 		void DeleteGDIPlusImage();
 		void DeleteBitmap();
 
+		void Release();
+
 	private:
 		std::map<std::wstring, Animation*> mAnimations;
 		std::map<std::wstring, Events*> mEvents;
@@ -76,6 +81,7 @@ namespace ya
 		bool mbStop;
 		Gdiplus::ColorMatrix mColorMatrix;
 
+		Vector2 mAddPos;
 		bool mbIsLighten;
 
 	};

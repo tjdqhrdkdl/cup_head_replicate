@@ -37,7 +37,7 @@ namespace ya
 	void SceneEnter::AnimCompleteEvent()
 	{
 		ObjectManager::Destroy(this);
-		mPrevScene->ReleaseCameraObj();
+		SceneManager::GetCurScene()->ReleaseCameraObj();
 	}
 
 }

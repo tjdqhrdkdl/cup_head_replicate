@@ -24,6 +24,7 @@ namespace ya
 		void SetPhase(UINT phase) { mPhase = phase, mbPhaseChanged = true; }
 		Player* GetScenePlayer() { return mPlayer; }
 
+		void Release();
 	private:
 		BgImageObject* mBGI;
 		Player* mPlayer;

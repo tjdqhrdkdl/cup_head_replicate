@@ -71,6 +71,8 @@ namespace ya
 				}
 			}
 		}
+
+		HorseShoe(true, true, true);
 	}
 
 	BeppiPhaseThree::~BeppiPhaseThree()
@@ -244,10 +246,10 @@ namespace ya
 		}
 		else if (mbGoUp)
 		{
-			if (IsDeathTimeOn() && GetDeathTime() < 24)
+			if (IsDeathTimeOn() && GetDeathTime() < 19)
 			{
 				pos.y -= 400 * Time::DeltaTime();
-				if (GetDeathTime() < 20)
+				if (GetDeathTime() < 15)
 				{
 					pos.x = 900;
 					mbGoUp = false;
@@ -387,8 +389,10 @@ namespace ya
 	void BeppiPhaseThree::EndDropCompleteEvent()
 	{
 		mbEndFall = true;
-		ObjectManager::Destroy(mHorse, 10.0f);
-		ObjectManager::Destroy(mBackAnimation, 10.0f);
+		ObjectManager::Destroy(mHorse, 15.0f);
+		ObjectManager::Destroy(mBackAnimation, 15.0f);
+
+		dynamic_cast<BossBeppiScene*>(SceneManager::GetCurScene())->SetPhase(4);
 	}
 
 	void BeppiPhaseThree::OnCollisonEnter(Collider* other, Collider* my)
@@ -415,7 +419,7 @@ namespace ya
 					mHorse->GetBodyAnimator()->Play(L"GreenBodyEndLeft", true);
 			}
 			mHorse->GetHeadAnimator()->SetPlayAnimation(nullptr);
-			ObjectManager::Destroy(this, 30.0f);
+			ObjectManager::Destroy(this, 25.0f);
 			mbGoUp = true;
 			mCollider->SetOff(true);
 			mbYellowDrop = true;
@@ -429,6 +433,14 @@ namespace ya
 
 	void BeppiPhaseThree::OnCollisonExit(Collider* other, Collider* my)
 	{
+	}
+
+	void BeppiPhaseThree::Release()
+	{
+		mAnimator->Release();
+		BeppiPhaseThreeBack().Release();
+		BeppiHorse().Release();
+		HorseShoe(0,0,0).Release();
 	}
 
 

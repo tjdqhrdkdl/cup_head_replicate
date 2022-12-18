@@ -28,6 +28,8 @@ namespace ya
 		void SetBody(BeppiPh2Body* body) { mPh2Body = body; }
 		void IntroBulkupCompleteEvent();
 		void IntroBalloonCompleteEvent();
+
+		void Release();
 	private:
 		BeppiPh2Body* mPh2Body;
 		Collider* mCollider;

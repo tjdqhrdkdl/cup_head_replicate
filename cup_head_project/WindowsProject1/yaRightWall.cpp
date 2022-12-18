@@ -40,7 +40,7 @@ namespace ya
 			{
 				Player* player = dynamic_cast<Player*>(other->GetOwner());
 				Vector2 plPos = player->GetPos();
-				plPos.x = 1540;
+				plPos.x = GetPos().x - GetScale().x * 0.5 - 1 - player->GetScale().x * 0.5;
 				player->SetPos(plPos);
 			}
 		}
@@ -55,7 +55,7 @@ namespace ya
 		{
 			Player* player = dynamic_cast<Player*>(other->GetOwner());
 			Vector2 plPos = player->GetPos();
-			plPos.x = 1540;
+			plPos.x = GetPos().x - GetScale().x * 0.5 - 1 - player->GetScale().x * 0.5;
 			player->SetPos(plPos);
 		}
 		}

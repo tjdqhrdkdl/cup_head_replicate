@@ -147,4 +147,9 @@ namespace ya
 	{
 	}
 
+	void DuckPanel::Release()
+	{
+		mAnimator->Release();
+	}
+
 }

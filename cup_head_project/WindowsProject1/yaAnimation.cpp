@@ -36,7 +36,7 @@ namespace ya
 	{
 		GameObject* gameObj = mAnimator->GetOwner();
 		Vector2 pos = gameObj->GetPos();
-		
+		pos += mAnimator->GetAddPos();
 		Vector2 finalPos;
 		finalPos.x = pos.x - (mPictures[mPictureIndex]->GetWidth() / 2) + mFixPos.x;
 		finalPos.y = pos.y - (mPictures[mPictureIndex]->GetHeight()) + mFixPos.y	;
@@ -140,6 +140,17 @@ namespace ya
 		for (size_t i = 0; i < mPictures.size(); i++)
 		{
 			mPictures[i]->DeleteBitmap();
+		}
+	}
+
+	void Animation::Release()
+	{
+		for (size_t i = 0; i < mPictures.size(); i++)
+		{
+			if (mPictures[i] != nullptr)
+			{
+				Resources::Release(mPictures[i]);
+			}
 		}
 	}
 	

@@ -27,6 +27,7 @@ namespace ya
 
 		Animator* GetAnimator() { return mAnimator; }
 
+		void Release();
 	private:
 		bool mbRight;
 		bool mbYellow;

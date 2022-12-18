@@ -12,12 +12,6 @@ namespace ya
 	{
 		SetName(L"CoasterTail");
 		SetScale({ 270,70 });
-		mCollider = new Collider();
-		Collider* collider2 = new Collider();
-		collider2->SetScale({ 50, 170 });
-		collider2->SetAddPos({ -100,-50 });
-		AddComponent(mCollider);
-		AddComponent(collider2);
 
 		mBackAnimator = new Animator();
 		mFrontAnimator = new Animator();
@@ -60,6 +54,12 @@ namespace ya
 
 	void RollerCoasterTail::OnCollisonExit(Collider* other, Collider* my)
 	{
+	}
+
+	void RollerCoasterTail::Release()
+	{
+		mBackAnimator->Release();
+		mFrontAnimator->Release();
 	}
 
 }

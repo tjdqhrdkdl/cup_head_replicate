@@ -9,8 +9,8 @@ namespace ya
 	Ground::Ground()
 	{
 		AddComponent(new Collider());
-		SetPos({ 800, 700 });
-		SetScale({ 1700, 5 });
+		SetPos({ 800, 750 });
+		SetScale({ 1700, 50 });
 	}
 
 	Ground::~Ground()
@@ -34,13 +34,10 @@ namespace ya
 		{
 			Player* player = dynamic_cast<Player*>(other->GetOwner());
 			Vector2 plPos = player->GetPos();
-			Vector2 plPrevPos = player->GetPrevPos();
-			Vector2 gPos = GetPos();
-			Vector2 gScale = GetScale();
 			if (player->isFalling())
 			{
 				dynamic_cast<Rigidbody*>(player->GetComponent(eComponentType::Rigidbody))->SetGround(true);
-				plPos.y = 700;
+				plPos.y = GetPos().y - GetScale().y;
 				player->SetPos(plPos);
 			}
 		}

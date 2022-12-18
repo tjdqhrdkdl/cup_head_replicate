@@ -25,6 +25,8 @@ namespace ya
 		void SetHang(bool drop) { mHang = drop; }
 
 		void ExplodeEndEvent();
+
+		void Release();
 	private:
 		float mSpeed;
 		float mAliveTime;

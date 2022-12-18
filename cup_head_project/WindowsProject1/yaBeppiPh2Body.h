@@ -17,6 +17,8 @@ namespace ya
 		void IntroCue2();
 
 		void PipeIntroCompleteEvent();
+
+		void Release();
 	private:
 		bool mIntroMove;
 		Vector2 mVelocity;

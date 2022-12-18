@@ -23,7 +23,8 @@ namespace ya
 		void DeleteGDIPlusImage() { 
 			if (mImage != nullptr && (mbDeletedGDIPlusImage == false)) 
 			{
-				delete mImage; 
+				delete mImage;
+				mImage = nullptr;
 				mbDeletedGDIPlusImage = true;
 			}
 			

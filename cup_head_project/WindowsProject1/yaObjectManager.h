@@ -40,17 +40,16 @@ namespace ya
 		static __forceinline void Release()
 		{
 			Scene* scene = SceneManager::GetCurScene();
-			std::vector<GameObject*>* objects = scene->GetGameObjects();
 
 			for (size_t y = 0; y < _COLLIDER_LAYER; y++)
 			{
-				for (std::vector<GameObject*>::iterator iter = objects[y].begin()
-					; iter != objects[y].end();)
+				for (std::vector<GameObject*>::iterator iter = scene->GetGameObjects()[y].begin()
+					; iter != scene->GetGameObjects()[y].end();)
 				{
 					if ((*iter)->IsDeath() == true)
 					{
 						GameObject* obj = *iter;
-						iter = objects[y].erase(iter);
+						iter = scene->GetGameObjects()[y].erase(iter);
 						delete obj;
 						obj = nullptr;
 						continue;

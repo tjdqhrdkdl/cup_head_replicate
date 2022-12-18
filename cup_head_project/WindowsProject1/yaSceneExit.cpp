@@ -34,16 +34,17 @@ namespace ya
 
 	void SceneExit::AnimCompleteEvent()
 	{
-		ObjectManager::Destroy(this);
 		Scene* prevScene = SceneManager::GetCurScene();
 		prevScene->Exit();
 
+		SceneManager::GetCurScene()->ReleaseCameraObj();
 		SceneManager::SetCurScene(mType);
 		SceneManager::GetCurScene()->Enter();
 
 		SceneEnter* sceneEnter = new SceneEnter(prevScene);
 		sceneEnter->Initialize();
 		SceneManager::GetCurScene()->AddGameObject(dynamic_cast<GameObject*>(sceneEnter), eColliderLayer::Camera);
+		ObjectManager::Destroy(this);
 	}
 
 }

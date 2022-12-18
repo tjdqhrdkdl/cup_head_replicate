@@ -22,6 +22,7 @@ namespace ya
 		void ChoiceYellow(bool y) { mbYellow = y; }
 		void ChoiceRight(bool r) { mbRight = r , mbDirChanged = true; }
 
+		void Release();
 	private:
 		Animator* mBodyAnimator;
 		Animator* mHeadAnimator;

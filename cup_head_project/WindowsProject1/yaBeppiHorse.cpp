@@ -59,7 +59,7 @@ namespace ya
 		mBodyAnimator->Play(L"YellowBodyIdleLeft", true);
 		mHeadAnimator->Play(L"YellowHeadIdleLeft", true);
 		
-	
+		
 	}
 
 	BeppiHorse::~BeppiHorse()
@@ -129,6 +129,12 @@ namespace ya
 			else
 				mHeadAnimator->Play(L"GreenHeadIdleLeft", true);
 		}
+	}
+
+	void BeppiHorse::Release()
+	{
+		mBodyAnimator->Release();
+		mHeadAnimator->Release();
 	}
 
 }
