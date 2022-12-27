@@ -18,6 +18,32 @@
 #include <gdiplus.h>
 using namespace Gdiplus;
 #pragma comment (lib,"Gdiplus.lib")
+
+union Pixel
+{
+	struct
+	{
+		BYTE R;
+		BYTE G;
+		BYTE B;
+		BYTE A;
+	};
+	DWORD Color;
+
+	Pixel(BYTE r, BYTE g, BYTE b, BYTE a)
+		:R(r), G(g), B(b), A(a)
+	{
+
+	}
+
+	Pixel(COLORREF color)
+		:Color(color)
+	{
+
+	}
+
+};
+
 class WindowData
 {
 public:

@@ -1,10 +1,9 @@
 #include "yaUIManager.h"
 #include "yaHUD.h"
-//#include "yaButton.h"
-//#include "yaPanel.h"
+#include "yaButton.h"
+#include "yaPanel.h"
 #include "yaHealthUI.h"
 #include "yaEXPointUI.h"
-
 namespace ya
 {
 	std::unordered_map<eUIType, UiBase*> UIManager::mUIs;
@@ -15,24 +14,50 @@ namespace ya
 	void UIManager::Initialize()
 	{
 		// 여기에서 ui 메모리에 할당하면 된다.
-		//Button* button = new Button(eUIType::HP);
-		//mUIs.insert(std::make_pair(eUIType::HP, button));
-		//button->SetPos(Vector2(0.0f, 0.0f));
-		////newUI->SetSize(Vector2(500.0f, 100.0f));
-		//button->ImageLoad(L"HPBAR", L"..\\Resources\\Image\\HPBAR.bmp");
+		Button* startButton = new Button(eUIType::TITLEOPTION_START);
+		mUIs.insert(std::make_pair(eUIType::TITLEOPTION_START, startButton));
+		startButton->SetPos(Vector2(750.0f, 350.0f));
+		startButton->ImageLoad(L"START", L"..\\Resources\\Image\\UI\\TitleScene\\START.png");
+		startButton->SetClickImage(L"Start_onClick", L"..\\Resources\\Image\\UI\\TitleScene\\START_ON.png");
 
-		//HUD* hud = new HUD(eUIType::MP);
-		//mUIs.insert(std::make_pair(eUIType::MP, hud));
-		//hud->SetPos(Vector2(0.0f, 100.0f));
-		//hud->ImageLoad(L"HPBAR", L"..\\Resources\\Image\\HPBAR.bmp");
+		Button* optionButton = new Button(eUIType::TITLEOPTION_OPTION);
+		mUIs.insert(std::make_pair(eUIType::TITLEOPTION_OPTION, optionButton));
+		optionButton->SetPos(Vector2(735.0f, 400.0f));
+		optionButton->ImageLoad(L"Options", L"..\\Resources\\Image\\UI\\TitleScene\\OPTIONS.png");
+		optionButton->SetClickImage(L"Options_onClick", L"..\\Resources\\Image\\UI\\TitleScene\\OPTIONS_ON.png");
 
-//		Panel* panel = new Panel(eUIType::INVENTORY);
-		//mUIs.insert(std::make_pair(eUIType::INVENTORY, panel));
-		////newUI->SetIsFullScreen(true);
-		//panel->ImageLoad(L"BackPack", L"..\\Resources\\Image\\BackPack.bmp");
-		//panel->SetPos(Vector2(100.0f, 100.0f));
-		//panel->AddChild(button);
-		//panel->AddChild(hud);
+		Button* exitButton = new Button(eUIType::TITLEOPTION_EXIT);
+		mUIs.insert(std::make_pair(eUIType::TITLEOPTION_EXIT, exitButton));
+		exitButton->SetPos(Vector2(767.5f, 450.0f));
+		exitButton->ImageLoad(L"Exit", L"..\\Resources\\Image\\UI\\TitleScene\\EXIT.png");
+		exitButton->SetClickImage(L"Exit_onClick", L"..\\Resources\\Image\\UI\\TitleScene\\EXIT_ON.png");
+
+		Button* PlayResumeButton = new Button(eUIType::PLAYOPTION_RESUME);
+		mUIs.insert(std::make_pair(eUIType::PLAYOPTION_RESUME, PlayResumeButton));
+		PlayResumeButton->SetPos(Vector2(240, 100.0f));
+		PlayResumeButton->ImageLoad(L"PlayResume", L"..\\Resources\\Image\\UI\\PlayScene\\RESUME.png");
+		PlayResumeButton->SetClickImage(L"PlayResume_onClick", L"..\\Resources\\Image\\UI\\PlayScene\\RESUME_ON.png");
+
+		Button* PlayRetryButton = new Button(eUIType::PLAYOPTION_RETRY);
+		mUIs.insert(std::make_pair(eUIType::PLAYOPTION_RETRY, PlayRetryButton));
+		PlayRetryButton->SetPos(Vector2(252.5, 170.0f));
+		PlayRetryButton->ImageLoad(L"PlayRetry", L"..\\Resources\\Image\\UI\\PlayScene\\RETRY.png");
+		PlayRetryButton->SetClickImage(L"PlayRetry_onClick", L"..\\Resources\\Image\\UI\\PlayScene\\RETRY_ON.png");
+
+		Button* PlayExitButton = new Button(eUIType::PLAYOPTION_EXIT);
+		mUIs.insert(std::make_pair(eUIType::PLAYOPTION_EXIT, PlayExitButton));
+		PlayExitButton->SetPos(Vector2(190, 240.0f));
+		PlayExitButton->ImageLoad(L"PlayExit", L"..\\Resources\\Image\\UI\\PlayScene\\EXITTOMAP.png");
+		PlayExitButton->SetClickImage(L"PlayExit_onClick", L"..\\Resources\\Image\\UI\\PlayScene\\EXITTOMAP_ON.png");
+		
+
+		Panel* panel = new Panel(eUIType::PLAYOPTION_PANEL);
+		mUIs.insert(std::make_pair(eUIType::PLAYOPTION_PANEL, panel));
+		panel->ImageLoad(L"PlayPanel", L"..\\Resources\\Image\\UI\\PlayScene\\Panel.png");
+		panel->SetPos(Vector2(450, 250));
+		panel->AddChild(PlayResumeButton);
+		panel->AddChild(PlayRetryButton);
+		panel->AddChild(PlayExitButton);
 
 		HealthUI* healthUI = new HealthUI(eUIType::HP);
 		mUIs.insert(std::make_pair(eUIType::HP, healthUI));

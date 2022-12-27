@@ -38,4 +38,9 @@ namespace ya
 		ObjectManager::Destroy(this);
 	}
 
+	void Phase3BGExplodeEffect::Release()
+	{
+		mAnimator->Release();
+	}
+
 }

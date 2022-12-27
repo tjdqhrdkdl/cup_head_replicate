@@ -5,6 +5,7 @@ namespace ya {
 
 	class Collider;
 	class Scene;
+	class GameObject;
 	class CollisionManager
 	{
 	public:
@@ -12,6 +13,7 @@ namespace ya {
 		static void SetLayer(eColliderLayer left, eColliderLayer right, bool value);
 		static void LayerCollision(Scene* scene, eColliderLayer left, eColliderLayer right);
 		static bool Intersect(Collider* left, Collider* right);
+
 
 		static void ColliderCollision(Collider* left, Collider* right);
 		static std::map<UINT64, bool>* GetCollisionInfo() { return &mCollisionInfo; }

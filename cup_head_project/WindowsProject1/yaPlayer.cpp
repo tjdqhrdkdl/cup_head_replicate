@@ -16,6 +16,7 @@
 #include "yaDashEffect.h"
 #include "yaOnHitEffect.h"
 #include "yaPinkSpring.h"
+#include "yaCrackShot.h"
 
 #define STATE_HAVE(STATE) (mCurState & STATE) == STATE
 namespace ya 
@@ -45,10 +46,11 @@ namespace ya
 		SetPos({ 400.0f, 700.0f });
 		SetScale({ 90.0f, 120.0f });
 		AddComponent(new Collider());
-
+		GetComponent<Collider>()->SetBulletPassing(true);
 		mJumpCollider = new Collider();
 		mJumpCollider->SetScale({ 90,10 });
 		mJumpCollider->SetAddPos({ 0,60 });
+		mJumpCollider->SetBulletPassing(true);
 		AddComponent(mJumpCollider);
 		mRigidbody = new Rigidbody();
 		mRigidbody->SetGround(true);
@@ -180,6 +182,7 @@ namespace ya
 		//Initialize시 이미지 로드
 		{
 			PeaShooter({ 1,0 });
+			CrackShot({ 1,0 });
 			ParryEffect();
 			DashEffect();
 			SpecialAttackEffect({ 1,0 });
@@ -426,58 +429,58 @@ namespace ya
 		if (!(STATE_HAVE(PlayerState_OnHit)))
 		{
 			// 키 눌러진 상태
-			if (KEY_PRESSED(eKeyCode::UP))
-			{
-				mCurState |= PlayerState_Input_Up;
-			}
-			if (KEY_PRESSED(eKeyCode::DOWN))
-			{
-				mCurState |= PlayerState_Input_Down;
-			}
-			if (KEY_PRESSED(eKeyCode::LEFT))
-			{
-				mCurState |= PlayerState_Input_Left;
-				if (!(STATE_HAVE(PlayerState_OnDash)))
-					mCurState &= ~PlayerState_LookRight;
-			}
-			if (KEY_PRESSED(eKeyCode::RIGHT))
-			{
-				mCurState |= PlayerState_Input_Right;
+				if (KEY_PRESSED(eKeyCode::UP))
+				{
+					mCurState |= PlayerState_Input_Up;
+				}
+				if (KEY_PRESSED(eKeyCode::DOWN))
+				{
+					mCurState |= PlayerState_Input_Down;
+				}
+				if (KEY_PRESSED(eKeyCode::LEFT))
+				{
+					mCurState |= PlayerState_Input_Left;
+					if (!(STATE_HAVE(PlayerState_OnDash)))
+						mCurState &= ~PlayerState_LookRight;
+				}
+				if (KEY_PRESSED(eKeyCode::RIGHT))
+				{
+					mCurState |= PlayerState_Input_Right;
 
-				if (!(STATE_HAVE(PlayerState_OnDash)))
-					mCurState |= PlayerState_LookRight;
+					if (!(STATE_HAVE(PlayerState_OnDash)))
+						mCurState |= PlayerState_LookRight;
+				}
+				if (KEY_PRESSED(eKeyCode::X))
+				{
+					mCurState |= PlayerState_Input_X;
+
+				}
+				if (KEY_PRESSED(eKeyCode::C))
+				{
+					mCurState |= PlayerState_Input_C;
+				}
 			}
-			if (KEY_PRESSED(eKeyCode::X))
+
+			// 키 누르는 순간
+			// 중복키
+
+			//키 떼는 순간
+			if (KEY_UP(eKeyCode::UP))
 			{
-				mCurState |= PlayerState_Input_X;
-
+				mCurState &= ~PlayerState_Input_Up;
 			}
-			if (KEY_PRESSED(eKeyCode::C))
+			if (KEY_UP(eKeyCode::DOWN))
 			{
-				mCurState |= PlayerState_Input_C;
+				mCurState &= ~PlayerState_Input_Down;
 			}
-		}
-
-		// 키 누르는 순간
-		// 중복키
-
-		//키 떼는 순간
-		if (KEY_UP(eKeyCode::UP))
-		{
-			mCurState &= ~PlayerState_Input_Up;
-		}
-		if (KEY_UP(eKeyCode::DOWN))
-		{
-			mCurState &= ~PlayerState_Input_Down;
-		}
-		if (KEY_UP(eKeyCode::LEFT))
-		{
-			mCurState &= ~PlayerState_Input_Left;
-		}
-		if (KEY_UP(eKeyCode::RIGHT))
-		{
-			mCurState &= ~PlayerState_Input_Right;
-		}
+			if (KEY_UP(eKeyCode::LEFT))
+			{
+				mCurState &= ~PlayerState_Input_Left;
+			}
+			if (KEY_UP(eKeyCode::RIGHT))
+			{
+				mCurState &= ~PlayerState_Input_Right;
+			}
 		if (KEY_UP(eKeyCode::X))
 		{
 			mCurState &= ~PlayerState_Input_X;
@@ -493,6 +496,12 @@ namespace ya
 			mSpecialPoint = 5;
 			mHP = 5;
 			//Jump()
+		}
+
+		if (KEY_DOWN(eKeyCode::A))
+		{
+			mCurGunType = eGunType((int(mCurGunType) + 1)%2);
+			SetShooterCoolTime(mCurGunType);
 		}
 	}
 
@@ -879,6 +888,10 @@ namespace ya
 			SetGunDir();
 			if (mCurGunType == eGunType::PeaShooter)
 				bullet = new PeaShooter(mGunDir);
+			else if (mCurGunType == eGunType::CrackShot)
+				bullet = new CrackShot(mGunDir);
+			else if (mCurGunType == eGunType::Spreader)
+				;
 			SetBulletStartPos(bullet);
 			bullet->Initialize();
 			bullet->SetOwner(this);
@@ -1191,15 +1204,25 @@ namespace ya
 					bool isSpecial = true;
 					bullet = new PeaShooter(mGunDir, isSpecial);
 				}
-				SetEXBulletStartPos(bullet);
-				bullet->Initialize();
-				bullet->SetOwner(this);
+				else if (mCurGunType == eGunType::CrackShot)
+				{
+					bool isSpecial = true;
+					if (mEXCrackShot != nullptr)
+						mEXCrackShot->SetParried(true);
+					bullet = new CrackShot(mGunDir, isSpecial);
+					mEXCrackShot = dynamic_cast<CrackShot*>( bullet);
+				}
+				if (bullet != nullptr)
+				{
+					SetEXBulletStartPos(bullet);
+					bullet->Initialize();
+					bullet->SetOwner(this);
+					Scene* curScene = SceneManager::GetCurScene();
+					curScene->AddGameObject(bullet, eColliderLayer::Player_Projecttile);
+					mReloading = true;
+				}
 
 
-
-				Scene* curScene = SceneManager::GetCurScene();
-				curScene->AddGameObject(bullet, eColliderLayer::Player_Projecttile);
-				mReloading = true;
 			}
 			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetVelocity({ 0,0 });
 			dynamic_cast<Rigidbody*>(GetComponent(eComponentType::Rigidbody))->SetGravity({ 0,0 });
@@ -1308,7 +1331,7 @@ namespace ya
 		if (guntype == eGunType::PeaShooter)
 			mShooterCoolTime = PeaShooter::GetCoolTime();
 		else if (guntype == eGunType::CrackShot)
-			mShooterCoolTime = 0.5f;
+			mShooterCoolTime = CrackShot::GetCoolTime();
 		else if (guntype == eGunType::Spreader)
 			mShooterCoolTime = 0.1f;
 	}

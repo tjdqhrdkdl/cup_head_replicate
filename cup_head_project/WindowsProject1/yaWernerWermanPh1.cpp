@@ -854,6 +854,13 @@ namespace ya
 
 	void WernerWermanPh1::Release()
 	{
+		mContentAnimator->Release();
+		mCanFrontAnimator->Release();
+		mCanBackAnimator->Release();
+		mWheelsAnimator->Release();
+		Junk(1).Release();
+		PinkSpring(1).Release();
+		TomatoBomb().Release();
 	}
 
 }

@@ -46,4 +46,9 @@ namespace ya
 		mPh2WallGround = ObjectManager::Instantiate<Ph2WallGround>(SceneManager::GetCurScene(), eColliderLayer::FrontObject);
 	}
 
+	void Phase2BGChanger::Release()
+	{
+		mAnimator->Release();
+	}
+
 }

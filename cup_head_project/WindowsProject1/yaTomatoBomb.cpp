@@ -123,6 +123,8 @@ namespace ya
 
 	void TomatoBomb::Release()
 	{
+		mAnimator->Release();
+		TomatoFire().Release();
 	}
 
 }

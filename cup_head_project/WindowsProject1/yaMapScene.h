@@ -1,7 +1,11 @@
 #pragma once
 #include "yaScene.h"
 
-namespace ya {
+namespace ya 
+{
+	class BgImageObject;
+	class WorldPlayer;
+	class WorldMap;
 	class MapScene : public Scene
 	{
 	public:
@@ -15,6 +19,11 @@ namespace ya {
 
 		virtual void Enter();
 		virtual void Exit();
-
+	private:
+		BgImageObject* mBGI;
+		BgImageObject* mBGITopperLeft;
+		BgImageObject* mBGITopperRight;
+		WorldPlayer* mWorldPlayer;
+		WorldMap* mWorldMap;
 	};
 }

@@ -16,7 +16,7 @@ namespace ya
 		static void SetTarget(GameObject* gameObj) { mTarget = gameObj; }
 		static void SetCameraEffect(eCameraEffect effect) { mEffect = effect; }
 
-
+		static void PositionInit(){mTarget = nullptr, mLookPosition = (mResolution / 2.0f) , mDistance = { 0,0 };}
 	private:
 		Camera() = default;
 		~Camera() = default;

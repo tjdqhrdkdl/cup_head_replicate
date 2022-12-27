@@ -14,7 +14,7 @@ namespace ya
 		SetScale({ 1600,900 });
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
-		mAnimator->CreateAnimation(L"Enter", L"..\\Resources\\Image\\Camera\\Enter\\tile0", 17, 0.03f, true, false, { 0,0 }, true, true);
+		mAnimator->CreateAnimation(L"Enter", L"..\\Resources\\Image\\Camera\\Enter\\tile0", 17, 0.03f, true, false, { 0,0 }, false, true);
 
 		mAnimator->GetCompleteEvent(L"Enter") = std::bind(&SceneEnter::AnimCompleteEvent, this);
 		mAnimator->Play(L"Enter", true);

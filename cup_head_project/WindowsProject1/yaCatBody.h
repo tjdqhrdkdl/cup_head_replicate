@@ -29,9 +29,9 @@ namespace ya
 		void Release();
 
 	private:
-		Animator* mLeftArmAnimator;;
+		Animator* mLeftArmAnimator;
 		Animator* mRightArmAnimator;
-		Animator* mBodyAnimator;;
+		Animator* mBodyAnimator;
 		Animator* mTailAnimator;
 
 	};

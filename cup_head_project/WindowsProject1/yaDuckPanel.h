@@ -1,6 +1,6 @@
 #pragma once
 #include "Common.h"
-#include "yaGameObject.h"
+#include "yaMonster.h"
 #include "yaPicture.h"
 #include "yaLightBulb.h"
 
@@ -8,7 +8,7 @@ namespace ya
 {
 
 	class Animator;
-	class DuckPanel : public GameObject
+	class DuckPanel : public Monster
 	{
 	public:
 

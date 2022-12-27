@@ -61,6 +61,7 @@ namespace ya
 			if (!mSpecial)
 			{
 				mAnimator->Play(L"BulletDeath", false);
+				GetComponent<Collider>()->SetOff(true);
 			}
 		}
 	}

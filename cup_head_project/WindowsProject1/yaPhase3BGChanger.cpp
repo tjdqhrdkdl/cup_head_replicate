@@ -40,4 +40,9 @@ namespace ya
 		dynamic_cast<BossCanRatScene*>(SceneManager::GetCurScene())->ChangeLastBGQue();
 	}
 
+	void Phase3BGChanger::Release()
+	{
+		mAnimator->Release();
+	}
+
 }

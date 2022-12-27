@@ -113,6 +113,7 @@ namespace ya {
 
 	void Paw::Release()
 	{
+		mAnimator->Release();
 	}
 
 }

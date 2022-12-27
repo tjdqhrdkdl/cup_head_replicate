@@ -13,6 +13,7 @@ namespace ya {
 			virtual void Tick() override;
 			virtual void Render(HDC hdc) override;
 
+			void SetReady() { mbReady = true; }
 
 			virtual void Enter();
 			virtual void Exit();
@@ -20,5 +21,7 @@ namespace ya {
 	private:
 		GameObject* mReady;
 		GameObject* mLogo;
+
+		bool mbReady;
 	};
 }

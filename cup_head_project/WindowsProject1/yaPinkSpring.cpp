@@ -147,6 +147,7 @@ namespace ya
 
 	void PinkSpring::Release()
 	{
+		mAnimator->Release();
 	}
 
 }

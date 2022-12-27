@@ -495,6 +495,17 @@ namespace ya
 
 	void WernerWermanPh2::Release()
 	{
+		mBottomAnimator->Release();
+		mTinBackAnimator->Release();
+		mScissorAnimator->Release();
+		mLeftCannonAnimator->Release();
+		mRightCannonAnimator->Release();
+		mMouseAnimator->Release();
+		mTinFrontAnimator->Release();
+		mLeftFireAnimator->Release();
+		mRightFireAnimator->Release();
+		BottomWoodCart().Release();
+		Disc(1).Release();
 	}
 
 }

@@ -141,6 +141,7 @@ namespace ya
 
 	void BottomWoodCart::Release()
 	{
+		mAnimator->Release();
 	}
 
 }

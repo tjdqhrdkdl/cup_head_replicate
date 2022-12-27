@@ -6,6 +6,7 @@ namespace ya
 {
 	class Player;
 	class Disc;
+	class CameraBlur;
 	class BossCanRatScene : public Scene
 	{
 	public:
@@ -17,7 +18,9 @@ namespace ya
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 
-
+		void ResumeClickEvent();
+		void RetryClickEvent();
+		void ExitClickEvent();
 		virtual void Enter() override;
 		virtual void Exit() override;
 
@@ -50,5 +53,8 @@ namespace ya
 		bool mbPhaseChanged;
 		float mPhaseTimeChecker;
 		float mPeakTimeChecker;
+
+		CameraBlur* mCameraBlur;
+		bool mbUIOn;
 	};
 }

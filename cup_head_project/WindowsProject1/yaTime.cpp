@@ -5,6 +5,7 @@ LARGE_INTEGER ya::Time::mPrevFrequency;
 LARGE_INTEGER ya::Time::mCurFrequency;
 float ya::Time::mDeltaTime = 0.0f;
 bool ya::Time::mSlowDown = false;
+bool ya::Time::mStop = false;
 
 void ya::Time::Initialize()
 {
@@ -41,6 +42,8 @@ float ya::Time::DeltaTime()
 {
 	if (mSlowDown)
 		return mDeltaTime * 0.001f;
+	else if (mStop)
+		return 0;
 	else
 		return mDeltaTime;
 }

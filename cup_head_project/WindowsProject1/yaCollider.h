@@ -21,6 +21,7 @@ namespace ya
 		void SetBulletPassing(bool off) { misBulletPassing = off; }
 		void SetAddPos(Vector2 pos) { mAddPos = pos; }
 		void SetDanger(bool off) { misDanger = off; }
+		Vector2 GetAddPos() { return mAddPos; }
 		Vector2 GetPos() { return mPos; }
 		Vector2 GetOffset() { return mOffset; }
 		Vector2 GetScale() { return mScale; }

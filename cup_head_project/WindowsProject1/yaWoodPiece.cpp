@@ -96,6 +96,7 @@ namespace ya
 
 	void WoodPiece::Release()
 	{
+		mAnimator->Release();
 	}
 
 }

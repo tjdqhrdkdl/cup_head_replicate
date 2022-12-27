@@ -18,6 +18,7 @@ namespace ya
 
 		void Phase2BGChangerCompleteEvent();
 
+		void Release();
 	private:
 		Animator* mAnimator;
 		float mTime;

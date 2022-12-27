@@ -19,6 +19,8 @@
 #include "yaPhase2BGChanger.h"
 #include "yaPhase3BGChanger.h"
 #include "yaPhase3BGExplodeEffect.h"
+#include "yaCameraBlur.h"
+#include "yaButton.h"
 namespace ya
 {
 	BossCanRatScene::BossCanRatScene()
@@ -64,6 +66,7 @@ namespace ya
 		ObjectManager::Instantiate<WernerWermanPh1>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
 		ObjectManager::Instantiate<Ready>(this, eColliderLayer::Top_Effect);
 
+		mCameraBlur = ObjectManager::Instantiate<CameraBlur>(this, eColliderLayer::Top_Effect);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontObject, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::BehindMonster, true);
@@ -105,6 +108,12 @@ namespace ya
 		healthUI->SetTarget(mPlayer);
 		HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
 		exPointUI->SetTarget(mPlayer);
+		Button* resumeButton = UIManager::GetUiInstant<Button>(eUIType::PLAYOPTION_RESUME);
+		resumeButton->GetOnClickEvent() = std::bind(&BossCanRatScene::ResumeClickEvent, this);
+		Button* retryButton = UIManager::GetUiInstant<Button>(eUIType::PLAYOPTION_RETRY);
+		retryButton->GetOnClickEvent() = std::bind(&BossCanRatScene::RetryClickEvent, this);
+		Button* exitButton = UIManager::GetUiInstant<Button>(eUIType::PLAYOPTION_EXIT);
+		exitButton->GetOnClickEvent() = std::bind(&BossCanRatScene::ExitClickEvent, this);
 		mPhaseTimeChecker = 0;
 		mPhase = 0;
 		mbPhaseChanged = false;
@@ -112,81 +121,96 @@ namespace ya
 
 	void BossCanRatScene::Tick()
 	{
-		Scene::Tick();
-		if ( mPhase <2)
+		if (!Time::isStop())
 		{
-			mPeakTimeChecker += Time::DeltaTime();
-			if (mPeakTimeChecker > 10)
+			Scene::Tick();
+			if (mPhase < 2)
 			{
-				switch (rand()%3)
+				mPeakTimeChecker += Time::DeltaTime();
+				if (mPeakTimeChecker > 10)
 				{
-				case 0:
-					mPeakingCat->Reset({ -500,800 }, { 400, 640 });
-					break;
-				case 1:
-					mPeakingCat->Reset({ 2100,800 }, { 1150, 250 });
-					break;
-				case 2:
-					mPeakingCat->Reset({ 400,1200 }, { 830, 840 });
-					break;
-				}
+					switch (rand() % 3)
+					{
+					case 0:
+						mPeakingCat->Reset({ -500,800 }, { 400, 640 });
+						break;
+					case 1:
+						mPeakingCat->Reset({ 2100,800 }, { 1150, 250 });
+						break;
+					case 2:
+						mPeakingCat->Reset({ 400,1200 }, { 830, 840 });
+						break;
+					}
 
-				mPeakTimeChecker = 0;
-			}
-		}
-		else if (mPhase == 2)
-		{
-			mPeakTimeChecker += Time::DeltaTime();
-			if (mPeakTimeChecker > 10)
-			{
-				switch (rand() % 3)
-				{
-				case 0:
-					mPeakingCat->Reset({ -500,800 }, { 400, 540 });
-					break;
-				case 1:
-					mPeakingCat->Reset({ 2100,800 }, { 1150, 250 });
-					break;
-				case 2:
-					mPeakingCat->Reset({ 400,1200 }, { 830, 840 });
-					break;
-				}
-
-				mPeakTimeChecker = 0;
-			}
-		}
-		if (mPhase == 2 && mbPhaseChanged)
-		{
-			ObjectManager::Destroy(mBGI1);
-			AddGameObject(mBGI2, eColliderLayer::BehindMonster);
-			mPh2BGChanger = ObjectManager::Instantiate<Phase2BGChanger>(this, eColliderLayer::BehindMonster);
-			for (size_t i = 0; i < 2; i++)
-			{
-				for (size_t k = 0; k < 7; k++)
-				{
-					dynamic_cast<WernerWermanPh2*>(mPhase2Object)->SetDiscs(mDiscs[i][k], i);
+					mPeakTimeChecker = 0;
 				}
 			}
-			mbPhaseChanged = false;
+			else if (mPhase == 2)
+			{
+				mPeakTimeChecker += Time::DeltaTime();
+				if (mPeakTimeChecker > 10)
+				{
+					switch (rand() % 3)
+					{
+					case 0:
+						mPeakingCat->Reset({ -500,800 }, { 400, 540 });
+						break;
+					case 1:
+						mPeakingCat->Reset({ 2100,800 }, { 1150, 250 });
+						break;
+					case 2:
+						mPeakingCat->Reset({ 400,1200 }, { 830, 840 });
+						break;
+					}
+
+					mPeakTimeChecker = 0;
+				}
+			}
+			if (mPhase == 2 && mbPhaseChanged)
+			{
+				ObjectManager::Destroy(mBGI1);
+				AddGameObject(mBGI2, eColliderLayer::BehindMonster);
+				mPh2BGChanger = ObjectManager::Instantiate<Phase2BGChanger>(this, eColliderLayer::BehindMonster);
+				for (size_t i = 0; i < 2; i++)
+				{
+					for (size_t k = 0; k < 7; k++)
+					{
+						dynamic_cast<WernerWermanPh2*>(mPhase2Object)->SetDiscs(mDiscs[i][k], i);
+					}
+				}
+				mbPhaseChanged = false;
+			}
+
+			if (mPhase == 3 && mbPhaseChanged)
+			{
+				mPhaseTimeChecker += Time::DeltaTime();
+				mPeakingCat->SetPhase2ObjectToDelete(mPhase2Object);
+				mbPhaseChanged = false;
+			}
+
+			if (mPhase == 5 && mbPhaseChanged)
+			{
+				mbPhaseChanged = false;
+				SceneManager::ChangeScene(eSceneType::Map);
+			}
 		}
-
-		if (mPhase == 3 && mbPhaseChanged)
+		if (KEY_DOWN(eKeyCode::ESC))
 		{
-			mPhaseTimeChecker += Time::DeltaTime();
-			mPeakingCat->SetPhase2ObjectToDelete(mPhase2Object);
-			mbPhaseChanged = false;
-		}
+			if (!mbUIOn)
+			{
+				UIManager::Push(eUIType::PLAYOPTION_PANEL);
+				mbUIOn = true;
+				Time::Stop(true);
+				mCameraBlur->SetOn(true);
+			}
+			else
+			{
+				UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+				mbUIOn = false;
+				Time::Stop(false);
+				mCameraBlur->SetOn(false);
 
-		if (mPhase == 5 && mbPhaseChanged)
-		{
-			mbPhaseChanged = false;
-			SceneManager::ChangeScene(eSceneType::Map);
-		}
-
-
-		if (KEY_DOWN(eKeyCode::N))
-		{
-			SceneManager::ChangeScene(eSceneType::Map);
+			}
 		}
 
 	}
@@ -202,6 +226,52 @@ namespace ya
 
 
 
+	}
+
+	void BossCanRatScene::ResumeClickEvent()
+	{
+		if (KEY_DOWN(eKeyCode::LBTN))
+		{
+			UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+			mbUIOn = false;
+			Time::Stop(false);
+			mCameraBlur->SetOn(false);
+		}
+	}
+
+	void BossCanRatScene::RetryClickEvent()
+	{
+		if (KEY_DOWN(eKeyCode::LBTN))
+		{
+			UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+			mbUIOn = false;
+			Time::Stop(false);
+			mCameraBlur->SetOn(false);
+			Scene::Release();
+			mbInitialized = false;
+			UIManager::Pop(eUIType::HP);
+			UIManager::Pop(eUIType::MP);
+			HUD* healthUI = UIManager::GetUiInstant<HUD>(eUIType::HP);
+			healthUI->SetTarget(nullptr);
+			HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
+			exPointUI->SetTarget(nullptr);
+			Initialize();
+			Scene::Enter();
+			UIManager::Push(eUIType::HP);
+			UIManager::Push(eUIType::MP);
+		}
+	}
+
+	void BossCanRatScene::ExitClickEvent()
+	{
+		if (KEY_DOWN(eKeyCode::LBTN))
+		{
+			UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+			mbUIOn = false;
+			Time::Stop(false);
+			mCameraBlur->SetOn(false);
+			SceneManager::ChangeScene(eSceneType::Map);
+		}
 	}
 
 	void BossCanRatScene::ChangeBGQue()
@@ -245,5 +315,11 @@ namespace ya
 	}
 	void BossCanRatScene::Release()
 	{
+		WernerWermanPh1().Release();
+		WernerWermanPh2(1,true).Release();
+		WernerWermanPh3(true).Release();
+		Phase2BGChanger().Release();
+		Phase3BGChanger().Release();
+		Phase3BGExplodeEffect().Release();
 	}
 }

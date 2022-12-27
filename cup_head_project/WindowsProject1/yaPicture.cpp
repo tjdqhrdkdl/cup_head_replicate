@@ -131,5 +131,23 @@ namespace ya
 			DeleteDC(mHdc);
 		}
 
+	}	
+	Pixel Picture::GetPixelImage(int x, int y)
+	{
+		COLORREF rgba = GetPixel(mHdc, x, y);
+
+		return Pixel(rgba);	
+	}
+
+	void Picture::SetPixel(int x, int y, Pixel pixel)
+	{
+		// 비트맵 좌표는 촤측하단이 0,0 
+		// 윈도우좌표처럼 사용하려면 y를 반대로 바꾸어 주어야 한다.
+		y = (UINT)mHeight - (y + 1);
+
+		Pixel* bitmapPixel = (Pixel*)mBitmap;
+		bitmapPixel += ((UINT)mWidth * y + x);
+
+		*bitmapPixel = pixel;
 	}
 }

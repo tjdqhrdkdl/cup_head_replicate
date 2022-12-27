@@ -14,6 +14,7 @@ namespace ya
 		static Scene* GetCurScene() { return mCurScene; }
 		static void SetCurScene(eSceneType type) { mCurScene = mScenes[(UINT)type]; }
 
+
 		static void DetroyGameObject();
 		static void ChangeScene(eSceneType type);
 

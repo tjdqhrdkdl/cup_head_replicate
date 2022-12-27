@@ -144,6 +144,15 @@
     <Filter Include="Engine\GameObject\BossWernerWerman\Phase 3">
       <UniqueIdentifier>{647c87ae-4c7e-421f-b549-d182a40ae8ea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Map">
+      <UniqueIdentifier>{22a4e1c9-e3a9-41b7-9711-495cd7967448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Gun\Spreader">
+      <UniqueIdentifier>{e2da708d-82cc-4d3d-a917-4b916dbf6199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Gun\CrackShot">
+      <UniqueIdentifier>{20c0a770-e00b-4555-a870-7818aefecc42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -434,6 +443,22 @@
     <ClInclude Include="yaWoodPiece.h">
       <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
     </ClInclude>
+    <ClInclude Include="yaWorldMap.h">
+      <Filter>Engine\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="yaWorldPlayer.h">
+      <Filter>Engine\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="yaSpreader.h">
+      <Filter>Engine\GameObject\Gun\Spreader</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPanel.h" />
+    <ClInclude Include="yaCameraBlur.h" />
+    <ClInclude Include="yaButton.h" />
+    <ClInclude Include="yaBossObject.h" />
+    <ClInclude Include="yaCrackShot.h">
+      <Filter>Engine\GameObject\Gun\CrackShot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -705,6 +730,30 @@
     </ClCompile>
     <ClCompile Include="yaWoodPiece.cpp">
       <Filter>Engine\GameObject\BossWernerWerman\Phase 3</Filter>
+    </ClCompile>
+    <ClCompile Include="yaWorldMap.cpp">
+      <Filter>Engine\GameObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="yaWorldPlayer.cpp">
+      <Filter>Engine\GameObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSpreader.cpp">
+      <Filter>Engine\GameObject\Gun\Spreader</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPanel.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCameraBlur.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="yaButton.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBossObject.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCrackShot.cpp">
+      <Filter>Engine\GameObject\Gun\CrackShot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,8 @@
 #include "yaScene.h"
 #include "yaCamera.h"
-
+#include "yaCollider.h"
 #include "yaApplication.h"
-
+#include "yaMonster.h"
 namespace ya {
 	Scene::Scene()
 	{
@@ -90,6 +90,37 @@ namespace ya {
 			mObjects[_COLLIDER_LAYER - 1].erase(mObjects[_COLLIDER_LAYER - 1].begin() + y);
 		}
 		mObjects[_COLLIDER_LAYER - 1].clear();
+	}
+
+	Collider* Scene::GetNearestCollider(GameObject* base, eColliderLayer targetLayer)
+	{
+		Vector2 pos =  base->GetPos();
+		std::vector<GameObject*> layerObjects = mObjects[(int)targetLayer];
+		float minDistance = -1;
+		Collider* retCol = nullptr;
+		for (size_t i = 0; i < layerObjects.size(); i++)
+		{
+			if (dynamic_cast<Monster*>(layerObjects[i]) != nullptr)
+			{
+				std::vector<Collider*> colliders = layerObjects[i]->GetComponents<Collider>();
+				for (size_t k = 0; k < colliders.size(); k++)
+				{
+					if (!colliders[k]->isOff())
+					{
+						Vector2 targetPos = colliders[k]->GetPos();
+						Vector2 difPos = targetPos - pos;
+
+						float distance = sqrtf(difPos.x * difPos.x + difPos.y * difPos.y);
+						if (distance < 1300 && (distance < minDistance || minDistance < 0))
+						{
+							minDistance = distance;
+							retCol = colliders[k];
+						}
+					}
+				}
+			}
+		}
+		return retCol;
 	}
 
 	void Scene::AddGameObject(GameObject* gameobject, eColliderLayer type)

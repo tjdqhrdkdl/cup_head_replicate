@@ -10,6 +10,7 @@
 #include "yaTime.h"
 #include "yaReadyAnimation.h"
 #include "yaAnimator.h"
+#include "yaBgImageObject.h"
 namespace ya {
 	LogoScene::LogoScene()
 	{
@@ -22,6 +23,10 @@ namespace ya {
 	void LogoScene::Initialize()
 	{
 		mReady = ObjectManager::Instantiate<ReadyAnimation>(this, eColliderLayer::BackGround);
+		BgImageObject* press =  new BgImageObject();
+		press->SetImage(L"PressAny", L"UI\\press.png", RGB(255, 0, 255), true);
+		press->SetPos({ 550,760 });
+		AddGameObject(press, eColliderLayer::BackGround);
 		mLogo = ObjectManager::Instantiate<LogoAnimation>(this, eColliderLayer::BackGround);
 		Scene::Initialize();
 	}
@@ -30,11 +35,14 @@ namespace ya {
 	{
 		Scene::Tick();
 		bool out = false;
-		for (size_t i = 0; i < 58; i++)
+		if (mbReady)
 		{
-			if (KEY_DOWN((eKeyCode)i))
+			for (size_t i = 0; i < 58; i++)
 			{
-				out = true;
+				if (KEY_DOWN((eKeyCode)i))
+				{
+					out = true;
+				}
 			}
 		}
 		if (out)

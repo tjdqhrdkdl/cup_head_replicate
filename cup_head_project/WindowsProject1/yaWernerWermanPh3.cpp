@@ -443,4 +443,14 @@ namespace ya
 			mHeadAnimator->Play(L"HeadIdleRight", false);
 	}
 
+	void WernerWermanPh3::Release()
+	{
+		mHeadAnimator->Release();
+		CatBody().Release();
+		Paw(1).Release();
+		GhostMouse(1).Release();
+		WoodPiece().Release();
+		
+	}
+
 }

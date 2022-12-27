@@ -34,6 +34,8 @@ namespace ya
 		
 
 
+		Pixel GetPixelImage(int x, int y);
+		void SetPixel(int x, int y, Pixel pixel);
 
 		bool mbDeletedGDIPlusImage;
 	private:

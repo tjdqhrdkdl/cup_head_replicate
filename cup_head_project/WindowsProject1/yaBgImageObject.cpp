@@ -5,6 +5,7 @@ namespace ya {
 
 	BgImageObject::BgImageObject()
 		:mImage(nullptr)
+		, mbOff(false)
 	{
 	}
 
@@ -31,17 +32,18 @@ namespace ya {
 		rect.y = mImage->GetHeight() * scale.y;
 		
 		
-
-		if (mIsTransparent)
+		if (!mbOff) 
 		{
-			TransparentBlt(hdc, finalPos.x, finalPos.y, rect.x, rect.y
-				, mImage->GetDC(), 0, 0, mImage->GetWidth(), mImage->GetHeight()
-				, mColor);
+			if (mIsTransparent)
+			{
+				TransparentBlt(hdc, finalPos.x, finalPos.y, rect.x, rect.y
+					, mImage->GetDC(), 0, 0, mImage->GetWidth(), mImage->GetHeight()
+					, mColor);
 
+			}
+			else
+				BitBlt(hdc, finalPos.x, finalPos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetDC(), 0, 0, SRCCOPY);
 		}
-		else
-			BitBlt(hdc, finalPos.x, finalPos.y, mImage->GetWidth(), mImage->GetHeight(), mImage->GetDC(), 0, 0, SRCCOPY);
-
 		GameObject::Render(hdc);
 	}
 

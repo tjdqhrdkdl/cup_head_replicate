@@ -1,7 +1,9 @@
 #pragma once
 #include "Common.h"
 #include "yaGameObject.h"
-namespace ya {
+namespace ya 
+{
+	class Collider;
 	class Scene
 	{
 	public:
@@ -16,6 +18,8 @@ namespace ya {
 
 		void Release();
 		void ReleaseCameraObj();
+
+		Collider* GetNearestCollider(GameObject* base, eColliderLayer targetLayer);
 
 		void AddGameObject(GameObject* gameobject , eColliderLayer type);
 		void DeleteGameObject(GameObject* target);

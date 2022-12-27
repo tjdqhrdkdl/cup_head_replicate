@@ -1,5 +1,5 @@
 #include "yaInput.h"
-
+#include "yaApplication.h"
 
 namespace ya
 {
@@ -30,6 +30,7 @@ namespace ya
 	};
 
 	std::vector<Input::Key> Input::mKeys;
+	Vector2 Input::mMousePos;
 
 	void Input::Initialize()
 	{
@@ -78,6 +79,12 @@ namespace ya
 					mKeys[i].bPressed = false;
 				}
 
+				POINT mousePos = {};
+				GetCursorPos(&mousePos);
+				HWND hwnd = Application::GetInstance().GetWindowData().hWnd;
+				ScreenToClient(hwnd, &mousePos);
+				mMousePos.x = mousePos.x;
+				mMousePos.y = mousePos.y;
 			}
 		}
 		else
@@ -107,5 +114,22 @@ namespace ya
 	eKeyState Input::GetKeyState(eKeyCode keyCode)
 	{
 		return mKeys[(UINT)keyCode].state;
+	}
+
+	Vector2 Input::GetMousePos(HWND hWnd)
+	{
+		Vector2 vMousePos(-1.0f, -1.0f);
+		if (GetFocus())
+		{
+			POINT mousePos = {};
+			GetCursorPos(&mousePos);
+			ScreenToClient(hWnd, &mousePos);
+			vMousePos.x = mousePos.x;
+			vMousePos.y = mousePos.y;
+
+			return vMousePos;
+		}
+
+		return vMousePos;
 	}
 }

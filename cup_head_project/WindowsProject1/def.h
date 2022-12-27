@@ -69,7 +69,13 @@ enum class eUIType
 	MP,
 	SHOP,
 	INVENTORY,
-	OPTION,
+	TITLEOPTION_START,
+	TITLEOPTION_OPTION,
+	TITLEOPTION_EXIT,
+	PLAYOPTION_PANEL,
+	PLAYOPTION_RESUME,
+	PLAYOPTION_RETRY,
+	PLAYOPTION_EXIT,
 
 
 	END,
@@ -77,8 +83,15 @@ enum class eUIType
 enum class eGunType
 {
 	PeaShooter,
-	Spreader,
 	CrackShot,
+	Spreader,
+};
+
+enum class eBossType
+{
+	WernerWerman,
+	Beppi,
+	End
 };
 union CollisionId
 {
@@ -89,3 +102,4 @@ union CollisionId
 
 	UINT64 ID;
 };
+

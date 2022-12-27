@@ -62,33 +62,35 @@ namespace ya
 
 	void Penguin::Tick()
 	{
-		Vector2 pos = GetPos();
-		float destXPos;
-		switch (mPositionNumber)
+		if (mAnimator->GetPlayAnimation()->GetName() != L"Pop")
 		{
-		case 0:
-			destXPos = 10;
-			break;
-		case 1:
-			destXPos = 350;
-			break;
-		case 2:
-			destXPos = 700;
-			break;
-		case 3:
-			destXPos = 1050;
-			break;
-		case 4:
-			destXPos = 1310;
-			break;
-		case 5:
-			destXPos = 1570;
-			break;
-		}
-		Monster::Tick();
+			Vector2 pos = GetPos();
+			float destXPos;
+			switch (mPositionNumber)
+			{
+			case 0:
+				destXPos = 10;
+				break;
+			case 1:
+				destXPos = 350;
+				break;
+			case 2:
+				destXPos = 700;
+				break;
+			case 3:
+				destXPos = 1050;
+				break;
+			case 4:
+				destXPos = 1310;
+				break;
+			case 5:
+				destXPos = 1570;
+				break;
+			}
+			Monster::Tick();
 
 
-		if (mAnimator->GetPlayAnimation()->GetName() == L"RollOnGroundRight")
+			if (mAnimator->GetPlayAnimation()->GetName() == L"RollOnGroundRight")
 			{
 				pos.x += Time::DeltaTime() * 600;
 				if (pos.x > destXPos)
@@ -98,7 +100,7 @@ namespace ya
 					mAnimator->Play(L"RollGetUpRight", true);
 				}
 			}
-		else if(mAnimator->GetPlayAnimation()->GetName() == L"RollOnGroundLeft")
+			else if (mAnimator->GetPlayAnimation()->GetName() == L"RollOnGroundLeft")
 			{
 				pos.x -= Time::DeltaTime() * 600;
 				if (pos.x < destXPos)
@@ -108,43 +110,44 @@ namespace ya
 					mAnimator->Play(L"RollGetUpLeft", true);
 				}
 			}
-		else if (mRolloutPhase ==0)
-		{
-			pos.y += Time::DeltaTime() * 200;
-			if (pos.y > 520)
+			else if (mRolloutPhase == 0)
 			{
-				pos.y = 520;
-				++mRolloutPhase;
+				pos.y += Time::DeltaTime() * 200;
+				if (pos.y > 520)
+				{
+					pos.y = 520;
+					++mRolloutPhase;
+				}
 			}
-		}
-		else if (mRolloutPhase == 1)
-		{
-			pos.y -= Time::DeltaTime() * 200;
-			if (pos.y < 460)
+			else if (mRolloutPhase == 1)
 			{
-				pos.y = 460;
-				++mRolloutPhase;
+				pos.y -= Time::DeltaTime() * 200;
+				if (pos.y < 460)
+				{
+					pos.y = 460;
+					++mRolloutPhase;
+				}
 			}
-		}
-		else if (mRolloutPhase == 2)
-		{
-			pos.y += Time::DeltaTime() * 600;
-			if (mbGround)
-				mRolloutPhase = 3;
-		}
-		SetPos(pos);
+			else if (mRolloutPhase == 2)
+			{
+				pos.y += Time::DeltaTime() * 600;
+				if (mbGround)
+					mRolloutPhase = 3;
+			}
+			SetPos(pos);
 
-		if (mHp < 0)
-		{
-			if (mAnimator->GetPlayAnimation()->GetName() != L"Pop")
+			if (mHp < 0)
 			{
-				SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::Effect);
-				mAnimator->Play(L"Pop", false);
+				if (mAnimator->GetPlayAnimation()->GetName() != L"Pop")
+				{
+					SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::Effect);
+					mAnimator->Play(L"Pop", false);
+				}
+				mCollider->SetOff(true);
 			}
-			mCollider->SetOff(true);
-		}
 
-		SummonBaseBall();
+			SummonBaseBall();
+		}
 	}
 
 	void Penguin::Render(HDC hdc)

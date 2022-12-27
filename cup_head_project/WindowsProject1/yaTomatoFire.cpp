@@ -66,6 +66,7 @@ namespace ya
 
 	void TomatoFire::Release()
 	{
+		mAnimator->Release();
 	}
 
 }

@@ -219,6 +219,8 @@ namespace ya
 
 	void Disc::Release()
 	{
+		mAnimator->Release();
+		mStickAnimator->Release();
 	}
 
 }

@@ -20,6 +20,8 @@ namespace ya
 		void CatIntroCompleteEvent();
 
 		void SetOn(bool b) { mbOn = b; }
+
+		void Release();
 	private:
 		Animator* mAnimator;
 

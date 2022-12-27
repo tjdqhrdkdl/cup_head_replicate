@@ -107,6 +107,12 @@ namespace ya
 
 	void CatBody::Release()
 	{
+		mLeftArmAnimator->Release();
+		mRightArmAnimator->Release();
+		mBodyAnimator->Release();
+		mTailAnimator->Release();
+
+
 	}
 
 }

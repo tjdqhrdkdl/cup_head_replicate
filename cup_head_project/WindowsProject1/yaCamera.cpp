@@ -65,7 +65,18 @@ namespace ya
 
 
 		if (mTarget != nullptr)
+		{
 			mLookPosition = mTarget->GetPos();
+			Vector2 pos = mTarget->GetPos();
+			if (pos.x < 800)
+				mLookPosition.x = 800;
+			else if(pos.x >3200)
+				mLookPosition.x = 3200;
+			if(pos.y <470)
+				mLookPosition.y = 470;
+			else if (pos.y > 1850)
+				mLookPosition.y = 1850;
+		}
 
 		mDistance = mLookPosition - (mResolution / 2.0f);
 	}

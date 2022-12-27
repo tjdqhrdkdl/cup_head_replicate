@@ -2,7 +2,9 @@
 #include "yaAnimator.h"
 #include "yaCollider.h"
 #include "yaObjectManager.h"
+#include "yaSceneManager.h"
 #include "yaTime.h"
+#include "yaLogoScene.h"	
 namespace ya
 {
 	LogoAnimation::LogoAnimation()
@@ -45,6 +47,7 @@ namespace ya
 	void LogoAnimation::LogoCompleteEvent()
 	{
 		mComplete = true;
+		dynamic_cast<LogoScene*>(SceneManager::GetCurScene())->SetReady();
 	}
 
 }

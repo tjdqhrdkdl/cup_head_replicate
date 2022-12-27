@@ -5,6 +5,7 @@
 namespace ya 
 {
 	class Player;
+	class CameraBlur;
 	class BossBeppiScene : public Scene
 	{
 	public:
@@ -16,6 +17,9 @@ namespace ya
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 
+		void ResumeClickEvent();
+		void RetryClickEvent();
+		void ExitClickEvent();
 
 		virtual void Enter() override;
 		virtual void Exit() override;
@@ -35,5 +39,8 @@ namespace ya
 		UINT mPhase;
 		bool mbPhaseChanged;
 		float mPhaseTimeChecker;
+
+		CameraBlur* mCameraBlur;
+		bool mbUIOn;
 	};
 }

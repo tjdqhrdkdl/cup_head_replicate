@@ -12,7 +12,7 @@ namespace ya
 		mType = type;
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
-		mAnimator->CreateAnimation(L"Exit", L"..\\Resources\\Image\\Camera\\Exit\\tile00", 17, 0.03f, true, false, { 0,0 }, true, true);
+		mAnimator->CreateAnimation(L"Exit", L"..\\Resources\\Image\\Camera\\Exit\\tile00", 17, 0.03f, true, false, { 0,0 }, false, true);
 
 		mAnimator->GetCompleteEvent(L"Exit") = std::bind(&SceneExit::AnimCompleteEvent, this);
 		mAnimator->Play(L"Exit", true);

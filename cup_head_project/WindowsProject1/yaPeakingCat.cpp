@@ -122,5 +122,10 @@ namespace ya
 		phase3->SetPhase2Object(mPhase2Object);
 	}
 
+	void PeakingCat::Release()
+	{
+		mAnimator->Release();
+	}
+
 
 }

@@ -159,9 +159,13 @@
     <ClInclude Include="yaBgImageObject.h" />
     <ClInclude Include="yaBossExplosion.h" />
     <ClInclude Include="yaBossCanRatScene.h" />
+    <ClInclude Include="yaBossObject.h" />
     <ClInclude Include="yaBottomWoodCart.h" />
+    <ClInclude Include="yaButton.h" />
+    <ClInclude Include="yaCameraBlur.h" />
     <ClInclude Include="yaCatBody.h" />
     <ClInclude Include="yaCatPaw.h" />
+    <ClInclude Include="yaCrackShot.h" />
     <ClInclude Include="yaDashEffect.h" />
     <ClInclude Include="yaDisc.h" />
     <ClInclude Include="yaEXPointUI.h" />
@@ -189,6 +193,7 @@
     <ClInclude Include="yaLightBulb.h" />
     <ClInclude Include="yaLogoAnimation.h" />
     <ClInclude Include="yaOnHitEffect.h" />
+    <ClInclude Include="yaPanel.h" />
     <ClInclude Include="yaParryEffect.h" />
     <ClInclude Include="yaPeakingCat.h" />
     <ClInclude Include="yaPenguin.h" />
@@ -225,6 +230,7 @@
     <ClInclude Include="def.h" />
     <ClInclude Include="yaShootEffect.h" />
     <ClInclude Include="yaSpecialAttackEffect.h" />
+    <ClInclude Include="yaSpreader.h" />
     <ClInclude Include="yaSwingPlatform.h" />
     <ClInclude Include="yaTime.h" />
     <ClInclude Include="yaTitleScene.h" />
@@ -236,6 +242,8 @@
     <ClInclude Include="yaWernerWermanPh1.h" />
     <ClInclude Include="yaWernerWermanPh2.h" />
     <ClInclude Include="yaWoodPiece.h" />
+    <ClInclude Include="yaWorldMap.h" />
+    <ClInclude Include="yaWorldPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -253,9 +261,13 @@
     <ClCompile Include="yaBgImageObject.cpp" />
     <ClCompile Include="yaBossExplosion.cpp" />
     <ClCompile Include="yaBossCanRatScene.cpp" />
+    <ClCompile Include="yaBossObject.cpp" />
     <ClCompile Include="yaBottomWoodCart.cpp" />
+    <ClCompile Include="yaButton.cpp" />
+    <ClCompile Include="yaCameraBlur.cpp" />
     <ClCompile Include="yaCatBody.cpp" />
     <ClCompile Include="yaCatPaw.cpp" />
+    <ClCompile Include="yaCrackShot.cpp" />
     <ClCompile Include="yaDashEffect.cpp" />
     <ClCompile Include="yaDisc.cpp" />
     <ClCompile Include="yaEXPointUI.cpp" />
@@ -283,6 +295,7 @@
     <ClCompile Include="yaLightBulb.cpp" />
     <ClCompile Include="yaLogoAnimation.cpp" />
     <ClCompile Include="yaOnHitEffect.cpp" />
+    <ClCompile Include="yaPanel.cpp" />
     <ClCompile Include="yaParryEffect.cpp" />
     <ClCompile Include="yaPeakingCat.cpp" />
     <ClCompile Include="yaPenguin.cpp" />
@@ -317,6 +330,7 @@
     <ClCompile Include="yaSceneManager.cpp" />
     <ClCompile Include="yaShootEffect.cpp" />
     <ClCompile Include="yaSpecialAttackEffect.cpp" />
+    <ClCompile Include="yaSpreader.cpp" />
     <ClCompile Include="yaSwingPlatform.cpp" />
     <ClCompile Include="yaTime.cpp" />
     <ClCompile Include="yaTitleScene.cpp" />
@@ -328,6 +342,8 @@
     <ClCompile Include="yaWernerWermanPh1.cpp" />
     <ClCompile Include="yaWernerWermanPh2.cpp" />
     <ClCompile Include="yaWoodPiece.cpp" />
+    <ClCompile Include="yaWorldMap.cpp" />
+    <ClCompile Include="yaWorldPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WindowsProject1.rc" />

@@ -17,6 +17,8 @@
 #include "yaBeppiPhaseThree.h"
 #include "yaBeppiPhaseFour.h"
 #include "yaKnockOut.h"
+#include "yaCameraBlur.h"
+#include "yaButton.h"
 namespace ya 
 {
 	BossBeppiScene::BossBeppiScene()
@@ -48,10 +50,13 @@ namespace ya
 		ObjectManager::Instantiate<BeppiPhaseOne>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
 		ObjectManager::Instantiate<Ready>(this, eColliderLayer::Top_Effect);
 
+		mCameraBlur = ObjectManager::Instantiate<CameraBlur>(this, eColliderLayer::Top_Effect);
+
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontObject, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::BehindMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster_Projecttile, true);
+		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Player_Projecttile, true);
 		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::FrontMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::FrontObject, true);
 		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::BehindMonster, true);
@@ -74,58 +79,87 @@ namespace ya
 		healthUI->SetTarget(mPlayer);
 		HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
 		exPointUI->SetTarget(mPlayer);
+		Button* resumeButton = UIManager::GetUiInstant<Button>(eUIType::PLAYOPTION_RESUME);
+		resumeButton->GetOnClickEvent() = std::bind(&BossBeppiScene::ResumeClickEvent, this);
+		Button* retryButton = UIManager::GetUiInstant<Button>(eUIType::PLAYOPTION_RETRY);
+		retryButton->GetOnClickEvent() = std::bind(&BossBeppiScene::RetryClickEvent, this);
+		Button* exitButton = UIManager::GetUiInstant<Button>(eUIType::PLAYOPTION_EXIT);
+		exitButton->GetOnClickEvent() = std::bind(&BossBeppiScene::ExitClickEvent, this);
+
+
+
 		mPhaseTimeChecker = 0;
 		mPhase = 0;
 		mbPhaseChanged = false;
+
+
 	}
 
 	void BossBeppiScene::Tick()
 	{
-		Scene::Tick();
-		if (mPhase == 2 && mbPhaseChanged)
+		if (!Time::isStop())
 		{
-			mPhaseTimeChecker += Time::DeltaTime();
-			if (mPhaseTimeChecker > 5.0f)
+			Scene::Tick();
+			if (mPhase == 2 && mbPhaseChanged)
 			{
-				BeppiPh2Body* ph2Body = ObjectManager::Instantiate<BeppiPh2Body>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
-				BeppiPhaseTwo* beppiPh2  = ObjectManager::Instantiate<BeppiPhaseTwo>(this, eColliderLayer::BehindMonster);
-				beppiPh2->SetBody(ph2Body);
+				mPhaseTimeChecker += Time::DeltaTime();
+				if (mPhaseTimeChecker > 5.0f)
+				{
+					BeppiPh2Body* ph2Body = ObjectManager::Instantiate<BeppiPh2Body>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
+					BeppiPhaseTwo* beppiPh2 = ObjectManager::Instantiate<BeppiPhaseTwo>(this, eColliderLayer::BehindMonster);
+					beppiPh2->SetBody(ph2Body);
+					mbPhaseChanged = false;
+					mPhaseTimeChecker = 0;
+				}
+			}
+
+			if (mPhase == 3 && mbPhaseChanged)
+			{
+				mPhaseTimeChecker += Time::DeltaTime();
+				if (mPhaseTimeChecker > 8.0f)
+				{
+					ObjectManager::Instantiate<BeppiPhaseThree>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
+					mbPhaseChanged = false;
+					mPhaseTimeChecker = 0;
+				}
+			}
+
+			if (mPhase == 4 && mbPhaseChanged)
+			{
+				mPhaseTimeChecker += Time::DeltaTime();
+				if (mPhaseTimeChecker > 18.0f)
+				{
+					ObjectManager::Instantiate<BeppiPhaseFour>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
+					mbPhaseChanged = false;
+					mPhaseTimeChecker = 0;
+				}
+			}
+
+			if (mPhase == 5 && mbPhaseChanged)
+			{
 				mbPhaseChanged = false;
-				mPhaseTimeChecker = 0;
+				SceneManager::ChangeScene(eSceneType::Map);
 			}
 		}
 
-		if (mPhase == 3 && mbPhaseChanged)
+
+		if (KEY_DOWN(eKeyCode::ESC))
 		{
-			mPhaseTimeChecker += Time::DeltaTime();
-			if (mPhaseTimeChecker > 8.0f)
+			if (!mbUIOn)
 			{
-				ObjectManager::Instantiate<BeppiPhaseThree>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
-				mbPhaseChanged = false;
-				mPhaseTimeChecker = 0;
+				UIManager::Push(eUIType::PLAYOPTION_PANEL);
+				mbUIOn = true;
+				Time::Stop(true);
+				mCameraBlur->SetOn(true);
 			}
-		}
-
-		if (mPhase == 4 && mbPhaseChanged)
-		{
-			mPhaseTimeChecker += Time::DeltaTime();
-			if (mPhaseTimeChecker > 18.0f)
+			else
 			{
-				ObjectManager::Instantiate<BeppiPhaseFour>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
-				mbPhaseChanged = false;
-				mPhaseTimeChecker = 0;
+				UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+				mbUIOn = false;
+				Time::Stop(false);
+				mCameraBlur->SetOn(false);
+
 			}
-		}
-
-		if (mPhase == 5 && mbPhaseChanged)
-		{
-			mbPhaseChanged = false;
-			SceneManager::ChangeScene(eSceneType::Map);
-		}
-
-		if (KEY_DOWN(eKeyCode::N))
-		{
-			SceneManager::ChangeScene(eSceneType::Map);
 		}
 
 	}
@@ -141,6 +175,52 @@ namespace ya
 
 
 
+	}
+
+	void BossBeppiScene::ResumeClickEvent()
+	{
+		if (KEY_DOWN(eKeyCode::LBTN))
+		{
+			UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+			mbUIOn = false;
+			Time::Stop(false);
+			mCameraBlur->SetOn(false);
+		}
+	}
+
+	void BossBeppiScene::RetryClickEvent()
+	{
+		if (KEY_DOWN(eKeyCode::LBTN))
+		{
+			UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+			mbUIOn = false;
+			Time::Stop(false);
+			mCameraBlur->SetOn(false);
+			Scene::Release();
+			mbInitialized = false;
+			UIManager::Pop(eUIType::HP);
+			UIManager::Pop(eUIType::MP);
+			HUD* healthUI = UIManager::GetUiInstant<HUD>(eUIType::HP);
+			healthUI->SetTarget(nullptr);
+			HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
+			exPointUI->SetTarget(nullptr);
+			Initialize();
+			Scene::Enter();
+			UIManager::Push(eUIType::HP);
+			UIManager::Push(eUIType::MP);
+		}
+	}
+
+	void BossBeppiScene::ExitClickEvent()
+	{
+		if (KEY_DOWN(eKeyCode::LBTN))
+		{
+			UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+			mbUIOn = false;
+			Time::Stop(false);
+			mCameraBlur->SetOn(false);
+			SceneManager::ChangeScene(eSceneType::Map);
+		}
 	}
 
 	void BossBeppiScene::Enter()

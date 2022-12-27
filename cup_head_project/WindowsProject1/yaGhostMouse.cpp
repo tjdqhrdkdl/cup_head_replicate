@@ -166,6 +166,8 @@ namespace ya
 
 	void GhostMouse::Release()
 	{
+		mAnimator->Release();
+		GhostMouseBall({0,1}).Release();
 	}
 
 }

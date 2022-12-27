@@ -127,6 +127,7 @@ namespace ya
 
 	void Junk::Release()
 	{
+		mAnimator->Release();
 	}
 
 }

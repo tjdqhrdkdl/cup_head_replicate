@@ -8,6 +8,7 @@ namespace ya
 	class Animator;
 	class Rigidbody;
 	class Collider;
+	class CrackShot;
 	class Player : public GameObject
 	{
 	public:
@@ -103,5 +104,6 @@ namespace ya
 		Animator* mAnimator;
 		Rigidbody* mRigidbody;
 		Collider* mJumpCollider;
+		CrackShot* mEXCrackShot;
 	};
 }

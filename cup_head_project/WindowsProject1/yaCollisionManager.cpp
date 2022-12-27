@@ -92,6 +92,7 @@ namespace ya {
 		}
 		return false;
 	}
+
 	void CollisionManager::ColliderCollision(Collider* left, Collider* right)
 	{
 		CollisionId id = {};
