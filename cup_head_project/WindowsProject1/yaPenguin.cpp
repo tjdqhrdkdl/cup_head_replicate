@@ -87,7 +87,6 @@ namespace ya
 				destXPos = 1570;
 				break;
 			}
-			Monster::Tick();
 
 
 			if (mAnimator->GetPlayAnimation()->GetName() == L"RollOnGroundRight")
@@ -148,6 +147,7 @@ namespace ya
 
 			SummonBaseBall();
 		}
+		Monster::Tick();
 	}
 
 	void Penguin::Render(HDC hdc)
@@ -178,7 +178,7 @@ namespace ya
 			mCollider->SetHitBox(true);
 		}
 
-		else if (dynamic_cast<RollerCoasterHead*>(other->GetOwner()) != nullptr)
+		else if (other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster)
 		{
 			if (mAnimator->GetPlayAnimation()->GetName() != L"Pop")
 			{

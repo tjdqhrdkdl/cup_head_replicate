@@ -21,6 +21,7 @@ namespace ya
 		, mSpeed(1100.0f)
 		, mAliveTimeChecker(0.0f)
 	{
+		AddComponent(mAnimator);
 		SetName(L"CrackShot");
 		SetPos({ 0,0 });
 		Animator* effectAnimator = GetShootEffect()->GetAnimator();

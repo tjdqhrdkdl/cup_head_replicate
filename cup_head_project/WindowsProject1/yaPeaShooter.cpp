@@ -21,6 +21,7 @@ namespace ya
 		, mSpeed(1200.0f)
 		, mAliveTimeChecker(0.0f)
 	{
+		AddComponent(mAnimator);
 		SetName(L"PeaShooter");
 		SetPos({ 0,0 });
 		Animator* effectAnimator = GetShootEffect()->GetAnimator();

@@ -17,7 +17,7 @@
 #include "yaOnHitEffect.h"
 #include "yaPinkSpring.h"
 #include "yaCrackShot.h"
-
+#include "yaSpreader.h"
 #define STATE_HAVE(STATE) (mCurState & STATE) == STATE
 namespace ya 
 {
@@ -183,6 +183,7 @@ namespace ya
 		{
 			PeaShooter({ 1,0 });
 			CrackShot({ 1,0 });
+			Spreader({ 1,0 });
 			ParryEffect();
 			DashEffect();
 			SpecialAttackEffect({ 1,0 });
@@ -500,7 +501,7 @@ namespace ya
 
 		if (KEY_DOWN(eKeyCode::A))
 		{
-			mCurGunType = eGunType((int(mCurGunType) + 1)%2);
+			mCurGunType = eGunType((int(mCurGunType) + 1)%3);
 			SetShooterCoolTime(mCurGunType);
 		}
 	}
@@ -891,7 +892,12 @@ namespace ya
 			else if (mCurGunType == eGunType::CrackShot)
 				bullet = new CrackShot(mGunDir);
 			else if (mCurGunType == eGunType::Spreader)
-				;
+			{
+				Spreader::Shoot(mGunDir, this, false);
+				mCurState |= PlayerState_OnShoot;
+				mReloading = true;
+				return;
+			}
 			SetBulletStartPos(bullet);
 			bullet->Initialize();
 			bullet->SetOwner(this);
@@ -1212,6 +1218,10 @@ namespace ya
 					bullet = new CrackShot(mGunDir, isSpecial);
 					mEXCrackShot = dynamic_cast<CrackShot*>( bullet);
 				}
+				else if (mCurGunType == eGunType::Spreader)
+				{
+					Spreader::Shoot(mGunDir, this, true);
+				}
 				if (bullet != nullptr)
 				{
 					SetEXBulletStartPos(bullet);
@@ -1333,7 +1343,7 @@ namespace ya
 		else if (guntype == eGunType::CrackShot)
 			mShooterCoolTime = CrackShot::GetCoolTime();
 		else if (guntype == eGunType::Spreader)
-			mShooterCoolTime = 0.1f;
+			mShooterCoolTime = Spreader::GetCoolTime();
 	}
 
 	Vector2 Player::SetBulletStartPos(Bullet* bullet)

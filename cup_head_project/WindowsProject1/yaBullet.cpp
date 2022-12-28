@@ -8,6 +8,7 @@
 #include "yaMonster.h"
 #include "yaPlayer.h"
 #include "yaAnimator.h"
+#include "yaSpreader.h"
 namespace ya 
 {
 	Bullet::Bullet(Vector2 dir, bool special)
@@ -20,7 +21,6 @@ namespace ya
 
 		AddComponent(new Collider());
 		mAnimator = new Animator();
-		AddComponent(mAnimator);
 	}
 
 	Bullet::~Bullet()

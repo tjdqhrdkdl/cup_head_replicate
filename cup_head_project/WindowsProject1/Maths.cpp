@@ -30,4 +30,7 @@ const std::wstring Vector2::GetDirInStr()
 		return L"LeftUp";
 	else if (isLeftDown())
 		return L"LeftDown";
+
+	else
+		return L"";
 }

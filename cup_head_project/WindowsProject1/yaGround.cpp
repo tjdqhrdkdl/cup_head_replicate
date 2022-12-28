@@ -9,8 +9,8 @@ namespace ya
 	Ground::Ground()
 	{
 		AddComponent(new Collider());
-		SetPos({ 800, 750 });
-		SetScale({ 1700, 50 });
+		SetPos({ 800, 900 });
+		SetScale({ 1700, 200 });
 	}
 
 	Ground::~Ground()
