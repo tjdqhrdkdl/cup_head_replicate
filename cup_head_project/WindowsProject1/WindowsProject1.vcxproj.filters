@@ -156,6 +156,9 @@
     <Filter Include="Engine\GameObject\BossCarnation">
       <UniqueIdentifier>{7602c3e6-7f80-4263-aacf-103ae42eb923}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\BossCarnation\Seeds">
+      <UniqueIdentifier>{527dac78-768e-4223-b766-5d9e68f0f0f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -476,6 +479,15 @@
     <ClInclude Include="yaFlowerPlatForm.h">
       <Filter>Engine\GameObject\BossCarnation</Filter>
     </ClInclude>
+    <ClInclude Include="yaChomper.h">
+      <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMiniFlowerr.h">
+      <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
+    </ClInclude>
+    <ClInclude Include="yaVenus.h">
+      <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -777,6 +789,15 @@
     </ClCompile>
     <ClCompile Include="yaFlowerPlatForm.cpp">
       <Filter>Engine\GameObject\BossCarnation</Filter>
+    </ClCompile>
+    <ClCompile Include="yaChomper.cpp">
+      <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMiniFlowerr.cpp">
+      <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
+    </ClCompile>
+    <ClCompile Include="yaVenus.cpp">
+      <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

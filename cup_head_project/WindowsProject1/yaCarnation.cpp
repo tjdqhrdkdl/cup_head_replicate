@@ -4,7 +4,7 @@
 #include "yaTime.h"
 #include "yaSceneManager.h"
 #include "yaObjectManager.h"
-
+#include "yaChomper.h"
 
 namespace ya
 {
@@ -27,6 +27,12 @@ namespace ya
 
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
+		mMissileAnimator = new Animator();
+		AddComponent(mMissileAnimator);
+
+		mMissileAnimator->CreateAnimation(L"MissileFX", L"..\\Resources\\Image\\Cagney Carnation\\Firing Seeds\\Seed Missiles\\flower_gatling_fx_00", 12, 0.05f, false, false);
+		mMissileAnimator->SetAddPos({ -70,-670 });
+
 
 		mAnimator->CreateAnimation(L"Intro", L"..\\Resources\\Image\\Cagney Carnation\\Intro\\Intro_", 21, 0.05f, false, false);
 		mAnimator->SetLightenAnimation(mAnimator->CreateAnimation(L"Idle", L"..\\Resources\\Image\\Cagney Carnation\\Idle\\Idle_", 19, 0.05f, false, false)
@@ -170,10 +176,19 @@ namespace ya
 		if (mAnimator->GetPlayAnimation()->GetName() == L"FiringSeedIdle")
 		{
 			mFiringSeedIdleTimeChecker += Time::DeltaTime();
-			if (mFiringSeedIdleTimeChecker > 2)
+			mChomperSummonTimeChecker += Time::DeltaTime();
+			if (mFiringSeedIdleTimeChecker > 5)
 			{
 				mFiringSeedIdleTimeChecker = 0;
 				mAnimator->Play(L"FiringSeedComeback", false);
+				mMissileAnimator->SetPlayAnimation(nullptr);
+			}
+
+			if (mChomperSummonTimeChecker > 1.5f)
+			{
+				mChomperSummonTimeChecker = 0;
+				Chomper* seed = ObjectManager::Instantiate<Chomper>(SceneManager::GetCurScene(), eColliderLayer::Monster_Projecttile);
+				seed->SetPos({(float)(rand() % 1000) + 100,-100 });
 			}
 		}
 	}
@@ -221,8 +236,8 @@ namespace ya
 		else
 		{
 			mAnimator->Play(L"FaceAttackLowIdle", true);
-			mHeadCollider->SetAddPos({ -600,70 });
-			mHeadCollider->SetScale({ 1600,400 });
+			mHeadCollider->SetAddPos({ -600,100 });
+			mHeadCollider->SetScale({ 1600,300 });
 		}
 
 	}
@@ -236,6 +251,7 @@ namespace ya
 	void Carnation::SeedFireStartCompleteEvent()
 	{
 		mAnimator->Play(L"FiringSeedIdle", true);
+		mMissileAnimator->Play(L"MissileFX", true);
 	}
 
 	void Carnation::SeedFireComebackCompleteEvent()

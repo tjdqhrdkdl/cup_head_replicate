@@ -43,10 +43,14 @@ namespace ya
 	private:
 		Collider* mHeadCollider;
 		Collider* mBodyCollider;
+
+		Animator* mMissileAnimator;
+
 		float mAttackChoiceTimeChecker;
 		float mFaceAttackChargeTimeChecker;
 		float mFaceAttackIdleTimeChecker;
 		float mFiringSeedIdleTimeChecker;
+		float mChomperSummonTimeChecker;
 		eCarnationAttacks mCurAttack;
 	};
 }

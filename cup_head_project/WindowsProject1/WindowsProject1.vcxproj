@@ -167,6 +167,7 @@
     <ClInclude Include="yaCarnation.h" />
     <ClInclude Include="yaCatBody.h" />
     <ClInclude Include="yaCatPaw.h" />
+    <ClInclude Include="yaChomper.h" />
     <ClInclude Include="yaCrackShot.h" />
     <ClInclude Include="yaDashEffect.h" />
     <ClInclude Include="yaDisc.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="yaJunk.h" />
     <ClInclude Include="yaKnockOut.h" />
     <ClInclude Include="yaLeftWall.h" />
+    <ClInclude Include="yaMiniFlowerr.h" />
     <ClInclude Include="yaMonster.h" />
     <ClInclude Include="yaBossBeppiScene.h" />
     <ClInclude Include="yaCamera.h" />
@@ -240,6 +242,7 @@
     <ClInclude Include="yaTomatoFire.h" />
     <ClInclude Include="yaUIBase.h" />
     <ClInclude Include="yaUIManager.h" />
+    <ClInclude Include="yaVenus.h" />
     <ClInclude Include="yaWernerWermanPh3.h" />
     <ClInclude Include="yaWernerWermanPh1.h" />
     <ClInclude Include="yaWernerWermanPh2.h" />
@@ -271,6 +274,7 @@
     <ClCompile Include="yaCarnation.cpp" />
     <ClCompile Include="yaCatBody.cpp" />
     <ClCompile Include="yaCatPaw.cpp" />
+    <ClCompile Include="yaChomper.cpp" />
     <ClCompile Include="yaCrackShot.cpp" />
     <ClCompile Include="yaDashEffect.cpp" />
     <ClCompile Include="yaDisc.cpp" />
@@ -285,6 +289,7 @@
     <ClCompile Include="yaJunk.cpp" />
     <ClCompile Include="yaKnockOut.cpp" />
     <ClCompile Include="yaLeftWall.cpp" />
+    <ClCompile Include="yaMiniFlowerr.cpp" />
     <ClCompile Include="yaMonster.cpp" />
     <ClCompile Include="yaBossBeppiScene.cpp" />
     <ClCompile Include="yaCamera.cpp" />
@@ -342,6 +347,7 @@
     <ClCompile Include="yaTomatoFire.cpp" />
     <ClCompile Include="yaUIBase.cpp" />
     <ClCompile Include="yaUIManager.cpp" />
+    <ClCompile Include="yaVenus.cpp" />
     <ClCompile Include="yaWernerWermanPh3.cpp" />
     <ClCompile Include="yaWernerWermanPh1.cpp" />
     <ClCompile Include="yaWernerWermanPh2.cpp" />
