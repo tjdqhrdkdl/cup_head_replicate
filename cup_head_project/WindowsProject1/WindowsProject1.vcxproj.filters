@@ -153,6 +153,9 @@
     <Filter Include="Engine\GameObject\Gun\CrackShot">
       <UniqueIdentifier>{20c0a770-e00b-4555-a870-7818aefecc42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\BossCarnation">
+      <UniqueIdentifier>{7602c3e6-7f80-4263-aacf-103ae42eb923}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -219,9 +222,6 @@
       <Filter>Engine\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="yaBossBeppiScene.h">
-      <Filter>Engine\Scene\BossScenes</Filter>
-    </ClInclude>
-    <ClInclude Include="yaBossVegetableScene.h">
       <Filter>Engine\Scene\BossScenes</Filter>
     </ClInclude>
     <ClInclude Include="yaCamera.h">
@@ -452,12 +452,29 @@
     <ClInclude Include="yaSpreader.h">
       <Filter>Engine\GameObject\Gun\Spreader</Filter>
     </ClInclude>
-    <ClInclude Include="yaPanel.h" />
-    <ClInclude Include="yaCameraBlur.h" />
-    <ClInclude Include="yaButton.h" />
-    <ClInclude Include="yaBossObject.h" />
     <ClInclude Include="yaCrackShot.h">
       <Filter>Engine\GameObject\Gun\CrackShot</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBossObject.h">
+      <Filter>Engine\GameObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="yaCameraBlur.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="yaButton.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPanel.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBossCarnationScene.h">
+      <Filter>Engine\Scene\BossScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yaCarnation.h">
+      <Filter>Engine\GameObject\BossCarnation</Filter>
+    </ClInclude>
+    <ClInclude Include="yaFlowerPlatForm.h">
+      <Filter>Engine\GameObject\BossCarnation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -510,9 +527,6 @@
       <Filter>Engine\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="yaBossBeppiScene.cpp">
-      <Filter>Engine\Scene\BossScenes</Filter>
-    </ClCompile>
-    <ClCompile Include="yaBossVegetableScene.cpp">
       <Filter>Engine\Scene\BossScenes</Filter>
     </ClCompile>
     <ClCompile Include="yaCamera.cpp">
@@ -740,20 +754,29 @@
     <ClCompile Include="yaSpreader.cpp">
       <Filter>Engine\GameObject\Gun\Spreader</Filter>
     </ClCompile>
-    <ClCompile Include="yaPanel.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="yaCameraBlur.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="yaButton.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
-    <ClCompile Include="yaBossObject.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="yaCrackShot.cpp">
       <Filter>Engine\GameObject\Gun\CrackShot</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBossObject.cpp">
+      <Filter>Engine\GameObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCameraBlur.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="yaButton.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPanel.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBossCarnationScene.cpp">
+      <Filter>Engine\Scene\BossScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yaCarnation.cpp">
+      <Filter>Engine\GameObject\BossCarnation</Filter>
+    </ClCompile>
+    <ClCompile Include="yaFlowerPlatForm.cpp">
+      <Filter>Engine\GameObject\BossCarnation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

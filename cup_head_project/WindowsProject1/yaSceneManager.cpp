@@ -3,7 +3,7 @@
 #include "yaTitleScene.h"
 #include "yaMapScene.h"
 #include "yaBossBeppiScene.h"
-#include "yaBossVegetableScene.h"
+#include "yaBossCarnationScene.h"
 #include "yaBossCanRatScene.h"
 #include "yaEndScene.h"
 #include "yaObjectManager.h"
@@ -21,7 +21,7 @@ namespace ya
 		mScenes[(UINT)eSceneType::Logo] = new LogoScene();
 		mScenes[(UINT)eSceneType::Title] = new TitleScene();
 		mScenes[(UINT)eSceneType::Map] = new MapScene();
-		mScenes[(UINT)eSceneType::BossVegetable] = new BossVegetableScene();
+		mScenes[(UINT)eSceneType::BossCarnation] = new BossCarnationScene();
 		mScenes[(UINT)eSceneType::BossBeppi] = new BossBeppiScene();
 		mScenes[(UINT)eSceneType::BossWernerWerman] = new BossCanRatScene();
 		mScenes[(UINT)eSceneType::End] = new EndScene();

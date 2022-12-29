@@ -119,7 +119,7 @@ namespace ya
 
 			SetDamage(EXDamage);
 			mSpeed = 800;
-			Spreader::AliveTime = 3.0f;
+			Spreader::AliveTime = 10.0f;
 
 			effectAnimator->Play(L"BulletSpreaderSpark", false);
 

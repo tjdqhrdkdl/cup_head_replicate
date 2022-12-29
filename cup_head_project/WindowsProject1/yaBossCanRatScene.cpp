@@ -58,7 +58,7 @@ namespace ya
 		AddGameObject(mBGI1, eColliderLayer::BackGround);
 
 		Ground* ground = ObjectManager::Instantiate<Ground>(this, eColliderLayer::FrontObject);
-		ground->SetPos({ 800,800 });
+		ground->SetPos({ 800,950 });
 		ObjectManager::Instantiate<LeftWall>(this, eColliderLayer::FrontObject);
 		ObjectManager::Instantiate<RightWall>(this, eColliderLayer::FrontObject);
 		mPlayer = ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);

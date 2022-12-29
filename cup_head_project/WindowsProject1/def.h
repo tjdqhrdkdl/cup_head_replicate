@@ -8,7 +8,7 @@ enum class eSceneType
 	Logo,
 	Title,
 	Map,
-	BossVegetable,
+	BossCarnation,
 	BossBeppi,
 	BossWernerWerman,
 	End,

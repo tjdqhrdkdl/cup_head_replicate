@@ -86,6 +86,10 @@ namespace ya {
 		if (KEY_DOWN(eKeyCode::N))
 		{
 			SceneManager::ChangeScene(eSceneType::BossWernerWerman);
+		}		
+		if (KEY_DOWN(eKeyCode::C))
+		{
+			SceneManager::ChangeScene(eSceneType::BossCarnation);
 		}
 		if (mWorldPlayer->GetEnterObject() != nullptr)
 		{
