@@ -159,6 +159,9 @@
     <Filter Include="Engine\GameObject\BossCarnation\Seeds">
       <UniqueIdentifier>{527dac78-768e-4223-b766-5d9e68f0f0f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\BossCarnation\ThrowingObjects">
+      <UniqueIdentifier>{1cc821ad-b5ba-483d-9f7d-b7f85cb78e95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -482,11 +485,23 @@
     <ClInclude Include="yaChomper.h">
       <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
     </ClInclude>
-    <ClInclude Include="yaMiniFlowerr.h">
+    <ClInclude Include="yaMiniFlower.h">
       <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
     </ClInclude>
     <ClInclude Include="yaVenus.h">
       <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
+    </ClInclude>
+    <ClInclude Include="yaMiniFlowerBullet.h">
+      <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
+    </ClInclude>
+    <ClInclude Include="yaAcorn.h">
+      <Filter>Engine\GameObject\BossCarnation\ThrowingObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="yaBoomerang.h">
+      <Filter>Engine\GameObject\BossCarnation\ThrowingObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="yaPollen.h">
+      <Filter>Engine\GameObject\BossCarnation\ThrowingObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -793,11 +808,23 @@
     <ClCompile Include="yaChomper.cpp">
       <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
     </ClCompile>
-    <ClCompile Include="yaMiniFlowerr.cpp">
+    <ClCompile Include="yaMiniFlower.cpp">
       <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
     </ClCompile>
     <ClCompile Include="yaVenus.cpp">
       <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
+    </ClCompile>
+    <ClCompile Include="yaMiniFlowerBullet.cpp">
+      <Filter>Engine\GameObject\BossCarnation\Seeds</Filter>
+    </ClCompile>
+    <ClCompile Include="yaAcorn.cpp">
+      <Filter>Engine\GameObject\BossCarnation\ThrowingObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="yaBoomerang.cpp">
+      <Filter>Engine\GameObject\BossCarnation\ThrowingObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="yaPollen.cpp">
+      <Filter>Engine\GameObject\BossCarnation\ThrowingObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

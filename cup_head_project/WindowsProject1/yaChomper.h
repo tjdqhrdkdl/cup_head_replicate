@@ -20,6 +20,7 @@ namespace ya
 
 		void ArriveCompleteEvent();
 		void GroundBurstCompleteEvent();
+		void DeathCompleteEvent();
 
 		void Release();
 

@@ -30,6 +30,7 @@ namespace ya
 		mAnimator->CreateAnimation(L"Death", L"..\\Resources\\Image\\Cagney Carnation\\Firing Seeds\\Seeds\\Chomper\\Death\\Chomper_Die_", 16, 0.04f, false, false);
 
 		mAnimator->GetCompleteEvent(L"SeedArrive") = std::bind(&Chomper::ArriveCompleteEvent, this);
+		mAnimator->GetCompleteEvent(L"Death") = std::bind(&Chomper::DeathCompleteEvent, this);
 		mVineAnimator->GetCompleteEvent(L"GroundBurst") = std::bind(&Chomper::GroundBurstCompleteEvent, this);
 
 		mAnimator->Play(L"SeedFall", true);
@@ -47,6 +48,12 @@ namespace ya
 			&& mAnimator->GetPlayAnimation()->GetName() == L"SeedFall")
 		{
 			pos.y += 300*Time::DeltaTime();
+		}
+
+		if (mHp < 0 && mAnimator->GetPlayAnimation()->GetName() != L"Death")
+		{
+			mAnimator->Play(L"Death", false);
+			mCollider->SetOff(true);
 		}
 		SetPos(pos);
 	}
@@ -84,6 +91,11 @@ namespace ya
 		mAnimator->Play(L"Idle", true);
 		SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::FrontMonster);
 		mCollider->SetScale({ 50,100 });
+	}
+
+	void Chomper::DeathCompleteEvent()
+	{
+		ObjectManager::Destroy(this);
 	}
 
 	void Chomper::Release()

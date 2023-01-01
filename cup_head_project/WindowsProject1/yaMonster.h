@@ -15,6 +15,7 @@ namespace ya
 
 		void SetHp(float hp) { mHp = hp; }
 		bool GetOnHit() { return onHit; }
+		bool GetInvincible() { return mInvincible; }
 		float GetOnHitChecker() { return onHitChecker; }
 
 		virtual void Tick() override;
@@ -27,6 +28,7 @@ namespace ya
 		float mHp;
 		bool onHit;
 		float onHitChecker;
+		bool mInvincible;
 		bool mDead;
 	};
 }

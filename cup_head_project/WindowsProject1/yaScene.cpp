@@ -105,7 +105,7 @@ namespace ya {
 				std::vector<Collider*> colliders = layerObjects[i]->GetComponents<Collider>();
 				for (size_t k = 0; k < colliders.size(); k++)
 				{
-					if (!colliders[k]->isOff())
+					if (!colliders[k]->isOff() && !colliders[k]->isBulletPassing())
 					{
 						Vector2 targetPos = colliders[k]->GetPos();
 						Vector2 difPos = targetPos - pos;

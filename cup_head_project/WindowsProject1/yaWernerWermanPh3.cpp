@@ -147,7 +147,7 @@ namespace ya
 				effect->SetPos(pos);
 			}
 
-			if (GetDeathTime() < 290)
+			if (GetDeathTime() < 295)
 				dynamic_cast<BossCanRatScene*>(SceneManager::GetCurScene())->SetPhase(5);
 		}
 	}

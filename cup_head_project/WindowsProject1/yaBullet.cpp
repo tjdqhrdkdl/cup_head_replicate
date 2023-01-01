@@ -48,7 +48,7 @@ namespace ya
 				Monster* monster = dynamic_cast<Monster*>(other->GetOwner());
 				if (monster == nullptr)
 					;
-				else
+				else if(!monster->GetInvincible())
 				{
 					float hp = monster->GetHp();
 					hp -= GetDamage();

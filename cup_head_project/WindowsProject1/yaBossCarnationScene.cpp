@@ -44,9 +44,9 @@ namespace ya
 		mPlayer = ObjectManager::Instantiate<Player>(this, eColliderLayer::Player);
 		mPlayer->SetPos({ 400,750 });
 		ObjectManager::Instantiate<Ready>(this, eColliderLayer::Top_Effect);
-		ObjectManager::Instantiate<FlowerPlatForm>(this, eColliderLayer::FrontObject)->SetPos({ 230,500 });
-		ObjectManager::Instantiate<FlowerPlatForm>(this, eColliderLayer::FrontObject)->SetPos({ 590,460 });
-		ObjectManager::Instantiate<FlowerPlatForm>(this, eColliderLayer::FrontObject)->SetPos({ 950,530 });
+		ObjectManager::Instantiate<FlowerPlatForm>(this, eColliderLayer::FrontObject)->SetPos({ 230,480 });
+		ObjectManager::Instantiate<FlowerPlatForm>(this, eColliderLayer::FrontObject)->SetPos({ 590,490 });
+		ObjectManager::Instantiate<FlowerPlatForm>(this, eColliderLayer::FrontObject)->SetPos({ 950,500 });
 
 		ObjectManager::Instantiate<Carnation>(this, eColliderLayer::FrontMonster);
 		mCameraBlur = ObjectManager::Instantiate<CameraBlur>(this, eColliderLayer::Top_Effect);
@@ -94,9 +94,10 @@ namespace ya
 				mbPhaseChanged = false;
 			}
 
-			if (mPhase == 3 && mbPhaseChanged)
+			if (mPhase == 5 && mbPhaseChanged)
 			{
 				mbPhaseChanged = false;
+				SceneManager::ChangeScene(eSceneType::Map);
 			}
 
 		}

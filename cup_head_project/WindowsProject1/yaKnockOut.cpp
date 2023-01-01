@@ -13,7 +13,7 @@ namespace ya
 
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
-		mAnimator->CreateAnimation(L"KnockOut", L"..\\Resources\\Image\\A KNOCKOUT\\FightText_KO_00", 27, 0.08f, false, false, { 0,0 }, false, true);
+		mAnimator->CreateAnimation(L"KnockOut", L"..\\Resources\\Image\\A KNOCKOUT\\FightText_KO_00", 27, 0.05f, false, false, { 0,0 }, false, true);
 
 		mAnimator->GetCompleteEvent(L"KnockOut") = std::bind(&KnockOut::KnockOutCompleteEvent, this);
 		mAnimator->Play(L"KnockOut", false);
@@ -25,7 +25,12 @@ namespace ya
 
 	void KnockOut::Tick()
 	{
-		GameObject::Tick();
+		Time::SlowDown(false);
+		GameObject::Tick();		
+		if (!isDead)
+		{
+			Time::SlowDown(true);
+		}
 	}
 
 	void KnockOut::Render(HDC hdc)
@@ -36,6 +41,8 @@ namespace ya
 	void KnockOut::KnockOutCompleteEvent()
 	{
 		ObjectManager::Destroy(this);
+		Time::SlowDown(false);
+		isDead = true;
 	}
 
 }

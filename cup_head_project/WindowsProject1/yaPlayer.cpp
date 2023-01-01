@@ -49,7 +49,7 @@ namespace ya
 		GetComponent<Collider>()->SetBulletPassing(true);
 		mJumpCollider = new Collider();
 		mJumpCollider->SetScale({ 45,10 });
-		mJumpCollider->SetAddPos({ 0,60 });
+		mJumpCollider->SetAddPos({ 0,55 });
 		mJumpCollider->SetBulletPassing(true);
 		AddComponent(mJumpCollider);
 		mRigidbody = new Rigidbody();

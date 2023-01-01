@@ -18,6 +18,8 @@ namespace ya
 
 	private:
 		Animator* mAnimator;
+
+		bool isDead;
 		float mTime;
 	};
 }
