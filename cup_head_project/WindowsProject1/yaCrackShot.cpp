@@ -176,7 +176,7 @@ namespace ya
 
 		if (mSpecial)
 		{
-			if (mParried == true && !mbCrack)
+			if (mParried == true && !mbCrack && !GetComponent<Collider>()->isOff())
 			{
 				mbCrack = true;
 

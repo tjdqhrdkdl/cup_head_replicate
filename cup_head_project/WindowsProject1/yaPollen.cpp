@@ -36,7 +36,7 @@ namespace ya
 		GameObject::Tick();
 		Vector2 pos = GetPos();
 		pos.x -= Time::DeltaTime() * 400;
-		pos.y += 3*sinf(pos.x/100);
+		pos.y += Time::DeltaTime() * 100 * sinf(pos.x / 100);
 		SetPos(pos);
 		if (mParried)
 			ObjectManager::Destroy(this);

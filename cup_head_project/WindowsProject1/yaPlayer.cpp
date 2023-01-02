@@ -51,7 +51,7 @@ namespace ya
 		GetComponent<Collider>()->SetBulletPassing(true);
 		mJumpCollider = new Collider();
 		mJumpCollider->SetScale({ 45,10 });
-		mJumpCollider->SetAddPos({ 0,55 });
+		mJumpCollider->SetAddPos({ 0,58 });
 		mJumpCollider->SetBulletPassing(true);
 		AddComponent(mJumpCollider);
 		mRigidbody = new Rigidbody();
@@ -978,7 +978,7 @@ namespace ya
 			
 			SetScale(playerScaleDuck);
 
-			mJumpCollider->SetAddPos({ 0,30 });
+			mJumpCollider->SetAddPos({ 0,28 });
 		}
 		else
 		{
@@ -986,7 +986,7 @@ namespace ya
 			{
 				GetComponent<Collider>()->SetScale({ playerScaleBasic });
 				SetScale(playerScaleBasic);
-				mJumpCollider->SetAddPos({ 0,55 });
+				mJumpCollider->SetAddPos({ 0,58 });
 				mCurState &= ~PlayerState_OnShoot;
 			}
 		}

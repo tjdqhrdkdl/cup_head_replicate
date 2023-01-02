@@ -23,7 +23,6 @@ namespace ya
 
 	void Ph2WallGround::Tick()
 	{
-		SetPos(Camera::CalculatePos(GetPos()));
 		GameObject::Tick();
 	}
 

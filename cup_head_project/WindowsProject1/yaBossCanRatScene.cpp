@@ -70,6 +70,7 @@ namespace ya
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontObject, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::BehindMonster, true);
+		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Player_Projecttile, true);
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::Monster_Projecttile, true);
 		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::FrontMonster, true);
 		CollisionManager::SetLayer(eColliderLayer::Player_Projecttile, eColliderLayer::FrontObject, true);
@@ -194,7 +195,7 @@ namespace ya
 			if (mPhase == 5 && mbPhaseChanged)
 			{
 				mbPhaseChanged = false;
-				SceneManager::ChangeScene(eSceneType::Map);
+				SceneManager::ChangeScene(eSceneType::End);
 			}
 		}
 		if (KEY_DOWN(eKeyCode::ESC))
@@ -277,7 +278,7 @@ namespace ya
 			mbUIOn = false;
 			Time::Stop(false);
 			mCameraBlur->SetOn(false);
-			SceneManager::ChangeScene(eSceneType::End);
+			SceneManager::ChangeScene(eSceneType::Map);
 		}
 	}
 
