@@ -73,6 +73,10 @@ namespace ya
 		healthUI->SetTarget(mPlayer);
 		HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
 		exPointUI->SetTarget(mPlayer);
+		HUD* weaponUI = UIManager::GetUiInstant<HUD>(eUIType::Gun);
+		weaponUI->SetTarget(mPlayer);
+		weaponUI->InActive();
+
 		Button* resumeButton = UIManager::GetUiInstant<Button>(eUIType::PLAYOPTION_RESUME);
 		resumeButton->GetOnClickEvent() = std::bind(&BossCarnationScene::ResumeClickEvent, this);
 		Button* retryButton = UIManager::GetUiInstant<Button>(eUIType::PLAYOPTION_RETRY);
@@ -181,8 +185,10 @@ namespace ya
 	{
 		Initialize();
 		Scene::Enter();
+		UIManager::Push(eUIType::Gun);
 		UIManager::Push(eUIType::HP);
 		UIManager::Push(eUIType::MP);
+
 	}
 
 	void BossCarnationScene::Exit()
@@ -191,16 +197,20 @@ namespace ya
 		mbInitialized = false;
 		UIManager::Pop(eUIType::HP);
 		UIManager::Pop(eUIType::MP);
+		UIManager::Pop(eUIType::Gun);
 		HUD* healthUI = UIManager::GetUiInstant<HUD>(eUIType::HP);
 		healthUI->SetTarget(nullptr);
 		HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
 		exPointUI->SetTarget(nullptr);
+		HUD* weaponUI = UIManager::GetUiInstant<HUD>(eUIType::Gun);
+		weaponUI->SetTarget(nullptr);
 
 		Release();
 	}
 
 	void BossCarnationScene::Release()
 	{
+		Carnation().Release();
 	}
 
 }

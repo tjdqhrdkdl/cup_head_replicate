@@ -152,8 +152,6 @@ namespace ya
 			mVineAnimator->Play(L"VineC", false);
 			break;
 		}
-		SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::FrontMonster);
-		mCollider->SetScale({ 70,70 });
 	}
 
 	void Venus::VineGrowCompleteEvent()
@@ -185,6 +183,8 @@ namespace ya
 			mAnimator->Play(L"IntroLeft", false);
 		else
 			mAnimator->Play(L"IntroRight", false);
+		SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::FrontMonster);
+		mCollider->SetScale({ 70,70 });
 	}
 
 	void Venus::VineReverseCompleteEvent()
@@ -206,6 +206,8 @@ namespace ya
 	}
 	void Venus::Release()
 	{
+		mVineAnimator->Release();
+		mAnimator->Release();
 	}
 
 }

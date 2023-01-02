@@ -87,6 +87,7 @@ namespace ya
 
 	void Acorn::Release()
 	{
+		mAnimator->Release();
 	}
 
 }

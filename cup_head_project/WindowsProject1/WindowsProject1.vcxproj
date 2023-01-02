@@ -247,6 +247,7 @@
     <ClInclude Include="yaUIBase.h" />
     <ClInclude Include="yaUIManager.h" />
     <ClInclude Include="yaVenus.h" />
+    <ClInclude Include="yaWeaponUI.h" />
     <ClInclude Include="yaWernerWermanPh3.h" />
     <ClInclude Include="yaWernerWermanPh1.h" />
     <ClInclude Include="yaWernerWermanPh2.h" />
@@ -356,6 +357,7 @@
     <ClCompile Include="yaUIBase.cpp" />
     <ClCompile Include="yaUIManager.cpp" />
     <ClCompile Include="yaVenus.cpp" />
+    <ClCompile Include="yaWeaponUI.cpp" />
     <ClCompile Include="yaWernerWermanPh3.cpp" />
     <ClCompile Include="yaWernerWermanPh1.cpp" />
     <ClCompile Include="yaWernerWermanPh2.cpp" />

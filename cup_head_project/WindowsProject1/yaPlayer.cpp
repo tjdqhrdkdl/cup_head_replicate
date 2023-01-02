@@ -18,6 +18,8 @@
 #include "yaPinkSpring.h"
 #include "yaCrackShot.h"
 #include "yaSpreader.h"
+#include "yaUIManager.h"
+#include "yaHUD.h"
 #define STATE_HAVE(STATE) (mCurState & STATE) == STATE
 namespace ya 
 {
@@ -503,6 +505,9 @@ namespace ya
 		{
 			mCurGunType = eGunType((int(mCurGunType) + 1)%3);
 			SetShooterCoolTime(mCurGunType);
+			HUD* weaponUI = UIManager::GetUiInstant<HUD>(eUIType::Gun);
+			weaponUI->InActive();
+			weaponUI->Active();
 		}
 	}
 

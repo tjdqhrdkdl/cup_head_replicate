@@ -65,6 +65,7 @@ enum class eColliderLayer
 };
 enum class eUIType
 {
+	Gun,
 	HP,
 	MP,
 	SHOP,
@@ -85,12 +86,14 @@ enum class eGunType
 	PeaShooter,
 	CrackShot,
 	Spreader,
+	End,
 };
 
 enum class eBossType
 {
 	WernerWerman,
 	Beppi,
+	Carnation,
 	End
 };
 union CollisionId

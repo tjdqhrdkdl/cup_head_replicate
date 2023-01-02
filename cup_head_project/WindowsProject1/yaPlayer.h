@@ -53,6 +53,7 @@ namespace ya
 		UINT GetSpecialPoint() { return mSpecialPoint; }
 		float GetSpecialPointFloat() { return mSpecialPointFloat; }
 		Collider* GetJumpCollider() { return mJumpCollider; }
+		eGunType GetGunType() { return mCurGunType; }
 		bool IsParrying();
 
 		bool isFalling() { return mFalling; }

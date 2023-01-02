@@ -48,6 +48,15 @@ namespace ya {
 		wernerwermanObj->SetScale({ 70,100 });
 		wernerwermanObj->GetCollider()->SetAddPos({ -120,-100 });
 
+		BossObject* carnationObj = new BossObject();
+		carnationObj->mType = eBossType::Carnation;
+		carnationObj->GetAnimator()->CreateAnimation(L"carnationObj", L"..\\Resources\\Image\\Cagney Carnation\\CagneyObject\\tile0", 3, 0.1f, true, false);
+		carnationObj->GetAnimator()->Play(L"carnationObj", true);
+		carnationObj->SetPos({ 2200,880});
+		carnationObj->SetScale({ 150,70 });
+		carnationObj->GetCollider()->SetAddPos({ 0,-35 });
+
+
 		BossObject* beppiObj = new BossObject();
 		beppiObj->mType = eBossType::Beppi;
 		beppiObj->GetAnimator()->CreateAnimation(L"beppiObj", L"..\\Resources\\Image\\Beppi\\BeppiObj\\tile0", 3, 0.1f, true, false);
@@ -64,6 +73,7 @@ namespace ya {
 
 		AddGameObject(wernerwermanObj, eColliderLayer::FrontObject);
 		AddGameObject(beppiObj, eColliderLayer::FrontObject);
+		AddGameObject(carnationObj, eColliderLayer::FrontObject);
 
 
 		CollisionManager::SetLayer(eColliderLayer::Player, eColliderLayer::FrontObject, true);
@@ -103,6 +113,10 @@ namespace ya {
 				else if (bossObj != nullptr && bossObj->mType == eBossType::Beppi)
 				{
 					SceneManager::ChangeScene(eSceneType::BossBeppi);
+				}
+				else if (bossObj != nullptr && bossObj->mType == eBossType::Carnation)
+				{
+					SceneManager::ChangeScene(eSceneType::BossCarnation);
 				}
 			}
 		}

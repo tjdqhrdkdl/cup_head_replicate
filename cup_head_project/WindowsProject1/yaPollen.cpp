@@ -65,6 +65,8 @@ namespace ya
 
 	void Pollen::Release()
 	{
+		mAnimator->Release();
+
 	}
 
 }

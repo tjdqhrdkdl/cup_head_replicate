@@ -503,6 +503,9 @@
     <ClInclude Include="yaPollen.h">
       <Filter>Engine\GameObject\BossCarnation\ThrowingObjects</Filter>
     </ClInclude>
+    <ClInclude Include="yaWeaponUI.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -825,6 +828,9 @@
     </ClCompile>
     <ClCompile Include="yaPollen.cpp">
       <Filter>Engine\GameObject\BossCarnation\ThrowingObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="yaWeaponUI.cpp">
+      <Filter>Engine\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -160,8 +160,6 @@ namespace ya
 			mVineAnimator->Play(L"VineC", false);
 			break;
 		}
-		SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::FrontMonster);
-		mCollider->SetScale({ 50,100 });
 	}
 
 	void MiniFlower::VineGrowCompleteEvent()
@@ -187,6 +185,7 @@ namespace ya
 			mVineAnimator->Play(L"ReverseVineC", false);
 		}		
 		SetPos(pos);
+		SceneManager::GetCurScene()->ChangeLayer(this, eColliderLayer::FrontMonster);
 		mCollider->SetScale({ 80,80 });
 		mAnimator->Play(L"Intro", false);
 	}
@@ -213,6 +212,9 @@ namespace ya
 	}
 	void MiniFlower::Release()
 	{
+		mVineAnimator->Release();
+		mAnimator->Release();
+		MiniFlowerBullet({0,1}).Release();
 	}
 
 }

@@ -100,6 +100,8 @@ namespace ya
 
 	void Chomper::Release()
 	{
+		mVineAnimator->Release();
+		mAnimator->Release();
 	}
 
 }

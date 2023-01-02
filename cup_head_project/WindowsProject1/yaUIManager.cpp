@@ -4,6 +4,7 @@
 #include "yaPanel.h"
 #include "yaHealthUI.h"
 #include "yaEXPointUI.h"
+#include "yaWeaponUI.h"
 namespace ya
 {
 	std::unordered_map<eUIType, UiBase*> UIManager::mUIs;
@@ -58,6 +59,10 @@ namespace ya
 		panel->AddChild(PlayResumeButton);
 		panel->AddChild(PlayRetryButton);
 		panel->AddChild(PlayExitButton);
+
+		WeaponUI* weaponUI = new WeaponUI(eUIType::Gun);
+		mUIs.insert(std::make_pair(eUIType::Gun, weaponUI));
+
 
 		HealthUI* healthUI = new HealthUI(eUIType::HP);
 		mUIs.insert(std::make_pair(eUIType::HP, healthUI));

@@ -108,6 +108,9 @@ namespace ya
 		healthUI->SetTarget(mPlayer);
 		HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
 		exPointUI->SetTarget(mPlayer);
+		HUD* weaponUI = UIManager::GetUiInstant<HUD>(eUIType::Gun);
+		weaponUI->SetTarget(mPlayer);
+		weaponUI->InActive();
 		Button* resumeButton = UIManager::GetUiInstant<Button>(eUIType::PLAYOPTION_RESUME);
 		resumeButton->GetOnClickEvent() = std::bind(&BossCanRatScene::ResumeClickEvent, this);
 		Button* retryButton = UIManager::GetUiInstant<Button>(eUIType::PLAYOPTION_RETRY);
@@ -292,6 +295,7 @@ namespace ya
 	{
 		Initialize();
 		Scene::Enter();
+		UIManager::Push(eUIType::Gun);
 		UIManager::Push(eUIType::HP);
 		UIManager::Push(eUIType::MP);
 	}
@@ -306,6 +310,8 @@ namespace ya
 		healthUI->SetTarget(nullptr);
 		HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
 		exPointUI->SetTarget(nullptr);
+		HUD* weaponUI = UIManager::GetUiInstant<HUD>(eUIType::Gun);
+		weaponUI->SetTarget(nullptr);
 
 		for (size_t i = 0; i < 2; i++)
 		{

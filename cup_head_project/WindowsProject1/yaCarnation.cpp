@@ -207,7 +207,9 @@ namespace ya
 
 				if (mHp < 200 && mAnimator->GetPlayAnimation()->GetName() == L"Idle")
 				{
-					mbFinalForm = true;
+					mbFinalForm = true;		
+					mHeadCollider->SetScale({ 300,300 });
+					mHeadCollider->SetAddPos({ 0,-300 });
 					mAnimator->Play(L"FinalIntro", false);
 				}
 			}
@@ -235,7 +237,7 @@ namespace ya
 			if (mDeathEffectTimeChecker > 0.4f + (rand() % 5) * 0.1)
 			{
 				mDeathEffectTimeChecker = 0;
-				Vector2 pos = { 1400,550 };
+				Vector2 pos = { 1400,650 };
 				switch (rand() % 6)
 				{
 				case 0:
@@ -663,6 +665,15 @@ namespace ya
 	void Carnation::Release()
 	{
 		mAnimator->Release();
+		mMissileAnimator->Release();
+		mFinalVineMainAnimator->Release();
+		mFinalVineAAnimator->Release();
+		Chomper().Release();
+		MiniFlower().Release();
+		Venus().Release();
+		Acorn().Release();
+		Boomerang().Release();
+		Pollen().Release();
 	}
 
 }

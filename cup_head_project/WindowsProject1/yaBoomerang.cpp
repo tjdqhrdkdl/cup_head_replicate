@@ -76,6 +76,8 @@ namespace ya
 
 	void Boomerang::Release()
 	{
+		mAnimator->Release();
+
 	}
 
 }
