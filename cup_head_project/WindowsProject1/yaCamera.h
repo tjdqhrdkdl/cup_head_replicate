@@ -15,6 +15,8 @@ namespace ya
 		static Vector2 CalculatePos(Vector2 pos) { return pos - mDistance; }
 		static void SetTarget(GameObject* gameObj) { mTarget = gameObj; }
 		static void SetCameraEffect(eCameraEffect effect) { mEffect = effect; }
+		static void SetShake(bool shake) { mbShake = shake; }
+		static void Shake();
 
 		static void PositionInit(){mTarget = nullptr, mLookPosition = (mResolution / 2.0f) , mDistance = { 0,0 };}
 	private:
@@ -32,6 +34,10 @@ namespace ya
 		static float mAlphaTime;
 		static float mCuttonAlpha;
 		static float mEndTime;
+
+		static float mShakeTime;
+		static bool mbShake;
+		static bool mbVerticalShake;
 	};
 
 

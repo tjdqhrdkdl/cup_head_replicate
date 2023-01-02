@@ -19,7 +19,6 @@ namespace ya
 
 	void Ground::Tick()
 	{
-		SetPos(Camera::CalculatePos(GetPos()));
 		GameObject::Tick();
 	}
 

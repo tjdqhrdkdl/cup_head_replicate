@@ -16,6 +16,9 @@ namespace ya
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 
+		Animator* GetRightArmAnimator() { return mRightArmAnimator; }
+		Animator* GetLeftArmAnimator() { return mLeftArmAnimator; }
+
 
 		void SetDeath();
 

@@ -262,6 +262,10 @@ namespace ya
 			Scene::Enter();
 			UIManager::Push(eUIType::HP);
 			UIManager::Push(eUIType::MP);
+			for (size_t i = 0; i < 2; i++)
+			{
+				mDiscs[i].clear();
+			}
 		}
 	}
 

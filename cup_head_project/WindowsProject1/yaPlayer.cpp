@@ -986,7 +986,7 @@ namespace ya
 			{
 				GetComponent<Collider>()->SetScale({ playerScaleBasic });
 				SetScale(playerScaleBasic);
-				mJumpCollider->SetAddPos({ 0,60 });
+				mJumpCollider->SetAddPos({ 0,55 });
 				mCurState &= ~PlayerState_OnShoot;
 			}
 		}

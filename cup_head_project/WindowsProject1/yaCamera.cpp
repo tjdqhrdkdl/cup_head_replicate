@@ -17,6 +17,9 @@ namespace ya
 	float Camera::mAlphaTime = 0.0f;
 	float Camera::mCuttonAlpha = 0.0f;
 	float Camera::mEndTime = 5.0f;
+	float Camera::mShakeTime = 0;
+	bool Camera::mbShake = false;
+	bool Camera::mbVerticalShake = false;
 
 	void Camera::Initialize()
 	{
@@ -78,6 +81,10 @@ namespace ya
 				mLookPosition.y = 1850;
 		}
 
+		if (mbShake)
+		{
+			Shake();
+		}
 		mDistance = mLookPosition - (mResolution / 2.0f);
 	}
 
@@ -97,5 +104,30 @@ namespace ya
 			, mCutton->GetDC(), 0, 0
 			, mCutton->GetWidth(), mCutton->GetHeight()
 			, func);
+	}
+	void Camera::Shake()
+	{
+		mShakeTime += Time::DeltaTime();
+
+		if (mShakeTime < 0.02f)
+		{
+			if (mbVerticalShake)
+				mLookPosition.x += 500*Time::DeltaTime();
+			else
+				mLookPosition.y += 500 * Time::DeltaTime();
+		}
+		else
+		{
+			if (mbVerticalShake)
+				mLookPosition.x -= 500 * Time::DeltaTime();
+			else
+				mLookPosition.y -= 500 * Time::DeltaTime();
+		}
+		if (mShakeTime > 0.04f)
+		{
+			mShakeTime = 0;
+			mbVerticalShake = !mbVerticalShake;
+			mLookPosition = (mResolution / 2.0f);
+		}
 	}
 }

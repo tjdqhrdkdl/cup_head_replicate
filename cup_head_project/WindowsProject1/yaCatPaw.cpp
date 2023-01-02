@@ -3,6 +3,7 @@
 #include "yaAnimator.h"
 #include "yaTime.h"
 #include "yaSceneManager.h"
+#include "yaCamera.h"
 #include "yaObjectManager.h"
 namespace ya {
 	Paw::Paw(bool right)
@@ -100,6 +101,7 @@ namespace ya {
 		if (mHitCount == 1)
 		{
 			mOwnerCat->SummonWoodPieces(mbRight);
+			Camera::SetShake(true);
 		}
 		if (mHitCount > 4)
 		{
@@ -108,6 +110,7 @@ namespace ya {
 			else
 				mAnimator->Play(L"PawOutroLeft", true);
 			mOwnerCat->SetPawBack();
+			Camera::SetShake(false);
 		}
 	}
 

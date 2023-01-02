@@ -22,7 +22,6 @@ namespace ya
 
 	void LeftWall::Tick()
 	{
-		SetPos(Camera::CalculatePos(GetPos()));
 		GameObject::Tick();
 	}
 

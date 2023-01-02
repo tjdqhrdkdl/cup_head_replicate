@@ -379,11 +379,14 @@ namespace ya
 		else if (mbPlayClawLeft)
 		{
 			mHeadAnimator->Play(L"ClawHeadIntroLeft", false);
+			mCatBody->GetLeftArmAnimator()->SetPlayAnimation(nullptr);
 			mbPlayClawLeft = false;
 		}
 		else if (mbPlayClawRight)
 		{
 			mHeadAnimator->Play(L"ClawHeadIntroRight", false);
+			mCatBody->GetRightArmAnimator()->SetPlayAnimation(nullptr);
+
 			mbPlayClawRight = false;
 		}
 	}
@@ -400,10 +403,13 @@ namespace ya
 		else if (mbPlayClawLeft)
 		{
 			mHeadAnimator->Play(L"ClawHeadIntroLeft", false);
+			mCatBody->GetLeftArmAnimator()->SetPlayAnimation(nullptr);
+
 			mbPlayClawLeft = false;
 		}
 		else if (mbPlayClawRight)
 		{
+			mCatBody->GetRightArmAnimator()->SetPlayAnimation(nullptr);
 			mHeadAnimator->Play(L"ClawHeadIntroRight", false);
 			mbPlayClawRight = false;
 		}
@@ -438,9 +444,15 @@ namespace ya
 	{
 		mbPawBack = false;
 		if (mHeadAnimator->GetPlayAnimation()->GetName() == L"ClawHeadOutroLeft")
+		{
+			mCatBody->GetLeftArmAnimator()->Play(L"LeftArmIdle", true);
 			mHeadAnimator->Play(L"HeadIdleLeft", false);
+		}
 		else
+		{
+			mCatBody->GetRightArmAnimator()->Play(L"RightArmIdle", true);
 			mHeadAnimator->Play(L"HeadIdleRight", false);
+		}
 	}
 
 	void WernerWermanPh3::Release()
