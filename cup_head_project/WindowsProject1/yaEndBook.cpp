@@ -59,18 +59,6 @@ namespace ya
 			}
 			mArrowAnimator->SetPlayAnimation(nullptr);
 		}
-		if (mArrowAnimator->GetPlayAnimation() != nullptr)
-		{
-				if (mbArrowMoveRight)
-					mArrowAnimator->SetAddPos({ mArrowAnimator->GetAddPos().x + Time::DeltaTime() * 20, mArrowAnimator->GetAddPos().y });
-				else
-					mArrowAnimator->SetAddPos({ mArrowAnimator->GetAddPos().x - Time::DeltaTime() * 20, mArrowAnimator->GetAddPos().y });
-
-				if (mArrowAnimator->GetAddPos().x < 595)
-					mbArrowMoveRight = true;
-				else if (mArrowAnimator->GetAddPos().x > 605)
-					mbArrowMoveRight = false;
-		}
 	}
 
 	void EndBook::Render(HDC hdc)

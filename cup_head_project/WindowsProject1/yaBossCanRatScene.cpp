@@ -277,7 +277,7 @@ namespace ya
 			mbUIOn = false;
 			Time::Stop(false);
 			mCameraBlur->SetOn(false);
-			SceneManager::ChangeScene(eSceneType::Map);
+			SceneManager::ChangeScene(eSceneType::End);
 		}
 	}
 

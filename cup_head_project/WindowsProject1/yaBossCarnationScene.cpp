@@ -101,7 +101,7 @@ namespace ya
 			if (mPhase == 5 && mbPhaseChanged)
 			{
 				mbPhaseChanged = false;
-				SceneManager::ChangeScene(eSceneType::End);
+				SceneManager::ChangeScene(eSceneType::Map);
 			}
 
 		}
