@@ -32,8 +32,7 @@ namespace ya
 			mCurScene = scene;
 			scene->Initialize();
 		}
-
-		mCurScene = mScenes[0];
+		mCurScene = mScenes[(UINT)eSceneType::Logo];
 		
 	}
 

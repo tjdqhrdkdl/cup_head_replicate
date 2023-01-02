@@ -4,6 +4,8 @@
 #include "yaBgImageObject.h"
 #include "yaInput.h"
 #include "yaScenemanager.h"
+#include "yaObjectManager.h"
+#include "yaEndBook.h"
 namespace ya {
 	EndScene::EndScene()
 	{
@@ -15,17 +17,14 @@ namespace ya {
 
 	void EndScene::Initialize()
 	{
-
 		Scene::Initialize();
+		ObjectManager::Instantiate<EndBook>(this, eColliderLayer::BackGround)->SetPos({800,900});
+
 	}
 
 	void EndScene::Tick()
 	{
 		Scene::Tick();
-		if (KEY_DOWN(eKeyCode::N))
-		{
-			SceneManager::ChangeScene(eSceneType::Title);
-		}
 	}
 
 	void EndScene::Render(HDC hdc)
@@ -44,6 +43,8 @@ namespace ya {
 
 	void EndScene::Enter()
 	{
+		Initialize();
+		Scene::Enter();
 	}
 
 	void EndScene::Exit()

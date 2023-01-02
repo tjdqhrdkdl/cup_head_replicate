@@ -162,6 +162,9 @@
     <Filter Include="Engine\GameObject\BossCarnation\ThrowingObjects">
       <UniqueIdentifier>{1cc821ad-b5ba-483d-9f7d-b7f85cb78e95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\EndBook">
+      <UniqueIdentifier>{47fe5355-6c3d-4fbd-8902-ab3569cec2ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -506,6 +509,12 @@
     <ClInclude Include="yaWeaponUI.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
+    <ClInclude Include="yaEndBook.h">
+      <Filter>Engine\GameObject\EndBook</Filter>
+    </ClInclude>
+    <ClInclude Include="yaSoundManager.h">
+      <Filter>Engine\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -831,6 +840,12 @@
     </ClCompile>
     <ClCompile Include="yaWeaponUI.cpp">
       <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="yaEndBook.cpp">
+      <Filter>Engine\GameObject\EndBook</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSoundManager.cpp">
+      <Filter>Engine\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

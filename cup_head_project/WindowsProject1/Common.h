@@ -19,6 +19,12 @@
 using namespace Gdiplus;
 #pragma comment (lib,"Gdiplus.lib")
 
+#include <mmsystem.h>
+#include <dsound.h>
+#include <dinput.h>
+
+#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "dsound.lib")
 union Pixel
 {
 	struct

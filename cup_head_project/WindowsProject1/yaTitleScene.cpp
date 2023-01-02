@@ -10,6 +10,7 @@
 #include "yaObjectManager.h"
 #include "yaTime.h"
 #include "yaUIManager.h"
+#include "yaApplication.h"
 #include "yaButton.h"
 namespace ya 
 {
@@ -55,6 +56,9 @@ namespace ya
 
 	void TitleScene::ExitClickEvent()
 	{
+		if (KEY_DOWN(eKeyCode::LBTN))
+			DestroyWindow(Application::GetInstance().GetWindowData().hWnd);
+
 	}
 
 	void TitleScene::Enter()
