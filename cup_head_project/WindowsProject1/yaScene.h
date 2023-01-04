@@ -39,8 +39,10 @@ namespace ya
 		std::vector<GameObject*> mObjects[_COLLIDER_LAYER];
 		bool misIntro;
 		bool mbStart;
+		bool mbSceneChanging;
 
 		float mTime;
+
 
 
 	};

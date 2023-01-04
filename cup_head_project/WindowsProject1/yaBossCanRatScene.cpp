@@ -38,7 +38,7 @@ namespace ya
 	void BossCanRatScene::Initialize()
 	{
 		mBGM = Resources::Load<Sound>(L"MouseBGM", L"..\\Resources\\Sound\\Mouse\\MUS_Mouse.wav");
-		mBGM->SetVolume(10);
+		mBGM->SetVolume(30);
 		mCatIntroSound = Resources::Load<Sound>(L"CatIntroSound", L"..\\Resources\\Sound\\Mouse\\sfx_level_mouse_cat_intro.wav");
 
 		SetIntro(true);
@@ -131,116 +131,112 @@ namespace ya
 
 	void BossCanRatScene::Tick()
 	{
-		if (!Time::isStop())
+		if (SceneManager::GetCurScene() == (Scene*)this)
 		{
-			Scene::Tick();
-			if (mTime < 2)
+			if (!Time::isStop())
 			{
-				mBGM->SetVolume(mTime * 5);
-			}
-			if (mPhase < 2)
-			{
-				mPeakTimeChecker += Time::DeltaTime();
-				if (mPeakTimeChecker > 10)
+				Scene::Tick();
+				if (mTime < 2)
 				{
-					switch (rand() % 3)
-					{
-					case 0:
-						mPeakingCat->Reset({ -500,800 }, { 400, 640 });
-						break;
-					case 1:
-						mPeakingCat->Reset({ 2100,800 }, { 1150, 250 });
-						break;
-					case 2:
-						mPeakingCat->Reset({ 400,1200 }, { 830, 840 });
-						break;
-					}
-
-					mPeakTimeChecker = 0;
+					mBGM->SetVolume(mTime * 5);
 				}
-			}
-			else if (mPhase == 2)
-			{
-				mPeakTimeChecker += Time::DeltaTime();
-				if (mPeakTimeChecker > 10)
+				if (mPhase < 2)
 				{
-					switch (rand() % 3)
+					mPeakTimeChecker += Time::DeltaTime();
+					if (mPeakTimeChecker > 10)
 					{
-					case 0:
-						mPeakingCat->Reset({ -500,800 }, { 400, 540 });
-						break;
-					case 1:
-						mPeakingCat->Reset({ 2100,800 }, { 1150, 250 });
-						break;
-					case 2:
-						mPeakingCat->Reset({ 400,1200 }, { 830, 840 });
-						break;
-					}
+						switch (rand() % 3)
+						{
+						case 0:
+							mPeakingCat->Reset({ -500,800 }, { 400, 640 });
+							break;
+						case 1:
+							mPeakingCat->Reset({ 2100,800 }, { 1150, 250 });
+							break;
+						case 2:
+							mPeakingCat->Reset({ 400,1200 }, { 830, 840 });
+							break;
+						}
 
-					mPeakTimeChecker = 0;
-				}
-			}
-			if (mPhase == 2 && mbPhaseChanged)
-			{
-				ObjectManager::Destroy(mBGI1);
-				AddGameObject(mBGI2, eColliderLayer::BehindMonster);
-				mPh2BGChanger = ObjectManager::Instantiate<Phase2BGChanger>(this, eColliderLayer::BehindMonster);
-				for (size_t i = 0; i < 2; i++)
-				{
-					for (size_t k = 0; k < 7; k++)
-					{
-						dynamic_cast<WernerWermanPh2*>(mPhase2Object)->SetDiscs(mDiscs[i][k], i);
+						mPeakTimeChecker = 0;
 					}
 				}
-				mbPhaseChanged = false;
-			}
+				else if (mPhase == 2)
+				{
+					mPeakTimeChecker += Time::DeltaTime();
+					if (mPeakTimeChecker > 10)
+					{
+						switch (rand() % 3)
+						{
+						case 0:
+							mPeakingCat->Reset({ -500,800 }, { 400, 540 });
+							break;
+						case 1:
+							mPeakingCat->Reset({ 2100,800 }, { 1150, 250 });
+							break;
+						case 2:
+							mPeakingCat->Reset({ 400,1200 }, { 830, 840 });
+							break;
+						}
 
-			if (mPhase == 3 && mbPhaseChanged)
-			{
-				mCatIntroSound->Play(false);
-				mPhaseTimeChecker += Time::DeltaTime();
-				mPeakingCat->SetPhase2ObjectToDelete(mPhase2Object);
-				mbPhaseChanged = false;
-			}
+						mPeakTimeChecker = 0;
+					}
+				}
+				if (mPhase == 2 && mbPhaseChanged)
+				{
+					ObjectManager::Destroy(mBGI1);
+					AddGameObject(mBGI2, eColliderLayer::BehindMonster);
+					mPh2BGChanger = ObjectManager::Instantiate<Phase2BGChanger>(this, eColliderLayer::BehindMonster);
+					for (size_t i = 0; i < 2; i++)
+					{
+						for (size_t k = 0; k < 7; k++)
+						{
+							dynamic_cast<WernerWermanPh2*>(mPhase2Object)->SetDiscs(mDiscs[i][k], i);
+						}
+					}
+					mbPhaseChanged = false;
+				}
 
-			if (mPhase == 5 && mbPhaseChanged)
+				if (mPhase == 3 && mbPhaseChanged)
+				{
+					mCatIntroSound->Play(false);
+					mPhaseTimeChecker += Time::DeltaTime();
+					mPeakingCat->SetPhase2ObjectToDelete(mPhase2Object);
+					mbPhaseChanged = false;
+				}
+
+				if (mPhase == 5 && mbPhaseChanged)
+				{
+					mbPhaseChanged = false;
+					SceneManager::ChangeScene(eSceneType::End);
+				}
+			}
+			if (KEY_DOWN(eKeyCode::ESC))
 			{
-				mbPhaseChanged = false;
-				SceneManager::ChangeScene(eSceneType::End);
+				if (!mbUIOn)
+				{
+					UIManager::Push(eUIType::PLAYOPTION_PANEL);
+					mbUIOn = true;
+					mBGM->Stop(false);
+					Time::Stop(true);
+					mCameraBlur->SetOn(true);
+				}
+				else
+				{
+					UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+					mBGM->Play(true);
+					mbUIOn = false;
+					Time::Stop(false);
+					mCameraBlur->SetOn(false);
+
+				}
 			}
 		}
-		if (KEY_DOWN(eKeyCode::ESC))
-		{
-			if (!mbUIOn)
-			{
-				UIManager::Push(eUIType::PLAYOPTION_PANEL);
-				mbUIOn = true;
-				mBGM->Stop(false);
-				Time::Stop(true);
-				mCameraBlur->SetOn(true);
-			}
-			else
-			{
-				UIManager::Pop(eUIType::PLAYOPTION_PANEL);
-				mBGM->Play(true);
-				mbUIOn = false;
-				Time::Stop(false);
-				mCameraBlur->SetOn(false);
-
-			}
-		}
-
 	}
 
 	void BossCanRatScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-
-		wchar_t szFloat[50] = {};
-		swprintf_s(szFloat, 50, L"CanRatScene");
-		int strLen = wcsnlen_s(szFloat, 50);
-		TextOut(hdc, 10, 50, szFloat, strLen);
-
 
 
 	}

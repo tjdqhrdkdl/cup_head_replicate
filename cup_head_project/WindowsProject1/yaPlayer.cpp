@@ -73,8 +73,9 @@ namespace ya
 			mSounds[i]->SetVolume(10);
 		}
 		mSounds[PlayerSound_HitCrack]->SetVolume(50);
-		mSounds[PlayerSound_Ex]->SetVolume(40);
+		mSounds[PlayerSound_Ex]->SetVolume(50);
 		mSounds[PlayerSound_CrackShot]->SetVolume(30);
+		mSounds[PlayerSound_Spread]->SetVolume(50);
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
 		{

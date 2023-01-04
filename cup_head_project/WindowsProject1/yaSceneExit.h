@@ -20,5 +20,7 @@ namespace ya
 	private:
 		Animator* mAnimator;
 		eSceneType mType;
+
+		bool mDead;
 	};
 }

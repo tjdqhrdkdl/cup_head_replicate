@@ -17,7 +17,7 @@ namespace ya
 		mAnimator->CreateAnimation(L"Enter", L"..\\Resources\\Image\\Camera\\Enter\\tile0", 17, 0.03f, true, false, { 0,0 }, false, true);
 
 		mAnimator->GetCompleteEvent(L"Enter") = std::bind(&SceneEnter::AnimCompleteEvent, this);
-		mAnimator->Play(L"Enter", true);
+		mAnimator->Play(L"Enter", false);
 	}
 
 	SceneEnter::~SceneEnter()

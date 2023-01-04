@@ -79,7 +79,7 @@ namespace ya
 		{
 			mCurScene = mScenes[(UINT)eSceneType::Logo];
 		}
-		else
+		else if (mScenes[(UINT)type] != mCurScene)
 		{
 			SceneExit* sceneExit = new SceneExit(type);
 			sceneExit->Initialize();

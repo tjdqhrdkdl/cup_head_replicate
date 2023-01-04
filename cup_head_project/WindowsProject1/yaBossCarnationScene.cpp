@@ -34,7 +34,7 @@ namespace ya
 	void BossCarnationScene::Initialize()
 	{
 		mBGM = Resources::Load<Sound>(L"FlowerBGM", L"..\\Resources\\Sound\\Flower\\MUS_Flower.wav");
-		mBGM->SetVolume(10);
+		mBGM->SetVolume(30);
 
 		SetIntro(true);
 		mBGI = new BgImageObject();
@@ -95,44 +95,48 @@ namespace ya
 
 	void BossCarnationScene::Tick()
 	{
-		if (!Time::isStop())
+		if (SceneManager::GetCurScene() == (Scene*)this)
 		{
-			Scene::Tick();
-			if (mTime < 2)
+			if (!Time::isStop())
 			{
-				mBGM->SetVolume(mTime * 5);
-			}
-			if (mPhase == 2 && mbPhaseChanged)
-			{
-				mbPhaseChanged = false;
-			}
+				Scene::Tick();
+				if (mTime < 2)
+				{
+					mBGM->SetVolume(mTime * 5);
+				}
+				if (mPhase == 2 && mbPhaseChanged)
+				{
+					mbPhaseChanged = false;
+				}
 
-			if (mPhase == 5 && mbPhaseChanged)
-			{
-				mbPhaseChanged = false;
-				SceneManager::ChangeScene(eSceneType::Win);
-				SceneManager::GetScoreScene()->SendInfo(300, mTime, mHPCount, mParryCount, mSuperCount);
-			}
+				if (mPhase == 5 && mbPhaseChanged)
+				{
+					mbPhaseChanged = false;
+					SceneManager::ChangeScene(eSceneType::Win);
+					SceneManager::GetScoreScene()->Initialize();
+					SceneManager::GetScoreScene()->SendInfo(300, mTime, mHPCount, mParryCount, mSuperCount);
+				}
 
-		}
-		if (KEY_DOWN(eKeyCode::ESC))
-		{
-			if (!mbUIOn)
-			{
-				UIManager::Push(eUIType::PLAYOPTION_PANEL);
-				mbUIOn = true;
-				Time::Stop(true);
-				mBGM->Stop(false);
-				mCameraBlur->SetOn(true);
 			}
-			else
+			if (KEY_DOWN(eKeyCode::ESC))
 			{
-				UIManager::Pop(eUIType::PLAYOPTION_PANEL);
-				mbUIOn = false;
-				mBGM->Play(true);
-				Time::Stop(false);
-				mCameraBlur->SetOn(false);
+				if (!mbUIOn)
+				{
+					UIManager::Push(eUIType::PLAYOPTION_PANEL);
+					mbUIOn = true;
+					Time::Stop(true);
+					mBGM->Stop(false);
+					mCameraBlur->SetOn(true);
+				}
+				else
+				{
+					UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+					mbUIOn = false;
+					mBGM->Play(true);
+					Time::Stop(false);
+					mCameraBlur->SetOn(false);
 
+				}
 			}
 		}
 	}

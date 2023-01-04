@@ -15,7 +15,7 @@ namespace ya
 		mAnimator->CreateAnimation(L"Exit", L"..\\Resources\\Image\\Camera\\Exit\\tile00", 17, 0.03f, true, false, { 0,0 }, false, true);
 
 		mAnimator->GetCompleteEvent(L"Exit") = std::bind(&SceneExit::AnimCompleteEvent, this);
-		mAnimator->Play(L"Exit", true);
+		mAnimator->Play(L"Exit", false);
 	}
 
 	SceneExit::~SceneExit()
@@ -25,6 +25,8 @@ namespace ya
 	void SceneExit::Tick()
 	{
 		GameObject::Tick();
+		if (mDead)
+			delete this;
 	}
 
 	void SceneExit::Render(HDC hdc)
@@ -44,7 +46,8 @@ namespace ya
 		SceneEnter* sceneEnter = new SceneEnter(prevScene);
 		sceneEnter->Initialize();
 		SceneManager::GetCurScene()->AddGameObject(dynamic_cast<GameObject*>(sceneEnter), eColliderLayer::Camera);
-		ObjectManager::Destroy(this);
+		
+		mDead = true;
 	}
 
 }

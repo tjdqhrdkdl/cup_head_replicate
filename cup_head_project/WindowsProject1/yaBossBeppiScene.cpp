@@ -36,7 +36,7 @@ namespace ya
 	void BossBeppiScene::Initialize()
 	{
 		mBGM = Resources::Load<Sound>(L"ClownBGM", L"..\\Resources\\Sound\\Clown\\MUS_Pirate.wav");
-		mBGM->SetVolume(10);
+		mBGM->SetVolume(30);
 
 		SetIntro(true);
 		mBGI = new BgImageObject();
@@ -105,91 +105,89 @@ namespace ya
 
 	void BossBeppiScene::Tick()
 	{
-		
-		if (!Time::isStop())
+		if (SceneManager::GetCurScene() == (Scene*)this)
 		{
-			if (mTime < 2)
+			if (!Time::isStop())
 			{
-				mBGM->SetVolume(mTime * 5);
-			}
-			else
-				mBGM->SetVolume(10);
-			Scene::Tick();
-			if (mPhase == 2 && mbPhaseChanged)
-			{
-				mPhaseTimeChecker += Time::DeltaTime();
-				if (mPhaseTimeChecker > 5.0f)
+				if (mTime < 2)
 				{
-					BeppiPh2Body* ph2Body = ObjectManager::Instantiate<BeppiPh2Body>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
-					BeppiPhaseTwo* beppiPh2 = ObjectManager::Instantiate<BeppiPhaseTwo>(this, eColliderLayer::BehindMonster);
-					beppiPh2->SetBody(ph2Body);
+					mBGM->SetVolume(mTime * 5);
+				}
+				else
+					mBGM->SetVolume(10);
+				Scene::Tick();
+				if (mPhase == 2 && mbPhaseChanged)
+				{
+					mPhaseTimeChecker += Time::DeltaTime();
+					if (mPhaseTimeChecker > 5.0f)
+					{
+						BeppiPh2Body* ph2Body = ObjectManager::Instantiate<BeppiPh2Body>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
+						BeppiPhaseTwo* beppiPh2 = ObjectManager::Instantiate<BeppiPhaseTwo>(this, eColliderLayer::BehindMonster);
+						beppiPh2->SetBody(ph2Body);
+						mbPhaseChanged = false;
+						mPhaseTimeChecker = 0;
+					}
+				}
+
+				if (mPhase == 3 && mbPhaseChanged)
+				{
+					mPhaseTimeChecker += Time::DeltaTime();
+					if (mPhaseTimeChecker > 8.0f)
+					{
+						ObjectManager::Instantiate<BeppiPhaseThree>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
+						mbPhaseChanged = false;
+						mPhaseTimeChecker = 0;
+					}
+				}
+
+				if (mPhase == 4 && mbPhaseChanged)
+				{
+					mPhaseTimeChecker += Time::DeltaTime();
+					if (mPhaseTimeChecker > 18.0f)
+					{
+						ObjectManager::Instantiate<BeppiPhaseFour>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
+						mbPhaseChanged = false;
+						mPhaseTimeChecker = 0;
+					}
+				}
+
+				if (mPhase == 5 && mbPhaseChanged)
+				{
 					mbPhaseChanged = false;
-					mPhaseTimeChecker = 0;
+					SceneManager::ChangeScene(eSceneType::Win);
+					SceneManager::GetScoreScene()->Initialize();
+
+					SceneManager::GetScoreScene()->SendInfo(300, mTime, mHPCount, mParryCount, mSuperCount);
 				}
 			}
 
-			if (mPhase == 3 && mbPhaseChanged)
-			{
-				mPhaseTimeChecker += Time::DeltaTime();
-				if (mPhaseTimeChecker > 8.0f)
-				{
-					ObjectManager::Instantiate<BeppiPhaseThree>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
-					mbPhaseChanged = false;
-					mPhaseTimeChecker = 0;
-				}
-			}
 
-			if (mPhase == 4 && mbPhaseChanged)
+			if (KEY_DOWN(eKeyCode::ESC))
 			{
-				mPhaseTimeChecker += Time::DeltaTime();
-				if (mPhaseTimeChecker > 18.0f)
+				if (!mbUIOn)
 				{
-					ObjectManager::Instantiate<BeppiPhaseFour>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
-					mbPhaseChanged = false;
-					mPhaseTimeChecker = 0;
+					UIManager::Push(eUIType::PLAYOPTION_PANEL);
+					mBGM->Stop(false);
+					mbUIOn = true;
+					Time::Stop(true);
+					mCameraBlur->SetOn(true);
 				}
-			}
+				else
+				{
+					UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+					mBGM->Play(true);
+					mbUIOn = false;
+					Time::Stop(false);
+					mCameraBlur->SetOn(false);
 
-			if (mPhase == 5 && mbPhaseChanged)
-			{
-				mbPhaseChanged = false;
-				SceneManager::ChangeScene(eSceneType::Win);
-				SceneManager::GetScoreScene()->SendInfo(300, mTime, mHPCount, mParryCount, mSuperCount);
+				}
 			}
 		}
-
-
-		if (KEY_DOWN(eKeyCode::ESC))
-		{
-			if (!mbUIOn)
-			{
-				UIManager::Push(eUIType::PLAYOPTION_PANEL);
-				mBGM->Stop(false);
-				mbUIOn = true;
-				Time::Stop(true);
-				mCameraBlur->SetOn(true);
-			}
-			else
-			{
-				UIManager::Pop(eUIType::PLAYOPTION_PANEL);
-				mBGM->Play(true);
-				mbUIOn = false;
-				Time::Stop(false);
-				mCameraBlur->SetOn(false);
-
-			}
-		}
-
 	}
 
 	void BossBeppiScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-
-		wchar_t szFloat[50] = {};
-		swprintf_s(szFloat, 50, L"BossBeppiScene");
-		int strLen = wcsnlen_s(szFloat, 50);
-		TextOut(hdc, 10, 50, szFloat, strLen);
 
 
 

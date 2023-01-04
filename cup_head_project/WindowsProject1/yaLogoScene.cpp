@@ -62,13 +62,6 @@ namespace ya {
 	{
 		Scene::Render(hdc);
 
-		Graphics graphic(hdc);
-		FontFamily  fontFamily(L"Arial");
-		Font        font(&fontFamily, 12,0, Gdiplus::UnitPoint);
-		PointF      pointF(10.0f, 30.0f);
-		SolidBrush  solidBrush(Color(255, 0, 0, 0));
-
-		graphic.DrawString(L"LogoScene", -1, &font, pointF, &solidBrush);
 
 	}
 

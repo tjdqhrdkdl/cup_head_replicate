@@ -28,8 +28,8 @@ namespace ya
 
 	void ScoreScene::Initialize()
 	{
-
-		Scene::Initialize();
+		mScorePhase = 0;
+		mbSceneChanging = false;
 		mBGI = new	BgImageObject();
 		AddGameObject(mBGI, eColliderLayer::BackGround);
 
@@ -59,117 +59,125 @@ namespace ya
 		mSuperNumber[0]->SetPos({ 1243,567 });
 		mSuperNumber[1]->SetPos({ 1278,567 });
 
+
+		Scene::Initialize();
+
 	}
 
 	void ScoreScene::Tick()
 	{
-		mBGM->Play(true);
-		Scene::Tick();
-		if (mTime > 1)
+		if (SceneManager::GetCurScene() == (Scene*)this)
 		{
-			mNumberChangeTime += Time::DeltaTime();
-			if (mScorePhase == 0)
-				mTimeNumber[3]->GetAnimator()->SetStop(false);
-			else if (mScorePhase == 1)
-				mHPNumber[0]->GetAnimator()->SetStop(false);
-			else if (mScorePhase == 2)
-				mParryNumber[0]->GetAnimator()->SetStop(false);
-			else if(mScorePhase == 3)
-				mSuperNumber[0]->GetAnimator()->SetStop(false);
-		}
-		if (mNumberChangeTime > 0.4f)
-		{
-			if (mScorePhase == 0)
+			mBGM->Play(true);
+			Scene::Tick();
+			if (mTime > 1)
 			{
-				for (size_t k = 0; k < 4; k++)
+				mNumberChangeTime += Time::DeltaTime();
+				if (mScorePhase == 0)
+					mTimeNumber[3]->GetAnimator()->SetStop(false);
+				else if (mScorePhase == 1)
+					mHPNumber[0]->GetAnimator()->SetStop(false);
+				else if (mScorePhase == 2)
+					mParryNumber[0]->GetAnimator()->SetStop(false);
+				else if (mScorePhase == 3)
+					mSuperNumber[0]->GetAnimator()->SetStop(false);
+			}
+			if (mNumberChangeTime > 0.4f)
+			{
+				if (mScorePhase == 0)
 				{
-					mTimeNumber[k]->GetAnimator()->GetPlayAnimation()->SetIndex(mTimeNumber[k]->GetStopIndex());
-					if (mMaxPlayTime >= mPlayTime)
-						mTimeNumber[k]->GetAnimator()->SetLighten(true);
-					mTimeNumber[k]->GetAnimator()->SetStop(true);
+					for (size_t k = 0; k < 4; k++)
+					{
+						mTimeNumber[k]->GetAnimator()->GetPlayAnimation()->SetIndex(mTimeNumber[k]->GetStopIndex());
+						if (mMaxPlayTime >= mPlayTime)
+							mTimeNumber[k]->GetAnimator()->SetLighten(true);
+						mTimeNumber[k]->GetAnimator()->SetStop(true);
+					}
 				}
-			}
-			else if (mScorePhase == 1)
-			{
-				for (size_t i = 0; i < 2; i++)
+				else if (mScorePhase == 1)
 				{
-					mHPNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mHPNumber[i]->GetStopIndex());
-					if (mMaxHp == mHp)
-						mHPNumber[i]->GetAnimator()->SetLighten(true);
-					mHPNumber[i]->GetAnimator()->SetStop(true);
+					for (size_t i = 0; i < 2; i++)
+					{
+						mHPNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mHPNumber[i]->GetStopIndex());
+						if (mMaxHp == mHp)
+							mHPNumber[i]->GetAnimator()->SetLighten(true);
+						mHPNumber[i]->GetAnimator()->SetStop(true);
+					}
 				}
-			}
-			else if (mScorePhase == 2)
-			{
-				for (size_t i = 0; i < 2; i++)
+				else if (mScorePhase == 2)
 				{
-					mParryNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mParryNumber[i]->GetStopIndex());
-					if (mMaxParry == mParry)
-						mParryNumber[i]->GetAnimator()->SetLighten(true);
-					mParryNumber[i]->GetAnimator()->SetStop(true);
+					for (size_t i = 0; i < 2; i++)
+					{
+						mParryNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mParryNumber[i]->GetStopIndex());
+						if (mMaxParry == mParry)
+							mParryNumber[i]->GetAnimator()->SetLighten(true);
+						mParryNumber[i]->GetAnimator()->SetStop(true);
+					}
 				}
-			}
-			else if (mScorePhase == 3)
-			{
-				for (size_t i = 0; i < 2; i++)
+				else if (mScorePhase == 3)
 				{
-					mSuperNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mSuperNumber[i]->GetStopIndex());
-					if (mMaxSuper == mSuper)
-						mSuperNumber[i]->GetAnimator()->SetLighten(true);
-					mSuperNumber[i]->GetAnimator()->SetStop(true);
+					for (size_t i = 0; i < 2; i++)
+					{
+						mSuperNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mSuperNumber[i]->GetStopIndex());
+						if (mMaxSuper == mSuper)
+							mSuperNumber[i]->GetAnimator()->SetLighten(true);
+						mSuperNumber[i]->GetAnimator()->SetStop(true);
+					}
 				}
+				else if (!mbSceneChanging)
+				{
+					SceneManager::ChangeScene(eSceneType::Map);
+					mbSceneChanging = true;
+					return;
+				}
+				mNumberChangeTime = 0;
+				mScorePhase += 1;
+				mTime = 0;
 			}
-			else
+			if (SceneManager::GetCurScene() == (Scene*)this)
 			{
-				SceneManager::ChangeScene(eSceneType::Map);
-				return;
-			}
-			mNumberChangeTime = 0;
-			mScorePhase += 1;
-			mTime = 0;
-		}
+				if (mHPNumber[0]->GetAnimator()->GetPlayAnimation()->GetIndex() == mHPNumber[0]->GetStopIndex())
+				{
+					if (mScorePhase == 1)
+					{
+						for (size_t i = 0; i < 2; i++)
+						{
+							mHPNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mHPNumber[i]->GetStopIndex());
+							if (mMaxHp == mHp)
+								mHPNumber[i]->GetAnimator()->SetLighten(true);
+							mHPNumber[i]->GetAnimator()->SetStop(true);
+						}
+					}
+				}
+				if (mParryNumber[0]->GetAnimator()->GetPlayAnimation()->GetIndex() == mParryNumber[0]->GetStopIndex())
 
-		if(mHPNumber[0]->GetAnimator()->GetPlayAnimation()->GetIndex() == mHPNumber[0]->GetStopIndex())
-		{
-			if (mScorePhase == 1)
-			{
-				for (size_t i = 0; i < 2; i++)
 				{
-					mHPNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mHPNumber[i]->GetStopIndex());
-					if (mMaxHp == mHp)
-						mHPNumber[i]->GetAnimator()->SetLighten(true);
-					mHPNumber[i]->GetAnimator()->SetStop(true);
+					if (mScorePhase == 2)
+					{
+						for (size_t i = 0; i < 2; i++)
+						{
+							mParryNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mParryNumber[i]->GetStopIndex());
+							if (mMaxParry == mParry)
+								mParryNumber[i]->GetAnimator()->SetLighten(true);
+							mParryNumber[i]->GetAnimator()->SetStop(true);
+						}
+					}
+				}
+				if (mSuperNumber[0]->GetAnimator()->GetPlayAnimation()->GetIndex() == mSuperNumber[0]->GetStopIndex())
+				{
+					if (mScorePhase == 3)
+					{
+						for (size_t i = 0; i < 2; i++)
+						{
+							mSuperNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mSuperNumber[i]->GetStopIndex());
+							if (mMaxSuper == mSuper)
+								mSuperNumber[i]->GetAnimator()->SetLighten(true);
+							mSuperNumber[i]->GetAnimator()->SetStop(true);
+						}
+					}
 				}
 			}
 		}
-		if (mParryNumber[0]->GetAnimator()->GetPlayAnimation()->GetIndex() == mParryNumber[0]->GetStopIndex())
-
-		{
-			if (mScorePhase == 2)
-			{
-				for (size_t i = 0; i < 2; i++)
-				{
-					mParryNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mParryNumber[i]->GetStopIndex());
-					if (mMaxParry == mParry)
-						mParryNumber[i]->GetAnimator()->SetLighten(true);
-					mParryNumber[i]->GetAnimator()->SetStop(true);
-				}
-			}
-		}
-		if (mSuperNumber[0]->GetAnimator()->GetPlayAnimation()->GetIndex() == mSuperNumber[0]->GetStopIndex())
-		{
-			if (mScorePhase == 3)
-			{
-				for (size_t i = 0; i < 2; i++)
-				{
-					mSuperNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mSuperNumber[i]->GetStopIndex());
-					if (mMaxSuper == mSuper)
-						mSuperNumber[i]->GetAnimator()->SetLighten(true);
-					mSuperNumber[i]->GetAnimator()->SetStop(true);
-				}
-			}
-		}
-
 	}
 
 	void ScoreScene::Render(HDC hdc)
@@ -204,6 +212,7 @@ namespace ya
 
 	void ScoreScene::Enter()
 	{
+		Initialize();
 		Scene::Enter();
 	}
 
@@ -212,7 +221,6 @@ namespace ya
 		Scene::Exit();
 		mBGM->Stop(true);
 		Scene::Release();
-		Initialize();
 
 	}
 

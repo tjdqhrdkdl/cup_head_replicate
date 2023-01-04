@@ -28,14 +28,14 @@ void ya::Time::Tick()
 
 void ya::Time::Render(HDC hdc)
 {
-	wchar_t szFloat[50] = {};
+	//wchar_t szFloat[50] = {};
 
-	//1초에 몇번 도는지를 계산하면 그게 내 프레임!
-	int fps = static_cast<int>(1.0f / mDeltaTime);
+	////1초에 몇번 도는지를 계산하면 그게 내 프레임!
+	//int fps = static_cast<int>(1.0f / mDeltaTime);
 
-	swprintf_s(szFloat, 50, L"fps : %d", fps);
-	int strLen = wcsnlen_s(szFloat, 50);
-	TextOut(hdc, 10, 10, szFloat, strLen);
+	//swprintf_s(szFloat, 50, L"fps : %d", fps);
+	//int strLen = wcsnlen_s(szFloat, 50);
+	//TextOut(hdc, 10, 10, szFloat, strLen);
 }
 
 float ya::Time::DeltaTime()

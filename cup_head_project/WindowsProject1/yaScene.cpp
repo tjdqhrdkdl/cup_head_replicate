@@ -6,6 +6,7 @@
 #include "yaSceneEnter.h"
 #include "yaTime.h"
 #include "yaInput.h"
+#include "yaSceneManager.h"
 namespace ya {
 	Scene::Scene()
 	{
@@ -36,6 +37,8 @@ namespace ya {
 			{
 				if (y < mObjects[x].size())
 				{
+					if (SceneManager::GetCurScene() != this)
+						return;
 					if (mObjects[x][y]->isLayerChanged())
 					{
 						mObjects[x][y]->SetLayerChange(false);

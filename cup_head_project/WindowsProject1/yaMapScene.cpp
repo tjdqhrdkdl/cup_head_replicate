@@ -88,69 +88,67 @@ namespace ya {
 
 	void MapScene::Tick()
 	{
-		if (mTime < 2)
+		if (SceneManager::GetCurScene() == (Scene*)this)
 		{
-			mBGM->SetVolume(mTime * 25);
-		}
-		Scene::Tick();
-		if (KEY_DOWN(eKeyCode::ESC))
-		{
-			SceneManager::ChangeScene(eSceneType::Title);
-		}
-		if (KEY_DOWN(eKeyCode::B))
-		{
-			SceneManager::ChangeScene(eSceneType::BossBeppi);
-		}
-		if (KEY_DOWN(eKeyCode::N))
-		{
-			SceneManager::ChangeScene(eSceneType::BossWernerWerman);
-		}
-		if (KEY_DOWN(eKeyCode::C))
-		{
-			SceneManager::ChangeScene(eSceneType::BossCarnation);
-		}
-		if (KEY_DOWN(eKeyCode::Q))
-		{
-			SceneManager::ChangeScene(eSceneType::End);
-		}
-		if (mWorldPlayer->GetEnterObject() != nullptr)
-		{
-			if (KEY_DOWN(eKeyCode::Z)) 
+			if (mTime < 2)
 			{
-				BossObject* bossObj = dynamic_cast<BossObject*>(mWorldPlayer->GetEnterObject());
-				if (bossObj != nullptr && bossObj->mType == eBossType::WernerWerman)
+				mBGM->SetVolume(mTime * 25);
+			}
+			Scene::Tick();
+			if (KEY_DOWN(eKeyCode::ESC))
+			{
+				SceneManager::ChangeScene(eSceneType::Title);
+			}
+			if (KEY_DOWN(eKeyCode::B))
+			{
+				SceneManager::ChangeScene(eSceneType::BossBeppi);
+			}
+			if (KEY_DOWN(eKeyCode::N))
+			{
+				SceneManager::ChangeScene(eSceneType::BossWernerWerman);
+			}
+			if (KEY_DOWN(eKeyCode::C))
+			{
+				SceneManager::ChangeScene(eSceneType::BossCarnation);
+			}
+			if (KEY_DOWN(eKeyCode::Q))
+			{
+				SceneManager::ChangeScene(eSceneType::End);
+			}
+			if (mWorldPlayer->GetEnterObject() != nullptr)
+			{
+				if (KEY_DOWN(eKeyCode::Z))
 				{
-					SceneManager::ChangeScene(eSceneType::BossWernerWerman);
-				}
-				else if (bossObj != nullptr && bossObj->mType == eBossType::Beppi)
-				{
-					SceneManager::ChangeScene(eSceneType::BossBeppi);
-				}
-				else if (bossObj != nullptr && bossObj->mType == eBossType::Carnation)
-				{
-					SceneManager::ChangeScene(eSceneType::BossCarnation);
-				}
+					BossObject* bossObj = dynamic_cast<BossObject*>(mWorldPlayer->GetEnterObject());
+					if (bossObj != nullptr && bossObj->mType == eBossType::WernerWerman)
+					{
+						SceneManager::ChangeScene(eSceneType::BossWernerWerman);
+					}
+					else if (bossObj != nullptr && bossObj->mType == eBossType::Beppi)
+					{
+						SceneManager::ChangeScene(eSceneType::BossBeppi);
+					}
+					else if (bossObj != nullptr && bossObj->mType == eBossType::Carnation)
+					{
+						SceneManager::ChangeScene(eSceneType::BossCarnation);
+					}
 
+				}
+			}
+			if (KEY_DOWN(eKeyCode::N_1))
+			{
+				mBGI->SetOff(true);
+			}
+			if (KEY_DOWN(eKeyCode::N_2))
+			{
+				mBGI->SetOff(false);
 			}
 		}
-		if (KEY_DOWN(eKeyCode::N_1))
-		{
-			mBGI->SetOff(true);
-		}
-		if (KEY_DOWN(eKeyCode::N_2))
-		{
-			mBGI->SetOff(false);
-		}
-
 	}
 
 	void MapScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-		wchar_t szFloat[50] = {};
-		swprintf_s(szFloat, 50, L"MapScene");
-		int strLen = wcsnlen_s(szFloat, 50);
-		TextOut(hdc, 10, 50, szFloat, strLen);
 	}
 
 	void MapScene::Enter()

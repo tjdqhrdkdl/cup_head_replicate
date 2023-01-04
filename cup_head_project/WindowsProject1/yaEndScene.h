@@ -16,5 +16,7 @@ namespace ya {
 		virtual void Enter();
 		virtual void Exit();
 
+	private:
+		Sound* mBGM;
 	};
 }
