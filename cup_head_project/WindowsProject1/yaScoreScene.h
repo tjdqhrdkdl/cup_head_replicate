@@ -14,7 +14,7 @@ namespace ya {
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 
-		void SendInfo(float maxTime, float time, UINT hp, UINT parry, UINT super);
+		void SendInfo(float maxTime, float time, UINT hp, UINT parry, UINT super, bool fin = false);
 		virtual void Enter();
 		virtual void Exit();
 
@@ -34,6 +34,7 @@ namespace ya {
 		UINT mMaxSuper;
 
 		float mNumberChangeTime;
+		bool mbFin;
 		UINT mScorePhase;
 
 		Number* mTimeNumber[4];

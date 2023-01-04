@@ -59,6 +59,7 @@ namespace ya
 		void SetShooterCoolTime(eGunType guntype);
 		void SetGunDir();
 		void SetGunEXDir(); 
+		void SetComplete(bool b) { mComplete = b; }
 		Vector2 SetBulletStartPos(Bullet*);
 		Vector2 SetEXBulletStartPos(Bullet*);
 		Vector2 GetPrevPos() { return mPrevPos; }
@@ -71,7 +72,7 @@ namespace ya
 		bool IsParrying();
 
 		bool isFalling() { return mFalling; }
-		bool isInvincible() { return mInvincibile; }
+		bool isInvincible() { return mInvincible; }
 		void SetAnimation();
 		void Shoot();
 		void Move();
@@ -98,7 +99,8 @@ namespace ya
 		bool mCanDash;
 		bool mCanEX;
 		bool mParrySlow;
-		bool mInvincibile;
+		bool mInvincible;
+		bool mComplete;
 		bool mBlinkChecker;
 
 		float mSpeed;

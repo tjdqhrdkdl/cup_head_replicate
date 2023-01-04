@@ -464,7 +464,8 @@ namespace ya
 						mDiscs[k][i]->SetFin(true);
 					}
 				}
-
+				mCollider->SetOff(true);
+				mHeadCollider->SetOff(true);
 
 			}
 			else

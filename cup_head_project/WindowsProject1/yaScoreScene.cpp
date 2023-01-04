@@ -70,7 +70,7 @@ namespace ya
 		{
 			mBGM->Play(true);
 			Scene::Tick();
-			if (mTime > 1)
+			if (mTime > 3)
 			{
 				mNumberChangeTime += Time::DeltaTime();
 				if (mScorePhase == 0)
@@ -126,13 +126,17 @@ namespace ya
 				}
 				else if (!mbSceneChanging)
 				{
-					SceneManager::ChangeScene(eSceneType::Map);
+					if (!mbFin)
+						SceneManager::ChangeScene(eSceneType::Map);
+					else
+						SceneManager::ChangeScene(eSceneType::End);
+					
 					mbSceneChanging = true;
 					return;
 				}
 				mNumberChangeTime = 0;
 				mScorePhase += 1;
-				mTime = 0;
+				mTime = 1;
 			}
 			if (SceneManager::GetCurScene() == (Scene*)this)
 			{
@@ -185,7 +189,7 @@ namespace ya
 		Scene::Render(hdc);
 	}
 
-	void ScoreScene::SendInfo(float maxTime, float time, UINT hp, UINT parry, UINT super)
+	void ScoreScene::SendInfo(float maxTime, float time, UINT hp, UINT parry, UINT super, bool fin)
 	{
 		mMaxPlayTime = (UINT)maxTime;
 		mPlayTime = (UINT)time;
@@ -207,7 +211,7 @@ namespace ya
 		mSuperNumber[0]->SetStopIndex(mSuper);
 		mSuperNumber[1]->SetStopIndex(6);
 		mSuperNumber[1]->GetAnimator()->GetPlayAnimation()->SetIndex(6);
-
+		mbFin = fin;
 	}
 
 	void ScoreScene::Enter()

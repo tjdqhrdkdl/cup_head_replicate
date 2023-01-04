@@ -13,6 +13,7 @@
 #include "yaBossExplosion.h"
 #include "yaKnockOut.h"
 #include "yaBossCarnationScene.h"
+#include "yaPlayer.h"
 namespace ya
 {
 	Carnation::Carnation()
@@ -20,7 +21,7 @@ namespace ya
 		, mAttackChoiceTimeChecker(0)
 	{
 		SetName(L"Carnation");
-		mHp = 201;
+		mHp = 400;
 		SetPos({ 1400,800 });
 		SetScale({ 200.0f,350.0f });
 		mHeadCollider = new Collider();
@@ -214,6 +215,11 @@ namespace ya
 				}
 			}
 
+			if (mAnimator->GetPlayAnimation()->GetName() == L"FinalIntro")
+			{
+				mHp = 200;
+			}
+
 			else if (mbFinalForm && mAnimator->GetPlayAnimation()->GetName() != L"FinalIntro")
 			{
 				VineAttack();
@@ -222,6 +228,7 @@ namespace ya
 				{
 					mAnimator->Play(L"Death", true);
 					dynamic_cast<BossCarnationScene*>(SceneManager::GetCurScene())->BGMOff();
+					dynamic_cast<BossCarnationScene*>(SceneManager::GetCurScene())->GetScenePlayer()->SetComplete(true);
 					ObjectManager::Instantiate<KnockOut>(SceneManager::GetCurScene(), eColliderLayer::UI);
 					mHeadCollider->SetOff(true);
 					mBodyCollider->SetOff(true);

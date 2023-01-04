@@ -12,13 +12,14 @@
 #include "yaWoodPiece.h"
 #include "yaKnockOut.h"
 #include "yaBossExplosion.h"
+#include "yaPlayer.h"
 namespace ya
 {
 	WernerWermanPh3::WernerWermanPh3(bool init)
 		:mbPlayJail(false)
 	{
 		SetName(L"WernerWermanPh3");
-		mHp = 200;
+		mHp = 500;
 		SetPos({ 800,900 });
 		SetScale({ 400,300.0f });
 		mCollider = new Collider();
@@ -110,6 +111,7 @@ namespace ya
 			if (mHeadAnimator->GetPlayAnimation()->GetName() != L"CatDeath")
 			{
 				dynamic_cast<BossCanRatScene*>(SceneManager::GetCurScene())->BGMOff();
+				dynamic_cast<BossCanRatScene*>(SceneManager::GetCurScene())->GetScenePlayer()->SetComplete(true);
 				ObjectManager::Instantiate<KnockOut>(SceneManager::GetCurScene(), eColliderLayer::UI);
 				mHeadAnimator->Play(L"CatDeath", false);
 				mCollider->SetOff(true);

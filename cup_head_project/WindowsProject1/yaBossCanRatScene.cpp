@@ -208,7 +208,9 @@ namespace ya
 				if (mPhase == 5 && mbPhaseChanged)
 				{
 					mbPhaseChanged = false;
-					SceneManager::ChangeScene(eSceneType::End);
+					SceneManager::ChangeScene(eSceneType::Win);
+					SceneManager::GetScoreScene()->Initialize();
+					SceneManager::GetScoreScene()->SendInfo(300, mTime, mHPCount, mParryCount, mSuperCount, true);
 				}
 			}
 			if (KEY_DOWN(eKeyCode::ESC))

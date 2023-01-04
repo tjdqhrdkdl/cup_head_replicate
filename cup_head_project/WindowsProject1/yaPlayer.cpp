@@ -308,7 +308,8 @@ namespace ya
 			}
 
 			//¸ó½ºÅÍ¿Í ºÎµúÈû
-			else if (mInvincibile == false
+			else if (mInvincible == false
+				&& mComplete == false
 				&& other->isHitBox() 
 				&& other->isDanger()
 				&& !(STATE_HAVE(PlayerState_OnHit))
@@ -332,7 +333,7 @@ namespace ya
 						velocity.x = 100.0f;
 					mRigidbody->SetVelocity(velocity);
 
-					mInvincibile = true;
+					mInvincible = true;
 					mCurState &= ~PlayerState_OnDash;
 					mDashTimeChecker = 0;
 					OnHitEffect* onhitEffect = new OnHitEffect();
@@ -409,7 +410,8 @@ namespace ya
 			}
 
 			//¸ó½ºÅÍ¿Í ºÎµúÈû
-			else if (mInvincibile == false
+			else if (mInvincible == false
+				&& mComplete == false
 				&& other->isHitBox()
 				&& other->isDanger()
 				&& !(STATE_HAVE(PlayerState_OnHit))
@@ -433,7 +435,7 @@ namespace ya
 						velocity.x = 100.0f;
 					mRigidbody->SetVelocity(velocity);
 
-					mInvincibile = true;
+					mInvincible = true;
 					mCurState &= ~PlayerState_OnDash;
 					mDashTimeChecker = 0;
 					OnHitEffect* onhitEffect = new OnHitEffect();
@@ -1334,12 +1336,12 @@ namespace ya
 	void Player::OnHit()
 	{
 		
-		if (mInvincibile)
+		if (mInvincible)
 		{
 			mInvincibileTimeChecker += Time::DeltaTime();
 			if (mInvincibileTimeChecker > 2.0f)
 			{
-				mInvincibile = false;
+				mInvincible = false;
 				mInvincibileTimeChecker = 0;
 				mAnimator->SetMatrixToBase();
 				mAnimator->GetPlayAnimation()->SetHaveAlpha(true);
@@ -1350,7 +1352,7 @@ namespace ya
 
 	void Player::Blink()
 	{
-		if (mInvincibile
+		if (mInvincible
 			&&!(STATE_HAVE(PlayerState_OnHit)))
 		{
 			if (!mBlinkChecker)

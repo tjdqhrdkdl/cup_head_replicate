@@ -19,7 +19,7 @@ namespace ya
 		, mDeathEffectTimeChecker(0.0f)
 	{
 		SetName(L"BeppiPhaseThree");
-		mHp = 200;
+		mHp = 300;
 		SetPos({ 1400,-300 });
 		SetScale({ 400.0f,400.0f });
 		mCollider = new Collider();
@@ -431,7 +431,7 @@ namespace ya
 					mHorse->GetBodyAnimator()->Play(L"GreenBodyEndLeft", true);
 			}
 			mHorse->GetHeadAnimator()->SetPlayAnimation(nullptr);
-			ObjectManager::Destroy(this, 25.0f);
+			ObjectManager::Destroy(this, 22.0f);
 			mbGoUp = true;
 			mCollider->SetOff(true);
 			mbYellowDrop = true;

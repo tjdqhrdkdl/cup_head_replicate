@@ -27,7 +27,7 @@ namespace ya
 		, misIntroApear(true)
 	{
 		SetName(L"BeppiPhaseTwo");
-		mHp = 200;
+		mHp = 300;
 		SetPos({ 800,1500 });
 		SetScale({ 400.0f,400.0f });
 		mCollider = new Collider();
@@ -84,7 +84,7 @@ namespace ya
 		if (IsDeathTimeOn())
 		{
 			mDeathEffectTimeChecker += Time::DeltaTime();
-
+			mCollider->SetOff(true);
 			if (mDeathEffectTimeChecker > 0.4f + (rand() % 5) * 0.1)
 			{
 				mDeathEffectTimeChecker = 0;

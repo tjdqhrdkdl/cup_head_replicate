@@ -11,6 +11,7 @@
 #include "yaSwingPlatform.h"
 #include "yaKnockOut.h"
 #include "yaSound.h"
+#include "yaPlayer.h"
 #include "yaResources.h"
 namespace ya
 {
@@ -28,7 +29,7 @@ namespace ya
 		, mSwingTime(1)
 	{
 		SetName(L"BeppiPhaseFour");
-		mHp = 200;
+		mHp = 400;
 		SetPos({ 800,2500 });
 		SetScale({ 260.0f,900.0f });
 		mCollider = new Collider();
@@ -111,6 +112,7 @@ namespace ya
 			{
 				ObjectManager::Instantiate<KnockOut>(SceneManager::GetCurScene(), eColliderLayer::UI);
 				dynamic_cast<BossBeppiScene*>(SceneManager::GetCurScene())->BGMOff();
+				dynamic_cast<BossBeppiScene*>(SceneManager::GetCurScene())->GetScenePlayer()->SetComplete(true);
 				mAnimator->Play(L"End", true);
 				ObjectManager::Destroy(this, 300.0f);
 			}

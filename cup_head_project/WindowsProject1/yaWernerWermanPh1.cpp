@@ -621,6 +621,7 @@ namespace ya
 	{
 		if (mbEnd)
 		{
+			GetComponent<Collider>()->SetOff(true);
 			if (mCanBackAnimator->GetPlayAnimation()->GetName() != L"MoveRight"
 				&& mCanBackAnimator->GetPlayAnimation()->GetName() != L"MoveLeft")
 			{

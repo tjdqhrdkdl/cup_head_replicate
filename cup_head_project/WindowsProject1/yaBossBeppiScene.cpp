@@ -143,7 +143,7 @@ namespace ya
 				if (mPhase == 4 && mbPhaseChanged)
 				{
 					mPhaseTimeChecker += Time::DeltaTime();
-					if (mPhaseTimeChecker > 18.0f)
+					if (mPhaseTimeChecker > 15.0f)
 					{
 						ObjectManager::Instantiate<BeppiPhaseFour>(SceneManager::GetCurScene(), eColliderLayer::BehindMonster);
 						mbPhaseChanged = false;
