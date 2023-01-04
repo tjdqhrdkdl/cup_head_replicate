@@ -211,6 +211,8 @@ namespace ya
 	{
 		Scene::Exit();
 		mBGM->Stop(true);
+		Scene::Release();
+		Initialize();
 
 	}
 
