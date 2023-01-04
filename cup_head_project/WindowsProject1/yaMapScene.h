@@ -6,6 +6,7 @@ namespace ya
 	class BgImageObject;
 	class WorldPlayer;
 	class WorldMap;
+	class Sound;
 	class MapScene : public Scene
 	{
 	public:
@@ -25,5 +26,8 @@ namespace ya
 		BgImageObject* mBGITopperRight;
 		WorldPlayer* mWorldPlayer;
 		WorldMap* mWorldMap;
+
+		Sound* mBGM;
+
 	};
 }

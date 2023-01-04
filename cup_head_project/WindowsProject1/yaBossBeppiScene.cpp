@@ -18,7 +18,9 @@
 #include "yaBeppiPhaseFour.h"
 #include "yaKnockOut.h"
 #include "yaCameraBlur.h"
+#include "yaSound.h"
 #include "yaButton.h"
+#include "yaScoreScene.h"
 namespace ya 
 {
 	BossBeppiScene::BossBeppiScene()
@@ -33,6 +35,9 @@ namespace ya
 
 	void BossBeppiScene::Initialize()
 	{
+		mBGM = Resources::Load<Sound>(L"ClownBGM", L"..\\Resources\\Sound\\Clown\\MUS_Pirate.wav");
+		mBGM->SetVolume(10);
+
 		SetIntro(true);
 		mBGI = new BgImageObject();
 		mBGI->SetImage(L"BeppiMainBGI", L"Beppi\\clown_bg_main.png");
@@ -100,8 +105,15 @@ namespace ya
 
 	void BossBeppiScene::Tick()
 	{
+		
 		if (!Time::isStop())
 		{
+			if (mTime < 2)
+			{
+				mBGM->SetVolume(mTime * 5);
+			}
+			else
+				mBGM->SetVolume(10);
 			Scene::Tick();
 			if (mPhase == 2 && mbPhaseChanged)
 			{
@@ -141,7 +153,8 @@ namespace ya
 			if (mPhase == 5 && mbPhaseChanged)
 			{
 				mbPhaseChanged = false;
-				SceneManager::ChangeScene(eSceneType::Map);
+				SceneManager::ChangeScene(eSceneType::Win);
+				SceneManager::GetScoreScene()->SendInfo(300, mTime, mHPCount, mParryCount, mSuperCount);
 			}
 		}
 
@@ -151,6 +164,7 @@ namespace ya
 			if (!mbUIOn)
 			{
 				UIManager::Push(eUIType::PLAYOPTION_PANEL);
+				mBGM->Stop(false);
 				mbUIOn = true;
 				Time::Stop(true);
 				mCameraBlur->SetOn(true);
@@ -158,6 +172,7 @@ namespace ya
 			else
 			{
 				UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+				mBGM->Play(true);
 				mbUIOn = false;
 				Time::Stop(false);
 				mCameraBlur->SetOn(false);
@@ -206,6 +221,7 @@ namespace ya
 			HUD* healthUI = UIManager::GetUiInstant<HUD>(eUIType::HP);
 			healthUI->SetTarget(nullptr);
 			HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
+			mBGM->SetPosition(0, true);
 			exPointUI->SetTarget(nullptr);
 			Initialize();
 			Scene::Enter();
@@ -226,10 +242,16 @@ namespace ya
 		}
 	}
 
+	void BossBeppiScene::BGMOff()
+	{
+		mBGM->Stop(true);
+	}
+
 	void BossBeppiScene::Enter()
 	{
 		Initialize();
 		Scene::Enter();
+		mBGM->Play(true);
 		UIManager::Push(eUIType::Gun);
 		UIManager::Push(eUIType::HP);
 		UIManager::Push(eUIType::MP);
@@ -237,6 +259,7 @@ namespace ya
 
 	void BossBeppiScene::Exit()
 	{
+		mBGM->Stop(true);
 		Scene::Release();
 		mbInitialized = false;
 		UIManager::Pop(eUIType::HP);

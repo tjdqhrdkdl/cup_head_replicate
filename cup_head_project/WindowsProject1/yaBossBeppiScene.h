@@ -20,7 +20,7 @@ namespace ya
 		void ResumeClickEvent();
 		void RetryClickEvent();
 		void ExitClickEvent();
-
+		void BGMOff();
 		virtual void Enter() override;
 		virtual void Exit() override;
 
@@ -30,11 +30,12 @@ namespace ya
 
 		void Release();
 	private:
+		Sound* mBGM;
+
 		BgImageObject* mBGI;
 		Player* mPlayer;
 		
 		bool mbInitialized;
-		float mTime;
 
 		UINT mPhase;
 		bool mbPhaseChanged;

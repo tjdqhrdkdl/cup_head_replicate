@@ -46,5 +46,7 @@ namespace ya
 
 		bool misIntroApear;
 		float mDeathEffectTimeChecker;
+		Sound* mWarningSound;
+		bool soundPlay;
 	};
 }

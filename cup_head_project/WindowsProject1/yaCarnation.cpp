@@ -221,6 +221,7 @@ namespace ya
 				if (mHp < 0)
 				{
 					mAnimator->Play(L"Death", true);
+					dynamic_cast<BossCarnationScene*>(SceneManager::GetCurScene())->BGMOff();
 					ObjectManager::Instantiate<KnockOut>(SceneManager::GetCurScene(), eColliderLayer::UI);
 					mHeadCollider->SetOff(true);
 					mBodyCollider->SetOff(true);
@@ -261,7 +262,11 @@ namespace ya
 				}
 
 				BossExplosion* effect = ObjectManager::Instantiate<BossExplosion>(SceneManager::GetCurScene(), eColliderLayer::Effect);
-
+				if (soundPlay == false)
+				{
+					soundPlay = true;
+					effect->SoundPlay();
+				}
 				effect->SetPos(pos);
 			}
 			if (GetDeathTime() < 295)

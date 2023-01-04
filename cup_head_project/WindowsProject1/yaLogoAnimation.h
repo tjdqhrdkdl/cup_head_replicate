@@ -5,6 +5,7 @@
 namespace ya 
 {
 	class Animator;
+
 	class LogoAnimation : public GameObject
 	{
 	public:

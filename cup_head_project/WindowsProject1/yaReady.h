@@ -5,6 +5,7 @@
 namespace ya
 {
 	class Animator;
+	class Sound;
 	class Ready : public GameObject
 	{
 	public:
@@ -18,6 +19,10 @@ namespace ya
 
 	private:
 		Animator* mAnimator;
+		Sound* mSound1;
+		Sound* mSound2;
+		Sound* mSoundBell;
+
 		float mTime;
 	};
 }

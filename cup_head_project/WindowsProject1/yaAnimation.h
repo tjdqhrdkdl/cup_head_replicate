@@ -20,7 +20,7 @@ namespace ya
 
 		bool isComplete() { return mComplete; }
 		void SetAnimator(Animator* animator) { mAnimator = animator; }
-
+		void SetIndex(UINT index) { mPictureIndex = index; }
 		void SetHaveAlpha(bool data) { mbHaveAlpha = data; }
 		void SetLightenAnimation(Animation* lightenAnim) { mLightenAnimation = lightenAnim; }
 

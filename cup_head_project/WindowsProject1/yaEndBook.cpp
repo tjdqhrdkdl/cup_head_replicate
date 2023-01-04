@@ -35,7 +35,7 @@ namespace ya
 		mAnimator->SetStop(true);
 		mArrowAnimator->Play(L"Arrow", true);
 
-		mArrowAnimator->SetAddPos({ 800,-50 });
+		mArrowAnimator->SetAddPos({ 600,-50 });
 	}
 
 	EndBook::~EndBook()
@@ -52,12 +52,23 @@ namespace ya
 				std::wstring key = L"TurnPage_" + std::to_wstring(++mPage);
 				mAnimator->Play(key, false);
 				mAnimator->SetStop(false);
+				mArrowAnimator->SetPlayAnimation(nullptr);
 			}
 			else
 			{
 				mAnimator->SetStop(false);
 			}
-			mArrowAnimator->SetPlayAnimation(nullptr);
+		}
+		if (mArrowAnimator->GetPlayAnimation() != nullptr)
+		{
+			mReadTime += Time::DeltaTime();
+			if (mReadTime < 1)
+				mArrowAnimator->SetAddPos({ 595 + mReadTime * 10, mArrowAnimator->GetAddPos().y });
+			else if (mReadTime < 2)
+				mArrowAnimator->SetAddPos({ 605 - (mReadTime - 1) * 10, mArrowAnimator->GetAddPos().y });
+			else
+				mReadTime = 0;
+
 		}
 	}
 
@@ -68,7 +79,6 @@ namespace ya
 
 	void EndBook::PageTurnCompleteEvent()
 	{
-		mAnimator->SetStop(true);
 		mArrowAnimator->Play(L"Arrow", true);
 	}
 

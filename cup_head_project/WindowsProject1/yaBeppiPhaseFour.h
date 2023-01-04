@@ -53,6 +53,8 @@ namespace ya
 		std::vector<UINT> mPenguinPosArr;
 
 		bool mbFirstSummon;
+		Sound* mWarningSound;
+		bool soundPlay;
 
 	};
 }

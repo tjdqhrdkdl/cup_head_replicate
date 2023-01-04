@@ -15,6 +15,8 @@
 #include "yaBossBeppiScene.h"
 #include "yaPlayer.h"
 #include "yaBossExplosion.h"
+#include "yaSound.h"
+#include "yaResources.h"
 namespace ya
 {
 	BeppiPhaseTwo::BeppiPhaseTwo()
@@ -57,10 +59,10 @@ namespace ya
 		
 
 		BalloonDog({1,0});
+		mWarningSound = Resources::Load<Sound>(L"CoasterBell", L"..\\Resources\\Sound\\Clown\\sfx_level_clown_warning_lights_loop_01.wav");
 		RollerCoaster(10);
 
 		BeppiPh2Body();
-		BossExplosion();
 
 		mAnimator->DeleteGDIPlusImage();
 	}
@@ -82,6 +84,7 @@ namespace ya
 		if (IsDeathTimeOn())
 		{
 			mDeathEffectTimeChecker += Time::DeltaTime();
+
 			if (mDeathEffectTimeChecker > 0.4f + (rand() % 5) * 0.1)
 			{
 				mDeathEffectTimeChecker = 0;
@@ -109,7 +112,11 @@ namespace ya
 				}
 
 				BossExplosion* effect = ObjectManager::Instantiate<BossExplosion>(SceneManager::GetCurScene(), eColliderLayer::Effect);
-
+				if (soundPlay == false)
+				{
+					soundPlay = true;
+					effect->SoundPlay();
+				}
 				effect->SetPos(pos);
 			}
 		}
@@ -251,6 +258,10 @@ namespace ya
 	void BeppiPhaseTwo::SummonCoaster()
 	{
 		mCoasterTimeChecker += Time::DeltaTime();
+		if (mCoasterTimeChecker > mCoasterTime - 0.6f)
+		{
+			mWarningSound->Play(false);
+		}
 		if (mCoasterTimeChecker > mCoasterTime)
 		{
 			mCoasterTimeChecker = 0;

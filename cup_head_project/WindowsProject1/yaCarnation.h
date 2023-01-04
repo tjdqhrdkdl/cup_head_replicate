@@ -99,6 +99,7 @@ namespace ya
 
 		bool mbFinalForm;
 		UINT mCreateCount;
+		bool soundPlay;
 		eCarnationAttacks mCurAttack;
 	};
 }

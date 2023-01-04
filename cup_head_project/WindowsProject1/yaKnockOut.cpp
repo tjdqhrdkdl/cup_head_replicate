@@ -3,6 +3,8 @@
 #include "yaCollider.h"
 #include "yaObjectManager.h"
 #include "yaTime.h"
+#include "yaSound.h"
+#include "yaResources.h"
 namespace ya
 {
 	KnockOut::KnockOut()
@@ -17,6 +19,7 @@ namespace ya
 
 		mAnimator->GetCompleteEvent(L"KnockOut") = std::bind(&KnockOut::KnockOutCompleteEvent, this);
 		mAnimator->Play(L"KnockOut", false);
+		mSound = Resources::Load<Sound>(L"BossKnockoutAnnounce", L"..\\Resources\\Sound\\Announcer\\sfx_level_announcer_knockout_0004.wav");
 	}
 
 	KnockOut::~KnockOut()
@@ -26,6 +29,11 @@ namespace ya
 	void KnockOut::Tick()
 	{
 		Time::SlowDown(false);
+		if (mTime == 0)
+		{
+			mSound->Play(false);
+		}
+		mTime += Time::DeltaTime();
 		GameObject::Tick();		
 		if (!isDead)
 		{

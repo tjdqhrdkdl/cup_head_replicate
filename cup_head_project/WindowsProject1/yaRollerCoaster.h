@@ -9,6 +9,7 @@ namespace ya
 
 	class Animator;
 	class Player;
+	class Sound;
 	class RollerCoaster : public GameObject
 	{
 	public:
@@ -26,6 +27,7 @@ namespace ya
 		virtual void OnCollisonExit(Collider* other, Collider* my) override;
 
 		void Release();
+		Sound* mSound;
 	private:
 		float mSpeed;
 		float mAliveTime;
@@ -37,6 +39,5 @@ namespace ya
 		RollerCoasterHead* mHead;
 		RollerCoasterTail* mTail;
 		std::vector<RollerCoasterTrail*> mTrails;
-
 	};
 }

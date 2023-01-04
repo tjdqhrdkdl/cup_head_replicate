@@ -20,7 +20,9 @@
 #include "yaPhase3BGChanger.h"
 #include "yaPhase3BGExplodeEffect.h"
 #include "yaCameraBlur.h"
+#include "yaSound.h"
 #include "yaButton.h"
+#include "yaScoreScene.h"
 namespace ya
 {
 	BossCanRatScene::BossCanRatScene()
@@ -35,6 +37,10 @@ namespace ya
 
 	void BossCanRatScene::Initialize()
 	{
+		mBGM = Resources::Load<Sound>(L"MouseBGM", L"..\\Resources\\Sound\\Mouse\\MUS_Mouse.wav");
+		mBGM->SetVolume(10);
+		mCatIntroSound = Resources::Load<Sound>(L"CatIntroSound", L"..\\Resources\\Sound\\Mouse\\sfx_level_mouse_cat_intro.wav");
+
 		SetIntro(true);
 		mBGIHouse = new BgImageObject();
 		mBGI1 = new BgImageObject();
@@ -128,6 +134,10 @@ namespace ya
 		if (!Time::isStop())
 		{
 			Scene::Tick();
+			if (mTime < 2)
+			{
+				mBGM->SetVolume(mTime * 5);
+			}
 			if (mPhase < 2)
 			{
 				mPeakTimeChecker += Time::DeltaTime();
@@ -187,6 +197,7 @@ namespace ya
 
 			if (mPhase == 3 && mbPhaseChanged)
 			{
+				mCatIntroSound->Play(false);
 				mPhaseTimeChecker += Time::DeltaTime();
 				mPeakingCat->SetPhase2ObjectToDelete(mPhase2Object);
 				mbPhaseChanged = false;
@@ -204,12 +215,14 @@ namespace ya
 			{
 				UIManager::Push(eUIType::PLAYOPTION_PANEL);
 				mbUIOn = true;
+				mBGM->Stop(false);
 				Time::Stop(true);
 				mCameraBlur->SetOn(true);
 			}
 			else
 			{
 				UIManager::Pop(eUIType::PLAYOPTION_PANEL);
+				mBGM->Play(true);
 				mbUIOn = false;
 				Time::Stop(false);
 				mCameraBlur->SetOn(false);
@@ -260,6 +273,7 @@ namespace ya
 			HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
 			exPointUI->SetTarget(nullptr);
 			Initialize();
+			mBGM->SetPosition(0, true);
 			Scene::Enter();
 			UIManager::Push(eUIType::HP);
 			UIManager::Push(eUIType::MP);
@@ -289,6 +303,7 @@ namespace ya
 		dynamic_cast<Phase2BGChanger*>(mPh2BGChanger)->DestroyGround();
 		AddGameObject(mBGI3_a, eColliderLayer::FrontObject);
 		ObjectManager::Instantiate<Phase3BGChanger>(this, eColliderLayer::FrontObject);
+
 	}
 	void BossCanRatScene::ChangeLastBGQue()
 	{
@@ -299,6 +314,7 @@ namespace ya
 	void BossCanRatScene::Enter()
 	{
 		Initialize();
+		mBGM->SetPosition(0,true);
 		Scene::Enter();
 		UIManager::Push(eUIType::Gun);
 		UIManager::Push(eUIType::HP);
@@ -307,6 +323,7 @@ namespace ya
 
 	void BossCanRatScene::Exit()
 	{
+		mBGM->Stop(true);
 		Scene::Release();
 		mbInitialized = false;
 		UIManager::Pop(eUIType::HP);
@@ -323,6 +340,11 @@ namespace ya
 			mDiscs[i].clear();
 		}
 		Release();
+	}
+	void BossCanRatScene::BGMOff()
+	{
+		mBGM->Stop(true);
+
 	}
 	void BossCanRatScene::Release()
 	{

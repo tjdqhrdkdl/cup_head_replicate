@@ -33,6 +33,7 @@ namespace ya
 		void OnCollisionEnter(Collider* other);
 		void OnCollisionStay(Collider* other);
 		void OnCollisionExit(Collider* other);
+		static bool mbRender;
 	private:
 		Vector2 mPos;
 		Vector2 mAddPos;

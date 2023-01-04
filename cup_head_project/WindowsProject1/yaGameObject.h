@@ -6,6 +6,7 @@
 namespace ya {
 
 	class Collider;
+	class Sound;
 	class GameObject :public Entity
 	{
 	public:

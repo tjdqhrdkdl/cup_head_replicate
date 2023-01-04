@@ -3,6 +3,9 @@
 #include "yaCollider.h"
 #include "yaApplication.h"
 #include "yaMonster.h"
+#include "yaSceneEnter.h"
+#include "yaTime.h"
+#include "yaInput.h"
 namespace ya {
 	Scene::Scene()
 	{
@@ -39,11 +42,17 @@ namespace ya {
 						continue;
 					}
 					if (mObjects[x][y] != nullptr)
-						mObjects[x][y]->Tick();
+					{
+
+						if (mbStart || dynamic_cast<SceneEnter*>(mObjects[x][y]) != nullptr)
+							mObjects[x][y]->Tick();
+					}
 				}
 			}
 		}
-
+		mTime += Time::DeltaTime();
+		if (KEY_DOWN(eKeyCode::S))
+			Collider::mbRender = !Collider::mbRender;
 	}
 
 	void Scene::Render(HDC hdc)

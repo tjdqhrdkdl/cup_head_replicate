@@ -20,6 +20,7 @@
 #include "yaSpreader.h"
 #include "yaUIManager.h"
 #include "yaHUD.h"
+#include "yaSound.h"
 #define STATE_HAVE(STATE) (mCurState & STATE) == STATE
 namespace ya 
 {
@@ -58,7 +59,22 @@ namespace ya
 		mRigidbody->SetGround(true);
 		AddComponent(mRigidbody);
 
+		mSounds.push_back(Resources::Load<Sound>(L"SoundHit", L"..\\Resources\\Sound\\Player\\sfx_player_hit_01.wav"));
+		mSounds.push_back(Resources::Load<Sound>(L"SoundHitCrack", L"..\\Resources\\Sound\\Player\\sfx_player_damage_crack_level3.wav"));
+		mSounds.push_back(Resources::Load<Sound>(L"SoundEX", L"..\\Resources\\Sound\\Player\\sfx_player_ex_forward_ground_01.wav"));
+		mSounds.push_back(Resources::Load<Sound>(L"SoundSpread", L"..\\Resources\\Sound\\Player\\sfx_player_spreadshot_fire_loop.wav"));
+		mSounds.push_back(Resources::Load<Sound>(L"SoundCrackshot", L"..\\Resources\\Sound\\Player\\sfx_player_weapon_crackshot_shoot_start_01.wav"));
+		mSounds.push_back(Resources::Load<Sound>(L"SoundPeaShoot", L"..\\Resources\\Sound\\Player\\sfx_player_default_fire_start_01.wav"));
+		mSounds.push_back(Resources::Load<Sound>(L"SoundPeaShootLoop", L"..\\Resources\\Sound\\Player\\sfx_player_default_fire_loop_01.wav"));
+		mSounds.push_back(Resources::Load<Sound>(L"SoundParry", L"..\\Resources\\Sound\\Player\\sfx_player_parry_slap_01.wav"));
 
+		for (size_t i = 0; i < mSounds.size(); i++)
+		{
+			mSounds[i]->SetVolume(10);
+		}
+		mSounds[PlayerSound_HitCrack]->SetVolume(50);
+		mSounds[PlayerSound_Ex]->SetVolume(40);
+		mSounds[PlayerSound_CrackShot]->SetVolume(30);
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
 		{
@@ -213,8 +229,7 @@ namespace ya
 			Parry();
 			OnHit();
 		}
-
-
+		SceneManager::GetCurScene()->mHPCount = mHP;
 		GameObject::Tick();
 	}
 
@@ -286,6 +301,9 @@ namespace ya
 				curscene->AddGameObject(parryEffect, eColliderLayer::Effect);
 				Time::SlowDown(true);
 				mParrySlow = true;
+				mSounds[PlayerSound_Parry]->Play(false);
+				if (SceneManager::GetCurScene()->mParryCount < 6)
+					SceneManager::GetCurScene()->mParryCount += 1;
 			}
 
 			//¸ó½ºÅÍ¿Í ºÎµúÈû
@@ -322,6 +340,8 @@ namespace ya
 					curscene->AddGameObject(onhitEffect, eColliderLayer::Effect);
 
 					EXCompleteEvent();
+					mSounds[PlayerSound_Hit]->Play(false);
+					mSounds[PlayerSound_HitCrack]->Play(false);
 				}
 			}
 		}
@@ -381,7 +401,10 @@ namespace ya
 				Scene* curscene = SceneManager::GetCurScene();
 				curscene->AddGameObject(parryEffect, eColliderLayer::Effect);
 				Time::SlowDown(true);
+				mSounds[PlayerSound_Parry]->Play(false);
 				mParrySlow = true;
+				if (SceneManager::GetCurScene()->mParryCount < 6)
+					SceneManager::GetCurScene()->mParryCount += 1;
 			}
 
 			//¸ó½ºÅÍ¿Í ºÎµúÈû
@@ -418,6 +441,8 @@ namespace ya
 					curscene->AddGameObject(onhitEffect, eColliderLayer::Effect);
 
 					EXCompleteEvent();
+					mSounds[PlayerSound_Hit]->Play(false);
+					mSounds[PlayerSound_HitCrack]->Play(false);
 				}
 			}
 		}
@@ -893,11 +918,18 @@ namespace ya
 			
 			SetGunDir();
 			if (mCurGunType == eGunType::PeaShooter)
+			{
 				bullet = new PeaShooter(mGunDir);
+				mSounds[PlayerSound_PeaShootLoop]->Play(true);
+			}
 			else if (mCurGunType == eGunType::CrackShot)
+			{
+				mSounds[PlayerSound_CrackShot]->Play(false);
 				bullet = new CrackShot(mGunDir);
+			}
 			else if (mCurGunType == eGunType::Spreader)
 			{
+				mSounds[PlayerSound_Spread]->SetPosition(0.3, false);
 				Spreader::Shoot(mGunDir, this, false);
 				mCurState |= PlayerState_OnShoot;
 				mReloading = true;
@@ -917,6 +949,7 @@ namespace ya
 		if (KEY_UP(eKeyCode::X))
 		{
 			mCurState &= ~PlayerState_OnShoot;
+			mSounds[PlayerSound_PeaShootLoop]->Stop(true);
 		}
 
 		if ((mReloading))
@@ -934,6 +967,7 @@ namespace ya
 			if (mShootAnimationTimeChecker >= mShooterCoolTime)
 			{
 				mCurState &= ~PlayerState_OnShoot;
+				mSounds[PlayerSound_PeaShootLoop]->Stop(true);
 				mShootAnimationTimeChecker = 0.0f;
 			}
 		}
@@ -1101,6 +1135,9 @@ namespace ya
 			&& mSpecialPoint > 0
 			)
 		{
+			if(SceneManager::GetCurScene()->mSuperCount < 6)
+				SceneManager::GetCurScene()->mSuperCount += 1;
+			mSounds[PlayerSound_Ex]->Play(false);
 			mSpecialPoint -= 1;
 			mCurState |= PlayerState_OnEX;
 			//¾Ö´Ï¸ÞÀÌ¼Ç
@@ -1250,7 +1287,6 @@ namespace ya
 			Scene* curscene = SceneManager::GetCurScene();
 			curscene->AddGameObject(exEffect, eColliderLayer::Effect);
 		}
-
 		if (mSpecialPoint == 5)
 			mSpecialPointFloat = 0;
 		if (mSpecialPointFloat > 1)

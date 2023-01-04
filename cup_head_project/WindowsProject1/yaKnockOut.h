@@ -18,7 +18,7 @@ namespace ya
 
 	private:
 		Animator* mAnimator;
-
+		Sound* mSound;
 		bool isDead;
 		float mTime;
 	};

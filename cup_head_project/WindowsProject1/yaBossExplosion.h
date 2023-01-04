@@ -15,7 +15,9 @@ namespace ya
 		virtual void Render(HDC hdc) override;
 
 		void EffectCompleteEvent();
+		void SoundPlay();
 	private:
 		Animator* mAnimator;
+		Sound* mSound;
 	};
 }

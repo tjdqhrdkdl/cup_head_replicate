@@ -25,16 +25,17 @@ namespace ya
 		virtual void Exit() override;
 
 		UINT GetPhase() { return mPhase; }
+		void BGMOff();
 		void SetPhase(UINT phase) { mPhase = phase, mbPhaseChanged = true; }
 		Player* GetScenePlayer() { return mPlayer; }
 
 		void Release();
 	private:
 		BgImageObject* mBGI;
+		Sound* mBGM;
 		Player* mPlayer;
 
 		bool mbInitialized;
-		float mTime;
 
 		UINT mPhase;
 		bool mbPhaseChanged;

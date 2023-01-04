@@ -8,6 +8,7 @@
 #include <functional>
 #include <queue>
 #include <stack>
+#include <assert.h>
 #include <unordered_map>
 #include "def.h"
 #include "Maths.h"

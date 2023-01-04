@@ -9,13 +9,13 @@
 #include "yaObjectManager.h"
 #include "yaSceneEnter.h"
 #include "yaSceneExit.h"
-
+#include "yaScoreScene.h"
 namespace ya 
 {
    
 	Scene* SceneManager::mScenes[(UINT)eSceneType::Max] = {};
 	Scene* SceneManager::mCurScene = nullptr;
-
+	ScoreScene* SceneManager::mScoreScene = nullptr;
 	void SceneManager::Initialize()
 	{
 		mScenes[(UINT)eSceneType::Logo] = new LogoScene();
@@ -24,6 +24,9 @@ namespace ya
 		mScenes[(UINT)eSceneType::BossCarnation] = new BossCarnationScene();
 		mScenes[(UINT)eSceneType::BossBeppi] = new BossBeppiScene();
 		mScenes[(UINT)eSceneType::BossWernerWerman] = new BossCanRatScene();
+
+		mScoreScene = new ScoreScene();
+		mScenes[(UINT)eSceneType::Win] = mScoreScene;
 		mScenes[(UINT)eSceneType::End] = new EndScene();
 
 		for (size_t i = 0; i < 3; i++)
@@ -32,8 +35,11 @@ namespace ya
 			mCurScene = scene;
 			scene->Initialize();
 		}
-		mCurScene = mScenes[(UINT)eSceneType::Logo];
+		mCurScene = mScoreScene;
+		mScoreScene->Initialize();
 		
+		mCurScene = mScenes[(UINT)eSceneType::Logo];
+		mScenes[(UINT)eSceneType::Logo]->Enter();
 	}
 
 	void SceneManager::Tick()
@@ -55,6 +61,11 @@ namespace ya
 			delete mScenes[i];
 			mScenes[i] = nullptr;
 		}
+	}
+
+	ScoreScene* SceneManager::GetScoreScene()
+	{
+		return mScoreScene;
 	}
 
 	void SceneManager::DetroyGameObject()

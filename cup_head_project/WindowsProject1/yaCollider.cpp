@@ -2,7 +2,11 @@
 #include "yaGameObject.h"
 #include "yaApplication.h"
 #include "yaCamera.h"
-namespace ya {
+#include "yaInput.h"
+namespace ya 
+{
+	bool Collider::mbRender = true;		
+
 	Collider::Collider()
 		: Component(eComponentType::Collider)
 		, mOffset(Vector2::Zero)
@@ -28,12 +32,13 @@ namespace ya {
 	{ 
 		GameObject* owner = GetOwner();
 		mPos = Vector2(owner->GetPos().x, owner->GetPos().y - owner->GetScale().y / 2) + mAddPos;
-	
+
+
 	}
 
 	void Collider::Render(HDC hdc)
 	{
-		if (!mOff)
+		if (!mOff && mbRender)
 		{
 			HBRUSH tr = Application::GetInstance().GetBrush(eBrushColor::Transparent);
 			Brush brush(hdc, tr);

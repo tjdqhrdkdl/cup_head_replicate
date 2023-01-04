@@ -8,6 +8,8 @@
 #include "yaRollerCoaster.h"
 #include "yaBossBeppiScene.h"
 #include "yaBossExplosion.h"
+#include "yaSound.h"
+#include "yaResources.h"
 namespace ya
 {
 	BeppiPhaseThree::BeppiPhaseThree(bool init)
@@ -71,6 +73,7 @@ namespace ya
 				}
 			}
 		}
+		mWarningSound = Resources::Load<Sound>(L"CoasterBell", L"..\\Resources\\Sound\\Clown\\sfx_level_clown_warning_lights_loop_01.wav");
 
 		HorseShoe(true, true, true);
 	}
@@ -129,7 +132,11 @@ namespace ya
 				}
 
 				BossExplosion* effect = ObjectManager::Instantiate<BossExplosion>(SceneManager::GetCurScene(), eColliderLayer::Effect);
-
+				if (soundPlay == false)
+				{
+					soundPlay = true;
+					effect->SoundPlay();
+				}
 				effect->SetPos(pos);
 			}
 		}
@@ -376,7 +383,12 @@ namespace ya
 
 	void BeppiPhaseThree::SummonCoaster()
 	{
-		mCoasterTimeChecker += Time::DeltaTime();
+		mCoasterTimeChecker += Time::DeltaTime();		
+		if (mCoasterTimeChecker > mCoasterTime - 0.6f)
+		{
+			if(!IsDeathTimeOn())
+				mWarningSound->Play(false);
+		}
 		if (mCoasterTimeChecker > mCoasterTime && !IsDeathTimeOn())
 		{
 			mCoasterTimeChecker = 0;
@@ -424,6 +436,7 @@ namespace ya
 			mCollider->SetOff(true);
 			mbYellowDrop = true;
 			dynamic_cast<BossBeppiScene*>(SceneManager::GetCurScene())->SetPhase(4);
+			mWarningSound->Stop(true);
 		}
 	}
 

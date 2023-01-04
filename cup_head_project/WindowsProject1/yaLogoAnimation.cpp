@@ -5,6 +5,7 @@
 #include "yaSceneManager.h"
 #include "yaTime.h"
 #include "yaLogoScene.h"	
+#include "yaResources.h"
 namespace ya
 {
 	LogoAnimation::LogoAnimation()
@@ -20,6 +21,7 @@ namespace ya
 
 		mAnimator->GetCompleteEvent(L"Logo") = std::bind( & LogoAnimation::LogoCompleteEvent, this);
 		mAnimator->Play(L"Logo", false);
+
 
 		mAnimator->DeleteGDIPlusImage();
 	}
@@ -48,6 +50,7 @@ namespace ya
 	{
 		mComplete = true;
 		dynamic_cast<LogoScene*>(SceneManager::GetCurScene())->SetReady();
+
 	}
 
 }

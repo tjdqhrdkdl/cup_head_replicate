@@ -11,6 +11,7 @@
 #include "yaReadyAnimation.h"
 #include "yaAnimator.h"
 #include "yaBgImageObject.h"
+#include "yaSound.h"
 namespace ya {
 	LogoScene::LogoScene()
 	{
@@ -22,6 +23,10 @@ namespace ya {
 
 	void LogoScene::Initialize()
 	{
+		mbStart = true;
+
+		mBGM = Resources::Load<Sound>(L"LogoSceneBGM", L"..\\Resources\\Sound\\Logo\\MUS_Intro.wav");
+		mBGM->SetVolume(20);
 		mReady = ObjectManager::Instantiate<ReadyAnimation>(this, eColliderLayer::BackGround);
 		BgImageObject* press =  new BgImageObject();
 		press->SetImage(L"PressAny", L"UI\\press.png", RGB(255, 0, 255), true);
@@ -34,6 +39,10 @@ namespace ya {
 	void LogoScene::Tick()
 	{
 		Scene::Tick();
+		if (mTime < 2)
+		{
+			mBGM->SetVolume(mTime * 10);
+		}
 		bool out = false;
 		if (mbReady)
 		{
@@ -65,6 +74,7 @@ namespace ya {
 
 	void LogoScene::Enter()
 	{
+		mBGM->SetPosition(1.0, true);
 	}
 
 	void LogoScene::Exit()
@@ -73,5 +83,7 @@ namespace ya {
 		mLogo->GetComponent<Animator>()->DeleteBitmap();
 		ObjectManager::Destroy(mReady);
 		ObjectManager::Destroy(mLogo);
+		mBGM->Stop(true);
+
 	}
 }

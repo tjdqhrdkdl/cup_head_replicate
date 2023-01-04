@@ -54,5 +54,8 @@ namespace ya
 		UCHAR mYellowShoeBlankIndex[3];
 		UCHAR mShoeCounter;
 		UCHAR mGreenShoeSetCounter;
+		Sound* mWarningSound;
+		bool soundPlay;
+
 	};
 }

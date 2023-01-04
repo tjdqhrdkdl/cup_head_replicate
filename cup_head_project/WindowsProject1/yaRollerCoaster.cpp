@@ -5,6 +5,8 @@
 #include "yaCollider.h"
 #include "yaPlayer.h"
 #include "yaRigidbody.h"
+#include "yaSound.h"
+#include "yaResources.h"
 namespace ya
 {
 	RollerCoaster::RollerCoaster(UINT coasterLength, bool init)
@@ -15,6 +17,7 @@ namespace ya
 	{
 		if (!init)
 		{
+
 			//部府 积己
 			mTail = ObjectManager::Instantiate<RollerCoasterTail>(SceneManager::GetCurScene(), eColliderLayer::FrontMonster);
 			mTail->SetPos({ 4870,700 });

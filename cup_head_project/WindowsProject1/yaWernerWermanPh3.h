@@ -65,6 +65,7 @@ namespace ya
 		bool mbPlayClawRight;
 		bool mbPlayClawLeft;
 		bool mbPawBack;
+		bool soundPlay;
 		UINT mGhostCount;
 	};
 }

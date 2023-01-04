@@ -11,6 +11,7 @@
 #include "yaAnimator.h"
 #include "yaCollider.h"
 #include "yaBossObject.h"
+#include "yaSound.h"
 namespace ya {
 	MapScene::MapScene()
 	{
@@ -22,6 +23,9 @@ namespace ya {
 
 	void MapScene::Initialize()
 	{
+		mbStart = true;
+
+		mBGM = Resources::Load<Sound>(L"WorldMapBGM", L"..\\Resources\\Sound\\Map\\bgm_map_world_1.wav");
 		mWorldMap = new WorldMap();
 		mWorldPlayer = new WorldPlayer();
 		mWorldMap->SetPlayer(mWorldPlayer);
@@ -84,6 +88,10 @@ namespace ya {
 
 	void MapScene::Tick()
 	{
+		if (mTime < 2)
+		{
+			mBGM->SetVolume(mTime * 25);
+		}
 		Scene::Tick();
 		if (KEY_DOWN(eKeyCode::ESC))
 		{
@@ -96,10 +104,14 @@ namespace ya {
 		if (KEY_DOWN(eKeyCode::N))
 		{
 			SceneManager::ChangeScene(eSceneType::BossWernerWerman);
-		}		
+		}
 		if (KEY_DOWN(eKeyCode::C))
 		{
 			SceneManager::ChangeScene(eSceneType::BossCarnation);
+		}
+		if (KEY_DOWN(eKeyCode::Q))
+		{
+			SceneManager::ChangeScene(eSceneType::End);
 		}
 		if (mWorldPlayer->GetEnterObject() != nullptr)
 		{
@@ -118,6 +130,7 @@ namespace ya {
 				{
 					SceneManager::ChangeScene(eSceneType::BossCarnation);
 				}
+
 			}
 		}
 		if (KEY_DOWN(eKeyCode::N_1))
@@ -143,10 +156,12 @@ namespace ya {
 	void MapScene::Enter()
 	{
 		Camera::SetTarget(mWorldPlayer);
+		mBGM->Play(true);
 	}
 
 	void MapScene::Exit()
 	{
 		Camera::PositionInit();
+		mBGM->Stop(true);
 	}
 }

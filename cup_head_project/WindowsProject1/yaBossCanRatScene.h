@@ -25,6 +25,7 @@ namespace ya
 		virtual void Exit() override;
 
 		UINT GetPhase() { return mPhase; }
+		void BGMOff();
 		void SetPhase(UINT phase) { mPhase = phase, mbPhaseChanged = true; }
 		Player* GetScenePlayer() { return mPlayer; }
 		void SetPhase2Object(GameObject* phase2) { mPhase2Object = phase2; }
@@ -33,7 +34,9 @@ namespace ya
 
 		void Release();
 	private:
-		 
+		Sound* mBGM;
+		Sound* mCatIntroSound;
+
 		BgImageObject* mBGIHouse;
 		BgImageObject* mBGI1;
 		BgImageObject* mBGI2;
@@ -47,7 +50,6 @@ namespace ya
 		GameObject* mPh2BGChanger;
 
 		bool mbInitialized;
-		float mTime;
 
 		UINT mPhase;
 		bool mbPhaseChanged;
@@ -56,5 +58,6 @@ namespace ya
 
 		CameraBlur* mCameraBlur;
 		bool mbUIOn;
+
 	};
 }

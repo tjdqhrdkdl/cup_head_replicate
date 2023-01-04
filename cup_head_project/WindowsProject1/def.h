@@ -11,6 +11,7 @@ enum class eSceneType
 	BossCarnation,
 	BossBeppi,
 	BossWernerWerman,
+	Win,
 	End,
 	Max,
 };

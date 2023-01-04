@@ -14,6 +14,7 @@ namespace ya {
 			virtual void Render(HDC hdc) override;
 
 			void SetReady() { mbReady = true; }
+			void PlayBGM();
 
 			virtual void Enter();
 			virtual void Exit();
@@ -22,6 +23,7 @@ namespace ya {
 		GameObject* mReady;
 		GameObject* mLogo;
 
+		Sound* mBGM;
 		bool mbReady;
 	};
 }

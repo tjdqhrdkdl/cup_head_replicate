@@ -200,6 +200,7 @@
     <ClInclude Include="yaGround.h" />
     <ClInclude Include="yaLightBulb.h" />
     <ClInclude Include="yaLogoAnimation.h" />
+    <ClInclude Include="yaNumber.h" />
     <ClInclude Include="yaOnHitEffect.h" />
     <ClInclude Include="yaPanel.h" />
     <ClInclude Include="yaParryEffect.h" />
@@ -237,7 +238,11 @@
     <ClInclude Include="yaSceneExit.h" />
     <ClInclude Include="yaSceneManager.h" />
     <ClInclude Include="def.h" />
+    <ClInclude Include="yaScoreScene.h" />
+    <ClInclude Include="yaStarScore.h" />
+    <ClInclude Include="yaWinObjects.h" />
     <ClInclude Include="yaShootEffect.h" />
+    <ClInclude Include="yaSound.h" />
     <ClInclude Include="yaSoundManager.h" />
     <ClInclude Include="yaSpecialAttackEffect.h" />
     <ClInclude Include="yaSpreader.h" />
@@ -314,6 +319,7 @@
     <ClCompile Include="yaGround.cpp" />
     <ClCompile Include="yaLightBulb.cpp" />
     <ClCompile Include="yaLogoAnimation.cpp" />
+    <ClCompile Include="yaNumber.cpp" />
     <ClCompile Include="yaOnHitEffect.cpp" />
     <ClCompile Include="yaPanel.cpp" />
     <ClCompile Include="yaParryEffect.cpp" />
@@ -349,7 +355,11 @@
     <ClCompile Include="yaSceneEnter.cpp" />
     <ClCompile Include="yaSceneExit.cpp" />
     <ClCompile Include="yaSceneManager.cpp" />
+    <ClCompile Include="yaScoreScene.cpp" />
+    <ClCompile Include="yaStarScore.cpp" />
+    <ClCompile Include="yaWinObjects.cpp" />
     <ClCompile Include="yaShootEffect.cpp" />
+    <ClCompile Include="yaSound.cpp" />
     <ClCompile Include="yaSoundManager.cpp" />
     <ClCompile Include="yaSpecialAttackEffect.cpp" />
     <ClCompile Include="yaSpreader.cpp" />

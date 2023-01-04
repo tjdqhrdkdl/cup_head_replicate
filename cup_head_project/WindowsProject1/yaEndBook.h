@@ -21,6 +21,7 @@ namespace ya
 		Animator* mAnimator;
 		Animator* mArrowAnimator;
 
+		float mReadTime;
 		bool mbArrowMoveRight;
 		UINT mPage;
 	};

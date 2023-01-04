@@ -27,6 +27,8 @@ namespace ya
 	void SceneEnter::Tick()
 	{
 		GameObject::Tick();
+		SceneManager::GetCurScene()->SetStart(true);
+
 	}
 
 	void SceneEnter::Render(HDC hdc)

@@ -1,5 +1,7 @@
 #include "yaBossExplosion.h"
 #include "yaAnimator.h"
+#include "yaResources.h"
+#include "yaSound.h"
 namespace ya
 {
 	BossExplosion::BossExplosion()
@@ -13,6 +15,8 @@ namespace ya
 		mAnimator->Play(L"Boom", true);
 
 		mAnimator->GetCompleteEvent(L"Boom") = std::bind(&BossExplosion::EffectCompleteEvent, this);
+		mSound = Resources::Load<Sound>(L"BoomSound", L"..\\Resources\\Sound\\Announcer\\sfx_level_knockout_boom_01.wav");
+		
 	}
 
 	BossExplosion::~BossExplosion()
@@ -32,6 +36,11 @@ namespace ya
 	void BossExplosion::EffectCompleteEvent()
 	{
 		ObjectManager::Destroy(this);
+	}
+
+	void BossExplosion::SoundPlay()
+	{
+		mSound->Play(false);
 	}
 
 }

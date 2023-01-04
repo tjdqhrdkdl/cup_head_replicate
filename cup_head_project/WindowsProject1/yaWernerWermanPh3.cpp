@@ -109,6 +109,7 @@ namespace ya
 		{
 			if (mHeadAnimator->GetPlayAnimation()->GetName() != L"CatDeath")
 			{
+				dynamic_cast<BossCanRatScene*>(SceneManager::GetCurScene())->BGMOff();
 				ObjectManager::Instantiate<KnockOut>(SceneManager::GetCurScene(), eColliderLayer::UI);
 				mHeadAnimator->Play(L"CatDeath", false);
 				mCollider->SetOff(true);
@@ -143,7 +144,11 @@ namespace ya
 				}
 
 				BossExplosion* effect = ObjectManager::Instantiate<BossExplosion>(SceneManager::GetCurScene(), eColliderLayer::Effect);
-
+				if (soundPlay == false)
+				{
+					soundPlay = true;
+					effect->SoundPlay();
+				}
 				effect->SetPos(pos);
 			}
 

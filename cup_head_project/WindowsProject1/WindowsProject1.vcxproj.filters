@@ -165,6 +165,9 @@
     <Filter Include="Engine\GameObject\EndBook">
       <UniqueIdentifier>{47fe5355-6c3d-4fbd-8902-ab3569cec2ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\WinScreen">
+      <UniqueIdentifier>{f64c2a92-85df-4ae4-89fb-002dce28f233}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -515,6 +518,21 @@
     <ClInclude Include="yaSoundManager.h">
       <Filter>Engine\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="yaSound.h">
+      <Filter>Engine\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="yaScoreScene.h">
+      <Filter>Engine\Scene\StructureScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="yaNumber.h">
+      <Filter>Engine\GameObject\WinScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="yaWinObjects.h">
+      <Filter>Engine\GameObject\WinScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="yaStarScore.h">
+      <Filter>Engine\GameObject\WinScreen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -846,6 +864,21 @@
     </ClCompile>
     <ClCompile Include="yaSoundManager.cpp">
       <Filter>Engine\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="yaSound.cpp">
+      <Filter>Engine\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="yaScoreScene.cpp">
+      <Filter>Engine\Scene\StructureScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="yaNumber.cpp">
+      <Filter>Engine\GameObject\WinScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="yaWinObjects.cpp">
+      <Filter>Engine\GameObject\WinScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="yaStarScore.cpp">
+      <Filter>Engine\GameObject\WinScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

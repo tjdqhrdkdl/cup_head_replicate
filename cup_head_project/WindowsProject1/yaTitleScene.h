@@ -21,5 +21,6 @@ namespace ya
 		virtual void Exit();
 	private:
 		BgImageObject* mBGI;
+		Sound* mBGM;
 	};
 }

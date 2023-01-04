@@ -12,6 +12,7 @@
 #include "yaUIManager.h"
 #include "yaApplication.h"
 #include "yaButton.h"
+#include "yaSound.h"
 namespace ya 
 {
 	TitleScene::TitleScene()
@@ -24,10 +25,14 @@ namespace ya
 
 	void TitleScene::Initialize()
 	{
+		mbStart = true;
 		mBGI = new BgImageObject();
 		mBGI->SetImage(L"TitleMainMenuBGI", L"Main Menu Background.png");
 		mBGI->SetPos({ 200,0 });
 		AddGameObject(mBGI, eColliderLayer::BackGround);
+
+		mBGM = Resources::Load<Sound>(L"TitleSceneBGM", L"..\\Resources\\Sound\\Logo\\mus_dlc_title.wav");
+		mBGM->SetVolume(10);
 
 		Scene::Initialize();
 		Button* startButton = UIManager::GetUiInstant<Button>(eUIType::TITLEOPTION_START);
@@ -66,6 +71,7 @@ namespace ya
 		UIManager::Push(eUIType::TITLEOPTION_START);
 		UIManager::Push(eUIType::TITLEOPTION_OPTION);
 		UIManager::Push(eUIType::TITLEOPTION_EXIT);
+		mBGM->Play(true);
 	}
 
 	void TitleScene::Exit()
@@ -73,5 +79,7 @@ namespace ya
 		UIManager::Pop(eUIType::TITLEOPTION_START);
 		UIManager::Pop(eUIType::TITLEOPTION_OPTION);
 		UIManager::Pop(eUIType::TITLEOPTION_EXIT);
+		mBGM->Stop(true);
+
 	}
 }

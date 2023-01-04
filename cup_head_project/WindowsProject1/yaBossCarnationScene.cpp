@@ -17,7 +17,8 @@
 #include "yaButton.h"
 #include "yaCarnation.h"
 #include "yaFlowerPlatForm.h"
-
+#include "yaSound.h"
+#include "yaScoreScene.h"
 namespace ya
 {
 	BossCarnationScene::BossCarnationScene()
@@ -32,6 +33,9 @@ namespace ya
 
 	void BossCarnationScene::Initialize()
 	{
+		mBGM = Resources::Load<Sound>(L"FlowerBGM", L"..\\Resources\\Sound\\Flower\\MUS_Flower.wav");
+		mBGM->SetVolume(10);
+
 		SetIntro(true);
 		mBGI = new BgImageObject();
 		mBGI->SetImage(L"CarnationBackground", L"Cagney Carnation\\Background.png", RGB(255, 0, 255), true);
@@ -94,6 +98,10 @@ namespace ya
 		if (!Time::isStop())
 		{
 			Scene::Tick();
+			if (mTime < 2)
+			{
+				mBGM->SetVolume(mTime * 5);
+			}
 			if (mPhase == 2 && mbPhaseChanged)
 			{
 				mbPhaseChanged = false;
@@ -102,7 +110,8 @@ namespace ya
 			if (mPhase == 5 && mbPhaseChanged)
 			{
 				mbPhaseChanged = false;
-				SceneManager::ChangeScene(eSceneType::Map);
+				SceneManager::ChangeScene(eSceneType::Win);
+				SceneManager::GetScoreScene()->SendInfo(300, mTime, mHPCount, mParryCount, mSuperCount);
 			}
 
 		}
@@ -113,12 +122,14 @@ namespace ya
 				UIManager::Push(eUIType::PLAYOPTION_PANEL);
 				mbUIOn = true;
 				Time::Stop(true);
+				mBGM->Stop(false);
 				mCameraBlur->SetOn(true);
 			}
 			else
 			{
 				UIManager::Pop(eUIType::PLAYOPTION_PANEL);
 				mbUIOn = false;
+				mBGM->Play(true);
 				Time::Stop(false);
 				mCameraBlur->SetOn(false);
 
@@ -160,6 +171,7 @@ namespace ya
 			UIManager::Pop(eUIType::HP);
 			UIManager::Pop(eUIType::MP);
 			HUD* healthUI = UIManager::GetUiInstant<HUD>(eUIType::HP);
+			mBGM->SetPosition(0, true);
 			healthUI->SetTarget(nullptr);
 			HUD* exPointUI = UIManager::GetUiInstant<HUD>(eUIType::MP);
 			exPointUI->SetTarget(nullptr);
@@ -186,6 +198,7 @@ namespace ya
 	{
 		Initialize();
 		Scene::Enter();
+		mBGM->Play(true);
 		UIManager::Push(eUIType::Gun);
 		UIManager::Push(eUIType::HP);
 		UIManager::Push(eUIType::MP);
@@ -194,6 +207,7 @@ namespace ya
 
 	void BossCarnationScene::Exit()
 	{
+		mBGM->Stop(true);
 		Scene::Release();
 		mbInitialized = false;
 		UIManager::Pop(eUIType::HP);
@@ -207,6 +221,11 @@ namespace ya
 		weaponUI->SetTarget(nullptr);
 
 		Release();
+	}
+
+	void ya::BossCarnationScene::BGMOff()
+	{
+		mBGM->Stop(true);
 	}
 
 	void BossCarnationScene::Release()

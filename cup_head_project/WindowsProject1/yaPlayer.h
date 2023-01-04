@@ -8,6 +8,7 @@ namespace ya
 	class Animator;
 	class Rigidbody;
 	class Collider;
+	class Sound;
 	class CrackShot;
 	class Player : public GameObject
 	{
@@ -29,6 +30,19 @@ namespace ya
 			PlayerState_LookRight	= 0x00000800,
 			PlayerState_OnShoot		= 0x00001000,
 			PlayerState_OnParry		= 0x00002000,
+
+		};
+
+		enum ePlayerSound
+		{
+			PlayerSound_Hit,
+			PlayerSound_HitCrack,
+			PlayerSound_Ex,
+			PlayerSound_Spread,
+			PlayerSound_CrackShot,
+			PlayerSound_PeaShoot,
+			PlayerSound_PeaShootLoop,
+			PlayerSound_Parry,
 
 		};
 		Player();
@@ -106,5 +120,6 @@ namespace ya
 		Rigidbody* mRigidbody;
 		Collider* mJumpCollider;
 		CrackShot* mEXCrackShot;
+		std::vector<Sound*> mSounds;
 	};
 }

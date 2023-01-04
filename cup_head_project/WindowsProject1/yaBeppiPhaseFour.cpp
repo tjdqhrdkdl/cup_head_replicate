@@ -10,12 +10,14 @@
 #include "yaPenguin.h"
 #include "yaSwingPlatform.h"
 #include "yaKnockOut.h"
+#include "yaSound.h"
+#include "yaResources.h"
 namespace ya
 {
 	BeppiPhaseFour::BeppiPhaseFour(bool init)
 		:mbIntro(true)
-		, mCoasterTimeChecker(13)
-		, mSpitTimeChecker(9)
+		, mCoasterTimeChecker(9)
+		, mSpitTimeChecker(5)
 		, mPenguinTimeChecker(0)
 		, mSwingTimeChecker(0)
 		, mSwingFirstTimeChecker(0)
@@ -78,6 +80,7 @@ namespace ya
 			mPenguinPosArr.push_back(i);
 		}
 
+		mWarningSound = Resources::Load<Sound>(L"CoasterBell", L"..\\Resources\\Sound\\Clown\\sfx_level_clown_warning_lights_loop_01.wav");
 		Penguin(1);
 	}
 
@@ -107,6 +110,7 @@ namespace ya
 			if (mAnimator->GetPlayAnimation()->GetName() != L"End")
 			{
 				ObjectManager::Instantiate<KnockOut>(SceneManager::GetCurScene(), eColliderLayer::UI);
+				dynamic_cast<BossBeppiScene*>(SceneManager::GetCurScene())->BGMOff();
 				mAnimator->Play(L"End", true);
 				ObjectManager::Destroy(this, 300.0f);
 			}
@@ -139,7 +143,11 @@ namespace ya
 				}
 
 				BossExplosion* effect = ObjectManager::Instantiate<BossExplosion>(SceneManager::GetCurScene(), eColliderLayer::Effect);
-
+				if (soundPlay == false)
+				{
+					soundPlay = true;
+					effect->SoundPlay();
+				}
 				effect->SetPos(pos);
 			}
 
@@ -174,6 +182,10 @@ namespace ya
 	void BeppiPhaseFour::SummonCoaster()
 	{
 		mCoasterTimeChecker += Time::DeltaTime();
+		if (mCoasterTimeChecker > mCoasterTime - 0.6f)
+		{
+			mWarningSound->Play(false);
+		}
 		if (mCoasterTimeChecker > mCoasterTime)
 		{
 			mCoasterTimeChecker = 0;

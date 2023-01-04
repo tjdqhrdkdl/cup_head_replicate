@@ -18,7 +18,7 @@ namespace ya
 		mAnimator = new Animator();
 		AddComponent(mAnimator);
 		mAnimator->CreateAnimation(L"PeakingCat", L"..\\Resources\\Image\\Werner Werman\\Phase 3\\Peaking\\cat_bg_peaking_00", 26, 0.1f, false, false);
-		mAnimator->CreateAnimation(L"CatIntro", L"..\\Resources\\Image\\Werner Werman\\Phase 3\\Intro\\IntroBack\\cat_intro_00", 10, 0.05f, false, false);
+		mAnimator->CreateAnimation(L"CatIntro", L"..\\Resources\\Image\\Werner Werman\\Phase 3\\Intro\\IntroBack\\cat_intro_00", 10, 0.06f, false, false);
 
 		mAnimator->GetCompleteEvent(L"CatIntro") = std::bind(&PeakingCat::CatIntroCompleteEvent, this);
 		mAnimator->Play(L"PeakingCat", true);

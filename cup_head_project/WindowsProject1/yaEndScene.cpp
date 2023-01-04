@@ -17,6 +17,7 @@ namespace ya {
 
 	void EndScene::Initialize()
 	{
+
 		Scene::Initialize();
 		ObjectManager::Instantiate<EndBook>(this, eColliderLayer::BackGround)->SetPos({800,900});
 
