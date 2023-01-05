@@ -61,6 +61,7 @@ namespace ya
 
 		void SetBaseAnimation(const std::wstring& name) { mBaseAnimation = FindAnimation(name); }
 		void SetStop(bool stop) { mbStop = stop; }
+		bool IsStop() { return mbStop; }
 
 		void SetLightenAnimation(Animation* base, Animation* lighten) { base->SetLightenAnimation(lighten); }
 		bool isLighten() { return mbIsLighten; }

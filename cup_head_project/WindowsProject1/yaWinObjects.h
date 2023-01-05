@@ -13,6 +13,7 @@ namespace ya
 		virtual void Tick() override;
 		virtual void Render(HDC hdc) override;
 
+		void Circle();
 	private:
 		Animator* mCupheadAnimator;
 		Animator* mBoardAnimator;

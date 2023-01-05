@@ -4,6 +4,8 @@
 
 namespace ya {
 	class Number;
+	class WinObjects;
+	class StarScore;
 	class ScoreScene : public Scene
 	{
 	public:
@@ -32,15 +34,19 @@ namespace ya {
 		UINT mMaxHp;
 		UINT mMaxParry;
 		UINT mMaxSuper;
+		
+		UINT mGrade;
 
 		float mNumberChangeTime;
 		bool mbFin;
 		UINT mScorePhase;
-
+		WinObjects* mWinObject;
 		Number* mTimeNumber[4];
 		Number* mHPNumber[2];
 		Number* mParryNumber[2];
 		Number* mSuperNumber[2];
+		Number* mGradeNumber;
+		StarScore* mStarScore[3];
 
 	};		 
 }

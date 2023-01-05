@@ -236,14 +236,7 @@ namespace ya
 
 	void Player::Render(HDC hdc)
 	{
-		Graphics graphic(hdc);
-		FontFamily  fontFamily(L"Arial");
-		Font        font(&fontFamily, 12, 0, Gdiplus::UnitPoint);
-		PointF      pointF(10.0f, 30.0f);
-		SolidBrush  solidBrush(Color(255, 255, 0, 255));
-		
 
-		graphic.DrawString(std::to_wstring(mCurState).c_str(), -1, &font, pointF, &solidBrush);
 		GameObject::Render(hdc);
 	}
 
@@ -932,7 +925,7 @@ namespace ya
 			}
 			else if (mCurGunType == eGunType::Spreader)
 			{
-				mSounds[PlayerSound_Spread]->SetPosition(0.3, false);
+				mSounds[PlayerSound_Spread]->SetPosition(0.8, false);
 				Spreader::Shoot(mGunDir, this, false);
 				mCurState |= PlayerState_OnShoot;
 				mReloading = true;

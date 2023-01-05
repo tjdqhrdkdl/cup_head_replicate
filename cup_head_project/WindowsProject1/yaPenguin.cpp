@@ -178,7 +178,8 @@ namespace ya
 			mCollider->SetHitBox(true);
 		}
 
-		else if (other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster)
+		else if (other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
+			&& dynamic_cast<Penguin*>(other->GetOwner()) == nullptr)
 		{
 			if (mAnimator->GetPlayAnimation()->GetName() != L"Pop")
 			{

@@ -2,7 +2,7 @@
 #include "yaAnimator.h"
 #include "yaTime.h"
 #include "yaResources.h"
-
+#include "yaSound.h"
 namespace ya
 {
 	WinObjects::WinObjects()
@@ -21,11 +21,12 @@ namespace ya
 		mBoardAnimator->CreateAnimation(L"WinBoard", L"..\\Resources\\Image\\WinScreen\\Board\\winscreen_board_", 2, 0.08f, false, false, { 250,-100 });
 		mTitleAnimator->CreateAnimation(L"WinTitle", L"..\\Resources\\Image\\WinScreen\\The Results\\English\\A\\winscreen_results_title_a_00", 4, 0.06f, false, false, { 0,-700 });
 		mCupheadAnimator->CreateAnimation(L"WinCuphead", L"..\\Resources\\Image\\WinScreen\\Cuphead\\Idle\\winscreen_ch_00", 8, 0.08f, false, false, { -350,-100 });
-		mCircleAnimator->CreateAnimation(L"WinCircle", L"..\\Resources\\Image\\WinScreen\\Circle Mark\\winscreen_circle_00", 13, 0.08f, false, false, { 300,-150 });
+		mCircleAnimator->CreateAnimation(L"WinCircle", L"..\\Resources\\Image\\WinScreen\\Circle Mark\\winscreen_circle_00", 13, 0.04f, false, false, { 350,-180 });
 
 		mBoardAnimator->Play(L"WinBoard", true);
 		mTitleAnimator->Play(L"WinTitle", true);
 		mCupheadAnimator->Play(L"WinCuphead", true);
+
 	}
 
 	WinObjects::~WinObjects()
@@ -40,6 +41,11 @@ namespace ya
 	void WinObjects::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+	}
+
+	void WinObjects::Circle()
+	{
+		mCircleAnimator->Play(L"WinCircle", false);
 	}
 
 }

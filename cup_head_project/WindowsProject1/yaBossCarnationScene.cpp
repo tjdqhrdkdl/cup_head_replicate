@@ -144,11 +144,6 @@ namespace ya
 	void BossCarnationScene::Render(HDC hdc)
 	{
 		Scene::Render(hdc);
-
-		wchar_t szFloat[50] = {};
-		swprintf_s(szFloat, 50, L"CarnationScene");
-		int strLen = wcsnlen_s(szFloat, 50);
-		TextOut(hdc, 10, 50, szFloat, strLen);
 	}
 
 	void BossCarnationScene::ResumeClickEvent()

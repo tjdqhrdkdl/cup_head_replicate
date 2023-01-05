@@ -10,6 +10,8 @@
 #include "yaNumber.h"
 #include "yaAnimator.h"
 #include "yaWinObjects.h"
+#include "yaStarScore.h"
+
 namespace ya
 {
 	ScoreScene::ScoreScene()
@@ -36,7 +38,8 @@ namespace ya
 		mBGI->SetImage(L"WinScreenBGI", L"WinScreen\\BG\\winscreen_bg.png", RGB(255, 0, 255), true);
 		mBGM = Resources::Load<Sound>(L"WinScreenBGM", L"..\\Resources\\Sound\\Win\\MUS_VictoryScreen.wav");
 
-		ObjectManager::Instantiate<WinObjects>(this, eColliderLayer::FrontMonster)->SetPos({800,900});
+		mWinObject = ObjectManager::Instantiate<WinObjects>(this, eColliderLayer::FrontMonster);
+		mWinObject->SetPos({800,900});
 
 		for (size_t i = 0; i < 4; i++)
 		{
@@ -59,6 +62,19 @@ namespace ya
 		mSuperNumber[0]->SetPos({ 1243,567 });
 		mSuperNumber[1]->SetPos({ 1278,567 });
 
+		for (size_t i = 0; i < 3; i++)
+		{
+			mStarScore[i] = ObjectManager::Instantiate<StarScore>(this, eColliderLayer::FrontMonster);
+		}
+		mStarScore[0]->SetPos({ 1220,625 });
+		mStarScore[1]->SetPos({ 1255,625 });
+		mStarScore[2]->SetPos({ 1290,625 });
+
+
+		mGradeNumber = ObjectManager::Instantiate<Number>(this, eColliderLayer::FrontMonster);
+		mGradeNumber->GetAnimator()->Play(L"WinCharAnim", false);
+		mGradeNumber->SetPos({ 1150,710 });
+
 
 		Scene::Initialize();
 
@@ -70,7 +86,7 @@ namespace ya
 		{
 			mBGM->Play(true);
 			Scene::Tick();
-			if (mTime > 3)
+			if (mTime > 2 && mScorePhase != 4)
 			{
 				mNumberChangeTime += Time::DeltaTime();
 				if (mScorePhase == 0)
@@ -81,6 +97,33 @@ namespace ya
 					mParryNumber[0]->GetAnimator()->SetStop(false);
 				else if (mScorePhase == 3)
 					mSuperNumber[0]->GetAnimator()->SetStop(false);
+
+				else if (mScorePhase == 5)
+					mGradeNumber->GetAnimator()->SetStop(false);
+			}
+			if (mScorePhase == 4)
+			{
+				if (mTime > 0.f)
+				{
+					mStarScore[0]->GetAnimator()->SetStop(false);
+					mStarScore[0]->playsound();
+				}
+				if (mTime > 2.0f)
+				{
+					mStarScore[1]->GetAnimator()->SetStop(false);
+					mStarScore[1]->playsound();
+
+				}
+				if (mTime > 2.7f)
+				{
+					mStarScore[2]->GetAnimator()->SetStop(false);
+					mStarScore[2]->playsound();
+				}
+				if (mTime > 3.4f)
+				{
+					mScorePhase = 5;
+					mTime = 1;
+				}
 			}
 			if (mNumberChangeTime > 0.4f)
 			{
@@ -90,8 +133,13 @@ namespace ya
 					{
 						mTimeNumber[k]->GetAnimator()->GetPlayAnimation()->SetIndex(mTimeNumber[k]->GetStopIndex());
 						if (mMaxPlayTime >= mPlayTime)
+						{
 							mTimeNumber[k]->GetAnimator()->SetLighten(true);
+						}
 						mTimeNumber[k]->GetAnimator()->SetStop(true);
+					}if (mMaxPlayTime >= mPlayTime)
+					{
+						mGrade++;
 					}
 				}
 				else if (mScorePhase == 1)
@@ -100,8 +148,14 @@ namespace ya
 					{
 						mHPNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mHPNumber[i]->GetStopIndex());
 						if (mMaxHp == mHp)
+						{
 							mHPNumber[i]->GetAnimator()->SetLighten(true);
+						}
 						mHPNumber[i]->GetAnimator()->SetStop(true);
+					}
+					if (mMaxHp == mHp)
+					{
+						mGrade++;
 					}
 				}
 				else if (mScorePhase == 2)
@@ -110,8 +164,13 @@ namespace ya
 					{
 						mParryNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mParryNumber[i]->GetStopIndex());
 						if (mMaxParry == mParry)
+						{
 							mParryNumber[i]->GetAnimator()->SetLighten(true);
+						}
 						mParryNumber[i]->GetAnimator()->SetStop(true);
+					}if (mMaxParry == mParry)
+					{
+						mGrade++;
 					}
 				}
 				else if (mScorePhase == 3)
@@ -120,9 +179,23 @@ namespace ya
 					{
 						mSuperNumber[i]->GetAnimator()->GetPlayAnimation()->SetIndex(mSuperNumber[i]->GetStopIndex());
 						if (mMaxSuper == mSuper)
+						{
 							mSuperNumber[i]->GetAnimator()->SetLighten(true);
+						}
 						mSuperNumber[i]->GetAnimator()->SetStop(true);
 					}
+					if (mMaxSuper == mSuper)
+					{
+						mGrade++;
+					}
+				}
+				else if (mScorePhase == 5)
+				{
+					mGradeNumber->GetAnimator()->GetPlayAnimation()->SetIndex(mGrade);
+					if (mGrade == 4)
+						mGradeNumber->GetAnimator()->SetLighten(true);
+					mGradeNumber->GetAnimator()->SetStop(true);
+					mWinObject->Circle();
 				}
 				else if (!mbSceneChanging)
 				{
@@ -178,6 +251,17 @@ namespace ya
 								mSuperNumber[i]->GetAnimator()->SetLighten(true);
 							mSuperNumber[i]->GetAnimator()->SetStop(true);
 						}
+					}
+				}
+				if (mGradeNumber->GetAnimator()->GetPlayAnimation()->GetIndex() == mGrade)
+				{
+					if (mScorePhase == 5)
+					{
+						mGradeNumber->GetAnimator()->GetPlayAnimation()->SetIndex(mGrade);
+						if (mGrade == 4)
+							mGradeNumber->GetAnimator()->SetLighten(true);
+						mGradeNumber->GetAnimator()->SetStop(true);
+						mWinObject->Circle();
 					}
 				}
 			}
