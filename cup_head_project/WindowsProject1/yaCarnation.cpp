@@ -308,8 +308,14 @@ namespace ya
 					mCurAttack = eCarnationAttacks::Carnation_FiringSeed;
 					break;
 				case 3:
-					mAnimator->Play(L"CreatingObjectIntro", false);
-					mCurAttack = eCarnationAttacks::Carnation_CreateObject;
+					if (mbAttacked)
+						mCurAttack = eCarnationAttacks::None;
+					else
+					{
+						mAnimator->Play(L"CreatingObjectIntro", false);
+						mCurAttack = eCarnationAttacks::Carnation_CreateObject;
+						mbAttacked = true;
+					}
 					break;
 				}
 				mAttackChoiceTimeChecker = 0;

@@ -96,6 +96,7 @@ namespace ya
 		bool mVineBReady;
 		bool mVineCReady;
 
+		bool mbAttacked;
 
 		bool mbFinalForm;
 		UINT mCreateCount;
