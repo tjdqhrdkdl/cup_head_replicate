@@ -30,6 +30,7 @@ namespace ya
 
 	void ScoreScene::Initialize()
 	{
+		mGrade = 0;
 		mScorePhase = 0;
 		mbSceneChanging = false;
 		mBGI = new	BgImageObject();
@@ -168,7 +169,8 @@ namespace ya
 							mParryNumber[i]->GetAnimator()->SetLighten(true);
 						}
 						mParryNumber[i]->GetAnimator()->SetStop(true);
-					}if (mMaxParry == mParry)
+					}
+					if (mMaxParry == mParry)
 					{
 						mGrade++;
 					}
