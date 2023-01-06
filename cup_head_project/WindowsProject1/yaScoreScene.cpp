@@ -87,7 +87,7 @@ namespace ya
 		{
 			mBGM->Play(true);
 			Scene::Tick();
-			if (mTime > 2 && mScorePhase != 4)
+			if (mTime > 3 && mScorePhase != 4)
 			{
 				mNumberChangeTime += Time::DeltaTime();
 				if (mScorePhase == 0)
@@ -109,21 +109,21 @@ namespace ya
 					mStarScore[0]->GetAnimator()->SetStop(false);
 					mStarScore[0]->playsound();
 				}
-				if (mTime > 2.0f)
+				if (mTime > 3.0f)
 				{
 					mStarScore[1]->GetAnimator()->SetStop(false);
 					mStarScore[1]->playsound();
 
 				}
-				if (mTime > 2.7f)
+				if (mTime > 3.7f)
 				{
 					mStarScore[2]->GetAnimator()->SetStop(false);
 					mStarScore[2]->playsound();
 				}
-				if (mTime > 3.4f)
+				if (mTime > 4.4f)
 				{
 					mScorePhase = 5;
-					mTime = 1;
+					mTime = 3;
 				}
 			}
 			if (mNumberChangeTime > 0.4f)
@@ -211,7 +211,7 @@ namespace ya
 				}
 				mNumberChangeTime = 0;
 				mScorePhase += 1;
-				mTime = 1;
+				mTime = 2;
 			}
 			if (SceneManager::GetCurScene() == (Scene*)this)
 			{
