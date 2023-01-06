@@ -199,7 +199,7 @@ namespace ya
 					mGradeNumber->GetAnimator()->SetStop(true);
 					mWinObject->Circle();
 				}
-				else if (!mbSceneChanging)
+				else if (mScorePhase == 8 && !mbSceneChanging)
 				{
 					if (!mbFin)
 						SceneManager::ChangeScene(eSceneType::Map);

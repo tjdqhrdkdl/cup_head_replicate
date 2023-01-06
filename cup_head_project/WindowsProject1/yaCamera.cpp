@@ -109,21 +109,21 @@ namespace ya
 	{
 		mShakeTime += Time::DeltaTime();
 
-		if (mShakeTime < 0.02f)
+		if (mShakeTime < 0.03f)
 		{
 			if (mbVerticalShake)
-				mLookPosition.x += 500*Time::DeltaTime();
+				mLookPosition.x += 800*Time::DeltaTime();
 			else
-				mLookPosition.y += 500 * Time::DeltaTime();
+				mLookPosition.y += 800 * Time::DeltaTime();
 		}
 		else
 		{
 			if (mbVerticalShake)
-				mLookPosition.x -= 500 * Time::DeltaTime();
+				mLookPosition.x -= 800 * Time::DeltaTime();
 			else
-				mLookPosition.y -= 500 * Time::DeltaTime();
+				mLookPosition.y -= 800 * Time::DeltaTime();
 		}
-		if (mShakeTime > 0.04f)
+		if (mShakeTime > 0.06f)
 		{
 			mShakeTime = 0;
 			mbVerticalShake = !mbVerticalShake;
