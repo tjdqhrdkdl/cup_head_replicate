@@ -93,5 +93,7 @@ namespace ya
 		float mSpeed;
 		eWernerWermanAttacks mBeforeAttack;
 		eWernerWermanAttacks mNowAttack;
+
+		UINT mPatternNum;
 	};
 }

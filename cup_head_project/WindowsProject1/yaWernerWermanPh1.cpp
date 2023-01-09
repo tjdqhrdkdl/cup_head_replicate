@@ -261,7 +261,7 @@ namespace ya
 			if (mChoiceTime > 2)
 			{
 				mChoiceTime = 0;
-				UINT atkNum = rand() % 3;
+				UINT atkNum = mPatternNum++ % 3;
 				eWernerWermanAttacks attack = (eWernerWermanAttacks)atkNum;
 				if (mBeforeAttack == eWernerWermanAttacks::None)
 					attack = (eWernerWermanAttacks)(atkNum % 2);

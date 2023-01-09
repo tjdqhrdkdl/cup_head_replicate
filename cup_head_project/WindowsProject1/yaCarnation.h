@@ -102,5 +102,7 @@ namespace ya
 		UINT mCreateCount;
 		bool soundPlay;
 		eCarnationAttacks mCurAttack;
+
+		UINT mPatternNum;
 	};
 }

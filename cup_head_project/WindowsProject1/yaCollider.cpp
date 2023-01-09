@@ -19,7 +19,7 @@ namespace ya
 	}
 
 	Collider::~Collider()
-	{
+	{ 
 	}
 
 	void Collider::Initialize()

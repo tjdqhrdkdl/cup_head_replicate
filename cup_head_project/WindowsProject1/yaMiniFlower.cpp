@@ -14,9 +14,9 @@ namespace ya
 		:mbIsSeed(true)
 	{
 		SetName(L"MiniFlower");
-		mHp = 8;
+		mHp = 1;
 		mInvincible = true;
-		SetScale({ 50.0f,50.0f });
+		SetScale({ 50.0f,40.0f });
 		mCollider = new Collider();
 		AddComponent(mCollider);
 

@@ -19,6 +19,7 @@ namespace ya
 	Carnation::Carnation()
 		:mCurAttack(eCarnationAttacks::None)
 		, mAttackChoiceTimeChecker(0)
+		, mPatternNum(0)
 	{
 		SetName(L"Carnation");
 		mHp = 400;
@@ -293,7 +294,7 @@ namespace ya
 			mAttackChoiceTimeChecker += Time::DeltaTime();
 			if (mAttackChoiceTimeChecker > 3)
 			{
-				switch (rand()%4)
+				switch (mPatternNum++%4)
 				{
 				case 0:
 					mAnimator->Play(L"FaceAttackHighStart", false);
@@ -308,14 +309,8 @@ namespace ya
 					mCurAttack = eCarnationAttacks::Carnation_FiringSeed;
 					break;
 				case 3:
-					if (mbAttacked)
-						mCurAttack = eCarnationAttacks::None;
-					else
-					{
-						mAnimator->Play(L"CreatingObjectIntro", false);
-						mCurAttack = eCarnationAttacks::Carnation_CreateObject;
-						mbAttacked = true;
-					}
+					mAnimator->Play(L"CreatingObjectIntro", false);
+					mCurAttack = eCarnationAttacks::Carnation_CreateObject;
 					break;
 				}
 				mAttackChoiceTimeChecker = 0;
