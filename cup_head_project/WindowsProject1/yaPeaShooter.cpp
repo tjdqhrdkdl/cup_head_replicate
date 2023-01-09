@@ -13,7 +13,7 @@ namespace ya
 {
 	float PeaShooter::CoolTime = 0.2f;
 	float PeaShooter::AliveTime = 1.0f;
-	float PeaShooter::BulletDamage = 3.3f;
+	float PeaShooter::BulletDamage = 1.8f;
 	float PeaShooter::EXDamage = 10.0f;
 
 	PeaShooter::PeaShooter(Vector2 dir, bool special)

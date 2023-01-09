@@ -13,8 +13,8 @@ namespace ya
 {
 	float CrackShot::CoolTime = 0.5f;
 	float CrackShot::AliveTime = 3.0f;
-	float CrackShot::BulletDamage = 10.0f;
-	float CrackShot::EXDamage = 20.0f;
+	float CrackShot::BulletDamage = 5.0f;
+	float CrackShot::EXDamage = 10.0f;
 
 	CrackShot::CrackShot(Vector2 dir, bool special)
 		: Bullet(dir, special)

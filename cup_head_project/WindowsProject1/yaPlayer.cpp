@@ -315,29 +315,30 @@ namespace ya
 				if(mHP > 0)
 				{
 					mHP -= 1;
-					mCurState |= PlayerState_OnHit;
-					mRigidbody->SetGravity(Gravity);
-					mRigidbody->SetGround(false);
-					Vector2 velocity = mRigidbody->GetVelocity();
-					velocity.y = -1000.0f;
-					if (STATE_HAVE(PlayerState_LookRight))
-						velocity.x = -100.0f;
-					else
-						velocity.x = 100.0f;
-					mRigidbody->SetVelocity(velocity);
-
-					mInvincible = true;
-					mCurState &= ~PlayerState_OnDash;
-					mDashTimeChecker = 0;
-					OnHitEffect* onhitEffect = new OnHitEffect();
-					onhitEffect->SetPos(GetPos());
-					Scene* curscene = SceneManager::GetCurScene();
-					curscene->AddGameObject(onhitEffect, eColliderLayer::Effect);
-
-					EXCompleteEvent();
-					mSounds[PlayerSound_Hit]->Play(false);
-					mSounds[PlayerSound_HitCrack]->Play(false);
 				}
+
+				mCurState |= PlayerState_OnHit;
+				mRigidbody->SetGravity(Gravity);
+				mRigidbody->SetGround(false);
+				Vector2 velocity = mRigidbody->GetVelocity();
+				velocity.y = -1000.0f;
+				if (STATE_HAVE(PlayerState_LookRight))
+					velocity.x = -100.0f;
+				else
+					velocity.x = 100.0f;
+				mRigidbody->SetVelocity(velocity);
+
+				mInvincible = true;
+				mCurState &= ~PlayerState_OnDash;
+				mDashTimeChecker = 0;
+				OnHitEffect* onhitEffect = new OnHitEffect();
+				onhitEffect->SetPos(GetPos());
+				Scene* curscene = SceneManager::GetCurScene();
+				curscene->AddGameObject(onhitEffect, eColliderLayer::Effect);
+
+				EXCompleteEvent();
+				mSounds[PlayerSound_Hit]->Play(false);
+				mSounds[PlayerSound_HitCrack]->Play(false);
 			}
 		}
 	}
@@ -417,29 +418,30 @@ namespace ya
 				if (mHP > 0)
 				{
 					mHP -= 1;
-					mCurState |= PlayerState_OnHit;
-					mRigidbody->SetGravity(Gravity);
-					mRigidbody->SetGround(false);
-					Vector2 velocity = mRigidbody->GetVelocity();
-					velocity.y = -1000.0f;
-					if (STATE_HAVE(PlayerState_LookRight))
-						velocity.x = -100.0f;
-					else
-						velocity.x = 100.0f;
-					mRigidbody->SetVelocity(velocity);
-
-					mInvincible = true;
-					mCurState &= ~PlayerState_OnDash;
-					mDashTimeChecker = 0;
-					OnHitEffect* onhitEffect = new OnHitEffect();
-					onhitEffect->SetPos(GetPos());
-					Scene* curscene = SceneManager::GetCurScene();
-					curscene->AddGameObject(onhitEffect, eColliderLayer::Effect);
-
-					EXCompleteEvent();
-					mSounds[PlayerSound_Hit]->Play(false);
-					mSounds[PlayerSound_HitCrack]->Play(false);
 				}
+
+				mCurState |= PlayerState_OnHit;
+				mRigidbody->SetGravity(Gravity);
+				mRigidbody->SetGround(false);
+				Vector2 velocity = mRigidbody->GetVelocity();
+				velocity.y = -1000.0f;
+				if (STATE_HAVE(PlayerState_LookRight))
+					velocity.x = -100.0f;
+				else
+					velocity.x = 100.0f;
+				mRigidbody->SetVelocity(velocity);
+
+				mInvincible = true;
+				mCurState &= ~PlayerState_OnDash;
+				mDashTimeChecker = 0;
+				OnHitEffect* onhitEffect = new OnHitEffect();
+				onhitEffect->SetPos(GetPos());
+				Scene* curscene = SceneManager::GetCurScene();
+				curscene->AddGameObject(onhitEffect, eColliderLayer::Effect);
+
+				EXCompleteEvent();
+				mSounds[PlayerSound_Hit]->Play(false);
+				mSounds[PlayerSound_HitCrack]->Play(false);
 			}
 		}
 	}

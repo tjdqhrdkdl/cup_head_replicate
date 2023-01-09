@@ -14,7 +14,7 @@ namespace ya
 		mPink = pink;
 		SetName(L"BalloonDog");
 		SetScale({ 120.0f, 100.0f });
-		mHp = 9.0f;
+		mHp = 4.0f;
 		mCollider = new Collider();
 		mCollider->SetAddPos({ 30,-30 });
 		AddComponent(mCollider);

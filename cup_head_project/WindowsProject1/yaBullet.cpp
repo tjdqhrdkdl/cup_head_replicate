@@ -68,6 +68,30 @@ namespace ya
 
 	void Bullet::OnCollisonStay(Collider* other, Collider* my)
 	{
+		if (other->isHitBox() && !(other->isBulletPassing()))
+		{
+			if (other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
+				|| other->GetOwner()->GetLayer() == eColliderLayer::BehindMonster)
+			{
+				Monster* monster = dynamic_cast<Monster*>(other->GetOwner());
+				if (monster == nullptr)
+					;
+				else if (!monster->GetInvincible())
+				{
+					float hp = monster->GetHp();
+					hp -= GetDamage();
+					monster->SetHp(hp);
+					if (!mSpecial)
+						mOwner->PlusSpecialPointF(GetDamage() / 100);
+				}
+
+			}
+			if (!mSpecial)
+			{
+				mAnimator->Play(L"BulletDeath", false);
+				GetComponent<Collider>()->SetOff(true);
+			}
+		}
 	}
 
 	void Bullet::OnCollisonExit(Collider* other, Collider* my)

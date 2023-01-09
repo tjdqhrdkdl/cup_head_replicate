@@ -13,7 +13,7 @@ namespace ya
 {
 	float Spreader::CoolTime = 0.2f;
 	float Spreader::AliveTime = 1.0f;
-	float Spreader::BulletDamage = 2.0f;
+	float Spreader::BulletDamage = 1.0f;
 	float Spreader::EXDamage = 10.0f;
 
 	Spreader::Spreader(Vector2 dir, bool special)
@@ -264,6 +264,26 @@ namespace ya
 	void Spreader::OnCollisonStay(Collider* other, Collider* my)
 	{
 		Bullet::OnCollisonStay(other, my);
+		if (other->isHitBox() && !(other->isBulletPassing()))
+		{
+			if (!mSpecial)
+			{
+				mAnimator->Play(L"BulletHit", false);
+				GetComponent<Collider>()->SetOff(true);
+			}
+
+			else
+			{
+				if (other->GetOwner()->GetLayer() == eColliderLayer::FrontMonster
+					|| other->GetOwner()->GetLayer() == eColliderLayer::BehindMonster
+					)
+				{
+					mAnimator->Play(L"BulletSpecialDeath", false);
+					GetComponent<Collider>()->SetOff(true);
+					mSmokeAnimator->SetPlayAnimation(nullptr);
+				}
+			}
+		}
 	}
 
 	void Spreader::OnCollisonExit(Collider* other, Collider* my)
