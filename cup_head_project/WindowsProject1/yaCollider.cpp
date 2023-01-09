@@ -5,7 +5,7 @@
 #include "yaInput.h"
 namespace ya 
 {
-	bool Collider::mbRender = true;		
+	bool Collider::mbRender = false;		
 
 	Collider::Collider()
 		: Component(eComponentType::Collider)
